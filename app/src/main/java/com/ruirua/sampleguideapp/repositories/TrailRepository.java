@@ -1,18 +1,18 @@
 package com.ruirua.sampleguideapp.repositories;
 
 import android.app.Application;
-import android.os.AsyncTask;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.room.RoomDatabase;
 
 import com.ruirua.sampleguideapp.BuildConfig;
 import com.ruirua.sampleguideapp.model.GuideDatabase;
-import com.ruirua.sampleguideapp.model.Trail;
-import com.ruirua.sampleguideapp.model.TrailAPI;
-import com.ruirua.sampleguideapp.model.TrailDAO;
+import com.ruirua.sampleguideapp.model.trails.Trail;
+import com.ruirua.sampleguideapp.model.trails.TrailAPI;
+import com.ruirua.sampleguideapp.model.trails.TrailDAO;
 import java.util.List;
+import java.util.concurrent.Executors;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -20,8 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TrailRepository {
 
-    public TrailDAO trailDAO;
-    public MediatorLiveData<List<Trail>> allTrails;
+    private final TrailDAO trailDAO;
+    private final MediatorLiveData<List<Trail>> allTrails;
 
     public TrailRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
@@ -40,7 +40,7 @@ public class TrailRepository {
     }
 
     public void insert(List<Trail> trails){
-        new InsertAsyncTask(trailDAO).execute(trails);
+        Executors.newSingleThreadExecutor().execute(() -> trailDAO.insert(trails));
     }
 
     private void makeRequest() {
@@ -70,20 +70,6 @@ public class TrailRepository {
 
     public LiveData<List<Trail>> getAllTrails(){
         return allTrails;
-    }
-
-    private static class InsertAsyncTask extends AsyncTask<List<Trail>,Void,Void> {
-        private TrailDAO trailDAO;
-
-        public InsertAsyncTask(TrailDAO catDao) {
-            this.trailDAO=catDao;
-        }
-
-        @Override
-        protected Void doInBackground(List<Trail>... lists) {
-            trailDAO.insert(lists[0]);
-            return null;
-        }
     }
 
 }

@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.ruirua.sampleguideapp.repositories.TrailRepository;
-import com.ruirua.sampleguideapp.model.Trail;
+import com.ruirua.sampleguideapp.model.trails.Trail;
 import java.util.List;
 
 public class TrailsViewModel extends AndroidViewModel {

@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.model;
+package com.ruirua.sampleguideapp.model.trails;
 
 
 import androidx.lifecycle.LiveData;

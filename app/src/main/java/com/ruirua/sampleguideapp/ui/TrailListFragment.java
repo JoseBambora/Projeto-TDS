@@ -9,16 +9,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ruirua.sampleguideapp.R;
-import com.ruirua.sampleguideapp.model.Trail;
+import com.ruirua.sampleguideapp.model.trails.Trail;
+import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A fragment representing a list of Items.
@@ -31,6 +33,8 @@ public class TrailListFragment extends Fragment {
     private int mColumnCount = 1;
 
     private TrailsViewModel trailsViewModel;
+
+    private PinsViewModel pinsViewModel;
 
     // private List<Trail> trails = new ArrayList<>();
 
@@ -66,7 +70,17 @@ public class TrailListFragment extends Fragment {
 
         trailsViewModel = new ViewModelProvider(this).get(TrailsViewModel.class);
         trailsViewModel.getAllTrails().observe(getViewLifecycleOwner(), x -> {
-                loadRecyclerView(view, x);
+            loadRecyclerView(view, x);
+            Log.d("trails",x.toString());
+        });
+        pinsViewModel = new ViewModelProvider(this).get(PinsViewModel.class);
+        pinsViewModel.getAllPins().observe(getViewLifecycleOwner(), pins -> {
+            Log.d("Pins","Entrou");
+            if (pins != null) {
+                Log.d("pins3", pins.toString());
+            }
+            else
+                Log.d("pins3","null");
         });
         return view;
     }

@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.model;
+package com.ruirua.sampleguideapp.model.trails;
 
 
 import androidx.annotation.NonNull;
@@ -16,7 +16,6 @@ public class Trail {
 
     @PrimaryKey
     @NonNull
-    //@SerializedName("id")
     @ColumnInfo(name = "id")
     String id;
 
@@ -24,11 +23,12 @@ public class Trail {
     @ColumnInfo(name = "trail_img")
     String image_url;
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -54,5 +54,14 @@ public class Trail {
     @Override
     public int hashCode() {
         return Objects.hash(id, image_url);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Trail{" +
+                "id='" + id + '\'' +
+                ", image_url='" + image_url + '\'' +
+                '}';
     }
 }

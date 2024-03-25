@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.ruirua.sampleguideapp.R;
-import com.ruirua.sampleguideapp.model.Trail;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
+import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

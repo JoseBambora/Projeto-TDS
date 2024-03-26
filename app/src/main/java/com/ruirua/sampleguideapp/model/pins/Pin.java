@@ -11,7 +11,6 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "pin",indices = @Index(value = {"id"},unique = true))
 public class Pin {
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "id")
     int id;
 

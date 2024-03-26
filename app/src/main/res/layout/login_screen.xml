@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textLoginViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textColor="@android:color/black"/>
+
+    <EditText
+        android:id="@+id/editLoginTextUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textLoginViewTitle"
+        android:layout_marginTop="120dp"
+        android:hint="Utilizador"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editLoginTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editLoginTextUsername"
+        android:layout_marginTop="16dp"
+        android:hint="Palavra Passe"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editLoginTextPassword"
+        android:layout_marginTop="16dp"
+        android:text="Login" />
+
+</RelativeLayout>

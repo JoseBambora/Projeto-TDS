@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BraGuia - Guia Turístico"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewHeader"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:paddingBottom="16dp"
+        android:text="Bem-vindo ao BraGuia!"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLocation"
+        android:layout_marginTop="-472dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Registar" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Login" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonTourRoutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDescription"
+        android:layout_marginTop="366dp"
+        android:layout_marginBottom="16dp"
+        android:text="Localização e Navegação" />
+
+    <Button
+        android:id="@+id/buttonLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonTourRoutes"
+        android:layout_marginBottom="16dp"
+        android:text="Conteudo Multimédia"/>
+
+</RelativeLayout>

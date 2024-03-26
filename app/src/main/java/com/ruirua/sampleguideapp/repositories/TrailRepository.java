@@ -4,17 +4,18 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import com.ruirua.sampleguideapp.BuildConfig;
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.model.trails.TrailAPI;
 import com.ruirua.sampleguideapp.model.trails.TrailDAO;
+import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
+import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
+
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TrailRepository {
     private final TrailDAO trailDAO;
@@ -41,10 +42,7 @@ public class TrailRepository {
     }
 
     private void makeRequest() {
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(BuildConfig.BRAGUIDE_BACKEND_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit= UtilsFuns.buildRetrofit();
         TrailAPI api = retrofit.create(TrailAPI.class);
         Call<List<Trail>> call = api.getTrails();
         call.enqueue(new UtilRepository<>(this::insert));

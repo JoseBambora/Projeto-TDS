@@ -5,18 +5,18 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import com.ruirua.sampleguideapp.BuildConfig;
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.PinAPI;
 import com.ruirua.sampleguideapp.model.pins.PinDAO;
+import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
+import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PinRepository {
     private final PinDAO pinDAO;
@@ -48,10 +48,7 @@ public class PinRepository {
     private void makeRequest() {
         String csrftoken = "";
         String sessionid = "";
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(BuildConfig.BRAGUIDE_BACKEND_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit= UtilsFuns.buildRetrofit();
         PinAPI api = retrofit.create(PinAPI.class);
         Call<List<Pin>> call = api.getPins(csrftoken,sessionid);
         call.enqueue(new UtilRepository<>(this::insert));

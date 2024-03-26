@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.repositories;
+package com.ruirua.sampleguideapp.repositories.utils;
 
 import android.util.Log;
 
@@ -32,3 +32,4 @@ public class UtilRepository<T> implements Callback<List<T>> {
         Log.e("main", "onFailure: " + t.getMessage());
     }
 }
+

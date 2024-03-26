@@ -1,5 +1,6 @@
 package com.ruirua.sampleguideapp.ui;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -16,11 +17,11 @@ import android.view.ViewGroup;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.trails.Trail;
+import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A fragment representing a list of Items.
@@ -63,6 +64,17 @@ public class TrailListFragment extends Fragment {
         }
     }
 
+    private void testLogin() {
+        UserRepository ur = new UserRepository((Application) requireContext().getApplicationContext());
+        ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
+            Log.d("userslogged1",users.toString());
+        });
+
+        // ur.login("premium_user","paiduser");
+        ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
+            Log.d("userslogged2",users.toString());
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

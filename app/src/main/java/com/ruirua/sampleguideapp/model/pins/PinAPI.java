@@ -14,5 +14,5 @@ public interface PinAPI {
     Call<List<Pin>> getPins(@Header("Cookie") String csrftoken, @Header("Cookie") String sessionid);
 
     @GET("pin/{id}")
-    Call<Trail> getTrail(@Path("id") int id, @Header("Cookie") String csrftoken, @Header("Cookie") String sessionid);
+    Call<Pin> getPin(@Path("id") int id, @Header("Cookie") String csrftoken, @Header("Cookie") String sessionid);
 }

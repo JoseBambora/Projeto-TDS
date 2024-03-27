@@ -4,13 +4,15 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.user.LoginData;
 import com.ruirua.sampleguideapp.model.user.User;
 import com.ruirua.sampleguideapp.model.user.UserAPI;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
+import com.ruirua.sampleguideapp.model.user.UserInfo;
+import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
 
 import java.util.List;
@@ -24,66 +26,62 @@ import retrofit2.Retrofit;
 
 public class UserRepository {
     private final UserDAO userDAO;
-    private final MediatorLiveData<User> currentUser;
+    private User currentUser;
 
+    private final UserAPI userAPI;
     public void setCurrentUser(User user) {
         if (user != null) {
-            currentUser.setValue(user);
+            currentUser = user;
         }
     }
     public UserRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
         userDAO = database.userDAO();
-        currentUser = new MediatorLiveData<>();
+        Retrofit retrofit = UtilsFuns.buildRetrofit();
+        userAPI = retrofit.create(UserAPI.class);
     }
     public LiveData<List<User>> usersLogged() {
         return userDAO.getUsers();
     }
 
-    public LiveData<User> userLogged() {return this.currentUser;}
-
     public void insert(User user){
         Executors.newSingleThreadExecutor().execute(() -> userDAO.insert(user));
     }
+
+    private void authUser(Response<ResponseBody> response,String username) {
+        Map<String,String> cookies = UtilsFuns.getCookies(response);
+        currentUser = new User();
+        currentUser.setUsername(username);
+        currentUser.setSessionid(cookies.get("sessionid"));
+        currentUser.setCsrftoken(cookies.get("csrftoken"));
+        currentUser.setUser_type("user");
+        insert(currentUser);
+        Log.d("userslogged2","Sucesso "+ username);
+    }
     public void login(String username, String password) {
-        Retrofit retrofit = UtilsFuns.buildRetrofit();
-        UserAPI userAPI = retrofit.create(UserAPI.class);
         Call<ResponseBody> call = userAPI.postLogin(new LoginData(username, password));
-        call.enqueue(new retrofit2.Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()) {
-                    Map<String,String> cookies = UtilsFuns.getCookies(response);
-                    User u = new User();
-                    u.setUsername(username);
-                    u.setSessionid(cookies.get("sessionid"));
-                    u.setCsrftoken(cookies.get("csrftoken"));
-                    u.setUser_type("user");
-                    insert(u);
-                    currentUser.setValue(u);
-                    Log.d("login","sucesso");
-                }
-                else {
-                   Log.e("login","Credenciais Erradas");
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("login","Erro falha login");
-            }
-        });
+        call.enqueue(new UtilRepository<>((res) -> authUser(res,username)));
     }
 
     public void logout() {
-        User u = currentUser.getValue();
-        if(u != null){
-            userDAO.deleteUser(u.getUsername());
+        currentUser = null;
+        // User u = currentUser;
+        // if(u != null){
+            // userDAO.deleteUser(u.getUsername());
             // logout api
-            currentUser.setValue(null);
-        }
+        //     currentUser.setValue(null);
+        // }
     }
 
     public boolean isLogged() {
-        return currentUser.getValue() != null;
+        return currentUser != null;
+    }
+
+    public LiveData<UserInfo> getUserInfo() {
+        MutableLiveData<UserInfo> res = new MutableLiveData<>();
+        String csrftoken = "csrftoken=CBkYlMArZvkqisTpUbgv6fQBTsf5nmVSPgUYEDX711bfmQnlpj5QhrgHrBA7Spio; Path=/; Expires=Wed, 26 Mar 2025 10:34:45 GMT;";
+        String sessionid = "sessionid=f3kmcjkadvckulq0w3bt2wre7joynbxq; Path=/; Expires=Wed, 10 Apr 2024 10:34:45 GMT;";
+        userAPI.getUserInfo(csrftoken,sessionid).enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
+        return res;
     }
 }

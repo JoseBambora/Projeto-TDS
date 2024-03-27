@@ -24,4 +24,8 @@ public class PinsViewModel extends AndroidViewModel {
     public LiveData<List<Pin>> getAllPins() {
         return pins;
     }
+    public LiveData<Pin> getPin(int id) {
+        return repository.getPin(id);
+    }
+
 }

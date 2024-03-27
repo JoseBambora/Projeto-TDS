@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 @Entity(tableName = "pin",indices = @Index(value = {"id"},unique = true))
 public class Pin {
     @PrimaryKey
@@ -45,5 +47,42 @@ public class Pin {
                 ", pin_lng=" + pin_lng +
                 ", pin_alt=" + pin_alt +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pin pin = (Pin) o;
+        return id == pin.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getPin_name() {
+        return pin_name;
+    }
+
+    public String getPin_desc() {
+        return pin_desc;
+    }
+
+    public float getPin_lat() {
+        return pin_lat;
+    }
+
+    public float getPin_lng() {
+        return pin_lng;
+    }
+
+    public float getPin_alt() {
+        return pin_alt;
     }
 }

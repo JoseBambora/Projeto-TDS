@@ -66,14 +66,17 @@ public class TrailListFragment extends Fragment {
 
     private void testLogin() {
         UserRepository ur = new UserRepository((Application) requireContext().getApplicationContext());
-        ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
-            Log.d("userslogged1",users.toString());
-        });
+        //ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
+        //    Log.d("userslogged1",users.toString());
+        //});
 
-        // ur.login("premium_user","paiduser");
+        ur.login("premium_user","paiduser");
         ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
             Log.d("userslogged2",users.toString());
         });
+        // ur.getUserInfo().observe(getViewLifecycleOwner(), users -> {
+        //     Log.d("UserInfoTeste",users.toString());
+        // });
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,15 +88,7 @@ public class TrailListFragment extends Fragment {
             loadRecyclerView(view, x);
             Log.d("trails",x.toString());
         });
-        pinsViewModel = new ViewModelProvider(this).get(PinsViewModel.class);
-        pinsViewModel.getAllPins().observe(getViewLifecycleOwner(), pins -> {
-            Log.d("Pins","Entrou");
-            if (pins != null) {
-                Log.d("pins3", pins.toString());
-            }
-            else
-                Log.d("pins3","null");
-        });
+        testLogin();
         return view;
     }
 

@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 public class User {
 
     @PrimaryKey
+    @NonNull
     //@SerializedName("id")
     @ColumnInfo(name = "username")
     private String username;

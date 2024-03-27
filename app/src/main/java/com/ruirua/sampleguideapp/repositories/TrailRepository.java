@@ -1,14 +1,12 @@
 package com.ruirua.sampleguideapp.repositories;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.ruirua.sampleguideapp.model.GuideDatabase;
-import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.model.trails.TrailAPI;
 import com.ruirua.sampleguideapp.model.trails.TrailDAO;
@@ -60,8 +58,9 @@ public class TrailRepository {
     }
 
     private void getTailAPI(int id, MutableLiveData<Trail> res) {
-        String csrftoken = "csrftoken=CBkYlMArZvkqisTpUbgv6fQBTsf5nmVSPgUYEDX711bfmQnlpj5QhrgHrBA7Spio; Path=/; Expires=Wed, 26 Mar 2025 10:34:45 GMT;";
-        String sessionid = "sessionid=f3kmcjkadvckulq0w3bt2wre7joynbxq; Path=/; Expires=Wed, 10 Apr 2024 10:34:45 GMT;";
+        UserRepository ur = UserRepository.getInstance();
+        String csrftoken = ur.getCsrfToken();
+        String sessionid = ur.getSessionId();
         Call<Trail> call = trailAPI.getTrail(id,csrftoken,sessionid);
         call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
     }

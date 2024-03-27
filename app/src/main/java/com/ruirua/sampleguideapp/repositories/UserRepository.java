@@ -29,16 +29,16 @@ public class UserRepository {
     private User currentUser;
 
     private final UserAPI userAPI;
-    public void setCurrentUser(User user) {
-        if (user != null) {
-            currentUser = user;
-        }
-    }
-    public UserRepository(Application application){
+    private UserRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
         userDAO = database.userDAO();
         Retrofit retrofit = UtilsFuns.buildRetrofit();
         userAPI = retrofit.create(UserAPI.class);
+    }
+    public void setCurrentUser(User user) {
+        if (user != null) {
+            currentUser = user;
+        }
     }
     public LiveData<List<User>> usersLogged() {
         return userDAO.getUsers();
@@ -65,23 +65,32 @@ public class UserRepository {
 
     public void logout() {
         currentUser = null;
-        // User u = currentUser;
-        // if(u != null){
-            // userDAO.deleteUser(u.getUsername());
-            // logout api
-        //     currentUser.setValue(null);
-        // }
     }
 
     public boolean isLogged() {
         return currentUser != null;
     }
 
+    public String getCsrfToken() {
+        return currentUser.getCsrftoken();
+    }
+
+    public String getSessionId() {
+        return currentUser.getSessionid();
+    }
+
     public LiveData<UserInfo> getUserInfo() {
         MutableLiveData<UserInfo> res = new MutableLiveData<>();
-        String csrftoken = "csrftoken=CBkYlMArZvkqisTpUbgv6fQBTsf5nmVSPgUYEDX711bfmQnlpj5QhrgHrBA7Spio; Path=/; Expires=Wed, 26 Mar 2025 10:34:45 GMT;";
-        String sessionid = "sessionid=f3kmcjkadvckulq0w3bt2wre7joynbxq; Path=/; Expires=Wed, 10 Apr 2024 10:34:45 GMT;";
-        userAPI.getUserInfo(csrftoken,sessionid).enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
+        userAPI.getUserInfo(getCsrfToken(),getSessionId()).enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
         return res;
+    }
+    private static UserRepository instance;
+    public static synchronized UserRepository getInstance() {
+        return instance;
+    }
+    public static synchronized UserRepository createUserRepository(Application application) {
+        if(instance == null)
+            instance = new UserRepository(application);
+        return instance;
     }
 }

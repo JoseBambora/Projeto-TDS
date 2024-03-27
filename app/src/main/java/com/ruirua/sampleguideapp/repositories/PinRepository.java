@@ -1,7 +1,6 @@
 package com.ruirua.sampleguideapp.repositories;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
@@ -53,32 +52,29 @@ public class PinRepository {
     }
 
     private void getPinsAPI() {
-        String csrftoken = "csrftoken=CBkYlMArZvkqisTpUbgv6fQBTsf5nmVSPgUYEDX711bfmQnlpj5QhrgHrBA7Spio; Path=/; Expires=Wed, 26 Mar 2025 10:34:45 GMT;";
-        String sessionid = "sessionid=f3kmcjkadvckulq0w3bt2wre7joynbxq; Path=/; Expires=Wed, 10 Apr 2024 10:34:45 GMT;";
+        UserRepository ur = UserRepository.getInstance();
+        String csrftoken = ur.getCsrfToken();
+        String sessionid = ur.getSessionId();
         Call<List<Pin>> call = pinAPI.getPins(csrftoken,sessionid);
         call.enqueue(new UtilRepository<>((response) -> this.insert(response.body())));
     }
 
     private void getPinAPI(int id, MutableLiveData<Pin> res) {
-        Log.d("Pinid","entrou4");
-        String csrftoken = "csrftoken=CBkYlMArZvkqisTpUbgv6fQBTsf5nmVSPgUYEDX711bfmQnlpj5QhrgHrBA7Spio; Path=/; Expires=Wed, 26 Mar 2025 10:34:45 GMT;";
-        String sessionid = "sessionid=f3kmcjkadvckulq0w3bt2wre7joynbxq; Path=/; Expires=Wed, 10 Apr 2024 10:34:45 GMT;";
+        UserRepository ur = UserRepository.getInstance();
+        String csrftoken = ur.getCsrfToken();
+        String sessionid = ur.getSessionId();
         Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);
         call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
     }
     public LiveData<Pin> getPin(int id) {
         MutableLiveData<Pin> res = new MutableLiveData<>();
-        Log.d("Pinid","entrou");
         if(allPins.getValue() != null) {
-            Log.d("Pinid","entrou1");
             int index = allPins.getValue().stream()
                     .map(Pin::getId)
                     .collect(Collectors.toList())
                     .indexOf(id);
-            Log.d("Pinid","entrou2");
             if (index != -1) {
                 res.setValue(allPins.getValue().get(index));
-                Log.d("Pinid","entrou3");
                 return res;
             }
         }

@@ -32,7 +32,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonLoginLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editLoginTextPassword"
@@ -43,7 +43,7 @@
         android:id="@+id/textViewNoAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonLogin"
+        android:layout_below="@id/buttonLoginLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Ainda não tem conta?"

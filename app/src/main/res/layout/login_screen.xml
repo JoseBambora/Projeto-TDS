@@ -39,4 +39,24 @@
         android:layout_marginTop="16dp"
         android:text="Login" />
 
+    <TextView
+        android:id="@+id/textViewNoAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Ainda não tem conta?"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/buttonLoginParaRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNoAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Registar"
+        android:textColor="@android:color/black"
+        android:background="@android:color/transparent" />
 </RelativeLayout>

@@ -48,4 +48,25 @@
         android:layout_marginTop="16dp"
         android:text="Registar"/>
 
+
+    <TextView
+        android:id="@+id/textViewAlreadyAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonRegisterRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Já tem uma conta?"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/buttonRegisterparaLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAlreadyAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Login"
+        android:textColor="@android:color/black"
+        android:background="@android:color/transparent" />
 </RelativeLayout>

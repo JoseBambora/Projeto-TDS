@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.trails.Trail;
-import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
@@ -64,20 +63,7 @@ public class TrailListFragment extends Fragment {
         }
     }
 
-    private void testLogin() {
-        UserRepository ur = new UserRepository((Application) requireContext().getApplicationContext());
-        //ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
-        //    Log.d("userslogged1",users.toString());
-        //});
 
-        ur.login("premium_user","paiduser");
-        ur.usersLogged().observe(getViewLifecycleOwner(), users -> {
-            Log.d("userslogged2",users.toString());
-        });
-        // ur.getUserInfo().observe(getViewLifecycleOwner(), users -> {
-        //     Log.d("UserInfoTeste",users.toString());
-        // });
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,7 +74,6 @@ public class TrailListFragment extends Fragment {
             loadRecyclerView(view, x);
             Log.d("trails",x.toString());
         });
-        testLogin();
         return view;
     }
 

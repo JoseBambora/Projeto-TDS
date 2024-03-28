@@ -50,7 +50,7 @@ public class TrailRepository {
 
     private void makeRequest() {
         Call<List<Trail>> call = trailAPI.getTrails();
-        call.enqueue(new UtilRepository<>((response) -> this.insert(response.body())));
+        call.enqueue(new UtilRepository<>((response) -> this.insert(response.body()),null));
     }
 
     public LiveData<List<Trail>> getAllTrails(){
@@ -62,7 +62,7 @@ public class TrailRepository {
         String csrftoken = ur.getCsrfToken();
         String sessionid = ur.getSessionId();
         Call<Trail> call = trailAPI.getTrail(id,csrftoken,sessionid);
-        call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
+        call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()), null));
     }
     public LiveData<Trail> getTrail(int id) {
         MutableLiveData<Trail> res = new MutableLiveData<>();

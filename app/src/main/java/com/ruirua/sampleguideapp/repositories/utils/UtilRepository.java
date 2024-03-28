@@ -11,20 +11,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UtilRepository<T> implements Callback<T> {
-    Consumer<Response<T>> insert;
-    public UtilRepository(Consumer<Response<T>> insertMethod) {
-        this.insert = insertMethod;
+    Consumer<Response<T>> sucess;
+    Consumer<Response<T>> error;
+    public UtilRepository(Consumer<Response<T>> sucess, Consumer<Response<T>> error) {
+        this.sucess = sucess;
+        this.error = error;
     }
 
     @Override
     public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         if(response.isSuccessful()) {
-            Log.d("Pinsid","Aceite");
-            insert.accept(response);
+            sucess.accept(response);
         }
         else{
-            Log.d("userslogged2","erro1");
-            Log.e("main", "onFailure: "+response.errorBody());
+            if(error != null)
+                error.accept(response);
         }
     }
 

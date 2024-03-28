@@ -18,6 +18,7 @@ import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,6 +35,7 @@ public class UserRepository {
         userDAO = database.userDAO();
         Retrofit retrofit = UtilsFuns.buildRetrofit();
         userAPI = retrofit.create(UserAPI.class);
+        currentUser = null;
     }
     public void setCurrentUser(User user) {
         if (user != null) {
@@ -48,19 +50,22 @@ public class UserRepository {
         Executors.newSingleThreadExecutor().execute(() -> userDAO.insert(user));
     }
 
-    private void authUser(Response<ResponseBody> response,String username) {
+    private void authUser(Response<ResponseBody> response, String username, Consumer<Boolean> consumer) {
         Map<String,String> cookies = UtilsFuns.getCookies(response);
         currentUser = new User();
         currentUser.setUsername(username);
         currentUser.setSessionid(cookies.get("sessionid"));
         currentUser.setCsrftoken(cookies.get("csrftoken"));
         currentUser.setUser_type("user");
-        insert(currentUser);
-        Log.d("userslogged2","Sucesso "+ username);
+        // insert(currentUser);
+        consumer.accept(true);
     }
-    public void login(String username, String password) {
-        Call<ResponseBody> call = userAPI.postLogin(new LoginData(username, password));
-        call.enqueue(new UtilRepository<>((res) -> authUser(res,username)));
+    public void login(String username, String password, Consumer<Boolean> consumer) {
+        if(currentUser == null) {
+            Call<ResponseBody> call = userAPI.postLogin(new LoginData(username, password));
+            call.enqueue(new UtilRepository<>((res) -> authUser(res,username,consumer), (res) -> consumer.accept(false)));
+        }
+        else consumer.accept(true);
     }
 
     public void logout() {
@@ -81,7 +86,7 @@ public class UserRepository {
 
     public LiveData<UserInfo> getUserInfo() {
         MutableLiveData<UserInfo> res = new MutableLiveData<>();
-        userAPI.getUserInfo(getCsrfToken(),getSessionId()).enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
+        userAPI.getUserInfo(getCsrfToken(),getSessionId()).enqueue(new UtilRepository<>((response) -> res.setValue(response.body()), null));
         return res;
     }
     private static UserRepository instance;

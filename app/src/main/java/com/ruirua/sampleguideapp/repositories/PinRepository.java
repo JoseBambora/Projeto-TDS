@@ -56,7 +56,7 @@ public class PinRepository {
         String csrftoken = ur.getCsrfToken();
         String sessionid = ur.getSessionId();
         Call<List<Pin>> call = pinAPI.getPins(csrftoken,sessionid);
-        call.enqueue(new UtilRepository<>((response) -> this.insert(response.body())));
+        call.enqueue(new UtilRepository<>((response) -> this.insert(response.body()),null));
     }
 
     private void getPinAPI(int id, MutableLiveData<Pin> res) {
@@ -64,7 +64,7 @@ public class PinRepository {
         String csrftoken = ur.getCsrfToken();
         String sessionid = ur.getSessionId();
         Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);
-        call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body())));
+        call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()),null));
     }
     public LiveData<Pin> getPin(int id) {
         MutableLiveData<Pin> res = new MutableLiveData<>();

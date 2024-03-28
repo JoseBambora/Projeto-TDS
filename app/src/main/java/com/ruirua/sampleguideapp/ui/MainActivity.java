@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonRegister = findViewById(R.id.buttonRegister);
         Button buttonLogin = findViewById(R.id.buttonLogin);
+        Button buttonList = findViewById(R.id.buttonTourRoutes);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TrailActivity.class);
                 startActivity(intent);
             }
         });

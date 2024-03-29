@@ -7,7 +7,7 @@
         android:id="@+id/textLoginViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="24sp"
         android:gravity="center"
         android:padding="16dp"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textLoginViewTitle"
         android:layout_marginTop="120dp"
-        android:hint="Utilizador"
+        android:hint="@string/utilizador"
         android:inputType="text" />
 
     <EditText
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editLoginTextUsername"
         android:layout_marginTop="16dp"
-        android:hint="Palavra Passe"
+        android:hint="@string/palavra_passe"
         android:inputType="textPassword" />
 
     <Button
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editLoginTextPassword"
         android:layout_marginTop="16dp"
-        android:text="Login" />
+        android:text="@string/login" />
 
     <TextView
         android:id="@+id/textViewNoAccount"
@@ -46,7 +46,7 @@
         android:layout_below="@id/buttonLoginLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Ainda não tem conta?"
+        android:text="@string/ainda_n_o_tem_conta"
         android:textColor="@android:color/black" />
 
     <Button
@@ -56,7 +56,7 @@
         android:layout_below="@id/textViewNoAccount"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Registar"
+        android:text="@string/registar"
         android:textColor="@android:color/black"
         android:background="@android:color/transparent" />
 
@@ -68,6 +68,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="2dp"
-        android:text="Voltar"
+        android:text="@string/voltar"
         android:textColor="@android:color/white" />
 </RelativeLayout>

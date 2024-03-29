@@ -21,4 +21,6 @@
     <string name="ainda_n_o_tem_conta">Ainda não tem conta?</string>
     <string name="confirmar_palavra_passe">Confirmar Palavra Passe</string>
     <string name="j_tem_uma_conta">Já tem uma conta?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

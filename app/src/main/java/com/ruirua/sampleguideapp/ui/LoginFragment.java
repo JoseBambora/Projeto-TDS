@@ -1,7 +1,13 @@
 package com.ruirua.sampleguideapp.ui;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +16,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 
 public class LoginFragment extends Fragment {
 
     public LoginFragment() {
-
+        // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_screen, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
+    }
 
-        Button buttonLoginVoltar = view.findViewById(R.id.buttonLoginVoltar);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Button buttonLoginParaRegister = view.findViewById(R.id.buttonLoginParaRegister);
+        Button buttonLoginVoltar = view.findViewById(R.id.buttonLoginVoltar);
         Button buttonLoginLogin = view.findViewById(R.id.buttonLoginLogin);
 
         buttonLoginVoltar.setOnClickListener(v -> {
@@ -37,11 +46,14 @@ public class LoginFragment extends Fragment {
         });
 
         buttonLoginParaRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AuthenticationActivity.class);
-            intent.putExtra("action", "register");
-            startActivity(intent);
-            getActivity().finish();
+            Log.d("DebugApp","entrou " + getView());
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(android.R.id.content, new RegisterFragment())
+                    .addToBackStack(null)
+                    .commit();
         });
+
 
         buttonLoginLogin.setOnClickListener(v -> {
             EditText editTextUsername = view.findViewById(R.id.editLoginTextUsername);
@@ -53,8 +65,6 @@ public class LoginFragment extends Fragment {
             Log.d("DebugApp","A realizar login " + ur);
             ur.login(username,password,this::postLogin);
         });
-
-        return view;
     }
 
     private void postLogin(boolean success) {

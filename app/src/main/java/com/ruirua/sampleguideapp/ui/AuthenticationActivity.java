@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ruirua.sampleguideapp.R;
@@ -16,26 +17,11 @@ public class AuthenticationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String action = intent.getStringExtra("action");
 
-        if ("register".equals(action)) {loadRegisterFragment();
-        }
-        else if ("login".equals(action)){loadLoginFragment();}
-
-    }
-
-    private void loadLoginFragment() {
-        LoginFragment loginFragment = new LoginFragment();
+        Fragment fragment = "register".equals(action) ? new RegisterFragment() : new LoginFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, loginFragment);
+        fragmentTransaction.replace(android.R.id.content, fragment);
         fragmentTransaction.commit();
-    }
 
-    // Método para carregar o fragmento de registro
-    private void loadRegisterFragment() {
-        RegisterFragment registerFragment = new RegisterFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, registerFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 }
 

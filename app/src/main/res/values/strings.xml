@@ -10,4 +10,15 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="voltar">Voltar</string>
+    <string name="braguia_guia_tur_stico">BraGuia - Guia Turístico</string>
+    <string name="bem_vindo_ao_braguia">Bem-vindo ao BraGuia!</string>
+    <string name="registar">Registar</string>
+    <string name="login">Login</string>
+    <string name="localiza_o_e_navega_o">Localização e Navegação</string>
+    <string name="conteudo_multim_dia">Conteudo Multimédia</string>
+    <string name="utilizador">Utilizador</string>
+    <string name="palavra_passe">Palavra Passe</string>
+    <string name="ainda_n_o_tem_conta">Ainda não tem conta?</string>
+    <string name="confirmar_palavra_passe">Confirmar Palavra Passe</string>
+    <string name="j_tem_uma_conta">Já tem uma conta?</string>
 </resources>

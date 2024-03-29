@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 
 @Entity(tableName = "user")
-public class User {
+public class UserLogged {
 
     @PrimaryKey
     @NonNull
@@ -25,6 +25,14 @@ public class User {
     @ColumnInfo(name = "sessionid")
     private String sessionid = "";
 
+    public boolean isPremium() {
+        return user_type.equals("Premium");
+
+    }
+
+    public boolean isStandard() {
+        return user_type.equals("Standard");
+    }
 
     public void setCsrftoken(String csrftoken) {
         this.csrftoken = csrftoken;

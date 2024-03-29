@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/Primario">
 
     <TextView
         android:id="@+id/textViewHeader"
@@ -12,7 +14,7 @@
         android:textSize="24sp"
         android:gravity="center"
         android:paddingBottom="16dp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@color/Alternativo"/>
 
     <TextView
         android:id="@+id/textViewDescription"
@@ -24,7 +26,7 @@
         android:lineSpacingMultiplier="1.2"
         android:paddingBottom="16dp"
         android:text="@string/bem_vindo_ao_braguia"
-        android:textColor="@android:color/black"
+        android:textColor="@color/Alternativo"
         android:textSize="16sp" />
 
     <LinearLayout
@@ -34,38 +36,54 @@
         android:layout_marginTop="-472dp"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            app:backgroundTint="@color/Secundario"
             android:text="@string/registar" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
+            app:backgroundTint="@color/Secundario"
             android:text="@string/login" />
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonEmergency"
+        android:layout_below="@id/textViewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="366dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/Secundario"
+        app:icon="@drawable/phone_icon"
+        app:iconGravity="textStart"
+        android:text="@string/chamada_de_emerg_ncia"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonTourRoutes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewDescription"
-        android:layout_marginTop="366dp"
+        android:layout_below="@id/buttonEmergency"
         android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/Secundario"
         android:text="@string/localiza_o_e_navega_o" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonTourRoutes"
         android:layout_marginBottom="16dp"
+        android:background="@color/Secundario"
+        app:backgroundTint="@color/Secundario"
         android:text="@string/conteudo_multim_dia"/>
 
 </RelativeLayout>

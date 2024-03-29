@@ -31,8 +31,8 @@ public class UtilRepository<T> implements Callback<T> {
 
     @Override
     public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
-        Log.d("userslogged2","erro2 " + t.getMessage());
-        Log.e("main", "onFailure: " + t.getMessage());
+        Log.d("DebugApp","erro2 " + t.getMessage());
+        Log.e("DebugApp", "onFailure: " + t.getMessage());
     }
 }
 

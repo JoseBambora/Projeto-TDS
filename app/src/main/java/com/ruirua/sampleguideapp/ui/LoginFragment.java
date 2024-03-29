@@ -46,7 +46,6 @@ public class LoginFragment extends Fragment {
         });
 
         buttonLoginParaRegister.setOnClickListener(v -> {
-            Log.d("DebugApp","entrou " + getView());
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(android.R.id.content, new RegisterFragment())
@@ -62,8 +61,9 @@ public class LoginFragment extends Fragment {
             String username = editTextUsername.getText().toString();
             String password = editTextPassword.getText().toString();
             UserRepository ur = UserRepository.getInstance();
-            Log.d("DebugApp","A realizar login " + ur);
+            Log.d("DebugApp","A realizar login " + ur + " " + ur.isLogged());
             ur.login(username,password,this::postLogin);
+            Toast.makeText(getActivity(), "A realizar login", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -71,8 +71,8 @@ public class LoginFragment extends Fragment {
         Log.d("DebugApp","Login feito " + success);
         if (success) {
             UserRepository ur = UserRepository.getInstance();
-            String t1 = ur.getCsrfToken();
-            String t2 = ur.getSessionId();
+            boolean t1 = ur.isPremium();
+            boolean t2 = ur.isStandard();
             Toast.makeText(getActivity(), "Login Feito, tokens: " + t1 + " | " + t2, Toast.LENGTH_SHORT).show();
         }
         else {

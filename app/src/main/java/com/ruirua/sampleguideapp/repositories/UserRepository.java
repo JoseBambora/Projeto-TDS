@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.user.LoginData;
-import com.ruirua.sampleguideapp.model.user.User;
+import com.ruirua.sampleguideapp.model.user.UserLogged;
 import com.ruirua.sampleguideapp.model.user.UserAPI;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
 import com.ruirua.sampleguideapp.model.user.UserInfo;
@@ -27,7 +27,7 @@ import retrofit2.Retrofit;
 
 public class UserRepository {
     private final UserDAO userDAO;
-    private User currentUser;
+    private UserLogged currentUser;
 
     private final UserAPI userAPI;
     private UserRepository(Application application){
@@ -37,35 +37,52 @@ public class UserRepository {
         userAPI = retrofit.create(UserAPI.class);
         currentUser = null;
     }
-    public void setCurrentUser(User user) {
+    public void setCurrentUser(UserLogged user) {
         if (user != null) {
             currentUser = user;
         }
     }
-    public LiveData<List<User>> usersLogged() {
+    public LiveData<List<UserLogged>> usersLogged() {
         return userDAO.getUsers();
     }
 
-    public void insert(User user){
+    public void insert(UserLogged user){
         Executors.newSingleThreadExecutor().execute(() -> userDAO.insert(user));
     }
 
+    public LiveData<UserInfo> getUserInfo() {
+        MutableLiveData<UserInfo> res = new MutableLiveData<>();
+        if(isLogged()) {
+            Call<UserInfo> call = userAPI.getUserInfo(getCsrfToken(),getSessionId());
+            call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()),null));
+        }
+        return res;
+    }
+
+    private void assignUserType() {
+        Call<UserInfo> call = userAPI.getUserInfo(getCsrfToken(),getSessionId());
+        call.enqueue(new UtilRepository<>((response) -> currentUser.setUser_type(response.body().getUser_type()),(er) -> Log.d("DebugApp","Erro ao fazer pedido do tipo de user ")));
+    }
     private void authUser(Response<ResponseBody> response, String username, Consumer<Boolean> consumer) {
         Map<String,String> cookies = UtilsFuns.getCookies(response);
-        currentUser = new User();
-        currentUser.setUsername(username);
-        currentUser.setSessionid(cookies.get("sessionid"));
-        currentUser.setCsrftoken(cookies.get("csrftoken"));
-        currentUser.setUser_type("user");
-        // insert(currentUser);
+        UserLogged ul = new UserLogged();
+        ul.setUsername(username);
+        ul.setSessionid(cookies.get("sessionid"));
+        ul.setCsrftoken(cookies.get("csrftoken"));
+        ul.setUser_type("user");
+        setCurrentUser(ul);
         consumer.accept(true);
+        assignUserType();
+        // insert(currentUser);
     }
     public void login(String username, String password, Consumer<Boolean> consumer) {
-        if(currentUser == null) {
+        if(isLogged()) {
+            consumer.accept(true);
+        }
+        else {
             Call<ResponseBody> call = userAPI.postLogin(new LoginData(username, password));
             call.enqueue(new UtilRepository<>((res) -> authUser(res,username,consumer), (res) -> consumer.accept(false)));
         }
-        else consumer.accept(true);
     }
 
     public void logout() {
@@ -84,11 +101,14 @@ public class UserRepository {
         return currentUser.getSessionid();
     }
 
-    public LiveData<UserInfo> getUserInfo() {
-        MutableLiveData<UserInfo> res = new MutableLiveData<>();
-        userAPI.getUserInfo(getCsrfToken(),getSessionId()).enqueue(new UtilRepository<>((response) -> res.setValue(response.body()), null));
-        return res;
+    public boolean isPremium() {
+        return isLogged() && currentUser.isPremium();
     }
+
+    public boolean isStandard() {
+        return isLogged() && currentUser.isStandard();
+    }
+
     private static UserRepository instance;
     public static synchronized UserRepository getInstance() {
         return instance;

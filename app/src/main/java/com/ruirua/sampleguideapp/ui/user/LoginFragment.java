@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.ui.authentication;
+package com.ruirua.sampleguideapp.ui.user;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -63,7 +63,7 @@ public class LoginFragment extends Fragment {
             UserRepository ur = UserRepository.getInstance();
             Log.d("DebugApp","A realizar login " + ur + " " + ur.isLogged());
             ur.login(username,password,this::postLogin);
-            Toast.makeText(getActivity(), "A realizar login", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "A realizar login", Toast.LENGTH_SHORT).show();
         });
     }
 

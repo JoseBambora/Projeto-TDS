@@ -109,4 +109,12 @@ public class UserInfo {
                 ", user_permissions=" + user_permissions +
                 '}';
     }
+
+    public boolean isStandard() {
+        return user_type.equals("Standard");
+    }
+
+    public boolean isPremium() {
+        return user_type.equals("Premium");
+    }
 }

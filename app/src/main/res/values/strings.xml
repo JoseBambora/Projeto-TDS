@@ -24,4 +24,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="chamada_de_emerg_ncia">Chamada de emergência</string>
+    <string name="nome_do_utilizador">Nome do utilizador:</string>
+    <string name="utilizador_info">Utilizador</string>
+    <string name="sem_nome">Sem nome</string>
 </resources>

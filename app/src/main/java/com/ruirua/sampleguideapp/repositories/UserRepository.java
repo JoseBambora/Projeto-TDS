@@ -28,6 +28,7 @@ import retrofit2.Retrofit;
 public class UserRepository {
     private final UserDAO userDAO;
     private UserLogged currentUser;
+    private UserInfo userInfo;
 
     private final UserAPI userAPI;
     private UserRepository(Application application){
@@ -50,18 +51,13 @@ public class UserRepository {
         Executors.newSingleThreadExecutor().execute(() -> userDAO.insert(user));
     }
 
-    public LiveData<UserInfo> getUserInfo() {
-        MutableLiveData<UserInfo> res = new MutableLiveData<>();
-        if(isLogged()) {
-            Call<UserInfo> call = userAPI.getUserInfo(getCsrfToken(),getSessionId());
-            call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()),null));
-        }
-        return res;
+    private void assignUserInfo(Response<UserInfo> response) {
+        userInfo = response.body();
     }
 
     private void assignUserType() {
         Call<UserInfo> call = userAPI.getUserInfo(getCsrfToken(),getSessionId());
-        call.enqueue(new UtilRepository<>((response) -> currentUser.setUser_type(response.body().getUser_type()),(er) -> Log.d("DebugApp","Erro ao fazer pedido do tipo de user ")));
+        call.enqueue(new UtilRepository<>(this::assignUserInfo,(er) -> Log.d("DebugApp","Erro ao fazer pedido do tipo de user ")));
     }
     private void authUser(Response<ResponseBody> response, String username, Consumer<Boolean> consumer) {
         Map<String,String> cookies = UtilsFuns.getCookies(response);
@@ -102,11 +98,15 @@ public class UserRepository {
     }
 
     public boolean isPremium() {
-        return isLogged() && currentUser.isPremium();
+        return isLogged() && userInfo != null && userInfo.isPremium();
     }
 
     public boolean isStandard() {
-        return isLogged() && currentUser.isStandard();
+        return isLogged() && userInfo != null && userInfo.isStandard();
+    }
+
+    public UserInfo getUserLoggedInfo() {
+        return this.userInfo;
     }
 
     private static UserRepository instance;

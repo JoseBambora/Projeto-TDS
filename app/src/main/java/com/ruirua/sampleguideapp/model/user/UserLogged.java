@@ -25,15 +25,6 @@ public class UserLogged {
     @ColumnInfo(name = "sessionid")
     private String sessionid = "";
 
-    public boolean isPremium() {
-        return user_type.equals("Premium");
-
-    }
-
-    public boolean isStandard() {
-        return user_type.equals("Standard");
-    }
-
     public void setCsrftoken(String csrftoken) {
         this.csrftoken = csrftoken;
     }

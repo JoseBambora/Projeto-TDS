@@ -82,8 +82,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonTourRoutes"
         android:layout_marginBottom="16dp"
-        android:background="@color/Secundario"
         app:backgroundTint="@color/Secundario"
         android:text="@string/conteudo_multim_dia"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/userInfo"
+        android:layout_below="@id/buttonLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/Secundario"
+        app:iconGravity="textStart"
+        app:icon="@drawable/user_133"
+        android:text="@string/utilizador_info"/>
 </RelativeLayout>

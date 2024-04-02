@@ -28,6 +28,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.trails.TrailActivity" />
-        <activity android:name=".ui.authentication.AuthenticationActivity" />
+        <activity android:name=".ui.user.UserActivity" />
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.ui.authentication;
+package com.ruirua.sampleguideapp.ui.user;
 
 
 import android.content.Intent;

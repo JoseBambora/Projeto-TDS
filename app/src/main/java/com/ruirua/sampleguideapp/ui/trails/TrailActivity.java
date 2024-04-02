@@ -21,12 +21,6 @@ public class TrailActivity extends AppCompatActivity {
         }
 
         Button returnButton = findViewById(R.id.return_button);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
+        returnButton.setOnClickListener(v -> finish());
     }
 }

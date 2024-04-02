@@ -10,7 +10,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/message_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Secundario"
+            android:textSize="24sp"
+            android:padding="20dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
 
         <include
             layout="@layout/field_template"
@@ -18,11 +31,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
         <include
             layout="@layout/field_template"
             android:id="@+id/field2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
 
         <include
             layout="@layout/field_template"
@@ -30,29 +51,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
         <include
             layout="@layout/field_template"
             android:id="@+id/field4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
         <include
             layout="@layout/field_template"
             android:id="@+id/field5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/goBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/Secundario"
+            app:icon="@drawable/back_24"
+            app:iconGravity="textStart"
+            android:text="@string/voltar"/>
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/goBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="366dp"
-        android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/Secundario"
-        app:icon="@drawable/back_24"
-        app:iconGravity="textStart"
-        android:text="@string/voltar"/>
 
 
 </FrameLayout>

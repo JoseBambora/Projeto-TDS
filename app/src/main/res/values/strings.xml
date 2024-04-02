@@ -27,4 +27,6 @@
     <string name="nome_do_utilizador">Nome do utilizador:</string>
     <string name="utilizador_info">Utilizador</string>
     <string name="sem_nome">Sem nome</string>
+    <string name="title_activity_pin">PinActivity</string>
+    <string name="consultar_pin_1">Consultar Pin 1</string>
 </resources>

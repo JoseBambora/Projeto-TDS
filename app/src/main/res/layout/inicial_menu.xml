@@ -1,98 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="@color/Primario">
 
-    <TextView
-        android:id="@+id/textViewHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/braguia_guia_tur_stico"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:paddingBottom="16dp"
-        android:textColor="@color/Alternativo"/>
-
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewHeader"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:lineSpacingMultiplier="1.2"
-        android:paddingBottom="16dp"
-        android:text="@string/bem_vindo_ao_braguia"
-        android:textColor="@color/Alternativo"
-        android:textSize="16sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonLocation"
-        android:layout_marginTop="-472dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/braguia_guia_tur_stico"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/Alternativo"/>
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingBottom="16dp"
+            android:text="@string/bem_vindo_ao_braguia"
+            android:textColor="@color/Alternativo"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:backgroundTint="@color/Secundario"
+                android:text="@string/registar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:backgroundTint="@color/Secundario"
+                android:text="@string/login" />
+
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonRegister"
-            android:layout_width="0dp"
+            android:id="@+id/buttonEmergency"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
             app:backgroundTint="@color/Secundario"
-            android:text="@string/registar" />
+            app:icon="@drawable/phone_icon"
+            app:iconGravity="textStart"
+            android:text="@string/chamada_de_emerg_ncia"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonLogin"
-            android:layout_width="0dp"
+            android:id="@+id/buttonTourRoutes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
             app:backgroundTint="@color/Secundario"
-            android:text="@string/login" />
-    </LinearLayout>
+            android:text="@string/localiza_o_e_navega_o" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonEmergency"
-        android:layout_below="@id/textViewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="366dp"
-        android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/Secundario"
-        app:icon="@drawable/phone_icon"
-        app:iconGravity="textStart"
-        android:text="@string/chamada_de_emerg_ncia"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/Secundario"
+            android:text="@string/conteudo_multim_dia"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonTourRoutes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonEmergency"
-        android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/Secundario"
-        android:text="@string/localiza_o_e_navega_o" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonPin1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/Secundario"
+            android:text="@string/consultar_pin_1"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonTourRoutes"
-        android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/Secundario"
-        android:text="@string/conteudo_multim_dia"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/userInfo"
-        android:layout_below="@id/buttonLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/Secundario"
-        app:iconGravity="textStart"
-        app:icon="@drawable/user_133"
-        android:text="@string/utilizador_info"/>
-</RelativeLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/userInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/Secundario"
+            app:iconGravity="textStart"
+            app:icon="@drawable/user_133"
+            android:text="@string/utilizador_info"/>
+        </LinearLayout>
+</FrameLayout>

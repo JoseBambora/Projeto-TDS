@@ -31,7 +31,11 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
-
+    private void goBack() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -39,11 +43,7 @@ public class LoginFragment extends Fragment {
         Button buttonLoginVoltar = view.findViewById(R.id.buttonLoginVoltar);
         Button buttonLoginLogin = view.findViewById(R.id.buttonLoginLogin);
 
-        buttonLoginVoltar.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        });
+        buttonLoginVoltar.setOnClickListener(v -> goBack());
 
         buttonLoginParaRegister.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager()
@@ -71,9 +71,12 @@ public class LoginFragment extends Fragment {
         Log.d("DebugApp","Login feito " + success);
         if (success) {
             UserRepository ur = UserRepository.getInstance();
-            boolean t1 = ur.isPremium();
-            boolean t2 = ur.isStandard();
-            Toast.makeText(getActivity(), "Login Feito, tokens: " + t1 + " | " + t2, Toast.LENGTH_SHORT).show();
+            String t1 = ur.getCsrfToken();
+            String t2 = ur.getSessionId();
+            Toast.makeText(getActivity(), "Login Feito", Toast.LENGTH_SHORT).show();
+            Log.d("DebugApp", "Csrftoken: " + t1);
+            Log.d("DebugApp", "Sessionid: " + t2);
+            goBack();
         }
         else {
             Toast.makeText(getActivity(), "Dados Incorretos", Toast.LENGTH_SHORT).show();

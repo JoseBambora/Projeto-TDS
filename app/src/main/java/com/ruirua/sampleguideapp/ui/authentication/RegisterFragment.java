@@ -1,8 +1,6 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.authentication;
 
 
-import android.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.ui.MainActivity;
 
 public class RegisterFragment extends Fragment {
 

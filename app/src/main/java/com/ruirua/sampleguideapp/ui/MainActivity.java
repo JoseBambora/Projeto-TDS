@@ -3,16 +3,15 @@ package com.ruirua.sampleguideapp.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.ui.authentication.AuthenticationActivity;
+import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
 
 public class MainActivity extends AppCompatActivity {
 

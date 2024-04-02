@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.TrailActivity" />
-        <activity android:name=".ui.AuthenticationActivity" />
+        <activity android:name=".ui.trails.TrailActivity" />
+        <activity android:name=".ui.authentication.AuthenticationActivity" />
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.trails;
 
 import androidx.recyclerview.widget.RecyclerView;
 

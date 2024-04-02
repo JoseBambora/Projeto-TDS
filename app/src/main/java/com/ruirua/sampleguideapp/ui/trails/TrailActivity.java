@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.trails;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;

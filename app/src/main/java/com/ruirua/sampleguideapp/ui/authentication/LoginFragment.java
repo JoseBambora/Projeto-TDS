@@ -1,4 +1,4 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.authentication;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
+import com.ruirua.sampleguideapp.ui.MainActivity;
 
 public class LoginFragment extends Fragment {
 

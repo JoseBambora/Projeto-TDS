@@ -1,6 +1,5 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.trails;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 

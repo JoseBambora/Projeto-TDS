@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.user.LoginFragment"
     android:id="@+id/LoginFragment"
-    android:background="@color/Primario">
+    android:background="?attr/Primario">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:textSize="24sp"
                 android:gravity="center"
                 android:padding="16dp"
-                android:textColor="@color/Secundario"/>
+                android:textColor="?attr/Secundario"/>
 
             <EditText
                 android:id="@+id/editLoginTextUsername"
@@ -35,12 +35,10 @@
                 android:layout_marginTop="120dp"
                 android:layout_marginHorizontal="20dp"
                 android:hint="@string/utilizador"
-                android:drawableStart="@drawable/baseline_mail_outline_24"
+                android:drawableStart="@drawable/user_icon_black"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:inputType="text"
-
-                android:textColor="@color/Primario"/>
+                android:inputType="text"/>
 
             <EditText
                 android:id="@+id/editLoginTextPassword"
@@ -50,18 +48,18 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/key_icon"
                 android:hint="@string/palavra_passe"
-                android:inputType="textPassword"
+                android:inputType="textPassword"/>
 
-                android:textColor="@color/Primario"/>
-
-            <Button
+            <android.widget.Button
                 android:id="@+id/buttonLoginLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/btn3"
                 android:layout_marginTop="16dp"
-                android:text="@string/login" />
+                android:text="@string/login"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/textViewNoAccount"
@@ -69,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/ainda_n_o_tem_conta"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/buttonLoginParaRegister"
@@ -77,16 +75,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/registar"
-                android:textColor="@android:color/black"
+                android:textColor="@color/black"
                 android:background="@android:color/transparent" />
         </LinearLayout>
 
 
-        <Button
+        <android.widget.Button
             android:id="@+id/buttonLoginVoltar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/voltar"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white"
+            android:background="@drawable/btn3"/>
     </LinearLayout>
 </FrameLayout>

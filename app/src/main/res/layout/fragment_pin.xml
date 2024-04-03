@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.pins.PinFragment"
-    android:background="@color/Primario">
+    android:background="@color/PrimarioLight">
 
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:id="@+id/goMainPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="@color/Secundario"
+            app:backgroundTint="@color/SecundarioLight"
             app:icon="@drawable/back_24"
             app:iconGravity="textStart"
             android:text="@string/voltar"/>

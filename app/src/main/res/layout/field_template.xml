@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:textColor="@color/Secundario"/>
+        android:textColor="@color/SecundarioLight"/>
 
     <TextView
         android:id="@+id/editId"
@@ -29,7 +29,7 @@
         android:layout_marginStart="8dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:textColor="@color/Primario"
+        android:textColor="@color/PrimarioLight"
         android:background="@drawable/input_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

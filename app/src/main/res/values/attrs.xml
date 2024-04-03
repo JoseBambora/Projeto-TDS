@@ -3,4 +3,7 @@
     <declare-styleable name="FieldTemplate">
         <attr name="text" format="string"/>
     </declare-styleable>
+    <attr name="Primario" format="color" />
+    <attr name="Secundario" format="color" />
+    <attr name="Alternativo" format="color" />
 </resources>

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.ruirua.sampleguideapp.repositories.UserRepository;
+import com.ruirua.sampleguideapp.ui.Settings;
 
 public class MyApplication extends Application {
     @Override
@@ -12,5 +13,6 @@ public class MyApplication extends Application {
         // Initialize your UserRepository here
         Log.d("DebugApp","A inicializar");
         UserRepository.createUserRepository(this);
+        Settings.createInstance(this);
     }
 }

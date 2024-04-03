@@ -3,6 +3,7 @@ package com.ruirua.sampleguideapp.ui.user;
 import static androidx.navigation.Navigation.findNavController;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.ui.MainActivity;
+import com.ruirua.sampleguideapp.ui.Settings;
 
 public class LoginFragment extends Fragment {
 
@@ -29,8 +33,13 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
-    }
+        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            rootView.getContext().getTheme().applyStyle(R.style.AppThemeDark, true);
+        }
+
+        return rootView;    }
     private void goBack() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
@@ -43,6 +52,9 @@ public class LoginFragment extends Fragment {
         Button buttonLoginVoltar = view.findViewById(R.id.buttonLoginVoltar);
         Button buttonLoginLogin = view.findViewById(R.id.buttonLoginLogin);
 
+        if(Settings.getInstance().isDarkMode()) {
+
+        }
         buttonLoginVoltar.setOnClickListener(v -> goBack());
 
         buttonLoginParaRegister.setOnClickListener(v -> {

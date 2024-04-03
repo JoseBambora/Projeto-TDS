@@ -11,7 +11,7 @@ import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.model.trails.TrailAPI;
 import com.ruirua.sampleguideapp.model.trails.TrailDAO;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
-import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
+import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -37,7 +37,7 @@ public class TrailRepository {
 
     public TrailRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
-        Retrofit retrofit= UtilsFuns.buildRetrofit();
+        Retrofit retrofit= RepoFuns.buildRetrofit();
         trailAPI = retrofit.create(TrailAPI.class);
         trailDAO = database.trailDAO();
         allTrails = new MediatorLiveData<>();

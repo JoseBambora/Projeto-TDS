@@ -11,7 +11,7 @@ import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.PinAPI;
 import com.ruirua.sampleguideapp.model.pins.PinDAO;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
-import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
+import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -40,7 +40,7 @@ public class PinRepository {
 
     public PinRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
-        Retrofit retrofit= UtilsFuns.buildRetrofit();
+        Retrofit retrofit= RepoFuns.buildRetrofit();
         pinAPI = retrofit.create(PinAPI.class);
         pinDAO = database.pinDAO();
         allPins = new MediatorLiveData<>();

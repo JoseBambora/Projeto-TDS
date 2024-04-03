@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.user.RegisterFragment"
-    android:id="@+id/RegisterFragment">
+    android:id="@+id/RegisterFragment"
+    android:background="?attr/Primario">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,12 +51,14 @@
                 android:hint="@string/confirmar_palavra_passe"
                 android:inputType="textPassword"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/buttonRegisterRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/registar"/>
+                android:text="@string/registar"
+                android:background="@drawable/btn3"
+                android:textColor="@color/white"/>
 
 
             <TextView
@@ -77,14 +80,15 @@
 
         </LinearLayout>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/buttonRegisterVoltar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginBottom="2dp"
             android:text="@string/voltar"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="@drawable/btn3"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
-    android:background="#FFFFFF">
+    android:background="?attr/Primario">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:textSize="24sp"
             android:gravity="center"
             android:paddingBottom="16dp"
-            android:textColor="@color/AlternativoLight"/>
+            android:textColor="?attr/Secundario"/>
 
         <TextView
             android:id="@+id/textViewDescription"
@@ -30,7 +30,7 @@
             android:lineSpacingMultiplier="1.2"
             android:paddingBottom="16dp"
             android:text="@string/bem_vindo_ao_braguia"
-            android:textColor="@color/AlternativoLight"
+            android:textColor="?attr/Secundario"
             android:textSize="16sp" />
 
         <View

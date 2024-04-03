@@ -1,10 +1,9 @@
 package com.ruirua.sampleguideapp.ui.user;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.ruirua.sampleguideapp.R;
-import com.ruirua.sampleguideapp.ui.MainActivity;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 public class RegisterFragment extends Fragment {
-
+    private FragmentActivity activity;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -27,21 +26,9 @@ public class RegisterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         Button buttonRegisterVoltar = view.findViewById(R.id.buttonRegisterVoltar);
         Button buttonRegisterparaLogin = view.findViewById(R.id.buttonRegisterparaLogin);
-
-        buttonRegisterVoltar.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        });
-
-        buttonRegisterparaLogin.setOnClickListener(v -> {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(android.R.id.content, new LoginFragment())
-                    .addToBackStack(null)
-                    .commit();
-        });
-
+        activity = getActivity();
+        buttonRegisterVoltar.setOnClickListener(v -> UIFuns.goBack(activity));
+        buttonRegisterparaLogin.setOnClickListener(v -> UIFuns.changeFragment(activity,this,activity.getSupportFragmentManager(),new LoginFragment()));
         return view;
     }
 }

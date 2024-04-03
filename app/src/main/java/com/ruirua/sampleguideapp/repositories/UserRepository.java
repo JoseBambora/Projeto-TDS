@@ -13,7 +13,7 @@ import com.ruirua.sampleguideapp.model.user.UserAPI;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
 import com.ruirua.sampleguideapp.model.user.UserInfo;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
-import com.ruirua.sampleguideapp.repositories.utils.UtilsFuns;
+import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class UserRepository {
     private UserRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
         userDAO = database.userDAO();
-        Retrofit retrofit = UtilsFuns.buildRetrofit();
+        Retrofit retrofit = RepoFuns.buildRetrofit();
         userAPI = retrofit.create(UserAPI.class);
         currentUser = null;
     }
@@ -64,7 +64,7 @@ public class UserRepository {
         call.enqueue(new UtilRepository<>(this::assignUserInfo,(er) -> Log.d("DebugApp","Erro ao fazer pedido do tipo de user ")));
     }
     private void authUser(Response<ResponseBody> response, String username, Consumer<Boolean> consumer) {
-        Map<String,String> cookies = UtilsFuns.getCookies(response);
+        Map<String,String> cookies = RepoFuns.getCookies(response);
         UserLogged ul = new UserLogged();
         ul.setUsername(username);
         ul.setSessionid(cookies.get("sessionid"));

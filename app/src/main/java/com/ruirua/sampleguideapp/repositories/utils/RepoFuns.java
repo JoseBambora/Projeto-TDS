@@ -1,10 +1,7 @@
 package com.ruirua.sampleguideapp.repositories.utils;
 
-import android.util.Log;
-
 import com.ruirua.sampleguideapp.BuildConfig;
 
-import java.net.HttpCookie;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +11,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UtilsFuns {
+public class RepoFuns {
     public static Retrofit buildRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.BRAGUIDE_BACKEND_URL)

@@ -1,28 +1,29 @@
 package com.ruirua.sampleguideapp.ui.user;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
-import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.user.UserInfo;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
-import com.ruirua.sampleguideapp.ui.MainActivity;
+import com.ruirua.sampleguideapp.ui.initial.MainActivity;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 public class UserFragment extends Fragment {
     private UserInfo ui;
+    private Activity activity;
     public UserFragment() {
         // Required empty public constructor
     }
@@ -76,18 +77,19 @@ public class UserFragment extends Fragment {
         });
     }
 
+    private void setOnClicks(View view) {
+        MaterialButton bt = view.findViewById(R.id.goBack);
+        bt.setOnClickListener(v -> UIFuns.goBack(activity));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         setFields(view);
-        MaterialButton bt = view.findViewById(R.id.goBack);
-        bt.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        });
+        setOnClicks(view);
+        activity = getActivity();
         return view;
     }
 }

@@ -1,6 +1,6 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.initial;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,17 +17,21 @@ import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
 import com.ruirua.sampleguideapp.ui.user.UserActivity;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuInicialFragment extends Fragment {
+    private Activity activity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inicial_menu, container, false);
-
+        activity = getActivity();
         setOnClicks(view);
         hideButtons(view);
-
         return view;
     }
 
@@ -43,6 +47,11 @@ public class MenuInicialFragment extends Fragment {
         }
     }
 
+    private Map<String,String> setAction(String value) {
+        Map<String,String> params = new HashMap<>();
+        params.put("action", value);
+        return params;
+    }
     private void setOnClicks(View view) {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
@@ -51,36 +60,12 @@ public class MenuInicialFragment extends Fragment {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
 
-        buttonRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), UserActivity.class);
-            intent.putExtra("action", "register");
-            startActivity(intent);
-        });
+        buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("register")));
+        buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("login")));
+        buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null,null));
+        buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("userinfo")));
+        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null,null));
+        buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
 
-        buttonLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), UserActivity.class);
-            intent.putExtra("action", "login");
-            startActivity(intent);
-        });
-
-        buttonList.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), TrailActivity.class);
-            startActivity(intent);
-        });
-
-        buttonEmergency.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show();
-        });
-
-        buttonUserInfo.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), UserActivity.class);
-            intent.putExtra("action", "userinfo");
-            startActivity(intent);
-        });
-
-        buttonPin1.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), PinActivity.class);
-            startActivity(intent);
-        });
     }
 }

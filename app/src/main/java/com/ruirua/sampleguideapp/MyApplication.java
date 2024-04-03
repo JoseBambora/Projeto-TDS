@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.ruirua.sampleguideapp.repositories.UserRepository;
-import com.ruirua.sampleguideapp.ui.Settings;
+import com.ruirua.sampleguideapp.ui.utils.Settings;
 
 public class MyApplication extends Application {
     @Override

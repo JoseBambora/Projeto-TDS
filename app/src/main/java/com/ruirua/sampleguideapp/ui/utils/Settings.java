@@ -1,12 +1,9 @@
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.utils;
 
 import android.content.Context;
-import android.util.JsonReader;
-import android.util.JsonWriter;
 
 import com.google.gson.Gson;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,6 +1,7 @@
 package com.ruirua.sampleguideapp.ui.pins;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,12 +17,14 @@ import android.widget.TextView;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Pin;
-import com.ruirua.sampleguideapp.ui.MainActivity;
+import com.ruirua.sampleguideapp.ui.initial.MainActivity;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 
 public class PinFragment extends Fragment {
 
     private final int pinId;
+    private Activity activity;
     public PinFragment(int pinId) {
         this.pinId = pinId;
     }
@@ -34,11 +37,7 @@ public class PinFragment extends Fragment {
 
     private void setOnClicks(View v) {
         Button buttonGoBack = v.findViewById(R.id.goMainPage);
-        buttonGoBack.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        });
+        buttonGoBack.setOnClickListener(view -> UIFuns.goBack(activity));
     }
 
     private void fillInfo(Pin pin) {
@@ -49,6 +48,7 @@ public class PinFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pin, container, false);
+        activity = getActivity();
         TextView tv = v.findViewById(R.id.title_pin);
         tv.setText("Pin " + pinId);
         PinsViewModel pvm = new ViewModelProvider(this).get(PinsViewModel.class);

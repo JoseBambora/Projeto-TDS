@@ -1,5 +1,5 @@
 
-package com.ruirua.sampleguideapp.ui;
+package com.ruirua.sampleguideapp.ui.initial;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -9,22 +9,23 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inicial_menu);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, new MenuInicialFragment())
-                    .commit();
+        UIFuns.configureTheme(this);
+        if (savedInstanceState == null)
+        {
+            Fragment f = new MenuInicialFragment();
+            UIFuns.changeFragment(this,f,getSupportFragmentManager(),f);
         }
-
         permissions();
     }
 
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             getSupportFragmentManager().beginTransaction()
                     .replace(android.R.id.content, new SettingsFragment())

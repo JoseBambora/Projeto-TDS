@@ -1,6 +1,8 @@
 package com.ruirua.sampleguideapp.ui.initial;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,19 @@ public class MenuInicialFragment extends Fragment {
         params.put("action", value);
         return params;
     }
+    private void googleMaps() {
+        double originLat = 41.4417;
+        double originLng = -8.2966;
+        double destLat = 41.5503;
+        double destLng = -8.4201;
+
+        Intent mapIntent = UIFuns.intentGoogleMaps(originLat,originLng,destLat,destLng);
+        if (mapIntent.resolveActivity(activity.getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Toast.makeText(activity, "Google Maps não está instalado", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void setOnClicks(View view) {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
@@ -59,6 +74,7 @@ public class MenuInicialFragment extends Fragment {
         Button buttonEmergency = view.findViewById(R.id.buttonEmergency);
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
+        Button buttonGM = view.findViewById(R.id.googleMaps);
 
         buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("register")));
         buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("login")));
@@ -66,6 +82,6 @@ public class MenuInicialFragment extends Fragment {
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("userinfo")));
         buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null,null));
         buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
-
+        buttonGM.setOnClickListener(v ->googleMaps());
     }
 }

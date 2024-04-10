@@ -3,7 +3,9 @@ package com.ruirua.sampleguideapp.ui.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -56,5 +58,29 @@ public class UIFuns {
             Map<String,String> params = sue.getParams();
             goToActivity(currentActivity.getApplicationContext(),activity.getClass(),params);
         }
+    }
+
+    public static Intent intentGoogleMaps(double origin_lat, double origin_lon, double destiny_lat, double destiny_lon) {
+
+        Uri gmmIntentUri = new Uri.Builder()
+                .scheme("https")
+                .authority("www.google.com")
+                .appendPath("maps")
+                .appendPath("dir")
+                .appendPath("")
+                .appendQueryParameter("api", "1")
+                .appendQueryParameter("origin", origin_lat + "," + origin_lon)
+                .appendQueryParameter("destination", destiny_lat + "," + destiny_lon)
+                .build();
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent;
+    }
+
+    public static Intent permissionsGoogleMap() {
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent;
     }
 }

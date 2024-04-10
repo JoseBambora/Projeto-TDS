@@ -89,6 +89,14 @@
             android:text="@string/conteudo_multim_dia"/>
 
         <android.widget.Button
+            android:id="@+id/googleMaps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn3"
+            android:textColor="@color/white"
+            android:text="@string/google_maps"/>
+
+        <android.widget.Button
             android:id="@+id/buttonPin1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

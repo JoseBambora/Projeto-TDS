@@ -18,7 +18,6 @@ public class RepoFuns {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
-
     public static Map<String,String> getCookies(Response<ResponseBody> response) {
         Map<String,String> res = new HashMap<>();
         List<String> cookies = response.headers().values("Set-Cookie");

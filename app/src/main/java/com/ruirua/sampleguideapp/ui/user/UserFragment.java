@@ -19,13 +19,16 @@ import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.user.UserInfo;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.ui.initial.MainActivity;
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 public class UserFragment extends Fragment {
     private UserInfo ui;
     private Activity activity;
-    public UserFragment() {
+    private GoBackInterface goBackInterface;
+    public UserFragment(GoBackInterface goBackInterface) {
         // Required empty public constructor
+        this.goBackInterface = goBackInterface;
     }
 
     @Override
@@ -79,7 +82,7 @@ public class UserFragment extends Fragment {
 
     private void setOnClicks(View view) {
         MaterialButton bt = view.findViewById(R.id.goBack);
-        bt.setOnClickListener(v -> UIFuns.goBack(activity));
+        bt.setOnClickListener(v -> goBackInterface.goBack());
     }
 
     @Override

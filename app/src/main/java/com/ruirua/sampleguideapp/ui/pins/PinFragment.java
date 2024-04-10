@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.ui.initial.MainActivity;
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 
@@ -25,8 +26,10 @@ public class PinFragment extends Fragment {
 
     private final int pinId;
     private Activity activity;
-    public PinFragment(int pinId) {
+    private GoBackInterface goBackInterface;
+    public PinFragment(GoBackInterface goBackInterface, int pinId) {
         this.pinId = pinId;
+        this.goBackInterface = goBackInterface;
     }
 
 
@@ -37,7 +40,7 @@ public class PinFragment extends Fragment {
 
     private void setOnClicks(View v) {
         Button buttonGoBack = v.findViewById(R.id.goMainPage);
-        buttonGoBack.setOnClickListener(view -> UIFuns.goBack(activity));
+        buttonGoBack.setOnClickListener(view -> goBackInterface.goBack());
     }
 
     private void fillInfo(Pin pin) {

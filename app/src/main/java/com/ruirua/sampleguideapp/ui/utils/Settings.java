@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Settings {
-    private boolean darkMode = true;
+    private boolean darkMode = false;
 
     private static Settings instance = null;
     private Context context = null;

@@ -14,9 +14,10 @@ import androidx.fragment.app.Fragment;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GoBackInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
         UIFuns.configureTheme(this);
         if (savedInstanceState == null)
         {
-            Fragment f = new MenuInicialFragment();
-            UIFuns.changeFragment(this,f,getSupportFragmentManager(),f);
+            UIFuns.changeFragment(getSupportFragmentManager(),new MenuInicialFragment());
         }
         permissions();
     }
@@ -49,13 +49,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, new SettingsFragment())
-                    .addToBackStack(null)
-                    .commit();
+            UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void goBack() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+            getSupportFragmentManager().popBackStack();
     }
 }

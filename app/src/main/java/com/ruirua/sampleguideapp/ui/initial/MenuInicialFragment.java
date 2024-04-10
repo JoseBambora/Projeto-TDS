@@ -1,9 +1,11 @@
 package com.ruirua.sampleguideapp.ui.initial;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,21 +34,30 @@ public class MenuInicialFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inicial_menu, container, false);
         activity = getActivity();
-        setOnClicks(view);
-        hideButtons(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setOnClicks(getView());
+        hideButtons(getView());
+
     }
 
     private void hideButtons(View view) {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         UserRepository ur = UserRepository.getInstance();
-        if (!ur.isLogged()) {
+        Log.d("DebugApp","Entrou agora " + ur.isLogged() + " " + ur.isPremium());
+        if (!ur.isLogged())
             buttonUserInfo.setVisibility(View.GONE);
-        }
-        if (!ur.isPremium()) {
+        else
+            buttonUserInfo.setVisibility(View.VISIBLE);
+        if (!ur.isPremium())
             buttonPin1.setVisibility(View.GONE);
-        }
+        else
+            buttonPin1.setVisibility(View.VISIBLE);
     }
 
     private Map<String,String> setAction(String value) {
@@ -76,11 +87,13 @@ public class MenuInicialFragment extends Fragment {
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonGM = view.findViewById(R.id.googleMaps);
 
-        buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("register")));
-        buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("login")));
-        buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null,null));
-        buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,null,setAction("userinfo")));
-        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null,null));
+        Context context = activity.getApplicationContext();
+
+        buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(context,UserActivity.class,setAction("register")));
+        buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(context,UserActivity.class,setAction("login")));
+        buttonList.setOnClickListener(v -> UIFuns.changeActivity(context,TrailActivity.class,null));
+        buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(context,UserActivity.class,setAction("userinfo")));
+        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(context, PinActivity.class,null));
         buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
         buttonGM.setOnClickListener(v ->googleMaps());
     }

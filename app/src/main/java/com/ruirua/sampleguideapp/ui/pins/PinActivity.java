@@ -8,15 +8,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class PinActivity extends AppCompatActivity {
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
+
+public class PinActivity extends AppCompatActivity implements GoBackInterface {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureTheme(this);
 
-        Fragment fragment = new PinFragment(1);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, fragment);
-        fragmentTransaction.commit();
+        Fragment fragment = new PinFragment(this,1);
+        UIFuns.changeFragmentNoPushStack(getSupportFragmentManager(),fragment);
+    }
+
+    @Override
+    public void goBack() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+            getSupportFragmentManager().popBackStack();
+        else
+            finish();
     }
 }

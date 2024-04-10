@@ -80,8 +80,8 @@ public class UserRepository {
         {
             UserLogged ul = new UserLogged();
             ul.setUsername("p");
-            ul.setCsrftoken("csrftoken=DWRoXUeL32XgNZQvcTlynt716KGz56O22If9lUEXEoL6ftdjbn9BTPafRdzKywzH; expires=Tue, 01 Apr 2025 14:46:43 GMT; Max-Age=31449600; Path=/; SameSite=Lax");
-            ul.setSessionid("sessionid=9dnxxf4js6qecmhf9mv2z5u6ame6vfcr; expires=Tue, 16 Apr 2024 14:46:43 GMT; Max-Age=1209600; Path=/; SameSite=Lax");
+            ul.setCsrftoken("csrftoken=tknr4RPpue47Oftn8mgjEuB1vW9Y7UpvMEhD0wIaO6AYTOHuSWQnGjN7JfUoIGKC; expires=Wed, 09 Apr 2025 18:48:11 GMT; Max-Age=31449600; Path=/; SameSite=Lax");
+            ul.setSessionid("sessionid=5sisk4qt4lajnr9zihurxbcktzbigz8i; expires=Wed, 24 Apr 2024 18:48:11 GMT; Max-Age=1209600; Path=/; SameSite=Lax");
             setCurrentUser(ul);
             assignUserType();
             consumer.accept(true);

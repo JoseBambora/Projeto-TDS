@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,16 +19,20 @@ import android.widget.Toast;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
+import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.Settings;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 import java.util.Set;
 
 public class LoginFragment extends Fragment {
-    private FragmentActivity activity;
+    private GoBackInterface goBackInterface;
+    private FragmentManager fragmentManager;
 
-    public LoginFragment() {
-        // Required empty public constructor
+    public LoginFragment(GoBackInterface goBackInterface, FragmentManager fragmentManager) {
+        this.goBackInterface = goBackInterface;
+        this.fragmentManager = fragmentManager;
     }
 
 
@@ -37,7 +42,6 @@ public class LoginFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         rootView.getContext().getTheme().applyStyle(R.style.AppThemeDark, true);
         setOnClicks(rootView);
-        activity = getActivity();
         return rootView;
     }
 
@@ -46,8 +50,9 @@ public class LoginFragment extends Fragment {
         Button buttonLoginVoltar = view.findViewById(R.id.buttonLoginVoltar);
         Button buttonLoginLogin = view.findViewById(R.id.buttonLoginLogin);
 
-        buttonLoginVoltar.setOnClickListener(v -> UIFuns.goBack(activity));
-        buttonLoginParaRegister.setOnClickListener(v -> UIFuns.changeFragment(activity,this,activity.getSupportFragmentManager(),new RegisterFragment()));
+        buttonLoginVoltar.setOnClickListener(v -> goBackInterface.goBack());
+        buttonLoginParaRegister.setOnClickListener(v -> UIFuns.changeFragment(fragmentManager, new RegisterFragment(this.goBackInterface,this.fragmentManager)));
+
         buttonLoginLogin.setOnClickListener(v -> login(view));
     }
 
@@ -70,13 +75,13 @@ public class LoginFragment extends Fragment {
             UserRepository ur = UserRepository.getInstance();
             String t1 = ur.getCsrfToken();
             String t2 = ur.getSessionId();
-            Toast.makeText(activity, "Login Feito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Login Feito", Toast.LENGTH_SHORT).show();
             Log.d("DebugApp", "Csrftoken: " + t1);
             Log.d("DebugApp", "Sessionid: " + t2);
-            UIFuns.goBack(activity);
+            goBackInterface.goBack();
         }
         else {
-            Toast.makeText(activity, "Dados Incorretos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Dados Incorretos", Toast.LENGTH_SHORT).show();
         }
     }
 }

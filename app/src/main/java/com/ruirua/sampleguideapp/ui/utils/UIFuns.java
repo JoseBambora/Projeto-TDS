@@ -22,13 +22,22 @@ public class UIFuns {
         else
             activity.setTheme(R.style.AppThemeDark);
     }
-    private static void goToFragment(FragmentManager fragmentManager, Fragment newFragment) {
+
+
+    public static void changeFragment(FragmentManager fragmentManager, Fragment newFragment) {
+        fragmentManager.beginTransaction()
+                .replace(android.R.id.content, newFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public static void changeFragmentNoPushStack(FragmentManager fragmentManager, Fragment newFragment) {
         fragmentManager.beginTransaction()
                 .replace(android.R.id.content, newFragment)
                 .commit();
     }
 
-    private static <T> void goToActivity(Context context, Class<T> newActivity, Map<String,String> params) {
+    public static <T> void changeActivity(Context context, Class<T> newActivity, Map<String,String> params) {
         Intent intent = new Intent(context, newActivity);
         if(params != null)
             params.forEach(intent::putExtra);
@@ -36,29 +45,6 @@ public class UIFuns {
         context.startActivity(intent);
     }
 
-    public static void changeFragment(Activity activity, Fragment currentFragment,FragmentManager fragmentManager, Fragment newFragment) {
-        StackUI.getInstance().pushElement(activity,currentFragment, fragmentManager);
-        goToFragment(fragmentManager,newFragment);
-    }
-
-    public static <T> void changeActivity(Activity currentActivity, Class<T> newActivity, Map<String,String> oldparams ,Map<String,String> newparams) {
-        StackUI.getInstance().pushElement(currentActivity,oldparams);
-        goToActivity(currentActivity.getApplicationContext(),newActivity,newparams);
-    }
-
-    public static void goBack(Activity currentActivity) {
-        StackUIElement sue = StackUI.getInstance().goBack();
-        Activity activity = sue.getActivitY();
-        if(currentActivity.equals(activity)) {
-            Fragment fragment = sue.getFragment();
-            FragmentManager fm = sue.getFm();
-            goToFragment(fm,fragment);
-        }
-        else {
-            Map<String,String> params = sue.getParams();
-            goToActivity(currentActivity.getApplicationContext(),activity.getClass(),params);
-        }
-    }
 
     public static Intent intentGoogleMaps(double origin_lat, double origin_lon, double destiny_lat, double destiny_lon) {
 

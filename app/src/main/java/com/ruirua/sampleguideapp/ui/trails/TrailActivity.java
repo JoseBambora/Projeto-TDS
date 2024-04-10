@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
-public class TrailActivity extends AppCompatActivity {
+public class TrailActivity extends AppCompatActivity implements GoBackInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,14 @@ public class TrailActivity extends AppCompatActivity {
         }
 
         Button returnButton = findViewById(R.id.return_button);
-        returnButton.setOnClickListener(v -> UIFuns.goBack(this));
+        returnButton.setOnClickListener(v -> this.goBack());
+    }
+
+    @Override
+    public void goBack() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+            getSupportFragmentManager().popBackStack();
+        else
+            finish();
     }
 }

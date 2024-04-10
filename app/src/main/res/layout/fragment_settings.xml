@@ -19,22 +19,13 @@
             android:text="@string/mudar_palavra_passe"
             android:onClick="onChangePasswordClicked"
             android:background="@drawable/btn3"/>
-        <RadioGroup
-            android:id="@+id/radioGroupMode"
-            android:layout_width="match_parent"
+        <ToggleButton
+            android:id="@+id/toggleButtonMode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RadioButton
-                android:id="@+id/radioButtonWhiteMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="White Mode"/>
-            <RadioButton
-                android:id="@+id/radioButtonDarkMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dark Mode"/>
-        </RadioGroup>
+            android:textOff="@string/white_mode"
+            android:textOn="@string/dark_mode"
+            android:layout_marginTop="16dp"/>
         <android.widget.Button
             android:id="@+id/buttonSettingsVoltar"
             android:layout_width="wrap_content"

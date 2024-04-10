@@ -30,4 +30,6 @@
     <string name="title_activity_pin">PinActivity</string>
     <string name="consultar_pin_1">Consultar Pin 1</string>
     <string name="mudar_palavra_passe">Mudar Palavra-Passe</string>
+    <string name="white_mode">White Mode</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

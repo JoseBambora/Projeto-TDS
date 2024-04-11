@@ -1,12 +1,8 @@
 package com.ruirua.sampleguideapp.ui.user;
 
-import static com.ruirua.sampleguideapp.ui.utils.UIFuns.configureTheme;
-
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
@@ -19,12 +15,8 @@ import android.widget.Toast;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
-import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
-import com.ruirua.sampleguideapp.ui.utils.Settings;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
-
-import java.util.Set;
 
 public class LoginFragment extends Fragment {
     private GoBackInterface goBackInterface;
@@ -89,4 +81,5 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getActivity(), "Dados Incorretos", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

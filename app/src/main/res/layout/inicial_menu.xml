@@ -29,7 +29,7 @@
             android:gravity="center"
             android:lineSpacingMultiplier="1.2"
             android:paddingBottom="16dp"
-            android:text="@string/bem_vindo_ao_braguia"
+            android:text="@string/braguia_your_virtual_guide_in_braga"
             android:textColor="?attr/Secundario"
             android:textSize="16sp" />
 
@@ -111,5 +111,18 @@
             android:background="@drawable/btn6"
             android:textColor="@color/white"
             android:text="@string/utilizador_info"/>
+
+        <TextView
+            android:id="@+id/app_landing_page_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingBottom="16dp"
+            android:text="@string/app_landing_page_text"
+            android:textColor="?attr/Secundario"
+            android:textSize="16sp" />
         </LinearLayout>
+
 </FrameLayout>

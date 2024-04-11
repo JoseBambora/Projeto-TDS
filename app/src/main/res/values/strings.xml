@@ -10,7 +10,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="voltar">Voltar</string>
-    <string name="braguia_guia_tur_stico">BraGuia - Guia Turístico</string>
+    <string name="braguia_guia_tur_stico">BraGuia</string>
     <string name="bem_vindo_ao_braguia">Bem-vindo ao BraGuia!</string>
     <string name="registar">Registar</string>
     <string name="login">Login</string>
@@ -33,4 +33,7 @@
     <string name="white_mode">White Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="google_maps">Google Maps Caminho da Salvação</string>
+    <string name="bem_vindo_de_volta">Bem-Vindo de Volta</string>
+    <string name="braguia_your_virtual_guide_in_braga">SYour virtual guide in Braga</string>
+    <string name="app_landing_page_text">Discover the hidden gems of Braga with our virtual guide app! Explore the city\'s rich history, stunning architecture, and vibrant culture from the palm of your hand. With personalized recommendations and insider tips, you\'ll experience the best of Braga like a local. Download the app now and start your adventure!</string>
 </resources>

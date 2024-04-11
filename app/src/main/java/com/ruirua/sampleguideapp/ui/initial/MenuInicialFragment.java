@@ -45,15 +45,25 @@ public class MenuInicialFragment extends Fragment {
     private void hideButtons(View view) {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
+        Button buttonRegister = view.findViewById(R.id.buttonRegister);
+        Button buttonLogin = view.findViewById(R.id.buttonLogin);
         UserRepository ur = UserRepository.getInstance();
-        if (!ur.isLogged())
+        if (!ur.isLogged()) {
             buttonUserInfo.setVisibility(View.GONE);
-        else
+            buttonRegister.setVisibility(View.VISIBLE);
+            buttonLogin.setVisibility(View.VISIBLE);
+        }
+        else {
             buttonUserInfo.setVisibility(View.VISIBLE);
-        if (!ur.isPremium())
+            buttonRegister.setVisibility(View.GONE);
+            buttonLogin.setVisibility(View.GONE);
+        }
+        if (!ur.isPremium()) {
             buttonPin1.setVisibility(View.GONE);
-        else
+        }
+        else {
             buttonPin1.setVisibility(View.VISIBLE);
+        }
     }
 
     private Map<String,String> setAction(String value) {

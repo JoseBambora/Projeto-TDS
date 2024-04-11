@@ -2,7 +2,6 @@ package com.ruirua.sampleguideapp.ui.user;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,7 +17,6 @@ import com.google.android.material.button.MaterialButton;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.user.UserInfo;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
-import com.ruirua.sampleguideapp.ui.initial.MainActivity;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
@@ -94,5 +92,11 @@ public class UserFragment extends Fragment {
         setOnClicks(view);
         activity = getActivity();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UIFuns.configureTheme(getActivity());
     }
 }

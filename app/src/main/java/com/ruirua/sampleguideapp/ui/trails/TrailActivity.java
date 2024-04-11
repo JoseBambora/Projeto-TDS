@@ -1,30 +1,27 @@
 package com.ruirua.sampleguideapp.ui.trails;
 
-import static com.ruirua.sampleguideapp.ui.utils.UIFuns.configureTheme;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
+import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
-public class TrailActivity extends AppCompatActivity implements GoBackInterface {
-
+public class TrailActivity extends OurActivity implements GoBackInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        configureTheme(this);
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new TrailListFragment())
                     .commitNow();
         }
+        setOnClicks();
+    }
 
-        Button returnButton = findViewById(R.id.return_button);
-        returnButton.setOnClickListener(v -> this.goBack());
+    private void setOnClicks() {
+        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
     }
 
     @Override

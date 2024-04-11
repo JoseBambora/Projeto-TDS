@@ -10,24 +10,31 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
+import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
-public class MainActivity extends AppCompatActivity implements GoBackInterface {
+public class MainActivity extends OurActivity implements GoBackInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UIFuns.configureTheme(this);
         if (savedInstanceState == null)
-        {
             UIFuns.changeFragment(getSupportFragmentManager(),new MenuInicialFragment());
-        }
         permissions();
+        setOnClicks();
+    }
+
+    private void setOnClicks() {
+        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
     }
 
     private void permissions() {
@@ -58,7 +65,9 @@ public class MainActivity extends AppCompatActivity implements GoBackInterface {
 
     @Override
     public void goBack() {
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
+            UIFuns.configureTheme(this);
+        }
     }
 }

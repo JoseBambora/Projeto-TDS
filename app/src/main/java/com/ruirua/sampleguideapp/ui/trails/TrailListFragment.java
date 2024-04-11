@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.trails.Trail;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
@@ -60,6 +61,12 @@ public class TrailListFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UIFuns.configureTheme(getActivity());
     }
 
 

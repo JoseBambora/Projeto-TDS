@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,22 +10,20 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.SampleGuideApp.AppBarOverlay">
+        android:theme="@style/Theme.SampleGuideApp.AppBarOverlay"
+        android:visibility="visible">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.SampleGuideApp.PopupOverlay" />
+            android:background="?attr/NavBar"
+            app:popupTheme="@style/Theme.SampleGuideApp.PopupOverlay"
+            app:title="Projeto TDS"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar" />
+    <include layout="@layout/content_main" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,16 +32,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <Button
-        android:id="@+id/return_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/voltar"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="16dp"
-        />
+        app:srcCompat="@drawable/settings_84"
+        android:backgroundTint="?attr/Secundario"
+        android:contentDescription="Definições"
+        app:fabSize="normal"
+        app:backgroundTint="?attr/Alternativo"
+        app:borderWidth="3dp"
+        app:tint="@color/white" />
 
 
 

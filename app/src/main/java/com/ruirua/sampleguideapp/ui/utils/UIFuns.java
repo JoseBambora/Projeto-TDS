@@ -7,8 +7,13 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
 
@@ -16,7 +21,7 @@ import java.util.Map;
 
 public class UIFuns {
     public static void configureTheme(Activity activity) {
-        Log.d("DebugApp","Entrou " + Settings.getInstance().isDarkMode());
+        Log.d("DebugApp","Entrou LightMode: " + Settings.getInstance().isLightMode() + " DarkMode: " + Settings.getInstance().isDarkMode());
         if(Settings.getInstance().isLightMode())
             activity.setTheme(R.style.AppThemeLight);
         else
@@ -26,14 +31,14 @@ public class UIFuns {
 
     public static void changeFragment(FragmentManager fragmentManager, Fragment newFragment) {
         fragmentManager.beginTransaction()
-                .replace(android.R.id.content, newFragment)
+                .replace(R.id.container, newFragment)
                 .addToBackStack(null)
                 .commit();
     }
 
     public static void changeFragmentNoPushStack(FragmentManager fragmentManager, Fragment newFragment) {
         fragmentManager.beginTransaction()
-                .replace(android.R.id.content, newFragment)
+                .replace(R.id.container, newFragment)
                 .commit();
     }
 

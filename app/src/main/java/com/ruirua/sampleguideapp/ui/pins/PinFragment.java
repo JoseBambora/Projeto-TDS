@@ -34,8 +34,10 @@ public class PinFragment extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        UIFuns.configureTheme(activity);
+        setOnClicks(getView());
     }
 
     private void setOnClicks(View v) {

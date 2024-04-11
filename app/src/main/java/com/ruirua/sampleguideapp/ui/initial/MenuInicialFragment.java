@@ -3,9 +3,7 @@ package com.ruirua.sampleguideapp.ui.initial;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +40,12 @@ public class MenuInicialFragment extends Fragment {
         super.onResume();
         setOnClicks(getView());
         hideButtons(getView());
-
     }
 
     private void hideButtons(View view) {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         UserRepository ur = UserRepository.getInstance();
-        Log.d("DebugApp","Entrou agora " + ur.isLogged() + " " + ur.isPremium());
         if (!ur.isLogged())
             buttonUserInfo.setVisibility(View.GONE);
         else

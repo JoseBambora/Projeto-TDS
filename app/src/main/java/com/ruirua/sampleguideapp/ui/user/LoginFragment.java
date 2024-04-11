@@ -40,9 +40,14 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        rootView.getContext().getTheme().applyStyle(R.style.AppThemeDark, true);
         setOnClicks(rootView);
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UIFuns.configureTheme(getActivity());
     }
 
     private void setOnClicks(View view) {

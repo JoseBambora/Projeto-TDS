@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.Settings;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 
 public class SettingsFragment extends Fragment {
@@ -52,6 +53,8 @@ public class SettingsFragment extends Fragment {
                 Toast.makeText(getContext(), "Modo escuro desativado", Toast.LENGTH_SHORT).show();
             }
         });
+
+        UIFuns.configureTheme(getActivity());
 
         return view;
     }

@@ -3,7 +3,6 @@ package com.ruirua.sampleguideapp.ui.user;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
@@ -33,5 +32,11 @@ public class RegisterFragment extends Fragment {
         buttonRegisterVoltar.setOnClickListener(v -> goBackInterface.goBack());
         buttonRegisterparaLogin.setOnClickListener(v -> UIFuns.changeFragment(fragmentManager,new LoginFragment(this.goBackInterface,fragmentManager)));
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UIFuns.configureTheme(getActivity());
     }
 }

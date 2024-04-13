@@ -19,7 +19,6 @@
             android:id="@+id/textViewHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/braguia_guia_tur_stico"
             android:textSize="30sp"
             android:gravity="center"
             android:paddingTop="16dp"
@@ -44,7 +43,6 @@
             android:gravity="center"
             android:lineSpacingMultiplier="1.2"
             android:paddingBottom="8dp"
-            android:text="@string/braguia_your_virtual_guide_in_braga"
             android:textColor="?attr/Texto2"
             android:textSize="16sp" />
 
@@ -135,7 +133,6 @@
             android:gravity="center"
             android:lineSpacingMultiplier="1.2"
             android:paddingBottom="16dp"
-            android:text="@string/app_landing_page_text"
             android:textColor="?attr/Texto2"
             android:textSize="16sp" />
         </LinearLayout>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.model.general.App;
+import com.ruirua.sampleguideapp.repositories.AppRepository;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
+import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
 import com.ruirua.sampleguideapp.ui.user.UserActivity;
@@ -27,19 +31,22 @@ import java.util.Map;
 
 public class MenuInicialFragment extends Fragment {
     private Activity activity;
+    private AppRepository appRepository;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inicial_menu, container, false);
         activity = getActivity();
+        appRepository = new AppRepository();
+        setOnClicks(view);
+        appRepository.getAppInfo().enqueue(new UtilRepository<>(r -> fillInfo(view,r.body().get(0)),null));
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setOnClicks(getView());
         hideButtons(getView());
     }
 
@@ -102,5 +109,14 @@ public class MenuInicialFragment extends Fragment {
         buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null));
         buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
         buttonGM.setOnClickListener(v ->googleMaps());
+    }
+
+    private void fillInfo(View v, App app) {
+        TextView infoTv = v.findViewById(R.id.app_landing_page_text);
+        TextView nameTv = v.findViewById(R.id.textViewHeader);
+        TextView descTv = v.findViewById(R.id.textViewDescription);
+        nameTv.setText(app.getApp_name());
+        descTv.setText(app.getApp_desc());
+        infoTv.setText(app.getPage_text());
     }
 }

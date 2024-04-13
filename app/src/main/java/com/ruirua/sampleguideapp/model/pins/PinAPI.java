@@ -1,7 +1,4 @@
 package com.ruirua.sampleguideapp.model.pins;
-
-import com.ruirua.sampleguideapp.model.trails.Trail;
-
 import java.util.List;
 
 import retrofit2.Call;

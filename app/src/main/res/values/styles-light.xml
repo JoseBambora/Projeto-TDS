@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="NavBar">@color/SecundarioLight</item>
+        <item name="NavBar">@color/PrimarioDark</item>
         <item name="Primario">@color/PrimarioLight</item>
         <item name="Secundario">@color/SecundarioLight</item>
         <item name="Alternativo">@color/AlternativoLight</item>
+        <item name="Texto1">@color/PrimarioDark</item>
+        <item name="Texto2">@color/SecundarioLight</item>
     </style>
 </resources>

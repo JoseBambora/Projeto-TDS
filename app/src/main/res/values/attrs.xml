@@ -7,4 +7,6 @@
     <attr name="Primario" format="color" />
     <attr name="Secundario" format="color" />
     <attr name="Alternativo" format="color" />
+    <attr name="Texto1" format="color" />
+    <attr name="Texto2" format="color" />
 </resources>

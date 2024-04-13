@@ -11,7 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
 
-public class OurActivity extends AppCompatActivity {
+public class OurActivity extends AppCompatActivity implements GoBackInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,5 +24,14 @@ public class OurActivity extends AppCompatActivity {
         NavController navController = navHostFragment.getNavController();
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+    }
+    @Override
+    public void goBack() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            UIFuns.configureTheme(this);
+        }
+        else
+            UIFuns.finishActivity(this);
     }
 }

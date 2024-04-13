@@ -52,6 +52,8 @@ public class SettingsFragment extends Fragment {
                 Settings.getInstance().changeToLightMode();
                 Toast.makeText(getContext(), "Modo escuro desativado", Toast.LENGTH_SHORT).show();
             }
+            UIFuns.configureTheme(getActivity());
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         });
         UIFuns.configureTheme(getActivity());
 

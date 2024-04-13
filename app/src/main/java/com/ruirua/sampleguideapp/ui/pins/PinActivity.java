@@ -17,7 +17,7 @@ import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
-public class PinActivity extends OurActivity implements GoBackInterface {
+public class PinActivity extends OurActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +28,5 @@ public class PinActivity extends OurActivity implements GoBackInterface {
 
     private void setOnClicks() {
         findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
-    }
-
-    @Override
-    public void goBack() {
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
-            getSupportFragmentManager().popBackStack();
-        else
-            UIFuns.finishActivity(this);
     }
 }

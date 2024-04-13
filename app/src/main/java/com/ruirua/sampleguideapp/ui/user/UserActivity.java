@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
-import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
-public class UserActivity extends OurActivity implements GoBackInterface {
+public class UserActivity extends OurActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,16 +20,6 @@ public class UserActivity extends OurActivity implements GoBackInterface {
     }
     private void setOnClicks() {
         findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
-    }
-
-    @Override
-    public void goBack() {
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-            UIFuns.configureTheme(this);
-        }
-        else
-            UIFuns.finishActivity(this);
     }
 }
 

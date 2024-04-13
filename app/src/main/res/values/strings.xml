@@ -36,4 +36,7 @@
     <string name="bem_vindo_de_volta">Bem-Vindo de Volta</string>
     <string name="braguia_your_virtual_guide_in_braga">SYour virtual guide in Braga</string>
     <string name="app_landing_page_text">Discover the hidden gems of Braga with our virtual guide app! Explore the city\'s rich history, stunning architecture, and vibrant culture from the palm of your hand. With personalized recommendations and insider tips, you\'ll experience the best of Braga like a local. Download the app now and start your adventure!</string>
+    <string name="atributte">Atributte</string>
+    <string name="valor">Valor</string>
+    <string name="id">ID</string>
 </resources>

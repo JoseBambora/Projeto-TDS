@@ -14,19 +14,83 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/title_pin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/goMainPage"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="@color/SecundarioLight"
-            app:icon="@drawable/back_24"
-            app:iconGravity="textStart"
-            android:text="@string/voltar"/>
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/pinID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/pinName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:textAppearance="?attr/textAppearanceListItem"
+                />
+            <TextView
+                android:id="@+id/coordsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:textAppearance="?attr/textAppearanceListItem"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/descTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TableLayout
+            android:id="@+id/relpinsTable"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:background="?attr/Secundario">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/id"
+                    android:textStyle="bold"
+                    android:textColor="?attr/Primario"
+                    android:gravity="center_horizontal"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor"
+                    android:textStyle="bold"
+                    android:textColor="?attr/Primario"
+                    android:gravity="center_horizontal"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/atributte"
+                    android:textStyle="bold"
+                    android:textColor="?attr/Primario"
+                    android:gravity="center_horizontal"/>
+            </TableRow>
+
+        </TableLayout>
+
+
+        <android.widget.Button
+            android:id="@+id/buttonPinVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/voltar"
+            android:textColor="@color/white"
+            android:background="@drawable/btn3"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -5,12 +5,15 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity(tableName = "pin",indices = @Index(value = {"id"},unique = true))
+@TypeConverters(RelPinListConverter.class)
 public class Pin {
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -36,6 +39,9 @@ public class Pin {
     @ColumnInfo(name="pin_alt")
     float pin_alt;
 
+    @SerializedName("rel_pin")
+    List<RelPin> relPinList;
+
     @NonNull
     @Override
     public String toString() {
@@ -46,6 +52,7 @@ public class Pin {
                 ", pin_lat=" + pin_lat +
                 ", pin_lng=" + pin_lng +
                 ", pin_alt=" + pin_alt +
+                ", pin_rel=" + relPinList +
                 '}';
     }
 
@@ -84,5 +91,9 @@ public class Pin {
 
     public float getPin_alt() {
         return pin_alt;
+    }
+
+    public List<RelPin> getRelPinList() {
+        return relPinList;
     }
 }

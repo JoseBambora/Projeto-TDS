@@ -10,12 +10,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.PinDAO;
+import com.ruirua.sampleguideapp.model.pins.RelPin;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.model.trails.TrailDAO;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
 
-@Database(entities = {Trail.class, UserLogged.class, Pin.class}, version = 964)
+@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class}, version = 966)
 public abstract class GuideDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "BraGuide";
 

@@ -21,7 +21,7 @@ public class PinActivity extends OurActivity implements GoBackInterface {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fragment fragment = new PinFragment(this,1);
+        Fragment fragment = new PinFragment(this,2);
         UIFuns.changeFragmentNoPushStack(getSupportFragmentManager(),fragment);
         setOnClicks();
     }

@@ -1,6 +1,7 @@
 package com.ruirua.sampleguideapp.model.pins;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -16,12 +17,16 @@ public class RelPin {
     @SerializedName("id")
     int id;
 
+    @ColumnInfo(name="value")
     @SerializedName("value")
     String value;
 
+    @ColumnInfo(name="attribute")
     @SerializedName("attrib")
     String attribute;
 
+
+    @ColumnInfo(name="idPin")
     @SerializedName("pin")
     int idPin;
 

@@ -16,25 +16,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.RelPin;
 import com.ruirua.sampleguideapp.ui.initial.MainActivity;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class PinFragment extends Fragment {
 
     private final int pinId;
     private Activity activity;
+
+    private Pin pin;
     private GoBackInterface goBackInterface;
 
 
@@ -48,19 +58,37 @@ public class PinFragment extends Fragment {
         buttonGoBack.setOnClickListener(view -> goBackInterface.goBack());
     }
 
-    @SuppressLint("SetTextI18n")
-    private void fillInfo(Pin pin, View v) {
-        Log.d("DebugApp","PIN: " + pin.toString());
+    private void setMedia(View v) {
+        List<Media> mediaList = pin.getMediaList();
+        for(Media m : mediaList) {
 
-        TextView idtv = v.findViewById(R.id.pinID);
-        TextView nametv = v.findViewById(R.id.pinName);
-        TextView coordstv = v.findViewById(R.id.coordsTV);
-        TextView descttv = v.findViewById(R.id.descTV);
+            if(m.isImage()) {
+                ImageView iv = v.findViewById(R.id.imagePin);
+                Picasso.get()
+                        .load(m.getMedia_file().replace("http:", "https:"))
+                        .into(iv);
+            }
+        }
+    }
+    private void setGeneralContent(View v) {
+        TextInputEditText idtv = v.findViewById(R.id.pinID);
+        TextInputEditText nametv = v.findViewById(R.id.pinName);
+        TextInputEditText coordstv = v.findViewById(R.id.pinLocation);
+        TextInputEditText descttv = v.findViewById(R.id.pinDesc);
+
+        idtv.setEnabled(false);
+        nametv.setEnabled(false);
+        coordstv.setEnabled(false);
+        descttv.setEnabled(false);
+
+        idtv.setText(String.valueOf(pin.getId()));
+        nametv.setText(String.valueOf(pin.getId()));
+        coordstv.setText("(" +pin.getPin_lat() + "," + pin.getPin_lng()+ "," + pin.getPin_alt() + ")");
+        descttv.setText(pin.getPin_desc());
+    }
+
+    private void setTable(View v) {
         TableLayout relpinsTable = v.findViewById(R.id.relpinsTable);
-        idtv.setText("ID: " + pin.getId());
-        nametv.setText("Name: " + pin.getId());
-        coordstv.setText("Localização: (" +pin.getPin_lat() + "," + pin.getPin_lng()+ "," + pin.getPin_alt() + ")");
-        descttv.setText("Description: " + pin.getPin_desc());
         int position = 1;
         for(RelPin relPin : pin.getRelPinList()) {
             TableRow tableRow = new TableRow(this.getActivity());
@@ -90,6 +118,14 @@ public class PinFragment extends Fragment {
 
             relpinsTable.addView(tableRow);
         }
+    }
+    @SuppressLint("SetTextI18n")
+    private void fillInfo(Pin pin, View v) {
+        this.pin = pin;
+        Log.d("DebugApp","PIN: " + pin.toString());
+        setMedia(v);
+        setGeneralContent(v);
+        setTable(v);
     }
     @SuppressLint("SetTextI18n")
     @Override

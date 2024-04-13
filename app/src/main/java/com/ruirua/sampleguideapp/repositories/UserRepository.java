@@ -86,7 +86,7 @@ public class UserRepository {
             assignUserType();
             consumer.accept(true);
         }
-        if(isLogged()) {
+        else if(isLogged()) {
             consumer.accept(true);
         }
         else {

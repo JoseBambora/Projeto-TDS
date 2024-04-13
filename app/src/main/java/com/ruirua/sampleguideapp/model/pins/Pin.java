@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity(tableName = "pin",indices = @Index(value = {"id"},unique = true))
-@TypeConverters(RelPinListConverter.class)
+@TypeConverters({RelPinListConverter.class, MediaListConverter.class})
 public class Pin {
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -42,6 +42,9 @@ public class Pin {
     @SerializedName("rel_pin")
     List<RelPin> relPinList;
 
+    @SerializedName("media")
+    List<Media> mediaList;
+
     @NonNull
     @Override
     public String toString() {
@@ -53,6 +56,7 @@ public class Pin {
                 ", pin_lng=" + pin_lng +
                 ", pin_alt=" + pin_alt +
                 ", pin_rel=" + relPinList +
+                ", media=" + mediaList +
                 '}';
     }
 
@@ -96,4 +100,9 @@ public class Pin {
     public List<RelPin> getRelPinList() {
         return relPinList;
     }
+
+    public List<Media> getMediaList() {
+        return mediaList;
+    }
+
 }

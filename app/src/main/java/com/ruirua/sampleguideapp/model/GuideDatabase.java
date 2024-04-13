@@ -8,6 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.PinDAO;
 import com.ruirua.sampleguideapp.model.pins.RelPin;
@@ -16,7 +17,7 @@ import com.ruirua.sampleguideapp.model.trails.TrailDAO;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
 
-@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class}, version = 966)
+@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class, Media.class}, version = 967)
 public abstract class GuideDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "BraGuide";
 

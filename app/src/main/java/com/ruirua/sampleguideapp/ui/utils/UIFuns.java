@@ -44,20 +44,28 @@ public class UIFuns {
                 .commit();
     }
 
-    public static <T> void changeActivity(Activity activity, Class<T> newActivity, Map<String,String> params) {
+    private static <T> void changeActivity(Activity activity, Class<T> newActivity, Map<String,String> params, boolean push) {
         Intent intent = new Intent(activity, newActivity);
         if(params != null)
             params.forEach(intent::putExtra);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
-        stack.push(activity.getClass());
+        if(push) {
+            Log.d("DebugApp", "Deu Push");
+            stack.push(activity.getClass());
+        }
         activity.finish();
+    }
 
+
+    public static <T> void changeActivity(Activity activity, Class<T> newActivity, Map<String,String> params) {
+        changeActivity(activity,newActivity,params,true);
     }
 
     public static <T> void finishActivity(Activity activity) {
+        Log.d("DebugApp","A fazer pop");
         Class<?> name = stack.pop();
-        changeActivity(activity,name,null);
+        changeActivity(activity,name,null,false);
     }
 
 

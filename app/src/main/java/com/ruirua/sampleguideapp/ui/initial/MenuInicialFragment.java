@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class MenuInicialFragment extends Fragment {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         UserRepository ur = UserRepository.getInstance();
+        Log.d("DebugApp","" + ur.isLogged());
         if (!ur.isLogged()) {
             buttonUserInfo.setVisibility(View.GONE);
             buttonRegister.setVisibility(View.VISIBLE);

@@ -2,14 +2,7 @@ package com.ruirua.sampleguideapp.ui.user;
 
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
@@ -32,10 +25,12 @@ public class UserActivity extends OurActivity implements GoBackInterface {
 
     @Override
     public void goBack() {
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
+            UIFuns.configureTheme(this);
+        }
         else
-            finish();
+            UIFuns.finishActivity(this);
     }
 }
 

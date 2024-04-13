@@ -18,8 +18,10 @@ import androidx.navigation.ui.NavigationUI;
 import com.ruirua.sampleguideapp.R;
 
 import java.util.Map;
+import java.util.Stack;
 
 public class UIFuns {
+    private static Stack<Class<?>> stack = new Stack<>();
     public static void configureTheme(Activity activity) {
         Log.d("DebugApp","Entrou LightMode: " + Settings.getInstance().isLightMode() + " DarkMode: " + Settings.getInstance().isDarkMode());
         if(Settings.getInstance().isLightMode())
@@ -42,12 +44,20 @@ public class UIFuns {
                 .commit();
     }
 
-    public static <T> void changeActivity(Context context, Class<T> newActivity, Map<String,String> params) {
-        Intent intent = new Intent(context, newActivity);
+    public static <T> void changeActivity(Activity activity, Class<T> newActivity, Map<String,String> params) {
+        Intent intent = new Intent(activity, newActivity);
         if(params != null)
             params.forEach(intent::putExtra);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        activity.startActivity(intent);
+        stack.push(activity.getClass());
+        activity.finish();
+
+    }
+
+    public static <T> void finishActivity(Activity activity) {
+        Class<?> name = stack.pop();
+        changeActivity(activity,name,null);
     }
 
 

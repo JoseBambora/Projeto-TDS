@@ -93,13 +93,11 @@ public class MenuInicialFragment extends Fragment {
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonGM = view.findViewById(R.id.googleMaps);
 
-        Context context = activity.getApplicationContext();
-
-        buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(context,UserActivity.class,setAction("register")));
-        buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(context,UserActivity.class,setAction("login")));
-        buttonList.setOnClickListener(v -> UIFuns.changeActivity(context,TrailActivity.class,null));
-        buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(context,UserActivity.class,setAction("userinfo")));
-        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(context, PinActivity.class,null));
+        buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("register")));
+        buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("login")));
+        buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
+        buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
+        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null));
         buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
         buttonGM.setOnClickListener(v ->googleMaps());
     }

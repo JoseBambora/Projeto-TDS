@@ -29,6 +29,6 @@ public class TrailActivity extends OurActivity implements GoBackInterface {
         if(getSupportFragmentManager().getBackStackEntryCount() > 0)
             getSupportFragmentManager().popBackStack();
         else
-            finish();
+            UIFuns.finishActivity(this);
     }
 }

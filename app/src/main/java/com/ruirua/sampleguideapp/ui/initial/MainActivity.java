@@ -8,15 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
@@ -76,7 +68,7 @@ public class MainActivity extends OurActivity implements GoBackInterface {
     public void onResume() {
         super.onResume();
         UIFuns.configureTheme(this);
-        Log.d("DebugApp", "onResume: ");
+        Log.d("DebugApp", "onResume aqui: ");
     }
 
 

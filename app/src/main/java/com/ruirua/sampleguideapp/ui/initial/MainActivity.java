@@ -4,6 +4,7 @@ package com.ruirua.sampleguideapp.ui.initial;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -70,4 +71,13 @@ public class MainActivity extends OurActivity implements GoBackInterface {
             UIFuns.configureTheme(this);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UIFuns.configureTheme(this);
+        Log.d("DebugApp", "onResume: ");
+    }
+
+
 }

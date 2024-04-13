@@ -16,10 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/braguia_guia_tur_stico"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:gravity="center"
+            android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:textColor="?attr/Secundario"/>
+            android:textColor="?attr/Secundario"
+            android:textStyle="bold|italic"/>
+
 
         <TextView
             android:id="@+id/textViewDescription"

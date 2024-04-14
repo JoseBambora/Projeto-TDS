@@ -2,6 +2,7 @@ package com.ruirua.sampleguideapp.ui.trails;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +30,15 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mIdView.setText(mValues.get(position).getId());
+        Trail trail = mValues.get(position);
+        holder.mIdView.setText("ID: " + trail.getId());
+        holder.mNameView.setText(trail.getTrailName());
+        holder.mDifficultyView.setText("Dificuldade: "+trail.getTrailDifficulty());
         Picasso.get()
-                .load(mValues.get(position).getUrl().replace("http:", "https:"))
+                .load(trail.getTrailImg().replace("http:", "https:"))
                 .into(holder.imageView);
     }
 
@@ -45,13 +50,18 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
+        public final TextView mNameView;
         public final ImageView imageView;
+
+        public final TextView mDifficultyView;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = view.findViewById(R.id.item_number);
+            mNameView = view.findViewById(R.id.trail_name);
             imageView = view.findViewById(R.id.cardimage);
+            mDifficultyView = view.findViewById(R.id.trail_difficulty);
         }
 
         @Override

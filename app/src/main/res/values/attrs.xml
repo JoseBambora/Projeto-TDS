@@ -9,4 +9,5 @@
     <attr name="Alternativo" format="color" />
     <attr name="Texto1" format="color" />
     <attr name="Texto2" format="color" />
+    <attr name="Texto3" format="color" />
 </resources>

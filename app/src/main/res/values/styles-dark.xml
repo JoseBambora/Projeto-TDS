@@ -7,6 +7,6 @@
         <item name="Alternativo">@color/AlternativoDark</item>
         <item name="Texto1">@color/white</item>
         <item name="Texto2">@color/white</item>
-        <item name="textInputStyle">@style/custom_inputlayout</item>
+        <item name="Texto3">@color/SecundarioDark</item>
     </style>
 </resources>

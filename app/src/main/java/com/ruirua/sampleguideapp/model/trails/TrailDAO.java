@@ -19,4 +19,7 @@ public interface TrailDAO {
 
     @Query("DELETE FROM trail")
     void deleteAll();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Trail trail);
 }

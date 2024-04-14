@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.ruirua.sampleguideapp.ui.trails.TrailListFragment"
+        android:name="com.ruirua.sampleguideapp.ui.initial.MenuInicialFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_item_list">
     </fragment>

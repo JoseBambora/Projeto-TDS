@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +18,6 @@ import android.view.ViewGroup;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
-import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class TrailListFragment extends Fragment {
 
     private TrailsViewModel trailsViewModel;
 
-    private PinsViewModel pinsViewModel;
+    private FragmentManager fragmentManager;
 
     // private List<Trail> trails = new ArrayList<>();
 
@@ -44,15 +44,8 @@ public class TrailListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TrailListFragment() {
-    }
-
-    public static TrailListFragment newInstance(int columnCount) {
-        TrailListFragment fragment = new TrailListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    public TrailListFragment(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -91,7 +84,7 @@ public class TrailListFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new TrailsRecyclerViewAdapter(trails));
+        recyclerView.setAdapter(new TrailsRecyclerViewAdapter(trails,fragmentManager));
     }
 
     @Override

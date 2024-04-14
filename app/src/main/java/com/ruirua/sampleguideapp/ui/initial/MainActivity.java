@@ -75,6 +75,4 @@ public class MainActivity extends OurActivity implements GoBackInterface {
         UIFuns.configureTheme(this);
         Log.d("DebugApp", "onResume aqui: ");
     }
-
-
 }

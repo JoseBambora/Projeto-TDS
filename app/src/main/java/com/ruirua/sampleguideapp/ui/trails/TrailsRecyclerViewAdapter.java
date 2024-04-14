@@ -1,5 +1,7 @@
 package com.ruirua.sampleguideapp.ui.trails;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.trails.Trail;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,8 +22,11 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
 
     private final List<Trail> mValues;
 
-    public TrailsRecyclerViewAdapter(List<Trail> items) {
+    private FragmentManager fragmentManager;
+
+    public TrailsRecyclerViewAdapter(List<Trail> items, FragmentManager fragmentManager) {
         mValues = items;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -40,6 +46,7 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         Picasso.get()
                 .load(trail.getTrailImg().replace("http:", "https:"))
                 .into(holder.imageView);
+        holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail.getId())));
     }
 
     @Override
@@ -68,5 +75,6 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         public String toString() {
             return super.toString() + mIdView;
         }
+
     }
 }

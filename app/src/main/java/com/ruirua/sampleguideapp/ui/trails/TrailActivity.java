@@ -11,11 +11,7 @@ public class TrailActivity extends OurActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new TrailListFragment())
-                    .commitNow();
-        }
+        UIFuns.changeFragment(getSupportFragmentManager(),new TrailListFragment(getSupportFragmentManager()));
         setOnClicks();
     }
 

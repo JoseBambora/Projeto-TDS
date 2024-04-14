@@ -17,7 +17,7 @@ import com.ruirua.sampleguideapp.model.trails.TrailDAO;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
 
-@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class, Media.class}, version = 968)
+@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class, Media.class}, version = 969)
 public abstract class GuideDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "BraGuide";
 

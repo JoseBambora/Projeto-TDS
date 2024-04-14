@@ -82,6 +82,6 @@ public class Media {
     }
 
     public boolean isVideo() {
-        return media_file.equals("V");
+        return media_type.equals("V");
     }
 }

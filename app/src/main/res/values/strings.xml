@@ -45,4 +45,10 @@
     <string name="nome_pin">Nome Pin</string>
     <string name="localiza_o_pin">Localização Pin</string>
     <string name="descri_o">Descrição</string>
+    <string name="udio">Áudio</string>
+    <string name="video">Video</string>
+    <string name="conte_do_multim_dia">Conteúdo Multimédia</string>
+    <string name="informa_es">Informações</string>
+    <string name="imagem">Imagem</string>
+    <string name="informa_o_extra">Informação Extra</string>
 </resources>

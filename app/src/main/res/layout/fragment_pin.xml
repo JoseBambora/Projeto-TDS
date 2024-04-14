@@ -20,7 +20,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="12dp">
+                <TextView
+                    android:id="@+id/multimediatv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="?attr/Secundario"
+                    android:textStyle="bold|italic"
+                    android:text="@string/conte_do_multim_dia"/>
+
                 <ImageView
                     android:id="@+id/imagePin"
                     android:tag="image_tag"
@@ -30,6 +43,45 @@
                     android:maxHeight="40dp"
                     android:contentDescription="@string/pin_image" />
 
+                <VideoView
+                    android:id="@+id/videoPin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+
+                    <android.widget.Button
+                        android:id="@+id/playImagem"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn3"
+                        android:textColor="@color/white"
+                        android:text="@string/imagem" />
+
+                    <android.widget.Button
+                        android:id="@+id/playAudio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn3"
+                        android:textColor="@color/white"
+                        android:text="@string/udio" />
+
+                    <android.widget.Button
+                        android:id="@+id/playVideo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn3"
+                        android:textColor="@color/white"
+                        android:text="@string/video" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -37,20 +89,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="vertical">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/pinIDTIL"
+
+                <TextView
+                    android:id="@+id/infotv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pin_id"
-                    android:background="@drawable/inputlayout"
-                    android:layout_margin="@dimen/text_margin">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/pinID"
-                        android:inputType="none"
-                        android:textColor="?attr/Texto1"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="?attr/Secundario"
+                    android:textStyle="bold|italic"
+                    android:text="@string/informa_es"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pinNameTIL"
@@ -97,22 +147,33 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/extraTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="?attr/Secundario"
+                    android:textStyle="bold|italic"
+                    android:text="@string/informa_o_extra"/>
+
+            </LinearLayout>
+
             <TableLayout
                 android:id="@+id/relpinsTable"
                 android:layout_width="match_parent"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
                 <TableRow
                     android:background="?attr/Secundario">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/id"
-                        android:textStyle="bold"
-                        android:textColor="?attr/Primario"
-                        android:gravity="center_horizontal"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -130,19 +191,7 @@
                         android:textColor="?attr/Primario"
                         android:gravity="center_horizontal"/>
                 </TableRow>
-
             </TableLayout>
-
-
-            <android.widget.Button
-                android:id="@+id/buttonPinVoltar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/voltar"
-                android:textColor="@color/white"
-                android:background="@drawable/btn3"/>
         </LinearLayout>
-
     </ScrollView>
-
 </FrameLayout>

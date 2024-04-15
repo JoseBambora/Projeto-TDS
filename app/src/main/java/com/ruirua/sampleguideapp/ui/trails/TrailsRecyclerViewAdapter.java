@@ -46,7 +46,7 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         Picasso.get()
                 .load(trail.getTrailImg().replace("http:", "https:"))
                 .into(holder.imageView);
-        holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail.getId())));
+        holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail)));
     }
 
     @Override

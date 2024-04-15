@@ -1,16 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.trails.TrailFragment"
     android:background="?attr/Primario">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/idTrilho"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <!-- TextView for Trail Name -->
+        <TextView
+            android:id="@+id/trailName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="?attr/Secundario"
+            android:textStyle="bold|italic"/>
+
+        <!-- ImageView for Trail Image -->
+        <ImageView
+            android:id="@+id/trailImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_margin="8dp"/>
+
+        <!-- TextView for Informação -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/informa_o"
+            android:layout_gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="?attr/Secundario"
+            android:textStyle="bold|italic"/>
+
+
+        <!-- TextView for Trail ID -->
+        <TextView
+            android:id="@+id/idTrilho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="8dp"/>
+
+        <!-- TextView for Trail Description -->
+        <TextView
+            android:id="@+id/trailDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="8dp"/>
+
+        <!-- TextView for Trail Duration -->
+        <TextView
+            android:id="@+id/trailDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="8dp"/>
+
+        <!-- TextView for Trail Difficulty -->
+        <TextView
+            android:id="@+id/trailDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="8dp"/>
+
+        <!-- TextView for Pins -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Pins"
+            android:layout_gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="?attr/Secundario"
+            android:textStyle="bold|italic"/>
+
+        <!-- TextView for Recursos-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Multimédia"
+            android:layout_gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="?attr/Secundario"
+            android:textStyle="bold|italic"/>
+
+    </LinearLayout>
+</ScrollView>

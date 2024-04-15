@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 
 public class OurActivity extends AppCompatActivity implements GoBackInterface {
     @Override
@@ -24,6 +25,7 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
         NavController navController = navHostFragment.getNavController();
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        setOnClick();
     }
     @Override
     public void goBack() {
@@ -33,5 +35,12 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
         }
         else
             UIFuns.finishActivity(this);
+    }
+
+    public void setOnClick() {
+        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
+        // findViewById(R.id.fab).setOnClickListener(v -> goBack());
+        // ^ SUBSTITUIR fab PELO ID DO BOTÃO VOLTAR ^
+        // EM TODAS AS ATIVADADES (excepto esta), REMOVER O MÉTODO SETONCLICK E TIRAR TODAS AS SUAS CHAMADAS.
     }
 }

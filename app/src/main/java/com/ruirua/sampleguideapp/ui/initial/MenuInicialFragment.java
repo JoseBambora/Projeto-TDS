@@ -56,7 +56,6 @@ public class MenuInicialFragment extends Fragment {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         UserRepository ur = UserRepository.getInstance();
-        Log.d("DebugApp","" + ur.isLogged());
         if (!ur.isLogged()) {
             buttonUserInfo.setVisibility(View.GONE);
             buttonRegister.setVisibility(View.VISIBLE);

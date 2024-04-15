@@ -38,9 +38,7 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
     }
 
     public void setOnClick() {
-        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
+        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment()));
         findViewById(R.id.backbt).setOnClickListener(v -> goBack());
-        // ^ SUBSTITUIR fab PELO ID DO BOTÃO VOLTAR ^
-        // EM TODAS AS ATIVADADES (excepto esta), REMOVER O MÉTODO SETONCLICK E TIRAR TODAS AS SUAS CHAMADAS.
     }
 }

@@ -74,17 +74,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="32dp"/>
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/goBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/Texto1"
-            android:background="@drawable/btn3"
-            app:icon="@drawable/back_24"
-            app:iconGravity="textStart"
-            android:text="@string/voltar"/>
     </LinearLayout>
 
 

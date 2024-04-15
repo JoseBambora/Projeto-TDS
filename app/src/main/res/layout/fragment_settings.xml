@@ -26,14 +26,5 @@
             android:textOff="@string/white_mode"
             android:textOn="@string/dark_mode"
             android:layout_marginTop="16dp"/>
-        <android.widget.Button
-            android:id="@+id/buttonSettingsVoltar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
-            android:text="@string/voltar"
-            android:textColor="@android:color/white"
-            android:background="@drawable/btn3"/>
     </LinearLayout>
 </FrameLayout>

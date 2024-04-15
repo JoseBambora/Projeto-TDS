@@ -44,10 +44,8 @@ public class LoginFragment extends Fragment {
 
     private void setOnClicks(View view) {
         Button buttonLoginParaRegister = view.findViewById(R.id.buttonLoginParaRegister);
-        Button buttonLoginVoltar = view.findViewById(R.id.buttonLoginVoltar);
         Button buttonLoginLogin = view.findViewById(R.id.buttonLoginLogin);
 
-        buttonLoginVoltar.setOnClickListener(v -> goBackInterface.goBack());
         buttonLoginParaRegister.setOnClickListener(v -> UIFuns.changeFragment(fragmentManager, new RegisterFragment(this.goBackInterface,this.fragmentManager)));
 
         buttonLoginLogin.setOnClickListener(v -> login(view));

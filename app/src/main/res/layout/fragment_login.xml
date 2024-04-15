@@ -80,14 +80,5 @@
                 android:textColor="?attr/Texto1"
                 android:background="@android:color/transparent" />
         </LinearLayout>
-
-
-        <android.widget.Button
-            android:id="@+id/buttonLoginVoltar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/voltar"
-            android:textColor="@color/white"
-            android:background="@drawable/btn3"/>
     </LinearLayout>
 </FrameLayout>

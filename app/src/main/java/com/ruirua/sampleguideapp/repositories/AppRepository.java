@@ -12,13 +12,17 @@ import retrofit2.Retrofit;
 public class AppRepository {
     private final AppAPI appAPI;
 
+    private Call<List<App>> cache = null;
+
     public AppRepository() {
         Retrofit retrofit = RepoFuns.buildRetrofit();
         appAPI = retrofit.create(AppAPI.class);
     }
 
     public Call<List<App>> getAppInfo() {
-        return appAPI.getAppInfo();
+        if(cache == null)
+            cache = appAPI.getAppInfo();
+        return cache;
     }
 
 

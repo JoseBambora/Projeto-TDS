@@ -8,15 +8,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.ruirua.sampleguideapp.R;
-import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 
 import java.util.Map;
 
@@ -43,7 +40,7 @@ public class OurNotifications {
     public static void sendNotification(Context context, String title, String text, PendingIntent pendingIntent) {
         Log.d("DebugApp","A enviar notificação " + title);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.user_icon_white)
+                .setSmallIcon(R.drawable.baseline_location_pin_24)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setContentIntent(pendingIntent)

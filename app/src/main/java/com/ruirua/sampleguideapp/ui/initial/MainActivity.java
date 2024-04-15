@@ -50,7 +50,7 @@ public class MainActivity extends OurActivity implements GoBackInterface {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this));
+            UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment());
             return true;
         }
 
@@ -69,6 +69,5 @@ public class MainActivity extends OurActivity implements GoBackInterface {
     public void onResume() {
         super.onResume();
         UIFuns.configureTheme(this);
-        Log.d("DebugApp", "onResume aqui: ");
     }
 }

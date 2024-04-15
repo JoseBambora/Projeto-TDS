@@ -7,13 +7,8 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
 
@@ -21,9 +16,8 @@ import java.util.Map;
 import java.util.Stack;
 
 public class UIFuns {
-    private static Stack<Class<?>> stack = new Stack<>();
+    private static final Stack<Class<?>> stack = new Stack<>();
     public static void configureTheme(Activity activity) {
-        Log.d("DebugApp","Entrou LightMode: " + Settings.getInstance().isLightMode() + " DarkMode: " + Settings.getInstance().isDarkMode());
         if(Settings.getInstance().isLightMode())
             activity.setTheme(R.style.AppThemeLight);
         else
@@ -51,7 +45,6 @@ public class UIFuns {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         if(push) {
-            Log.d("DebugApp", "Deu Push");
             stack.push(activity.getClass());
         }
         activity.finish();
@@ -62,8 +55,7 @@ public class UIFuns {
         changeActivity(activity,newActivity,params,true);
     }
 
-    public static <T> void finishActivity(Activity activity) {
-        Log.d("DebugApp","A fazer pop");
+    public static void finishActivity(Activity activity) {
         Class<?> name = stack.pop();
         changeActivity(activity,name,null,false);
     }
@@ -91,5 +83,16 @@ public class UIFuns {
         Intent mapIntent = new Intent(Intent.ACTION_VIEW);
         mapIntent.setPackage("com.google.android.apps.maps");
         return mapIntent;
+    }
+
+    public static void emergencyCall(Context context) {
+        String emergencyNumber = "112";
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + emergencyNumber));
+        if (callIntent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(callIntent);
+        } else {
+            Toast.makeText(context, "Não é possível realizar chamada de emergência", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -17,19 +17,10 @@ import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 
 public class SettingsFragment extends Fragment {
-    private GoBackInterface onBackPressedListener;
-    public SettingsFragment(GoBackInterface onBackPressedListener) {
-        this.onBackPressedListener = onBackPressedListener;
-    }
-
-    private void goBack() {
-        onBackPressedListener.goBack();
-    }
+    public SettingsFragment() {}
 
     private void setOnClicks(View view) {
         Button buttonChangePassword = view.findViewById(R.id.buttonChangePassword);
-        Button buttonSettingsVoltar = view.findViewById(R.id.buttonSettingsVoltar);
-        buttonSettingsVoltar.setOnClickListener(v -> goBack());
         buttonChangePassword.setOnClickListener(v -> Toast.makeText(getContext(), "Botão Mudar Palavra-Passe clicado", Toast.LENGTH_SHORT).show());
     }
 

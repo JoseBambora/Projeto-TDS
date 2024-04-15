@@ -27,9 +27,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        Button buttonRegisterVoltar = view.findViewById(R.id.buttonRegisterVoltar);
         Button buttonRegisterparaLogin = view.findViewById(R.id.buttonRegisterparaLogin);
-        buttonRegisterVoltar.setOnClickListener(v -> goBackInterface.goBack());
         buttonRegisterparaLogin.setOnClickListener(v -> UIFuns.changeFragment(fragmentManager,new LoginFragment(this.goBackInterface,fragmentManager)));
         return view;
     }

@@ -21,13 +21,7 @@ import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 public class UserFragment extends Fragment {
-    private UserInfo ui;
-    private Activity activity;
-    private GoBackInterface goBackInterface;
-    public UserFragment(GoBackInterface goBackInterface) {
-        // Required empty public constructor
-        this.goBackInterface = goBackInterface;
-    }
+    public UserFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,20 +71,12 @@ public class UserFragment extends Fragment {
             tv.setText("Olá " + ui.getUsername() + "!");
         });
     }
-
-    private void setOnClicks(View view) {
-        MaterialButton bt = view.findViewById(R.id.goBack);
-        bt.setOnClickListener(v -> goBackInterface.goBack());
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         setFields(view);
-        setOnClicks(view);
-        activity = getActivity();
         return view;
     }
 

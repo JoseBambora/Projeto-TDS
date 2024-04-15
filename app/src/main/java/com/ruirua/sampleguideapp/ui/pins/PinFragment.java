@@ -52,17 +52,10 @@ public class PinFragment extends Fragment {
     private Activity activity;
 
     private Pin pin;
-    private GoBackInterface goBackInterface;
 
 
-    public PinFragment(GoBackInterface goBackInterface, int pinId) {
+    public PinFragment( int pinId) {
         this.pinId = pinId;
-        this.goBackInterface = goBackInterface;
-    }
-
-    private void setOnClicks(View v) {
-        //FloatingActionButton buttonGoBack = v.findViewById(R.id.backbt);
-        // buttonGoBack.setOnClickListener(view -> goBackInterface.goBack());
     }
 
     private void setImage(Media m, View v) {
@@ -229,7 +222,6 @@ public class PinFragment extends Fragment {
         PinsViewModel pvm = new ViewModelProvider(this).get(PinsViewModel.class);
         pvm.getPin(pinId).observe(getViewLifecycleOwner(), p -> this.fillInfo(p,v));
         UIFuns.configureTheme(activity);
-        setOnClicks(v);
         return v;
     }
 }

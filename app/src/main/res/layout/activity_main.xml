@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,13 +24,10 @@
 
     <include layout="@layout/content_main" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+        android:id="@+id/fab"  android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"  android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/settings_84"
         android:backgroundTint="?attr/NavBar"
         android:contentDescription="@string/defini_es"
@@ -41,11 +37,9 @@
         app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backbt"
-        android:layout_width="wrap_content"
+        android:id="@+id/backbt"  android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom"  android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/back_24"
         android:backgroundTint="?attr/NavBar"
         android:contentDescription="@string/defini_es"
@@ -54,6 +48,18 @@
         app:borderWidth="3dp"
         app:tint="@color/white" />
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cebt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="?attr/NavBar"
+        android:contentDescription="@string/chamada_de_emerg_ncia"
+        app:backgroundTint="?attr/Alternativo"
+        app:borderWidth="3dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/phone_icon"
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

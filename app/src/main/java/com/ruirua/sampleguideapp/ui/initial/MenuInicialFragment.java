@@ -55,16 +55,20 @@ public class MenuInicialFragment extends Fragment {
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
+        Button buttonLogout = view.findViewById(R.id.buttonLogout);
+
         UserRepository ur = UserRepository.getInstance();
         if (!ur.isLogged()) {
             buttonUserInfo.setVisibility(View.GONE);
             buttonRegister.setVisibility(View.VISIBLE);
             buttonLogin.setVisibility(View.VISIBLE);
+            buttonLogout.setVisibility(View.GONE);
         }
         else {
             buttonUserInfo.setVisibility(View.VISIBLE);
             buttonRegister.setVisibility(View.GONE);
             buttonLogin.setVisibility(View.GONE);
+            buttonLogout.setVisibility(View.VISIBLE);
         }
         if (!ur.isPremium()) {
             buttonPin1.setVisibility(View.GONE);
@@ -100,6 +104,7 @@ public class MenuInicialFragment extends Fragment {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonGM = view.findViewById(R.id.googleMaps);
+        Button buttonLogout = view.findViewById(R.id.buttonLogout);
         buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("register")));
         buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("login")));
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
@@ -107,6 +112,10 @@ public class MenuInicialFragment extends Fragment {
         buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null));
         buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
         buttonGM.setOnClickListener(v ->googleMaps());
+        buttonLogout.setOnClickListener(v-> UserRepository.getInstance().logout() );
+        // secalhar aqui fui eu que trollei mas isto dá um refresh, mas deixou de fazer o logout por isso meti em comentario :p
+        // buttonLogout.setOnClickListener(v -> getFragmentManager().beginTransaction().detach(this).attach(this).commit());
+
     }
 
     private void fillInfo(View v, App app) {

@@ -1,5 +1,6 @@
 package com.ruirua.sampleguideapp.ui.utils;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,5 +41,9 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
     public void setOnClick() {
         findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment()));
         findViewById(R.id.backbt).setOnClickListener(v -> goBack());
+        Context context = null;
+        findViewById(R.id.cebt).setOnClickListener(v -> UIFuns.emergencyCall(context));
+
+        // o botão de emergencia fica assim para ja
     }
 }

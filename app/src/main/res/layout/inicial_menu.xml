@@ -125,6 +125,15 @@
             android:textColor="@color/white"
             android:text="@string/utilizador_info"/>
 
+        <android.widget.Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn7"
+            android:textColor="@color/white"
+            android:text="@string/logout"/>
+
+
         <TextView
             android:id="@+id/app_landing_page_text"
             android:layout_width="match_parent"

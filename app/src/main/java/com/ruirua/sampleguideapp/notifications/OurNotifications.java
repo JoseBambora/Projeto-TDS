@@ -18,6 +18,8 @@ import androidx.core.app.NotificationManagerCompat;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 
+import java.util.Map;
+
 public class OurNotifications {
 
     private static String CHANNEL_ID = "BraGuia";
@@ -30,8 +32,10 @@ public class OurNotifications {
         notificationManager.createNotificationChannel(channel);
     }
 
-    public static PendingIntent assignIntent(Activity activity, Class<?> activityres){
+    public static PendingIntent assignIntent(Activity activity, Class<?> activityres, Map<String,Integer> params){
         Intent intent = new Intent(activity, activityres);
+        if(params != null)
+            params.forEach(intent::putExtra);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         return PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }

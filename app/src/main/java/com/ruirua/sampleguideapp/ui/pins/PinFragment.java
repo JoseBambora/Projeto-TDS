@@ -65,6 +65,7 @@ public class PinFragment extends Fragment {
     }
 
     private void setImage(Media m, View v) {
+        Button buttonImage = v.findViewById(R.id.playImagem);
         ImageView iv = v.findViewById(R.id.imagePin);
         VideoView videoView = v.findViewById(R.id.videoPin);
         videoView.setVisibility(View.GONE);
@@ -72,6 +73,10 @@ public class PinFragment extends Fragment {
         Picasso.get()
                 .load(m.getMedia_file().replace("http:", "https:"))
                 .into(iv);
+        buttonImage.setOnClickListener(view-> {
+            videoView.setVisibility(View.GONE);
+            iv.setVisibility(View.VISIBLE);
+        });
     }
     private void setAudio(Media m, View v) {
         Button buttonAudio = v.findViewById(R.id.playAudio);
@@ -140,11 +145,12 @@ public class PinFragment extends Fragment {
         }
         VideoView videoView = v.findViewById(R.id.videoPin);
         ImageView iv = v.findViewById(R.id.imagePin);
+        Button buttonImage = v.findViewById(R.id.playImagem);
         Button buttonAudio = v.findViewById(R.id.playAudio);
         Button buttonVideo = v.findViewById(R.id.playVideo);
         if(!hasImage) {
             iv.setVisibility(View.GONE);
-            buttonVideo.setOnClickListener(view -> Toast.makeText(getActivity(),"Não há imagem disponível para este ponto de referência", Toast.LENGTH_SHORT).show());
+            buttonImage.setOnClickListener(view -> Toast.makeText(getActivity(),"Não há imagem disponível para este ponto de referência", Toast.LENGTH_SHORT).show());
         }
         else
             videoView.setVisibility(View.GONE);

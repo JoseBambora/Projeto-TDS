@@ -13,10 +13,15 @@ import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserActivity extends OurActivity {
 
     private void testNotif(){
-        PendingIntent activityPendingIntent = OurNotifications.assignIntent(this, PinActivity.class);
+        Map<String,Integer> params = new HashMap<>();
+        params.put("pinid",2);
+        PendingIntent activityPendingIntent = OurNotifications.assignIntent(this, PinActivity.class,params);
         OurNotifications.sendNotification(this,"User","Teste",activityPendingIntent);
     }
     @Override

@@ -12,10 +12,6 @@ public class TrailActivity extends OurActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UIFuns.changeFragment(getSupportFragmentManager(),new TrailListFragment(getSupportFragmentManager()));
-        setOnClicks();
     }
 
-    private void setOnClicks() {
-        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
-    }
 }

@@ -25,11 +25,7 @@ public class MainActivity extends OurActivity implements GoBackInterface {
         if (savedInstanceState == null)
             UIFuns.changeFragment(getSupportFragmentManager(),new MenuInicialFragment());
         permissions();
-        setOnClicks();
-    }
 
-    private void setOnClicks() {
-        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
     }
 
     private void permissions() {

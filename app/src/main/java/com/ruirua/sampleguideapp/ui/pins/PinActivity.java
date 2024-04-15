@@ -17,10 +17,5 @@ public class PinActivity extends OurActivity {
         int id = getIntent().getIntExtra("pinid",-1);
         Fragment fragment = new PinFragment(this,id);
         UIFuns.changeFragmentNoPushStack(getSupportFragmentManager(),fragment);
-        setOnClicks();
-    }
-
-    private void setOnClicks() {
-        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment(this)));
     }
 }

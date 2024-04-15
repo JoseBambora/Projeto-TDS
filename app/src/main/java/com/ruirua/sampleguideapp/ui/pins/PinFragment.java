@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ruirua.sampleguideapp.R;
@@ -60,7 +61,7 @@ public class PinFragment extends Fragment {
     }
 
     private void setOnClicks(View v) {
-        // Button buttonGoBack = v.findViewById(R.id.buttonPinVoltar);
+        //FloatingActionButton buttonGoBack = v.findViewById(R.id.backbt);
         // buttonGoBack.setOnClickListener(view -> goBackInterface.goBack());
     }
 

@@ -22,6 +22,7 @@ import com.ruirua.sampleguideapp.repositories.AppRepository;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
+import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
 import com.ruirua.sampleguideapp.ui.user.UserActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
@@ -32,7 +33,6 @@ import java.util.Map;
 public class MenuInicialFragment extends Fragment {
     private Activity activity;
     private AppRepository appRepository;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -101,7 +101,6 @@ public class MenuInicialFragment extends Fragment {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonGM = view.findViewById(R.id.googleMaps);
-
         buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("register")));
         buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("login")));
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));

@@ -14,7 +14,7 @@ public class PinActivity extends OurActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int id = getIntent().getIntExtra("pinid",-1);
+        int id = Integer.parseInt(getIntent().getStringExtra("pinid"));
         Fragment fragment = new PinFragment(id);
         UIFuns.changeFragmentNoPushStack(getSupportFragmentManager(),fragment);
     }

@@ -76,16 +76,7 @@ public class PinRepository {
     }
     public LiveData<Pin> getPin(int id) {
         MutableLiveData<Pin> res = new MutableLiveData<>();
-        if(allPins.getValue() != null) {
-            int index = allPins.getValue().stream()
-                    .map(Pin::getId)
-                    .collect(Collectors.toList())
-                    .indexOf(id);
-            if (index != -1) {
-                res.setValue(allPins.getValue().get(index));
-                return res;
-            }
-        }
+
         getPinAPI(id,res);
         return res;
     }

@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,10 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
 
     private final List<Trail> mValues;
 
+
     private FragmentManager fragmentManager;
 
-    public TrailsRecyclerViewAdapter(List<Trail> items, FragmentManager fragmentManager) {
+    public TrailsRecyclerViewAdapter(List<Trail> items,FragmentManager fragmentManager) {
         mValues = items;
         this.fragmentManager = fragmentManager;
     }
@@ -46,7 +48,7 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         Picasso.get()
                 .load(trail.getTrailImg().replace("http:", "https:"))
                 .into(holder.imageView);
-        holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail)));
+        holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail,fragmentManager)));
     }
 
     @Override

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,15 +35,12 @@ public class TrailListFragment extends Fragment {
 
     private FragmentManager fragmentManager;
 
-    // private List<Trail> trails = new ArrayList<>();
-
-
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TrailListFragment(FragmentManager fragmentManager) {
+    public TrailListFragment (FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 

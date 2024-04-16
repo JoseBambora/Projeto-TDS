@@ -49,6 +49,7 @@ public class MenuInicialFragment extends Fragment {
 
     private void hideButtons(View view) {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
+        Button buttonTourRoutes = view.findViewById(R.id.buttonTourRoutes);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
@@ -56,12 +57,14 @@ public class MenuInicialFragment extends Fragment {
 
         UserRepository ur = UserRepository.getInstance();
         if (!ur.isLogged()) {
+            buttonTourRoutes.setVisibility(View.GONE);
             buttonUserInfo.setVisibility(View.GONE);
             buttonRegister.setVisibility(View.VISIBLE);
             buttonLogin.setVisibility(View.VISIBLE);
             buttonLogout.setVisibility(View.GONE);
         }
         else {
+            buttonTourRoutes.setVisibility(View.VISIBLE);
             buttonUserInfo.setVisibility(View.VISIBLE);
             buttonRegister.setVisibility(View.GONE);
             buttonLogin.setVisibility(View.GONE);
@@ -105,7 +108,9 @@ public class MenuInicialFragment extends Fragment {
         buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("login")));
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
-        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null));
+        Map<String, String> params = new HashMap<>();
+        params.put("pinid","1");
+        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,params));
         buttonGM.setOnClickListener(v ->googleMaps());
         buttonLogout.setOnClickListener(v-> {
             UserRepository.getInstance().logout();

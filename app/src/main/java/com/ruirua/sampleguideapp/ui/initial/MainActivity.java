@@ -72,24 +72,6 @@ public class MainActivity extends OurActivity implements GoBackInterface {
     }
 
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment());
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void goBack() {
         if(getSupportFragmentManager().getBackStackEntryCount() > 0) {

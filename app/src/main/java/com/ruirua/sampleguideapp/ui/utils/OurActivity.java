@@ -3,7 +3,10 @@ package com.ruirua.sampleguideapp.ui.utils;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
@@ -73,5 +76,22 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
             LiveData<List<Pin>> getPins = PinRepository.getInstance().getAllPins();
             getPins.observe(this, pins -> this.sendNotificationsPinClose(pins,lon,lan,alt));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment());
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

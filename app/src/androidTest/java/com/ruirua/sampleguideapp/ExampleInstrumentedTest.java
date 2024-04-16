@@ -34,7 +34,7 @@ public class ExampleInstrumentedTest {
     public void testPins() {
         Application application = (Application) getInstrumentation().getTargetContext().getApplicationContext();
         assertNotNull(application);
-        PinRepository pr = new PinRepository(application);
+        PinRepository pr = PinRepository.createInstance(application);
         pr.getAllPins().observe((LifecycleOwner) getInstrumentation().getTargetContext(), data -> {
             assertTrue(data.size() > 0);
         });

@@ -77,15 +77,6 @@
         </LinearLayout>
 
         <android.widget.Button
-            android:id="@+id/buttonEmergency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn5"
-            android:textColor="@color/white"
-            app:iconGravity="textStart"
-            android:text="@string/chamada_de_emerg_ncia"/>
-
-        <android.widget.Button
             android:id="@+id/buttonTourRoutes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

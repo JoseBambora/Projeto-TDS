@@ -25,24 +25,14 @@
     <include layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"  android:layout_width="wrap_content"
+        android:id="@+id/backbt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"  android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/settings_84"
-        android:backgroundTint="?attr/NavBar"
-        android:contentDescription="@string/defini_es"
-        app:fabSize="normal"
-        app:backgroundTint="?attr/Alternativo"
-        app:borderWidth="3dp"
-        app:tint="@color/white" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backbt"  android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"  android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/back_24"
         android:backgroundTint="?attr/NavBar"
-        android:contentDescription="@string/defini_es"
+        android:contentDescription="@string/voltar"
         app:fabSize="normal"
         app:backgroundTint="?attr/Alternativo"
         app:borderWidth="3dp"
@@ -52,7 +42,7 @@
         android:id="@+id/cebt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="?attr/NavBar"
         android:contentDescription="@string/chamada_de_emerg_ncia"

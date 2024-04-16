@@ -59,10 +59,12 @@ public class TrailRepository {
 
     private void getTailAPI(int id, MutableLiveData<Trail> res) {
         UserRepository ur = UserRepository.getInstance();
-        String csrftoken = ur.getCsrfToken();
-        String sessionid = ur.getSessionId();
-        Call<Trail> call = trailAPI.getTrail(id,csrftoken,sessionid);
-        call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()), null));
+        if(ur.isLogged()) {
+            String csrftoken = ur.getCsrfToken();
+            String sessionid = ur.getSessionId();
+            Call<Trail> call = trailAPI.getTrail(id,csrftoken,sessionid);
+            call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()), null));
+        }
     }
     public LiveData<Trail> getTrail(int id) {
         MutableLiveData<Trail> res = new MutableLiveData<>();

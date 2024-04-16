@@ -105,4 +105,19 @@ public class Pin {
         return mediaList;
     }
 
+    public float distance(double lon1, double lat1, double alt1) {
+        final int R = 6371;
+        double lon1Rad = Math.toRadians(lon1);
+        double lat1Rad = Math.toRadians(lat1);
+        double lon2Rad = Math.toRadians(this.getPin_lng());
+        double lat2Rad = Math.toRadians(this.getPin_lat());
+        double lonDiff = lon2Rad - lon1Rad;
+        double latDiff = lat2Rad - lat1Rad;
+        double a = Math.pow(Math.sin(latDiff / 2), 2)
+                + Math.cos(lat1Rad) * Math.cos(lat2Rad)
+                * Math.pow(Math.sin(lonDiff / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c;
+        return (float) (distance * 1000 + Math.abs(this.getPin_alt() - alt1));
+    }
 }

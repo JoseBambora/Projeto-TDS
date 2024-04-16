@@ -1,22 +1,35 @@
 package com.ruirua.sampleguideapp.ui.utils;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.model.pins.Pin;
+import com.ruirua.sampleguideapp.notifications.NotificationSystem;
+import com.ruirua.sampleguideapp.repositories.PinRepository;
+import com.ruirua.sampleguideapp.repositories.UserRepository;
+import com.ruirua.sampleguideapp.sensors.OurLocationListener;
+import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OurActivity extends AppCompatActivity implements GoBackInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OurLocationListener.createInstance(this).updateActivity(this);
         UIFuns.configureTheme(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -39,11 +52,26 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
     }
 
     public void setOnClick() {
-        findViewById(R.id.fab).setOnClickListener(v -> UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment()));
         findViewById(R.id.backbt).setOnClickListener(v -> goBack());
-        Context context = null;
-        findViewById(R.id.cebt).setOnClickListener(v -> UIFuns.emergencyCall(context));
+        findViewById(R.id.cebt).setOnClickListener(v -> UIFuns.emergencyCall(this));
+    }
 
-        // o botão de emergencia fica assim para ja
+    private void sendNotificationsPinClose(List<Pin> pins, double lon, double lan, double alt) {
+        if(!pins.isEmpty())
+        {
+            Pin p = pins.get(0);
+            if(p.distance(lon,lan,alt) < 100) {
+                Map<String,Integer> params = new HashMap<>();
+                params.put("pinid",p.getId());
+                PendingIntent activityPendingIntent = NotificationSystem.assignIntent(this, PinActivity.class,params);
+                NotificationSystem.sendNotification(this,"Proximidade de um pin", "Está próximo de " + p.getPin_name(),activityPendingIntent );
+            }
+        }
+    }
+    public void sendNotifications(double lon, double lan, double alt) {
+        if(UserRepository.getInstance().isLogged()){
+            LiveData<List<Pin>> getPins = PinRepository.getInstance().getAllPins();
+            getPins.observe(this, pins -> this.sendNotificationsPinClose(pins,lon,lan,alt));
+        }
     }
 }

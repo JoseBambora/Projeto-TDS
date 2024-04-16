@@ -1,7 +1,5 @@
 package com.ruirua.sampleguideapp.notifications;
 
-
-
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,11 +11,12 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.ruirua.sampleguideapp.Permissions;
 import com.ruirua.sampleguideapp.R;
 
 import java.util.Map;
 
-public class OurNotifications {
+public class NotificationSystem {
 
     private static String CHANNEL_ID = "BraGuia";
     public static void createNotificationChannel(Context context) {
@@ -38,15 +37,16 @@ public class OurNotifications {
     }
 
     public static void sendNotification(Context context, String title, String text, PendingIntent pendingIntent) {
-        Log.d("DebugApp","A enviar notificação " + title);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.baseline_location_pin_24)
-                .setContentTitle(title)
-                .setContentText(text)
-                .setContentIntent(pendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(20, builder.build());
-        Log.d("DebugApp","Notificação enviada " + title);
+        if(Permissions.permission_notitications) {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.baseline_location_pin_24)
+                    .setContentTitle(title)
+                    .setContentText(text)
+                    .setContentIntent(pendingIntent)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            notificationManager.notify(20, builder.build());
+            Log.d("DebugApp","Notificação " + title + " enviada.");
+        }
     }
 }

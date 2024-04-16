@@ -1,10 +1,8 @@
 package com.ruirua.sampleguideapp.ui.initial;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import com.ruirua.sampleguideapp.repositories.AppRepository;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
-import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
 import com.ruirua.sampleguideapp.ui.user.UserActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
@@ -40,7 +37,7 @@ public class MenuInicialFragment extends Fragment {
         activity = getActivity();
         appRepository = new AppRepository();
         setOnClicks(view);
-        appRepository.getAppInfo().enqueue(new UtilRepository<>(r -> fillInfo(view,r.body().get(0)),null));
+        appRepository.getAppInfo().observe(getViewLifecycleOwner(), app -> this.fillInfo(view,app));
         return view;
     }
 
@@ -100,7 +97,6 @@ public class MenuInicialFragment extends Fragment {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonList = view.findViewById(R.id.buttonTourRoutes);
-        Button buttonEmergency = view.findViewById(R.id.buttonEmergency);
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonGM = view.findViewById(R.id.googleMaps);
@@ -110,11 +106,11 @@ public class MenuInicialFragment extends Fragment {
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
         buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,null));
-        buttonEmergency.setOnClickListener(v -> Toast.makeText(requireContext(), "Funcionalidade desativada para evitar destrastes", Toast.LENGTH_SHORT).show());
         buttonGM.setOnClickListener(v ->googleMaps());
-        buttonLogout.setOnClickListener(v-> UserRepository.getInstance().logout() );
-        // secalhar aqui fui eu que trollei mas isto dá um refresh, mas deixou de fazer o logout por isso meti em comentario :p
-        // buttonLogout.setOnClickListener(v -> getFragmentManager().beginTransaction().detach(this).attach(this).commit());
+        buttonLogout.setOnClickListener(v-> {
+            UserRepository.getInstance().logout();
+            UIFuns.refreshPage(getFragmentManager(),this);
+        } );
 
     }
 

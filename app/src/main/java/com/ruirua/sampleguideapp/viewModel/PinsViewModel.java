@@ -18,7 +18,7 @@ public class PinsViewModel extends AndroidViewModel {
     public LiveData<List<Pin>> pins;
     public PinsViewModel(@NonNull Application application) {
         super(application);
-        repository= new PinRepository(application);
+        repository= PinRepository.getInstance();
         pins = repository.getAllPins();
     }
     public LiveData<List<Pin>> getAllPins() {

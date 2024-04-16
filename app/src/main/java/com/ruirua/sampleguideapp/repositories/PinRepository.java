@@ -1,10 +1,12 @@
 package com.ruirua.sampleguideapp.repositories;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.pins.Pin;
@@ -13,6 +15,7 @@ import com.ruirua.sampleguideapp.model.pins.PinDAO;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -23,6 +26,7 @@ import retrofit2.Retrofit;
 public class PinRepository {
     private final PinDAO pinDAO;
     private final MediatorLiveData<List<Pin>> allPins;
+    private static PinRepository instance = null;
 
     private final PinAPI pinAPI;
 
@@ -31,14 +35,14 @@ public class PinRepository {
     }
 
     private void setValues(List<Pin> localPins) {
-        if (localPins != null && localPins.size() > 0) {
+        if (localPins != null && !localPins.isEmpty()) {
             allPins.setValue(localPins);
         } else {
             getPinsAPI();
         }
     }
 
-    public PinRepository(Application application){
+    private PinRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
         Retrofit retrofit= RepoFuns.buildRetrofit();
         pinAPI = retrofit.create(PinAPI.class);
@@ -53,18 +57,22 @@ public class PinRepository {
 
     private void getPinsAPI() {
         UserRepository ur = UserRepository.getInstance();
-        String csrftoken = ur.getCsrfToken();
-        String sessionid = ur.getSessionId();
-        Call<List<Pin>> call = pinAPI.getPins(csrftoken,sessionid);
-        call.enqueue(new UtilRepository<>((response) -> this.insert(response.body()),null));
+        if(ur.isLogged()) {
+            String csrftoken = ur.getCsrfToken();
+            String sessionid = ur.getSessionId();
+            Call<List<Pin>> call = pinAPI.getPins(csrftoken, sessionid);
+            call.enqueue(new UtilRepository<>((response) -> this.insert(response.body()), null));
+        }
     }
 
     private void getPinAPI(int id, MutableLiveData<Pin> res) {
         UserRepository ur = UserRepository.getInstance();
-        String csrftoken = ur.getCsrfToken();
-        String sessionid = ur.getSessionId();
-        Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);
-        call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()),null));
+        if(ur.isLogged()) {
+            String csrftoken = ur.getCsrfToken();
+            String sessionid = ur.getSessionId();
+            Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);
+            call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()),null));
+        }
     }
     public LiveData<Pin> getPin(int id) {
         MutableLiveData<Pin> res = new MutableLiveData<>();
@@ -80,5 +88,16 @@ public class PinRepository {
         }
         getPinAPI(id,res);
         return res;
+    }
+
+
+    public static PinRepository createInstance(Application application) {
+        if(instance == null)
+            instance = new PinRepository(application);
+        return instance;
+    }
+
+    public static PinRepository getInstance() {
+        return instance;
     }
 }

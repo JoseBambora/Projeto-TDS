@@ -2,7 +2,6 @@ package com.ruirua.sampleguideapp.ui.user;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 

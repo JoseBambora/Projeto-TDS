@@ -58,4 +58,7 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.3.0'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
+
+    implementation 'com.google.android.gms:play-services:12.0.1'
 }

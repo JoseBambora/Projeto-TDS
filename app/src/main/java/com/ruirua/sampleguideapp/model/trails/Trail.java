@@ -8,9 +8,16 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
+import com.ruirua.sampleguideapp.model.pins.Pin;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity(tableName = "trail", indices = @Index(value = {"id"}, unique = true))
-@TypeConverters(TrailConverter.class) // Add TypeConverters annotation
+@TypeConverters({EdgeConverter.class,RelTrailConverter.class})
 public class Trail {
 
     @PrimaryKey
@@ -22,9 +29,6 @@ public class Trail {
     @ColumnInfo(name = "trail_img")
     private String trailImg;
 
-    @SerializedName("trail_languages")
-    @ColumnInfo(name = "trail_languages")
-    private CountryLangs trailLanguages;
 
     @SerializedName("trail_name")
     @ColumnInfo(name = "trail_name")
@@ -42,6 +46,12 @@ public class Trail {
     @ColumnInfo(name = "trail_difficulty")
     private String trailDifficulty;
 
+    @SerializedName("rel_trail")
+    private List<RelTrail> reltrails;
+
+    @SerializedName("edges")
+    private List<Edge> edges;
+
     public int getId() {
         return id;
     }
@@ -56,14 +66,6 @@ public class Trail {
 
     public void setTrailImg(String trailImg) {
         this.trailImg = trailImg;
-    }
-
-    public CountryLangs getTrailLanguages() {
-        return trailLanguages;
-    }
-
-    public void setTrailLanguages(CountryLangs trailLanguages) {
-        this.trailLanguages = trailLanguages;
     }
 
     public String getTrailName() {
@@ -98,17 +100,45 @@ public class Trail {
         this.trailDifficulty = trailDifficulty;
     }
 
+    public List<RelTrail> getReltrails() {
+        return reltrails;
+    }
+
+    public void setReltrails(List<RelTrail> reltrails) {
+        this.reltrails = reltrails;
+    }
+
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
+
+    public List<Pin> getPins(){
+        Set<Pin> pins = new HashSet<>();
+        for (Edge edge: edges) {
+            pins.add(edge.getEdgeStart());
+            pins.add(edge.getEdgeEnd());
+        }
+        return new ArrayList<>(pins);
+    }
+
+
     @NonNull
     @Override
     public String toString() {
         return "Trail{" +
                 "id=" + id +
                 ", trailImg='" + trailImg + '\'' +
-                ", trailLanguages=" + trailLanguages +
                 ", trailName='" + trailName + '\'' +
                 ", trailDesc='" + trailDesc + '\'' +
                 ", trailDuration=" + trailDuration +
                 ", trailDifficulty='" + trailDifficulty + '\'' +
+                ", pins=" + getPins() +
+                ", relTrails='" + reltrails +
                 '}';
     }
 }

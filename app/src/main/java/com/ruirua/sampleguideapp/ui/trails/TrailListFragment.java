@@ -71,7 +71,7 @@ public class TrailListFragment extends Fragment {
         trailsViewModel = new ViewModelProvider(this).get(TrailsViewModel.class);
         trailsViewModel.getAllTrails().observe(getViewLifecycleOwner(), x -> {
             loadRecyclerView(view, x);
-            Log.d("trails",x.toString());
+            //Log.d("trails",x.toString());
         });
         return view;
     }

@@ -12,12 +12,14 @@ import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.PinDAO;
 import com.ruirua.sampleguideapp.model.pins.RelPin;
+import com.ruirua.sampleguideapp.model.trails.Edge;
+import com.ruirua.sampleguideapp.model.trails.RelTrail;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.model.trails.TrailDAO;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
 import com.ruirua.sampleguideapp.model.user.UserDAO;
 
-@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class, Media.class}, version = 969)
+@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class, Media.class, Edge.class, RelTrail.class}, version = 974)
 public abstract class GuideDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "BraGuide";
 

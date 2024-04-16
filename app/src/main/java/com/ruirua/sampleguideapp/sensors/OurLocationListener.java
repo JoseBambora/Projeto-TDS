@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -18,7 +19,9 @@ import com.ruirua.sampleguideapp.ui.utils.OurActivity;
 
 public class OurLocationListener extends LocationCallback {
     private final FusedLocationProviderClient fusedLocationProviderClient;
-    private final int delay = 10000;
+    private int delay = 10000;
+    private int priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
+
     private static OurLocationListener instance = null;
 
     private OurActivity ourActivity;
@@ -47,7 +50,7 @@ public class OurLocationListener extends LocationCallback {
     public void onStart() {
         if(Permissions.permission_location) {
             LocationRequest locationRequest = new LocationRequest();
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationRequest.setPriority(priority);
             locationRequest.setInterval(delay);
             fusedLocationProviderClient.requestLocationUpdates(
                     locationRequest,
@@ -58,7 +61,8 @@ public class OurLocationListener extends LocationCallback {
     }
 
     public void onStop() {
-        fusedLocationProviderClient.removeLocationUpdates(this);
+        if(Permissions.permission_location)
+            fusedLocationProviderClient.removeLocationUpdates(this);
     }
 
     @Override
@@ -70,5 +74,17 @@ public class OurLocationListener extends LocationCallback {
 
     public void updateActivity(OurActivity ourActivity) {
         this.ourActivity = ourActivity;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay * 1000;
+    }
+    public void restart() {
+        this.onStop();
+        this.onStart();
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

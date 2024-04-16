@@ -19,6 +19,8 @@ import java.util.Map;
 public class NotificationSystem {
 
     private static String CHANNEL_ID = "BraGuia";
+
+    private static boolean notify = true;
     public static void createNotificationChannel(Context context) {
         CharSequence name = "Notificações";
         String description = "Notificações pins";
@@ -37,7 +39,7 @@ public class NotificationSystem {
     }
 
     public static void sendNotification(Context context, String title, String text, PendingIntent pendingIntent) {
-        if(Permissions.permission_notitications) {
+        if(Permissions.permission_notitications && notify) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.baseline_location_pin_24)
                     .setContentTitle(title)
@@ -48,5 +50,9 @@ public class NotificationSystem {
             notificationManager.notify(20, builder.build());
             Log.d("DebugApp","Notificação " + title + " enviada.");
         }
+    }
+
+    public static void setNotify(boolean newNotify) {
+        notify = newNotify;
     }
 }

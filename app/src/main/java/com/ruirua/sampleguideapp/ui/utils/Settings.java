@@ -1,16 +1,35 @@
 package com.ruirua.sampleguideapp.ui.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.google.android.gms.location.LocationRequest;
 import com.google.gson.Gson;
+import com.ruirua.sampleguideapp.notifications.NotificationSystem;
+import com.ruirua.sampleguideapp.sensors.OurLocationListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Settings {
     private boolean darkMode = false;
+    private boolean onLocationListener = true;
+    private boolean notification = true;
+
+    private int delayLocationSensor = 10;
+
+    private int priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
     private static Settings instance = null;
     private Context context = null;
@@ -26,14 +45,13 @@ public class Settings {
 
     public static void createInstance(Context context) {
         if(instance == null) {
-            try {
-                InputStream is  = context.getAssets().open(file);
-                InputStreamReader reader = new InputStreamReader(is);
-                Gson gson = new Gson();
-                instance = gson.fromJson(reader, Settings.class);
-            } catch (IOException ignored) {
-                instance = new Settings();
-            }
+            instance = new Settings();
+            SharedPreferences prefs = context.getSharedPreferences(file, Context.MODE_PRIVATE);
+            instance.darkMode = prefs.getBoolean("darkMode", false);
+            instance.onLocationListener = prefs.getBoolean("onLocationListener", true);
+            instance.notification = prefs.getBoolean("notification", true);
+            instance.delayLocationSensor = prefs.getInt("delayLocationSensor", 10);
+            instance.priority = prefs.getInt("priority", LocationRequest.PRIORITY_HIGH_ACCURACY);
             instance.setContext(context);
         }
     }
@@ -45,12 +63,19 @@ public class Settings {
     public boolean isLightMode() {
         return !darkMode;
     }
+
+    public boolean isOnLocationListener (){
+        return onLocationListener;
+    }
     private void saveFile() {
-        try {
-            FileWriter writer = new FileWriter(file);
-            Gson gson = new Gson();
-            gson.toJson(this,this.getClass(),writer);
-        } catch (IOException ignored) {}
+        SharedPreferences prefs = context.getSharedPreferences(file, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("darkMode", darkMode);
+        editor.putBoolean("onLocationListener", onLocationListener);
+        editor.putBoolean("notification", notification);
+        editor.putInt("delayLocationSensor", delayLocationSensor);
+        editor.putInt("priority", priority);
+        editor.apply();
     }
     public void changeToDarkMode() {
         darkMode = true;
@@ -61,4 +86,88 @@ public class Settings {
         darkMode = false;
         saveFile();
     }
+
+    public void turnOnLocationListener() {
+        onLocationListener = true;
+        OurLocationListener.getInstance().onStart();
+        saveFile();
+    }
+
+    public void turnOffLocationListener() {
+        onLocationListener = false;
+        OurLocationListener.getInstance().onStop();
+        saveFile();
+    }
+
+    public void turnOnNotifications() {
+        notification = true;
+        NotificationSystem.setNotify(notification);
+        saveFile();
+
+    }
+    public void turnOffNotifications() {
+        notification = false;
+        NotificationSystem.setNotify(notification);
+        saveFile();
+    }
+
+    public void setDelay(int number) {
+        this.delayLocationSensor = number;
+        OurLocationListener.getInstance().setDelay(number);
+        OurLocationListener.getInstance().restart();
+        saveFile();
+    }
+    public int getDelay() {
+        return delayLocationSensor;
+    }
+
+    private String converterToString() {
+        switch (priority) {
+            case LocationRequest.PRIORITY_HIGH_ACCURACY:
+                return "Accuracy alta";
+            case LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY:
+                return "Accuracy balanceada";
+            case LocationRequest.PRIORITY_LOW_POWER:
+                return "Bateria baixa";
+            default:
+                return "Sem bateria";
+        }
+    }
+    private int converterToInt(String input) {
+        switch (input) {
+            case "Accuracy alta":
+                return LocationRequest.PRIORITY_HIGH_ACCURACY;
+            case "Accuracy balanceada":
+                return  LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
+            case "Bateria baixa":
+                return  LocationRequest.PRIORITY_LOW_POWER;
+            default:
+                return LocationRequest.PRIORITY_NO_POWER;
+        }
+    }
+
+    private List<String> getPriorityValues() {
+        List<String> list = new ArrayList<>(4);
+        list.add("Accuracy alta");
+        list.add("Accuracy balanceada");
+        list.add("Bateria baixa");
+        list.add("Sem bateria");
+        return list;
+    }
+
+    public String[] getPossiblePriorityValues() {
+        return getPriorityValues().toArray(new String[0]);
+    }
+
+    public int getPositionPriority() {
+        return getPriorityValues().indexOf(converterToString());
+    }
+
+    public void setPriority(String selected) {
+        priority = converterToInt(selected);
+        OurLocationListener.getInstance().setPriority(priority);
+        OurLocationListener.getInstance().restart();
+        saveFile();
+    }
+
 }

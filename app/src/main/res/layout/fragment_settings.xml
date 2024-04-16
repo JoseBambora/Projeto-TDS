@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ui.shared.SettingsFragment"
@@ -12,19 +13,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
-        <android.widget.Button
-            android:id="@+id/buttonChangePassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mudar_palavra_passe"
-            android:onClick="onChangePasswordClicked"
-            android:background="@drawable/btn3"/>
-        <ToggleButton
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/toggleButtonMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textOff="@string/white_mode"
-            android:textOn="@string/dark_mode"
+            android:gravity="center"
+            app:thumbTint="?attr/Secundario"
             android:layout_marginTop="16dp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchLocationSensor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:thumbTint="?attr/Secundario"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:thumbTint="?attr/Secundario"/>
+
+        <NumberPicker
+            android:id="@+id/numberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
     </LinearLayout>
 </FrameLayout>

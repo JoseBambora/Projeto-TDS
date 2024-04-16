@@ -19,6 +19,7 @@ import com.ruirua.sampleguideapp.sensors.OurLocationListener;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
+import com.ruirua.sampleguideapp.ui.utils.Settings;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 import java.util.ArrayList;

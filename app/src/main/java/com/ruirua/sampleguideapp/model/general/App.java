@@ -8,7 +8,7 @@ public class App {
     @SerializedName("app_name")
     String app_name;
 
-    @SerializedName("social")
+    @SerializedName("socials")
     List<Social> socialMedia;
 
     @SerializedName("contacts")

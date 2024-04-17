@@ -2,6 +2,7 @@ package com.ruirua.sampleguideapp.ui.initial;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,8 +124,20 @@ public class MenuInicialFragment extends Fragment {
         TextView infoTv = v.findViewById(R.id.app_landing_page_text);
         TextView nameTv = v.findViewById(R.id.textViewHeader);
         TextView descTv = v.findViewById(R.id.textViewDescription);
+        Button facebookButton = v.findViewById(R.id.facebookButton);
+        Button umLogoButton = v.findViewById(R.id.umLogoButton);
+
         nameTv.setText(app.getApp_name());
         descTv.setText(app.getApp_desc());
         infoTv.setText(app.getPage_text());
+        String facebookUrl = app.getSocialMedia().get(0).getUrl();
+        facebookButton.setOnClickListener(view -> {Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(facebookUrl));
+            startActivity(intent);});
+        String umLogoUrl = app.getPartners().get(0).getUrl();
+        umLogoButton.setOnClickListener(view -> {Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(umLogoUrl));
+            startActivity(intent);});
     }
 }
+

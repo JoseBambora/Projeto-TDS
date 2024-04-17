@@ -73,7 +73,7 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
     }
     public void sendNotifications(double lon, double lan, double alt) {
         if(UserRepository.getInstance().isLogged()){
-            LiveData<List<Pin>> getPins = PinRepository.getInstance().getAllPins();
+            LiveData<List<Pin>> getPins = new PinRepository(getApplication()).getAllPins();
             getPins.observe(this, pins -> this.sendNotificationsPinClose(pins,lon,lan,alt));
         }
     }

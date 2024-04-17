@@ -1,11 +1,14 @@
 package com.ruirua.sampleguideapp.repositories;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.location.LocationRequest;
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.user.LoginData;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
@@ -32,16 +35,55 @@ public class UserRepository {
 
     private boolean isGettingUserInfo = false;
 
+    private String saveFile = "logininfo";
+
     private final UserAPI userAPI;
+    private final Application application;
     private UserRepository(Application application){
+        this.application = application;
         GuideDatabase database = GuideDatabase.getInstance(application);
         userDAO = database.userDAO();
         Retrofit retrofit = RepoFuns.buildRetrofit();
         userAPI = retrofit.create(UserAPI.class);
-        currentUser = null;
+        SharedPreferences prefs = application.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
+        String crftoken = prefs.getString("Csrftoken",null);
+        String sessionid = prefs.getString("Sessionid",null);
+        String username = prefs.getString("username",null);
+        String user_type = prefs.getString("user_type",null);
+        if(crftoken != null && sessionid != null) {
+            currentUser = new UserLogged();
+            currentUser.setSessionid(sessionid);
+            currentUser.setCsrftoken(crftoken);
+            currentUser.setUsername(username);
+            currentUser.setUser_type(user_type);
+
+            String email = prefs.getString("email", null);
+            String date = prefs.getString("date", null);
+            String last_login = prefs.getString("last_login",null);
+            String last_name = prefs.getString("last_name", null);
+
+            userInfo = new MutableLiveData<>();
+            UserInfo ui = new UserInfo();
+            ui.setLast_name(last_name);
+            ui.setUser_type(user_type);
+            ui.setUsername(username);
+            ui.setEmail(email);
+            ui.setDate_joined(date);
+            ui.setLast_login(last_login);
+            userInfo.setValue(ui);
+
+        }
+        else
+            currentUser = null;
     }
     public void setCurrentUser(UserLogged user) {
         if (user != null) {
+            SharedPreferences prefs = application.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("Csrftoken", user.getCsrftoken());
+            editor.putString("Sessionid", user.getSessionid());
+            editor.putString("username",user.getUsername());
+            editor.apply();
             currentUser = user;
         }
     }
@@ -54,7 +96,16 @@ public class UserRepository {
     }
 
     private void assignUserInfo(Response<UserInfo> response) {
-        userInfo.setValue(response.body());
+        UserInfo userInfo = response.body();
+        this.userInfo.setValue(response.body());
+        SharedPreferences prefs = application.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("user_type", userInfo.getUser_type());
+        editor.putString("email", userInfo.getEmail());
+        editor.putString("date", userInfo.getDate_joined());
+        editor.putString("last_login", userInfo.getLast_login());
+        editor.putString("last_name", userInfo.getLast_name());
+        editor.apply();
         isGettingUserInfo = false;
     }
 
@@ -96,6 +147,7 @@ public class UserRepository {
     }
 
     public void logout() {
+        application.getSharedPreferences(saveFile, Context.MODE_PRIVATE).edit().clear().apply();
         currentUser = null;
     }
 

@@ -109,7 +109,7 @@ public class MenuInicialFragment extends Fragment {
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
         Map<String, String> params = new HashMap<>();
-        params.put("pinid","1");
+        params.put("pinid","2");
         buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,params));
         buttonGM.setOnClickListener(v ->googleMaps());
         buttonLogout.setOnClickListener(v-> {

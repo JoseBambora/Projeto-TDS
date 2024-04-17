@@ -26,7 +26,6 @@ import retrofit2.Retrofit;
 public class PinRepository {
     private final PinDAO pinDAO;
     private final MediatorLiveData<List<Pin>> allPins;
-    private static PinRepository instance = null;
 
     private final PinAPI pinAPI;
 
@@ -35,6 +34,7 @@ public class PinRepository {
     }
 
     private void setValues(List<Pin> localPins) {
+        Log.d("DebugApp","Entrou aqui " + (localPins != null && !localPins.isEmpty()));
         if (localPins != null && !localPins.isEmpty()) {
             allPins.setValue(localPins);
         } else {
@@ -42,7 +42,7 @@ public class PinRepository {
         }
     }
 
-    private PinRepository(Application application){
+    public PinRepository(Application application){
         GuideDatabase database = GuideDatabase.getInstance(application);
         Retrofit retrofit= RepoFuns.buildRetrofit();
         pinAPI = retrofit.create(PinAPI.class);
@@ -58,6 +58,7 @@ public class PinRepository {
     private void getPinsAPI() {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
+            Log.d("DebugApp","A ir buscar pins");
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<List<Pin>> call = pinAPI.getPins(csrftoken, sessionid);
@@ -68,6 +69,7 @@ public class PinRepository {
     private void getPinAPI(int id, MutableLiveData<Pin> res) {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
+            Log.d("DebugApp","A ir buscar pin");
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);
@@ -76,19 +78,17 @@ public class PinRepository {
     }
     public LiveData<Pin> getPin(int id) {
         MutableLiveData<Pin> res = new MutableLiveData<>();
-
+        if(allPins.getValue() != null) {
+            int index = allPins.getValue().stream()
+                    .map(Pin::getId)
+                    .collect(Collectors.toList())
+                    .indexOf(id);
+            if (index != -1) {
+                res.setValue(allPins.getValue().get(index));
+                return res;
+            }
+        }
         getPinAPI(id,res);
         return res;
-    }
-
-
-    public static PinRepository createInstance(Application application) {
-        if(instance == null)
-            instance = new PinRepository(application);
-        return instance;
-    }
-
-    public static PinRepository getInstance() {
-        return instance;
     }
 }

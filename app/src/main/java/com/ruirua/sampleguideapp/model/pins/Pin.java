@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity(tableName = "pin",indices = @Index(value = {"id"},unique = true))
-@TypeConverters({RelPinListConverter.class, MediaListConverter.class})
+@TypeConverters({MediaListConverter.class, RelPinListConverter.class})
 public class Pin {
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -51,7 +51,7 @@ public class Pin {
         return "Pin{" +
                 "id=" + id +
                 ", pin_name='" + pin_name + '\'' +
-                ", pin_desc='" + pin_desc + '\'' +
+                // ", pin_desc='" + pin_desc + '\'' +
                 ", pin_lat=" + pin_lat +
                 ", pin_lng=" + pin_lng +
                 ", pin_alt=" + pin_alt +

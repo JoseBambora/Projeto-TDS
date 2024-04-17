@@ -15,7 +15,6 @@ public class MyApplication extends Application {
         // Initialize your UserRepository here
         Log.d("DebugApp","A inicializar");
         UserRepository.createUserRepository(this);
-        PinRepository.createInstance(this);
         Settings.createInstance(this);
         NotificationSystem.createNotificationChannel(this);
     }

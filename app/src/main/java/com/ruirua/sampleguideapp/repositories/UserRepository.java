@@ -8,18 +8,13 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.user.LoginData;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
 import com.ruirua.sampleguideapp.model.user.UserAPI;
-import com.ruirua.sampleguideapp.model.user.UserDAO;
 import com.ruirua.sampleguideapp.model.user.UserInfo;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -31,9 +26,7 @@ import retrofit2.Retrofit;
 public class UserRepository {
     private UserLogged currentUser;
     private MutableLiveData<UserInfo> userInfo = new MutableLiveData<>();
-
     private final String saveFile = "logininfo";
-
     private final UserAPI userAPI;
     private final Application application;
 

@@ -16,18 +16,14 @@ import com.ruirua.sampleguideapp.model.trails.Edge;
 import com.ruirua.sampleguideapp.model.trails.RelTrail;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.model.trails.TrailDAO;
-import com.ruirua.sampleguideapp.model.user.UserLogged;
-import com.ruirua.sampleguideapp.model.user.UserDAO;
 
-@Database(entities = {Trail.class, UserLogged.class, Pin.class, RelPin.class, Media.class, Edge.class, RelTrail.class}, version = 974)
+@Database(entities = {Trail.class, Pin.class, RelPin.class, Media.class, Edge.class, RelTrail.class}, version = 975)
 public abstract class GuideDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "BraGuide";
 
     public abstract TrailDAO trailDAO();
 
     public abstract PinDAO pinDAO();
-
-    public abstract UserDAO userDAO();
 
     public static volatile GuideDatabase INSTANCE = null;
 
@@ -56,19 +52,16 @@ public abstract class GuideDatabase extends RoomDatabase {
 
         private final TrailDAO traildao;
         private final PinDAO pinDAO;
-        private final UserDAO userDAO;
 
         public PopulateDbAsyn(GuideDatabase catDatabase) {
             traildao = catDatabase.trailDAO();
             pinDAO = catDatabase.pinDAO();
-            userDAO = catDatabase.userDAO();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             traildao.deleteAll();
             pinDAO.deleteAll();
-            userDAO.deleteAll();
             return null;
         }
     }

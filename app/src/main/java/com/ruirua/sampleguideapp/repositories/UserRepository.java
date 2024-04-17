@@ -8,7 +8,6 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.location.LocationRequest;
 import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.user.LoginData;
 import com.ruirua.sampleguideapp.model.user.UserLogged;
@@ -18,9 +17,10 @@ import com.ruirua.sampleguideapp.model.user.UserInfo;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 import okhttp3.ResponseBody;
@@ -29,40 +29,30 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class UserRepository {
-    private final UserDAO userDAO;
     private UserLogged currentUser;
     private MutableLiveData<UserInfo> userInfo = new MutableLiveData<>();
 
-    private boolean isGettingUserInfo = false;
-
-    private String saveFile = "logininfo";
+    private final String saveFile = "logininfo";
 
     private final UserAPI userAPI;
     private final Application application;
-    private UserRepository(Application application){
-        this.application = application;
-        GuideDatabase database = GuideDatabase.getInstance(application);
-        userDAO = database.userDAO();
-        Retrofit retrofit = RepoFuns.buildRetrofit();
-        userAPI = retrofit.create(UserAPI.class);
+
+    private void clearSavedInfo() {
+        application.getSharedPreferences(saveFile, Context.MODE_PRIVATE).edit().clear().apply();
+    }
+
+    private void getSavedLoginInfo() {
         SharedPreferences prefs = application.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
         String crftoken = prefs.getString("Csrftoken",null);
         String sessionid = prefs.getString("Sessionid",null);
-        String username = prefs.getString("username",null);
-        String user_type = prefs.getString("user_type",null);
-        if(crftoken != null && sessionid != null) {
-            currentUser = new UserLogged();
-            currentUser.setSessionid(sessionid);
-            currentUser.setCsrftoken(crftoken);
-            currentUser.setUsername(username);
-            currentUser.setUser_type(user_type);
-
+        if(crftoken != null && sessionid != null && RepoFuns.validateTokens(crftoken,sessionid)) {
+            String username = prefs.getString("username",null);
+            String user_type = prefs.getString("user_type",null);
             String email = prefs.getString("email", null);
             String date = prefs.getString("date", null);
             String last_login = prefs.getString("last_login",null);
             String last_name = prefs.getString("last_name", null);
 
-            userInfo = new MutableLiveData<>();
             UserInfo ui = new UserInfo();
             ui.setLast_name(last_name);
             ui.setUser_type(user_type);
@@ -70,12 +60,28 @@ public class UserRepository {
             ui.setEmail(email);
             ui.setDate_joined(date);
             ui.setLast_login(last_login);
+
+            userInfo = new MutableLiveData<>();
             userInfo.setValue(ui);
 
+            currentUser = new UserLogged();
+            currentUser.setSessionid(sessionid);
+            currentUser.setCsrftoken(crftoken);
+            currentUser.setUsername(username);
+            currentUser.setUser_type(user_type);
         }
-        else
+        else {
+            clearSavedInfo();
             currentUser = null;
+        }
     }
+    private UserRepository(Application application){
+        this.application = application;
+        Retrofit retrofit = RepoFuns.buildRetrofit();
+        userAPI = retrofit.create(UserAPI.class);
+        getSavedLoginInfo();
+    }
+
     public void setCurrentUser(UserLogged user) {
         if (user != null) {
             SharedPreferences prefs = application.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
@@ -86,13 +92,6 @@ public class UserRepository {
             editor.apply();
             currentUser = user;
         }
-    }
-    public LiveData<List<UserLogged>> usersLogged() {
-        return userDAO.getUsers();
-    }
-
-    public void insert(UserLogged user){
-        Executors.newSingleThreadExecutor().execute(() -> userDAO.insert(user));
     }
 
     private void assignUserInfo(Response<UserInfo> response) {
@@ -106,11 +105,9 @@ public class UserRepository {
         editor.putString("last_login", userInfo.getLast_login());
         editor.putString("last_name", userInfo.getLast_name());
         editor.apply();
-        isGettingUserInfo = false;
     }
 
     private void assignUserType() {
-        isGettingUserInfo = true;
         Call<UserInfo> call = userAPI.getUserInfo(getCsrfToken(),getSessionId());
         call.enqueue(new UtilRepository<>(this::assignUserInfo,(er) -> Log.d("DebugApp","Erro ao fazer pedido do tipo de user ")));
     }
@@ -124,7 +121,6 @@ public class UserRepository {
         setCurrentUser(ul);
         assignUserType();
         consumer.accept(true);
-        // insert(currentUser);
     }
     public void login(String username, String password, Consumer<Boolean> consumer) {
         if(username.equals("p"))
@@ -147,12 +143,12 @@ public class UserRepository {
     }
 
     public void logout() {
-        application.getSharedPreferences(saveFile, Context.MODE_PRIVATE).edit().clear().apply();
         currentUser = null;
+        clearSavedInfo();
     }
 
     public boolean isLogged() {
-        return currentUser != null;
+        return currentUser != null && RepoFuns.validateTokens(getCsrfToken(),getSessionId());
     }
 
     public String getCsrfToken() {
@@ -165,10 +161,6 @@ public class UserRepository {
 
     public boolean isPremium() {
         return isLogged() && userInfo.getValue() != null && userInfo.getValue().isPremium();
-    }
-
-    public boolean isGettingUserInfo() {
-        return isGettingUserInfo;
     }
 
     public boolean isStandard() {

@@ -2,6 +2,9 @@ package com.ruirua.sampleguideapp.repositories.utils;
 
 import com.ruirua.sampleguideapp.BuildConfig;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,5 +27,24 @@ public class RepoFuns {
         res.put("csrftoken",cookies.get(0));
         res.put("sessionid",cookies.get(1));
         return res;
+    }
+
+    private static Date extractExpiration(String tokenString) {
+        try {
+            String[] parts = tokenString.split("; ");
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
+            for (String part : parts) {
+                if (part.startsWith("expires=")) {
+                    return sdf.parse(part.substring(8));
+                }
+            }
+        } catch (ParseException ignored) {}
+        return null;
+    }
+    public static boolean validateTokens(String csrfToken, String sessionID) {
+        Date currentDate = new Date();
+        Date csrfDate = extractExpiration(csrfToken);
+        Date sessionDate = extractExpiration(sessionID);
+        return currentDate.before(csrfDate) && currentDate.before(sessionDate);
     }
 }

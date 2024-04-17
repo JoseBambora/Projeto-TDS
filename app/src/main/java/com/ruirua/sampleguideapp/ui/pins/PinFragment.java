@@ -208,7 +208,6 @@ public class PinFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void fillInfo(Pin pin, View v) {
         this.pin = pin;
-        Log.d("DebugApp","PIN: " + pin.toString());
         setMedia(v);
         setGeneralContent(v);
         setTable(v);

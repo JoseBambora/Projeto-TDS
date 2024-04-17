@@ -34,7 +34,6 @@ public class PinRepository {
     }
 
     private void setValues(List<Pin> localPins) {
-        Log.d("DebugApp","Entrou aqui " + (localPins != null && !localPins.isEmpty()));
         if (localPins != null && !localPins.isEmpty()) {
             allPins.setValue(localPins);
         } else {
@@ -58,7 +57,6 @@ public class PinRepository {
     private void getPinsAPI() {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
-            Log.d("DebugApp","A ir buscar pins");
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<List<Pin>> call = pinAPI.getPins(csrftoken, sessionid);
@@ -69,7 +67,6 @@ public class PinRepository {
     private void getPinAPI(int id, MutableLiveData<Pin> res) {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
-            Log.d("DebugApp","A ir buscar pin");
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);

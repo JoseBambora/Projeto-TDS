@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -23,6 +24,7 @@ import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.sensors.OurLocationListener;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
+import com.ruirua.sampleguideapp.ui.user.LoginFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +93,10 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
             UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment());
             return true;
         }
-
+        if (id == R.id.action_login) {
+            UIFuns.changeFragment(getSupportFragmentManager(), new LoginFragment(this, getSupportFragmentManager()));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

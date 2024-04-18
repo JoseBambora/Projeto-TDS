@@ -145,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/socials"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/Secundario"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
@@ -164,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/partner"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/Secundario"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>

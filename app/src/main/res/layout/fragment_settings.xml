@@ -8,44 +8,92 @@
     android:padding="16dp"
     tools:context=".ui.shared.SettingsFragment"
     android:background="?attr/Primario">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/toggleButtonMode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:thumbTint="?attr/Secundario"
-            android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchLocationSensor"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            app:thumbTint="?attr/Secundario"/>
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchNotification"
-            android:layout_width="wrap_content"
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/toggleButtonMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:thumbTint="?attr/Secundario"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="?attr/Texto2"
+                android:text="@string/dark_mode"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            app:thumbTint="?attr/Secundario"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchLocationSensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:thumbTint="?attr/Secundario"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/localiza_o"
+                android:layout_marginStart="8dp"
+                android:textColor="?attr/Texto2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:thumbTint="?attr/Secundario"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notifica_es"
+                android:layout_marginStart="8dp"
+                android:textColor="?attr/Texto2"/>
+
+        </LinearLayout>
 
         <NumberPicker
             android:id="@+id/numberPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:textColor="@color/SecundarioDark" />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:textColor="@color/SecundarioDark" />
+
 
     </LinearLayout>
 </FrameLayout>

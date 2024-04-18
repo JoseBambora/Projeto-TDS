@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -46,6 +47,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 public class PinFragment extends Fragment {
@@ -75,55 +77,11 @@ public class PinFragment extends Fragment {
         });
     }
     private void setAudio(Media m, View v) {
-        Button buttonAudio = v.findViewById(R.id.playAudio);
-        buttonAudio.setOnClickListener(view -> {
-            try {
-                String url = m.getMedia_file();
-                Log.d("DebugApp","A configurar audio");
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .build());
-                mediaPlayer.reset();
-                mediaPlayer.setDataSource(url);
-                mediaPlayer.prepareAsync();
-                mediaPlayer.setOnPreparedListener(mp -> {
-                    Log.d("DebugApp","A começar play do audio");
-                    mediaPlayer.start();
-                });
-                Log.d("DebugApp","Audio configurado");
-            } catch (IOException e) {
-                Log.d("DebugApp","Erro a começar play do audio");
-                Toast.makeText(getActivity(), "Erro ao começar audio", Toast.LENGTH_SHORT).show();
-            }
-        });
+        UIFuns.playAudio(m.getMedia_file(),v.findViewById(R.id.playAudio),getActivity());
     }
 
     private void setVideo(Media m, View v) {
-        Button buttonVideo = v.findViewById(R.id.playVideo);
-        VideoView videoView = v.findViewById(R.id.videoPin);
-        ImageView iv = v.findViewById(R.id.imagePin);
-        buttonVideo.setOnClickListener(view -> {
-            videoView.setVisibility(View.VISIBLE);
-            iv.setVisibility(View.GONE);
-            String url = m.getMedia_file();
-
-            // Set the video URI and start playback
-            videoView.setVideoPath(url);
-            videoView.start();
-
-            // Optional: Add media controller for playback controls
-            MediaController mediaController = new MediaController(getActivity());
-            mediaController.setAnchorView(videoView);
-            videoView.setMediaController(mediaController);
-
-            // Optional: Handle errors during playback
-            videoView.setOnErrorListener((mp, what, extra) -> {
-                Toast.makeText(getActivity(), "Error playing video", Toast.LENGTH_SHORT).show();
-                return false;
-            });
-        });
+        UIFuns.playVideo(m.getMedia_file(),v.findViewById(R.id.videoPin), v.findViewById(R.id.playVideo), v.findViewById(R.id.imagePin), getActivity());
     }
     private void setMedia(View v) {
         List<Media> mediaList = pin.getMediaList();

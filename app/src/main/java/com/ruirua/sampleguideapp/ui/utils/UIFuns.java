@@ -3,8 +3,16 @@ package com.ruirua.sampleguideapp.ui.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import com.ruirua.sampleguideapp.Permissions;
 import com.ruirua.sampleguideapp.R;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Stack;
 
@@ -103,5 +112,65 @@ public class UIFuns {
 
     public static void refreshPage(FragmentManager fragmentManager, Fragment fragment) {
         fragmentManager.beginTransaction().detach(fragment).attach(fragment).commit();
+    }
+
+    private static void loadVideo(VideoView videoView, Button buttonVideo, ImageView imageView, Activity activity ) {
+        Toast.makeText(activity, "Vídeo carregado", Toast.LENGTH_SHORT).show();
+        buttonVideo.setOnClickListener(view -> {
+            String text = videoView.isPlaying() ? "Começar Vídeo" : "Pausar Vídeo" ;
+            buttonVideo.setText(text);
+            videoView.setVisibility(View.VISIBLE);
+            if(imageView != null)
+                imageView.setVisibility(View.GONE);
+            if(videoView.isPlaying())
+                videoView.pause();
+            else {
+                videoView.start();
+                ViewGroup.LayoutParams layoutParams = videoView.getLayoutParams();
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                videoView.setLayoutParams(layoutParams);
+            }
+        });
+    }
+    public static void playVideo(String video_url, VideoView videoView, Button buttonVideo, ImageView imageView, Activity activity) {
+        String url = video_url.replace("http:", "https:");
+        videoView.setVideoURI(Uri.parse(url));
+        MediaController mediaController = new MediaController(activity);
+        mediaController.setAnchorView(videoView);
+        mediaController.setMediaPlayer(videoView);
+        videoView.setMediaController(mediaController);
+        videoView.setOnPreparedListener(l -> UIFuns.loadVideo(videoView,buttonVideo,imageView,activity));
+        buttonVideo.setOnClickListener(view -> Toast.makeText(activity,"A carregar Vídeo", Toast.LENGTH_SHORT).show());
+    }
+
+    public static void playAudio(String audio_url, Button buttonAudio, Activity activity) {
+        try {
+            String url = audio_url.replace("http:", "https:");
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .build());
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(url);
+            mediaPlayer.prepareAsync();
+            mediaPlayer.setOnPreparedListener(l -> {
+
+                buttonAudio.setOnClickListener(view -> {
+                    String text = mediaPlayer.isPlaying()? "Começar Áudio" : "Pausar Áudio";
+                    buttonAudio.setText(text);
+                    if(mediaPlayer.isPlaying())
+                        mediaPlayer.pause();
+                    else
+                        mediaPlayer.start();
+                });
+            });
+            buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio", Toast.LENGTH_SHORT).show());
+
+        }
+        catch (IOException e) {
+            Toast.makeText(activity, "Erro ao carregar audio", Toast.LENGTH_SHORT).show();
+        }
     }
 }

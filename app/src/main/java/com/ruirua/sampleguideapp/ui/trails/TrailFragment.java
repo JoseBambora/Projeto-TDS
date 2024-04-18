@@ -87,7 +87,7 @@ public class TrailFragment extends Fragment {
         RecyclerView recyclerViewPins = view.findViewById(R.id.recycler_view_pins);
         recyclerViewPins.setLayoutManager(new LinearLayoutManager(requireContext()));
         List<Pin> pinList = trail.getPins();
-        TrailPinRecyclerView adapter = new TrailPinRecyclerView(pinList,getActivity());
+        TrailPinRecyclerView adapter = new TrailPinRecyclerView(pinList,fragmentManager);
         recyclerViewPins.setAdapter(adapter);
     }
 }

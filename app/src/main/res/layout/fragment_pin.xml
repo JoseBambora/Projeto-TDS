@@ -44,44 +44,41 @@
 
                 <VideoView
                     android:id="@+id/videoPin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
-
-                    <android.widget.Button
-                        android:id="@+id/playImagem"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn3"
-                        android:textColor="@color/white"
-                        android:text="@string/imagem" />
-
-                    <android.widget.Button
-                        android:id="@+id/playAudio"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn3"
-                        android:textColor="@color/white"
-                        android:text="@string/udio" />
-
-                    <android.widget.Button
-                        android:id="@+id/playVideo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn3"
-                        android:textColor="@color/white"
-                        android:text="@string/video" />
-                </LinearLayout>
-
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <android.widget.Button
+                    android:id="@+id/playImagem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn3"
+                    android:textColor="@color/white"
+                    android:text="@string/imagem" />
+                <android.widget.Button
+                    android:id="@+id/playAudio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn3"
+                    android:textColor="@color/white"
+                    android:text="@string/udio" />
+                <android.widget.Button
+                    android:id="@+id/playVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn3"
+                    android:textColor="@color/white"
+                    android:text="@string/video" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

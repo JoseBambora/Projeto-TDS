@@ -10,4 +10,5 @@
     <attr name="Texto1" format="color" />
     <attr name="Texto2" format="color" />
     <attr name="Texto3" format="color" />
+    <attr name="Texto4" format="color"/>
 </resources>

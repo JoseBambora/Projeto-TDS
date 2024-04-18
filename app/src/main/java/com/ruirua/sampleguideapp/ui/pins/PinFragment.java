@@ -3,6 +3,7 @@ package com.ruirua.sampleguideapp.ui.pins;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,19 +159,29 @@ public class PinFragment extends Fragment {
 
     }
     private void setGeneralContent(View v) {
-        TextInputEditText nametv = v.findViewById(R.id.pinName);
-        TextInputEditText coordstv = v.findViewById(R.id.pinLocation);
-        TextInputEditText descttv = v.findViewById(R.id.pinDesc);
-
-        nametv.setEnabled(false);
-        coordstv.setEnabled(false);
-        descttv.setEnabled(false);
+        TextView nametv = v.findViewById(R.id.pinName);
+        TextView coordstv = v.findViewById(R.id.pinLocation);
+        TextView descttv = v.findViewById(R.id.pinDesc);
+        TextView nameTvTop = v.findViewById(R.id.namePin);
 
         nametv.setText(pin.getPin_name());
         coordstv.setText("(" +pin.getPin_lat() + "," + pin.getPin_lng()+ "," + pin.getPin_alt() + ")");
         descttv.setText(pin.getPin_desc());
+        nameTvTop.setText(pin.getPin_name());
     }
 
+    private TextView createTextView(String text) {
+        TypedValue typedValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.Texto1, typedValue, true);
+        TextView res = new TextView(this.getActivity());
+        res.setText(text);
+        res.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+        res.setGravity(Gravity.CENTER_HORIZONTAL);
+        res.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        res.setTextColor(typedValue.data);
+        res.setTypeface(null, Typeface.BOLD);
+        return res;
+    }
     private void setTable(View v) {
         TableLayout relpinsTable = v.findViewById(R.id.relpinsTable);
         List<RelPin> relPins = pin.getRelPinList();
@@ -179,30 +191,21 @@ public class PinFragment extends Fragment {
             view.setVisibility(View.GONE);
         }
         else {
-            int position = 1;
             for(RelPin relPin : relPins) {
                 TableRow tableRow = new TableRow(this.getActivity());
-                TextView valueTextView = new TextView(this.getActivity());
-                TextView attributeTextView = new TextView(this.getActivity());
-                valueTextView.setText(relPin.getValue());
-                attributeTextView.setText(relPin.getAttribute());
 
-                valueTextView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-                attributeTextView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-
-                valueTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-                attributeTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-
-                if (position % 2 == 0) {  // Even positions after header (0)
-                    tableRow.setBackgroundColor(ContextCompat.getColor(this.getActivity(), R.color.gray));
-                }
-                position++;
+                TextView valueTextView = createTextView(relPin.getValue());
+                TextView attributeTextView = createTextView(relPin.getAttribute());
 
                 tableRow.addView(valueTextView);
                 tableRow.addView(attributeTextView);
 
                 relpinsTable.addView(tableRow);
             }
+            TableRow tableRow = new TableRow(this.getActivity());
+            tableRow.addView(createTextView(""));
+            tableRow.addView(createTextView(""));
+            relpinsTable.addView(tableRow);
         }
     }
     @SuppressLint("SetTextI18n")

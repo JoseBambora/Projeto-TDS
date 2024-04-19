@@ -9,5 +9,7 @@
         <item name="Texto2">@color/white</item>
         <item name="Texto3">@color/SecundarioDark</item>
         <item name="Texto4">@color/white</item>
+        <item name="android:itemBackground">@color/white</item>
+
     </style>
 </resources>

@@ -25,9 +25,9 @@ import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.RelPin;
+import com.ruirua.sampleguideapp.repositories.MediaRepository;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,9 +50,7 @@ public class PinFragment extends Fragment {
         videoView.setVisibility(View.GONE);
         String url = m.getMedia_file().replace("http:", "https:");
         iv.setVisibility(View.VISIBLE);
-        Picasso.get()
-                .load(url)
-                .into(iv);
+        MediaRepository.getImage(url,iv,getActivity());
         buttonImage.setOnClickListener(view-> {
             videoView.setVisibility(View.GONE);
             iv.setVisibility(View.VISIBLE);

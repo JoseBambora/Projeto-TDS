@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.ruirua.sampleguideapp.Permissions;
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.repositories.MediaRepository;
 
 import java.io.IOException;
 import java.util.Map;
@@ -135,7 +137,7 @@ public class UIFuns {
     }
     public static void playVideo(String video_url, VideoView videoView, Button buttonVideo, ImageView imageView, Activity activity) {
         String url = video_url.replace("http:", "https:");
-        videoView.setVideoURI(Uri.parse(url));
+        MediaRepository.getVideo(url,activity,videoView);
         MediaController mediaController = new MediaController(activity);
         mediaController.setAnchorView(videoView);
         mediaController.setMediaPlayer(videoView);
@@ -145,32 +147,25 @@ public class UIFuns {
     }
 
     public static void playAudio(String audio_url, Button buttonAudio, Activity activity) {
-        try {
-            String url = audio_url.replace("http:", "https:");
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .build());
-            mediaPlayer.reset();
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepareAsync();
-            mediaPlayer.setOnPreparedListener(l -> {
-
-                buttonAudio.setOnClickListener(view -> {
-                    String text = mediaPlayer.isPlaying()? "Começar Áudio" : "Pausar Áudio";
-                    buttonAudio.setText(text);
-                    if(mediaPlayer.isPlaying())
-                        mediaPlayer.pause();
-                    else
-                        mediaPlayer.start();
-                });
+        String url = audio_url.replace("http:", "https:");
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .build());
+        mediaPlayer.reset();
+        buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio", Toast.LENGTH_SHORT).show());
+        MediaRepository.getAudio(url,activity,mediaPlayer, l -> {
+            Log.d("DebugApp","Entrou aqui");
+            buttonAudio.setOnClickListener(view -> {
+                String text = mediaPlayer.isPlaying()? "Começar Áudio" : "Pausar Áudio";
+                buttonAudio.setText(text);
+                if(mediaPlayer.isPlaying())
+                    mediaPlayer.pause();
+                else
+                    mediaPlayer.start();
             });
-            buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio", Toast.LENGTH_SHORT).show());
+        });
 
-        }
-        catch (IOException e) {
-            Toast.makeText(activity, "Erro ao carregar audio", Toast.LENGTH_SHORT).show();
-        }
     }
 }

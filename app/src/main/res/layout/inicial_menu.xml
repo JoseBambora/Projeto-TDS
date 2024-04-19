@@ -101,14 +101,6 @@
             android:text="@string/google_maps"/>
 
         <android.widget.Button
-            android:id="@+id/buttonPin1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn3"
-            android:textColor="@color/white"
-            android:text="@string/consultar_pin_1"/>
-
-        <android.widget.Button
             android:id="@+id/userInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

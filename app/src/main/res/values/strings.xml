@@ -58,4 +58,9 @@
     <string name="notifica_es">Notificações</string>
     <string name="localiza_o">Localização</string>
     <string name="trail_image">Trail Image</string>
+    <string name="ltimo_login">Último Login</string>
+    <string name="tipo_de_utilizador">Tipo de Utilizador</string>
+    <string name="email">Email</string>
+    <string name="ltimo_nome">Último Nome</string>
+    <string name="nome_de_utilizador">Nome de Utilizador</string>
 </resources>

@@ -27,48 +27,22 @@ public class UserFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private void setFieldsAux(View field, String textview, String edittext) {
-        TextView tv = field.findViewById(R.id.textId);
-        TextView et = field.findViewById(R.id.editId);
-        tv.setText(textview);
-        et.setText(edittext);
-    }
-    private UserInfo teste() {
-        UserInfo ui = new UserInfo();
-        ui.setEmail("abc@gmail.com");
-        ui.setUsername("abc");
-        ui.setUser_type("Premium");
-        ui.setLast_login("Agora");
-        ui.setLast_name("def");
-        return ui;
-    }
     @SuppressLint("SetTextI18n")
     private void setFields(View view) {
         LiveData<UserInfo> liveData = UserRepository.getInstance().getUserLoggedInfo();
         liveData.observe(getViewLifecycleOwner(), ui -> {
-
-            Log.d("DebugApp",ui.toString());
-            View f1 = view.findViewById(R.id.field1);
-            setFieldsAux(f1,"Nome de Utilizador",ui.getUsername());
-
-            View f2 = view.findViewById(R.id.field2);
-            setFieldsAux(f2,"Último nome",ui.getLast_name());
-
-
-            View f3 = view.findViewById(R.id.field3);
-            setFieldsAux(f3,"Email",ui.getEmail());
-
-
-            View f4 = view.findViewById(R.id.field4);
-            setFieldsAux(f4,"Tipo de utilizador",ui.getUser_type());
-
-
-            View f5 = view.findViewById(R.id.field5);
-            setFieldsAux(f5,"Último login",ui.getLast_login());
-
-            TextView tv = view.findViewById(R.id.message_user);
-            tv.setText("Olá " + ui.getUsername() + "!");
+            TextView message = view.findViewById(R.id.message_user);
+            TextView f1 = view.findViewById(R.id.userName);
+            TextView f2 = view.findViewById(R.id.userEmail);
+            TextView f3 = view.findViewById(R.id.userType);
+            TextView f4 = view.findViewById(R.id.userLastLogin);
+            TextView f5 = view.findViewById(R.id.userLastName);
+            message.setText("Olá " + ui.getUsername());
+            f1.setText(ui.getUsername());
+            f2.setText(ui.getEmail());
+            f3.setText(ui.getUser_type());
+            f4.setText(ui.getLast_login());
+            f5.setText(ui.getLast_name());
         });
     }
     @Override

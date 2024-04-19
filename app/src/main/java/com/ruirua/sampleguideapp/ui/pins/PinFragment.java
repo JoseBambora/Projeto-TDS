@@ -2,52 +2,33 @@ package com.ruirua.sampleguideapp.ui.pins;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.AudioAttributes;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.RelPin;
-import com.ruirua.sampleguideapp.ui.initial.MainActivity;
-import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 
 public class PinFragment extends Fragment {
@@ -67,9 +48,10 @@ public class PinFragment extends Fragment {
         ImageView iv = v.findViewById(R.id.imagePin);
         VideoView videoView = v.findViewById(R.id.videoPin);
         videoView.setVisibility(View.GONE);
+        String url = m.getMedia_file().replace("http:", "https:");
         iv.setVisibility(View.VISIBLE);
         Picasso.get()
-                .load(m.getMedia_file().replace("http:", "https:"))
+                .load(url)
                 .into(iv);
         buttonImage.setOnClickListener(view-> {
             videoView.setVisibility(View.GONE);

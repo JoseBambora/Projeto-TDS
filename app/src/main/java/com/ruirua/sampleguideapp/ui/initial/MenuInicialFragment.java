@@ -51,7 +51,6 @@ public class MenuInicialFragment extends Fragment {
     private void hideButtons(View view) {
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonTourRoutes = view.findViewById(R.id.buttonTourRoutes);
-        Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
@@ -70,12 +69,6 @@ public class MenuInicialFragment extends Fragment {
             buttonRegister.setVisibility(View.GONE);
             buttonLogin.setVisibility(View.GONE);
             buttonLogout.setVisibility(View.VISIBLE);
-        }
-        if (!ur.isPremium()) {
-            buttonPin1.setVisibility(View.GONE);
-        }
-        else {
-            buttonPin1.setVisibility(View.VISIBLE);
         }
     }
 
@@ -102,16 +95,12 @@ public class MenuInicialFragment extends Fragment {
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonList = view.findViewById(R.id.buttonTourRoutes);
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
-        Button buttonPin1 = view.findViewById(R.id.buttonPin1);
         Button buttonGM = view.findViewById(R.id.googleMaps);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
         buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("register")));
         buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("login")));
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
-        Map<String, String> params = new HashMap<>();
-        params.put("pinid","2");
-        buttonPin1.setOnClickListener(v ->  UIFuns.changeActivity(activity, PinActivity.class,params));
         buttonGM.setOnClickListener(v ->googleMaps());
         buttonLogout.setOnClickListener(v-> {
             UserRepository.getInstance().logout();

@@ -4,4 +4,7 @@
         <item name="boxStrokeColor">@color/SecundarioLight</item>
         <item name="boxStrokeWidth">2dp</item>
     </style>
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/SecundarioDark</item>
+    </style>
 </resources>

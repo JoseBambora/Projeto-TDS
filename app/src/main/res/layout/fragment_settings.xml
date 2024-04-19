@@ -86,13 +86,13 @@
             android:id="@+id/numberPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/SecundarioDark" />
+            android:theme="@style/AppTheme.Picker" />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/SecundarioDark" />
+            android:theme="@style/AppTheme.Picker" />
 
 
     </LinearLayout>

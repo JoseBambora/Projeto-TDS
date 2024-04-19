@@ -1,5 +1,6 @@
 package com.ruirua.sampleguideapp.ui.shared;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
@@ -74,7 +76,7 @@ public class SettingsFragment extends Fragment {
         numberPicker.setValue(Settings.getInstance().getDelay());
         numberPicker.setOnValueChangedListener((picker,oldvalue,newval) -> Settings.getInstance().setDelay(newval));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, Settings.getInstance().getPossiblePriorityValues());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_item, Settings.getInstance().getPossiblePriorityValues());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = view.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
@@ -83,6 +85,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
+
                 handlePriorityChange(selectedItem);
             }
 

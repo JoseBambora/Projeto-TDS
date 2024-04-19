@@ -45,8 +45,8 @@
     <string name="nome_pin">Nome Pin</string>
     <string name="localiza_o_pin">Localização Pin</string>
     <string name="descri_o">Descrição</string>
-    <string name="udio">Áudio</string>
-    <string name="video">Video</string>
+    <string name="udio">Começar Áudio</string>
+    <string name="video">Começar Video</string>
     <string name="conte_do_multim_dia">Conteúdo Multimédia</string>
     <string name="informa_es">Informações</string>
     <string name="imagem">Imagem</string>
@@ -57,4 +57,5 @@
     <string name="partner">Partner</string>
     <string name="notifica_es">Notificações</string>
     <string name="localiza_o">Localização</string>
+    <string name="trail_image">Trail Image</string>
 </resources>

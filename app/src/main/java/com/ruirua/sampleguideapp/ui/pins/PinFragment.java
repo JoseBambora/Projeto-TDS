@@ -3,8 +3,10 @@ package com.ruirua.sampleguideapp.ui.pins;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +47,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 public class PinFragment extends Fragment {
@@ -73,55 +77,11 @@ public class PinFragment extends Fragment {
         });
     }
     private void setAudio(Media m, View v) {
-        Button buttonAudio = v.findViewById(R.id.playAudio);
-        buttonAudio.setOnClickListener(view -> {
-            try {
-                String url = m.getMedia_file();
-                Log.d("DebugApp","A configurar audio");
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .build());
-                mediaPlayer.reset();
-                mediaPlayer.setDataSource(url);
-                mediaPlayer.prepareAsync();
-                mediaPlayer.setOnPreparedListener(mp -> {
-                    Log.d("DebugApp","A começar play do audio");
-                    mediaPlayer.start();
-                });
-                Log.d("DebugApp","Audio configurado");
-            } catch (IOException e) {
-                Log.d("DebugApp","Erro a começar play do audio");
-                Toast.makeText(getActivity(), "Erro ao começar audio", Toast.LENGTH_SHORT).show();
-            }
-        });
+        UIFuns.playAudio(m.getMedia_file(),v.findViewById(R.id.playAudio),getActivity());
     }
 
     private void setVideo(Media m, View v) {
-        Button buttonVideo = v.findViewById(R.id.playVideo);
-        VideoView videoView = v.findViewById(R.id.videoPin);
-        ImageView iv = v.findViewById(R.id.imagePin);
-        buttonVideo.setOnClickListener(view -> {
-            videoView.setVisibility(View.VISIBLE);
-            iv.setVisibility(View.GONE);
-            String url = m.getMedia_file();
-
-            // Set the video URI and start playback
-            videoView.setVideoPath(url);
-            videoView.start();
-
-            // Optional: Add media controller for playback controls
-            MediaController mediaController = new MediaController(getActivity());
-            mediaController.setAnchorView(videoView);
-            videoView.setMediaController(mediaController);
-
-            // Optional: Handle errors during playback
-            videoView.setOnErrorListener((mp, what, extra) -> {
-                Toast.makeText(getActivity(), "Error playing video", Toast.LENGTH_SHORT).show();
-                return false;
-            });
-        });
+        UIFuns.playVideo(m.getMedia_file(),v.findViewById(R.id.videoPin), v.findViewById(R.id.playVideo), v.findViewById(R.id.imagePin), getActivity());
     }
     private void setMedia(View v) {
         List<Media> mediaList = pin.getMediaList();
@@ -157,19 +117,29 @@ public class PinFragment extends Fragment {
 
     }
     private void setGeneralContent(View v) {
-        TextInputEditText nametv = v.findViewById(R.id.pinName);
-        TextInputEditText coordstv = v.findViewById(R.id.pinLocation);
-        TextInputEditText descttv = v.findViewById(R.id.pinDesc);
-
-        nametv.setEnabled(false);
-        coordstv.setEnabled(false);
-        descttv.setEnabled(false);
+        TextView nametv = v.findViewById(R.id.pinName);
+        TextView coordstv = v.findViewById(R.id.pinLocation);
+        TextView descttv = v.findViewById(R.id.pinDesc);
+        TextView nameTvTop = v.findViewById(R.id.namePin);
 
         nametv.setText(pin.getPin_name());
         coordstv.setText("(" +pin.getPin_lat() + "," + pin.getPin_lng()+ "," + pin.getPin_alt() + ")");
         descttv.setText(pin.getPin_desc());
+        nameTvTop.setText(pin.getPin_name());
     }
 
+    private TextView createTextView(String text) {
+        TypedValue typedValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.Texto1, typedValue, true);
+        TextView res = new TextView(this.getActivity());
+        res.setText(text);
+        res.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+        res.setGravity(Gravity.CENTER_HORIZONTAL);
+        res.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        res.setTextColor(typedValue.data);
+        res.setTypeface(null, Typeface.BOLD);
+        return res;
+    }
     private void setTable(View v) {
         TableLayout relpinsTable = v.findViewById(R.id.relpinsTable);
         List<RelPin> relPins = pin.getRelPinList();
@@ -179,30 +149,21 @@ public class PinFragment extends Fragment {
             view.setVisibility(View.GONE);
         }
         else {
-            int position = 1;
             for(RelPin relPin : relPins) {
                 TableRow tableRow = new TableRow(this.getActivity());
-                TextView valueTextView = new TextView(this.getActivity());
-                TextView attributeTextView = new TextView(this.getActivity());
-                valueTextView.setText(relPin.getValue());
-                attributeTextView.setText(relPin.getAttribute());
 
-                valueTextView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-                attributeTextView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-
-                valueTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-                attributeTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-
-                if (position % 2 == 0) {  // Even positions after header (0)
-                    tableRow.setBackgroundColor(ContextCompat.getColor(this.getActivity(), R.color.gray));
-                }
-                position++;
+                TextView valueTextView = createTextView(relPin.getValue());
+                TextView attributeTextView = createTextView(relPin.getAttribute());
 
                 tableRow.addView(valueTextView);
                 tableRow.addView(attributeTextView);
 
                 relpinsTable.addView(tableRow);
             }
+            TableRow tableRow = new TableRow(this.getActivity());
+            tableRow.addView(createTextView(""));
+            tableRow.addView(createTextView(""));
+            relpinsTable.addView(tableRow);
         }
     }
     @SuppressLint("SetTextI18n")

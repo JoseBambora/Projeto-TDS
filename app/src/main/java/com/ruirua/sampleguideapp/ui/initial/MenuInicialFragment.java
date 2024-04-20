@@ -21,6 +21,7 @@ import com.ruirua.sampleguideapp.repositories.AppRepository;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
+import com.ruirua.sampleguideapp.ui.pins.PinFragment;
 import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
 import com.ruirua.sampleguideapp.ui.user.UserActivity;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
@@ -54,6 +55,8 @@ public class MenuInicialFragment extends Fragment {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
+        Button buttonId = view.findViewById(R.id.testePin);
+        buttonId.setOnClickListener(v -> UIFuns.changeFragment(getFragmentManager(),new PinFragment(1)));
 
         UserRepository ur = UserRepository.getInstance();
         if (!ur.isLogged()) {

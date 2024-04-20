@@ -3,6 +3,7 @@ package com.ruirua.sampleguideapp.ui.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -119,8 +120,8 @@ public class UIFuns {
     private static void loadVideo(VideoView videoView, Button buttonVideo, ImageView imageView, Activity activity ) {
         Toast.makeText(activity, "Vídeo carregado", Toast.LENGTH_SHORT).show();
         buttonVideo.setOnClickListener(view -> {
-            String text = videoView.isPlaying() ? "Começar Vídeo" : "Pausar Vídeo" ;
-            buttonVideo.setText(text);
+            int drawable = videoView.isPlaying() ? R.drawable.btn_video : R.drawable.btn_pause;
+            buttonVideo.setBackgroundResource(drawable);
             videoView.setVisibility(View.VISIBLE);
             if(imageView != null)
                 imageView.setVisibility(View.GONE);
@@ -146,9 +147,8 @@ public class UIFuns {
         buttonVideo.setOnClickListener(view -> Toast.makeText(activity,"A carregar Vídeo", Toast.LENGTH_SHORT).show());
     }
 
-    public static void playAudio(String audio_url, Button buttonAudio, Activity activity) {
+    public static void playAudio(String audio_url, Button buttonAudio, Activity activity, MediaPlayer mediaPlayer) {
         String url = audio_url.replace("http:", "https:");
-        MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -158,8 +158,8 @@ public class UIFuns {
         MediaRepository.getAudio(url,activity,mediaPlayer, l -> {
             Log.d("DebugApp","Entrou aqui");
             buttonAudio.setOnClickListener(view -> {
-                String text = mediaPlayer.isPlaying()? "Começar Áudio" : "Pausar Áudio";
-                buttonAudio.setText(text);
+                int drawable = mediaPlayer.isPlaying() ? R.drawable.btn_sound : R.drawable.btn_mute;
+                buttonAudio.setBackgroundResource(drawable);
                 if(mediaPlayer.isPlaying())
                     mediaPlayer.pause();
                 else

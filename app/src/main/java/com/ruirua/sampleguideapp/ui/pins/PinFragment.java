@@ -3,6 +3,7 @@ package com.ruirua.sampleguideapp.ui.pins;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,8 @@ public class PinFragment extends Fragment {
 
     private final int pinId;
     private Activity activity;
+    private VideoView videoView;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
 
     private Pin pin;
 
@@ -46,22 +49,23 @@ public class PinFragment extends Fragment {
     private void setImage(Media m, View v) {
         Button buttonImage = v.findViewById(R.id.playImagem);
         ImageView iv = v.findViewById(R.id.imagePin);
-        VideoView videoView = v.findViewById(R.id.videoPin);
         videoView.setVisibility(View.GONE);
         String url = m.getMedia_file().replace("http:", "https:");
         iv.setVisibility(View.VISIBLE);
         MediaRepository.getImage(url,iv,getActivity());
         buttonImage.setOnClickListener(view-> {
             videoView.setVisibility(View.GONE);
+            if(videoView.isPlaying())
+                videoView.pause();
             iv.setVisibility(View.VISIBLE);
         });
     }
     private void setAudio(Media m, View v) {
-        UIFuns.playAudio(m.getMedia_file(),v.findViewById(R.id.playAudio),getActivity());
+        UIFuns.playAudio(m.getMedia_file(),v.findViewById(R.id.playAudio),getActivity(), mediaPlayer);
     }
 
     private void setVideo(Media m, View v) {
-        UIFuns.playVideo(m.getMedia_file(),v.findViewById(R.id.videoPin), v.findViewById(R.id.playVideo), v.findViewById(R.id.imagePin), getActivity());
+        UIFuns.playVideo(m.getMedia_file(),videoView, v.findViewById(R.id.playVideo), v.findViewById(R.id.imagePin), getActivity());
     }
     private void setMedia(View v) {
         List<Media> mediaList = pin.getMediaList();
@@ -77,7 +81,6 @@ public class PinFragment extends Fragment {
             else if(m.isVideo())
                 setVideo(m,v);
         }
-        VideoView videoView = v.findViewById(R.id.videoPin);
         ImageView iv = v.findViewById(R.id.imagePin);
         Button buttonImage = v.findViewById(R.id.playImagem);
         Button buttonAudio = v.findViewById(R.id.playAudio);
@@ -159,9 +162,26 @@ public class PinFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pin, container, false);
         activity = getActivity();
+        videoView = v.findViewById(R.id.videoPin);
+
+        Button buttonImage = v.findViewById(R.id.playImagem);
+        Button buttonAudio = v.findViewById(R.id.playAudio);
+        Button buttonVideo = v.findViewById(R.id.playVideo);
+        buttonImage.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar imagem.", Toast.LENGTH_SHORT).show());
+        buttonVideo.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar vídeo.", Toast.LENGTH_SHORT).show());
+        buttonAudio.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar áudio.", Toast.LENGTH_SHORT).show());
         PinsViewModel pvm = new ViewModelProvider(this).get(PinsViewModel.class);
         pvm.getPin(pinId).observe(getViewLifecycleOwner(), p -> this.fillInfo(p,v));
         UIFuns.configureTheme(activity);
         return v;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (videoView != null && videoView.isPlaying())
+            videoView.pause();
+        if(mediaPlayer.isPlaying())
+            mediaPlayer.stop();
     }
 }

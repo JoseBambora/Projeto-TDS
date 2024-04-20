@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Button background -->
+    <item
+        android:drawable="@drawable/btn3" />
+    <item
+        android:drawable="@drawable/image_70"
+        android:gravity="center"
+        android:width="32dp"
+        android:height="25dp"
+        />
+</layer-list>

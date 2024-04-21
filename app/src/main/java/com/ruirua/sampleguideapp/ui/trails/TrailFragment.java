@@ -64,7 +64,7 @@ public class TrailFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void populateTrailInfo(Trail trail, View view) {
         TextView id = view.findViewById(R.id.idTrilho);
-        id.setText("ID: " + trail.getId());
+        id.setText("" + trail.getId());
 
         ImageView trailImg = view.findViewById(R.id.trailImg);
         Log.d("IMAGE", trail.getTrailImg());
@@ -77,10 +77,10 @@ public class TrailFragment extends Fragment {
         trailDesc.setText(trail.getTrailDesc());
 
         TextView trailDuration = view.findViewById(R.id.trailDuration);
-        trailDuration.setText("Duração: " + trail.getTrailDuration());
+        trailDuration.setText("" + trail.getTrailDuration());
 
         TextView trailDifficulty = view.findViewById(R.id.trailDifficulty);
-        trailDifficulty.setText("Dificuldade: " + trail.getTrailDifficulty());
+        trailDifficulty.setText(trail.getTrailDifficulty());
 
         setupTrailPinsRecyclerView(trail.getPins(), view);
     }

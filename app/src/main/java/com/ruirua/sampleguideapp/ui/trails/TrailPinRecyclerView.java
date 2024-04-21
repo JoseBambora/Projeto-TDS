@@ -55,10 +55,59 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
         private TextView pinNameTextView;
         private ImageView pinImageView;
 
+        private ImageView pinHasImage;
+        private ImageView pinHasAudio;
+        private ImageView pinHasVideo;
+
         public TrailPinViewHolder(@NonNull View itemView) {
             super(itemView);
             pinImageView = itemView.findViewById(R.id.pincardimage);
             pinNameTextView = itemView.findViewById(R.id.trail_name);
+            pinHasImage= itemView.findViewById(R.id.hasImage);
+            pinHasAudio= itemView.findViewById(R.id.hasAudio);
+            pinHasVideo= itemView.findViewById(R.id.hasVideo);
+        }
+
+        private void handleImage(List<Media>mediaList){
+            boolean hasImage = false;
+            for (Media media : mediaList) {
+                if (media.isImage()) {
+                    hasImage = true;
+                    break;
+                }
+            }
+            if (hasImage) pinHasImage.setImageResource(R.drawable.baseline_check_24);
+            else pinHasImage.setImageResource(R.drawable.baseline_close_24);
+        }
+
+        private void handleAudio(List<Media>mediaList){
+            boolean hasAudio = false;
+            for (Media media : mediaList) {
+                if (media.isAudio()) {
+                    hasAudio = true;
+                    break;
+                }
+            }
+            if (hasAudio) pinHasAudio.setImageResource(R.drawable.baseline_check_24);
+            else pinHasAudio.setImageResource(R.drawable.baseline_close_24);
+        }
+
+        private void handleVideo(List<Media>mediaList){
+            boolean hasVideo = false;
+            for (Media media : mediaList) {
+                if (media.isVideo()) {
+                    hasVideo = true;
+                    break;
+                }
+            }
+            if (hasVideo) pinHasVideo.setImageResource(R.drawable.baseline_check_24);
+            else pinHasVideo.setImageResource(R.drawable.baseline_close_24);
+        }
+
+        private void checkMultimedia(List<Media> mediaList){
+            handleImage(mediaList);
+            handleAudio(mediaList);
+            handleVideo(mediaList);
         }
 
         public void bind(Pin pin) {
@@ -71,8 +120,7 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
             } else {
                 pinImageView.setImageResource(R.drawable.baseline_broken_image_24);
             }
-
-            // Setting click listener to handle navigation to PinFragment
+            checkMultimedia(mediaList);
             Map<String,String> params = new HashMap<>();
             params.put("pinid", String.valueOf(pin.getId()));
             itemView.setOnClickListener(view -> UIFuns.changeFragment(fragmentManager,new PinFragment(pin.getId())));

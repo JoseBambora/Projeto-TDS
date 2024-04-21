@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
 
-        <!-- TextView for Trail Name -->
         <TextView
             android:id="@+id/trailName"
             android:layout_width="wrap_content"
@@ -23,7 +24,6 @@
             android:textColor="?attr/Secundario"
             android:textStyle="bold|italic"/>
 
-        <!-- ImageView for Trail Image -->
         <ImageView
             android:id="@+id/trailImg"
             android:layout_width="match_parent"
@@ -33,7 +33,6 @@
             android:layout_margin="8dp"
             android:contentDescription="@string/trail_image" />
 
-        <!-- TextView for Informação -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,61 +44,156 @@
             android:textColor="?attr/Secundario"
             android:textStyle="bold|italic"/>
 
-
-        <!-- TextView for Trail ID -->
-        <TextView
-            android:id="@+id/idTrilho"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-        <!-- TextView for Trail Description -->
-        <TextView
-            android:id="@+id/trailDesc"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/Texto2"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:text="@string/id_do_trilho"/>
+
+                <TextView
+                    android:id="@+id/idTrilho"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-        <!-- TextView for Trail Duration -->
-        <TextView
-            android:id="@+id/trailDuration"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/Texto2"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:text="@string/descricao"/>
+
+                <TextView
+                    android:id="@+id/trailDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-        <!-- TextView for Trail Difficulty -->
-        <TextView
-            android:id="@+id/trailDifficulty"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/Texto2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+                android:text="@string/dura_o"/>
+
+                <TextView
+                    android:id="@+id/trailDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-        <!-- TextView for Pins -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/Texto2"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:text="@string/dificuldade"/>
+
+                <TextView
+                    android:id="@+id/trailDifficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Pins"
+            android:text="@string/pins"
             android:layout_gravity="center"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:textColor="?attr/Secundario"
             android:textStyle="bold|italic"/>
 
-
-        <!-- RecyclerView for Pins -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_pins"
             android:layout_width="match_parent"
@@ -107,17 +201,6 @@
             android:layout_margin="8dp" />
 
 
-        <!-- TextView for Recursos-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Multimédia"
-            android:layout_gravity="center"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="?attr/Secundario"
-            android:textStyle="bold|italic"/>
-
     </LinearLayout>
+
 </ScrollView>

@@ -47,18 +47,8 @@ public class PinFragment extends Fragment {
     }
 
     private void setImage(Media m, View v) {
-        Button buttonImage = v.findViewById(R.id.playImagem);
-        ImageView iv = v.findViewById(R.id.imagePin);
         videoView.setVisibility(View.GONE);
-        String url = m.getMedia_file().replace("http:", "https:");
-        iv.setVisibility(View.VISIBLE);
-        MediaRepository.getImage(url,iv,getActivity());
-        buttonImage.setOnClickListener(view-> {
-            videoView.setVisibility(View.GONE);
-            if(videoView.isPlaying())
-                videoView.pause();
-            iv.setVisibility(View.VISIBLE);
-        });
+        UIFuns.showImage(m.getMedia_file(),v.findViewById(R.id.imagePin),activity,v.findViewById(R.id.playImagem),videoView);
     }
     private void setAudio(Media m, View v) {
         UIFuns.playAudio(m.getMedia_file(),v.findViewById(R.id.playAudio),getActivity(), mediaPlayer);

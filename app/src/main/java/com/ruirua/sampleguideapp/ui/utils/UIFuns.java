@@ -168,4 +168,18 @@ public class UIFuns {
         buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio.", Toast.LENGTH_SHORT).show());
         MediaRepository.getAudio(url,activity,mediaPlayer, l -> loadAudio(buttonAudio,activity,mediaPlayer));
     }
+
+    public static void showImage(String image_url, ImageView iv, Activity activity, Button buttonImage, VideoView videoView) {
+        String url = image_url.replace("http:", "https:");
+        iv.setVisibility(View.VISIBLE);
+        MediaRepository.getImage(url,iv,activity);
+        buttonImage.setOnClickListener(view-> {
+            if(videoView != null) {
+                videoView.setVisibility(View.GONE);
+                if(videoView.isPlaying())
+                    videoView.pause();
+            }
+            iv.setVisibility(View.VISIBLE);
+        });
+    }
 }

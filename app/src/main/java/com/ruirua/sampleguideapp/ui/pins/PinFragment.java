@@ -164,12 +164,12 @@ public class PinFragment extends Fragment {
         activity = getActivity();
         videoView = v.findViewById(R.id.videoPin);
 
-        Button buttonImage = v.findViewById(R.id.playImagem);
-        Button buttonAudio = v.findViewById(R.id.playAudio);
-        Button buttonVideo = v.findViewById(R.id.playVideo);
-        buttonImage.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar imagem.", Toast.LENGTH_SHORT).show());
-        buttonVideo.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar vídeo.", Toast.LENGTH_SHORT).show());
-        buttonAudio.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar áudio.", Toast.LENGTH_SHORT).show());
+        // Button buttonImage = v.findViewById(R.id.playImagem);
+        // Button buttonAudio = v.findViewById(R.id.playAudio);
+        // Button buttonVideo = v.findViewById(R.id.playVideo);
+        // buttonImage.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar imagem.", Toast.LENGTH_SHORT).show());
+        // buttonVideo.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar vídeo.", Toast.LENGTH_SHORT).show());
+        // buttonAudio.setOnClickListener(view -> Toast.makeText(getActivity(),"A carregar áudio.", Toast.LENGTH_SHORT).show());
         PinsViewModel pvm = new ViewModelProvider(this).get(PinsViewModel.class);
         pvm.getPin(pinId).observe(getViewLifecycleOwner(), p -> this.fillInfo(p,v));
         UIFuns.configureTheme(activity);

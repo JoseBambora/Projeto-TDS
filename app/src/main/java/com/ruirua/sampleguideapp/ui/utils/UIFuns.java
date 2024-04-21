@@ -138,13 +138,24 @@ public class UIFuns {
     }
     public static void playVideo(String video_url, VideoView videoView, Button buttonVideo, ImageView imageView, Activity activity) {
         String url = video_url.replace("http:", "https:");
-        MediaRepository.getVideo(url,activity,videoView);
+        buttonVideo.setOnClickListener(view -> Toast.makeText(activity,"A carregar Vídeo", Toast.LENGTH_SHORT).show());
+        MediaRepository.getVideo(url,activity,videoView, l -> UIFuns.loadVideo(videoView,buttonVideo,imageView,activity));
         MediaController mediaController = new MediaController(activity);
         mediaController.setAnchorView(videoView);
         mediaController.setMediaPlayer(videoView);
         videoView.setMediaController(mediaController);
-        videoView.setOnPreparedListener(l -> UIFuns.loadVideo(videoView,buttonVideo,imageView,activity));
-        buttonVideo.setOnClickListener(view -> Toast.makeText(activity,"A carregar Vídeo", Toast.LENGTH_SHORT).show());
+    }
+
+    private static void loadAudio(Button buttonAudio, Activity activity, MediaPlayer mediaPlayer) {
+        Toast.makeText(activity, "Áudio carregado", Toast.LENGTH_SHORT).show();
+        buttonAudio.setOnClickListener(view -> {
+            int drawable = mediaPlayer.isPlaying() ? R.drawable.btn_sound : R.drawable.btn_mute;
+            buttonAudio.setBackgroundResource(drawable);
+            if (mediaPlayer.isPlaying())
+                mediaPlayer.pause();
+            else
+                mediaPlayer.start();
+        });
     }
 
     public static void playAudio(String audio_url, Button buttonAudio, Activity activity, MediaPlayer mediaPlayer) {
@@ -154,18 +165,7 @@ public class UIFuns {
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .build());
         mediaPlayer.reset();
-        buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio", Toast.LENGTH_SHORT).show());
-        MediaRepository.getAudio(url,activity,mediaPlayer, l -> {
-            Log.d("DebugApp","Entrou aqui");
-            buttonAudio.setOnClickListener(view -> {
-                int drawable = mediaPlayer.isPlaying() ? R.drawable.btn_sound : R.drawable.btn_mute;
-                buttonAudio.setBackgroundResource(drawable);
-                if(mediaPlayer.isPlaying())
-                    mediaPlayer.pause();
-                else
-                    mediaPlayer.start();
-            });
-        });
-
+        buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio.", Toast.LENGTH_SHORT).show());
+        MediaRepository.getAudio(url,activity,mediaPlayer, l -> loadAudio(buttonAudio,activity,mediaPlayer));
     }
 }

@@ -45,8 +45,7 @@
                 <VideoView
                     android:id="@+id/videoPin"
                     android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:visibility="gone"/>
+                    android:layout_height="100dp" />
             </LinearLayout>
 
             <LinearLayout

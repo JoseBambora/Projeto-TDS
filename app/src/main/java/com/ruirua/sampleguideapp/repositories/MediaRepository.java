@@ -29,22 +29,19 @@ import java.util.function.Consumer;
 import okhttp3.ResponseBody;
 
 public class MediaRepository {
-    private static Set<String> audios = new HashSet<>();
 
     private static APIMedia apiMedia = RepoFuns.buildRetrofit().create(APIMedia.class);
-    private static Set<String> images = new HashSet<>();
-    private static Set<String> videos = new HashSet<>();
 
-    private static boolean hasAudio(String link) {
-        return audios.contains(link);
+    private static boolean hasAudio(Context context, String link) {
+        return getAudioFile(context,getFileName(link)).exists();
     }
 
-    private static boolean hasImage(String link) {
-        return images.contains(link);
+    private static boolean hasImage(Context context, String link) {
+        return getImageFile(context,getFileName(link)).exists();
     }
 
-    private static boolean hasVideo(String link) {
-        return videos.contains(link);
+    private static boolean hasVideo(Context context, String link) {
+        return getVideoFile(context,getFileName(link)).exists();
     }
 
 
@@ -70,6 +67,7 @@ public class MediaRepository {
 
     private static void readContent(InputStream inputStream, File file) {
         try {
+            file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file);
             byte[] buffer = new byte[4096];
             int bytesRead;
@@ -88,12 +86,12 @@ public class MediaRepository {
             InputStream inputStream = responseBody.byteStream();
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             File imageFile = getImageFile(context,filename);
+            imageFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(imageFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
             imageView.setImageBitmap(bitmap);
-            Log.d("DebugApp","Deu save imagem");
-            images.add(filename);
+            Log.d("DebugApp","Deu save imagem " + filename);
         } catch (Exception e) {
             Log.d("DebugApp", "Erro " + e.getMessage());
         }
@@ -107,19 +105,18 @@ public class MediaRepository {
             mediaPlayer.prepare();
             posPrepared.accept(mediaPlayer);
             Log.d("DebugApp","Deu save audio");
-            audios.add(filename);
         } catch (Exception e) {
             Log.d("DebugApp", "Erro " + e.getMessage());
         }
     }
-    private static void saveVideo(ResponseBody responseBody, Context context, String filename, VideoView videoView) {
+    private static void saveVideo(ResponseBody responseBody, Context context, String filename, VideoView videoView, Consumer<VideoView> posPrepared) {
         try {
             InputStream inputStream = responseBody.byteStream();
             File videoFile = getVideoFile(context,filename);
             readContent(inputStream,videoFile);
             Log.d("DebugApp","Deu save video");
             videoView.setVideoURI(Uri.fromFile(videoFile));
-            videos.add(filename);
+            posPrepared.accept(videoView);
         } catch (Exception e) {
             Log.d("DebugApp", "Erro " + e.getMessage());
         }
@@ -127,7 +124,7 @@ public class MediaRepository {
 
     public static void getImage(String link, ImageView imageView, Context context) {
         String filename = getFileName(link);
-        if(hasImage(filename)) {
+        if(hasImage(context,filename)) {
             Log.d("DebugApp", "Tem imagem guardado");
             File imageFile = getImageFile(context,filename);
             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
@@ -142,10 +139,10 @@ public class MediaRepository {
 
     public static void getAudio(String link, Context context, MediaPlayer mediaPlayer, Consumer<MediaPlayer> posPrepared) {
         String filename = getFileName(link);
-        if(hasAudio(filename)) {
+        if(hasAudio(context,filename)) {
             try {
                 Log.d("DebugApp", "Tem audio guardado");
-                File imageFile = getImageFile(context,filename);
+                File imageFile = getAudioFile(context,filename);
                 mediaPlayer.setDataSource(imageFile.getAbsolutePath());
                 mediaPlayer.prepare();
                 posPrepared.accept(mediaPlayer);
@@ -157,16 +154,17 @@ public class MediaRepository {
         }
     }
 
-    public static void getVideo(String link, Context context, VideoView videoView) {
+    public static void getVideo(String link, Context context, VideoView videoView, Consumer<VideoView> posPrepared) {
         String filename = getFileName(link);
-        if(hasVideo(filename)) {
+        if(hasVideo(context,filename)) {
             Log.d("DebugApp", "Tem video guardado");
-            File videoFile = getImageFile(context,filename);
+            File videoFile = getVideoFile(context,filename);
             videoView.setVideoURI(Uri.fromFile(videoFile));
+            posPrepared.accept(videoView);
         }
         else {
             Log.d("DebugApp", "A pedir video à API");
-            apiMedia.downloadMedia(filename).enqueue(new UtilRepository<>(r -> saveVideo(r.body(), context, filename, videoView), err -> Log.d("DebugApp", "Erro " + err.toString())));
+            apiMedia.downloadMedia(filename).enqueue(new UtilRepository<>(r -> saveVideo(r.body(), context, filename, videoView,posPrepared), err -> Log.d("DebugApp", "Erro " + err.toString())));
         }
     }
 }

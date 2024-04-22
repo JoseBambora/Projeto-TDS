@@ -57,11 +57,11 @@ public abstract class GuideDatabase extends RoomDatabase {
             traildao = catDatabase.trailDAO();
             pinDAO = catDatabase.pinDAO();
         }
-
+        
         @Override
         protected Void doInBackground(Void... voids) {
-            traildao.deleteAll();
-            pinDAO.deleteAll();
+            //traildao.deleteAll();
+            //pinDAO.deleteAll();
             return null;
         }
     }

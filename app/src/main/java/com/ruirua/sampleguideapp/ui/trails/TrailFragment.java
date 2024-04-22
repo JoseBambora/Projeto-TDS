@@ -57,6 +57,7 @@ public class TrailFragment extends Fragment {
         tvm.getTrail(trailId).observe(getViewLifecycleOwner(), trail -> {
             if (trail != null) {
                 populateTrailInfo(trail, view);
+                routeInfo(trail.getPinsInOrder(),view);
             }
         });
     }
@@ -106,6 +107,13 @@ public class TrailFragment extends Fragment {
         TrailPinRecyclerView adapter = new TrailPinRecyclerView(pinList, fragmentManager);
         recyclerViewPins.setAdapter(adapter);
     }
+
+    @SuppressLint("SetTextI18n")
+    private void routeInfo(List<Pin> pinList, View view)   {
+        TextView route = view.findViewById(R.id.route);
+        route.setText(pinList.toString());
+    }
+
 
 }
 

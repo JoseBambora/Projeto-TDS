@@ -126,6 +126,18 @@ public class Trail {
         return new ArrayList<>(pins);
     }
 
+    public List<Pin> getPinsInOrder() {
+        List<Pin> pinsInOrder = new ArrayList<>();
+        for (Edge edge : edges) {
+            if (!pinsInOrder.contains(edge.getEdgeStart())) {
+                pinsInOrder.add(edge.getEdgeStart());
+            }
+            if (!pinsInOrder.contains(edge.getEdgeEnd())) {
+                pinsInOrder.add(edge.getEdgeEnd());
+            }
+        }
+        return pinsInOrder;
+    }
 
     @NonNull
     @Override

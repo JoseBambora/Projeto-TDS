@@ -200,6 +200,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp" />
 
+        <TextView
+            android:id="@+id/route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="8dp"/>
+
 
     </LinearLayout>
 

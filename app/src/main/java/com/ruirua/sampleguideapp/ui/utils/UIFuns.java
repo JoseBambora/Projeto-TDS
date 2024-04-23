@@ -169,10 +169,14 @@ public class UIFuns {
         MediaRepository.getAudio(url,activity,mediaPlayer, l -> loadAudio(buttonAudio,activity,mediaPlayer));
     }
 
-    public static void showImage(String image_url, ImageView iv, Activity activity, Button buttonImage, VideoView videoView) {
+    public static void showImage(String image_url, ImageView iv, Activity activity) {
         String url = image_url.replace("http:", "https:");
         iv.setVisibility(View.VISIBLE);
         MediaRepository.getImage(url,iv,activity);
+    }
+
+    public static void showImage(String image_url, ImageView iv, Activity activity, Button buttonImage, VideoView videoView) {
+        showImage(image_url,iv,activity);
         buttonImage.setOnClickListener(view-> {
             if(videoView != null) {
                 videoView.setVisibility(View.GONE);

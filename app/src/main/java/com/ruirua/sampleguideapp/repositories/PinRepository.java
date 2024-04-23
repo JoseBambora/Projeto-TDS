@@ -12,6 +12,7 @@ import com.ruirua.sampleguideapp.model.GuideDatabase;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.pins.PinAPI;
 import com.ruirua.sampleguideapp.model.pins.PinDAO;
+import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 
@@ -67,25 +68,26 @@ public class PinRepository {
     private void getPinAPI(int id, MutableLiveData<Pin> res) {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
+            Log.d("DebugApp","A pedir pin " + id + " à API");
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<Pin> call = pinAPI.getPin(id,csrftoken,sessionid);
             call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()),null));
         }
     }
-    public LiveData<Pin> getPin(int id) {
-        MutableLiveData<Pin> res = new MutableLiveData<>();
-        if(allPins.getValue() != null) {
-            int index = allPins.getValue().stream()
-                    .map(Pin::getId)
-                    .collect(Collectors.toList())
-                    .indexOf(id);
-            if (index != -1) {
-                res.setValue(allPins.getValue().get(index));
-                return res;
-            }
+
+    private void getPin(Pin pin, int id, MediatorLiveData<Pin> res) {
+        if (pin != null) {
+            Log.d("DebugApp","Tem pin "+ id+" na base de dados");
+            res.setValue(pin);
         }
-        getPinAPI(id,res);
+        else
+            getPinAPI(id,res);
+
+    }
+    public LiveData<Pin> getPin(int id) {
+        MediatorLiveData<Pin> res = new MediatorLiveData<>();
+        res.addSource(pinDAO.getPin(id),p -> getPin(p,id,res));
         return res;
     }
 }

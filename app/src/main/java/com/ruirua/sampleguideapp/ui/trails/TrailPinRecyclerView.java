@@ -28,9 +28,12 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
     private List<Pin> pinList;
     private FragmentManager fragmentManager;
 
-    public TrailPinRecyclerView(List<Pin> pinList, FragmentManager fragmentManager) {
+    private Activity activity;
+
+    public TrailPinRecyclerView(List<Pin> pinList, FragmentManager fragmentManager, Activity activity) {
         this.pinList = pinList;
         this.fragmentManager = fragmentManager;
+        this.activity = activity;
     }
 
     @NonNull
@@ -114,6 +117,9 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
             pinNameTextView.setText(pin.getPin_name());
             List<Media> mediaList = pin.getMediaList();
             if (!mediaList.isEmpty()) {
+                for(Media media : mediaList)
+                    if(media.isImage())
+                        UIFuns.showImage(media.getMedia_file(),pinImageView,activity);
                 Picasso.get()
                         .load(mediaList.get(0).getMedia_file().replace("http:", "https:"))
                         .into(pinImageView);

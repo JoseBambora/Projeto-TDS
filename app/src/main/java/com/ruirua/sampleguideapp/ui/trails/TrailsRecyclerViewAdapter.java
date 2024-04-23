@@ -25,10 +25,12 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
 
 
     private FragmentManager fragmentManager;
+    private Activity activity;
 
-    public TrailsRecyclerViewAdapter(List<Trail> items,FragmentManager fragmentManager) {
+    public TrailsRecyclerViewAdapter(List<Trail> items,FragmentManager fragmentManager, Activity activity) {
         mValues = items;
         this.fragmentManager = fragmentManager;
+        this.activity = activity;
     }
 
     @Override
@@ -45,9 +47,7 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         holder.mIdView.setText("ID: " + trail.getId());
         holder.mNameView.setText(trail.getTrailName());
         holder.mDifficultyView.setText("Dificuldade: "+trail.getTrailDifficulty());
-        Picasso.get()
-                .load(trail.getTrailImg().replace("http:", "https:"))
-                .into(holder.imageView);
+        UIFuns.showImage(trail.getTrailImg(),holder.imageView,activity);
         holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail.getId(),fragmentManager)));
     }
 

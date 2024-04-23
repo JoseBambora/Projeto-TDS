@@ -1,5 +1,7 @@
 package com.ruirua.sampleguideapp.model.pins;
 
+import android.util.Log;
+
 import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
@@ -12,7 +14,7 @@ public class MediaListConverter {
 
     @TypeConverter
     public static List<Media> fromString(String value) {
-        Type listType = new TypeToken<List<RelPin>>() {}.getType();
+        Type listType = new TypeToken<List<Media>>() {}.getType();
         return new Gson().fromJson(value, listType);
     }
 

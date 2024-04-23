@@ -17,6 +17,9 @@ public interface PinDAO {
     @Query("SELECT DISTINCT * FROM pin")
     LiveData<List<Pin>> getPins();
 
+    @Query("SELECT * FROM pin WHERE id = :id")
+    LiveData<Pin> getPin(int id);
+
     @Query("DELETE FROM pin")
     void deleteAll();
 }

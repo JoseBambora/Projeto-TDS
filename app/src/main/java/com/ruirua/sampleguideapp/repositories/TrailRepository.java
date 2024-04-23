@@ -1,6 +1,7 @@
 package com.ruirua.sampleguideapp.repositories;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
@@ -27,7 +28,6 @@ public class TrailRepository {
     private final TrailAPI trailAPI;
 
     private void setTrails(List<Trail> localTrails) {
-        // TODO: ADD cache validation logic
         if (localTrails != null && localTrails.size() > 0) {
             allTrails.setValue(localTrails);
         } else {
@@ -45,10 +45,12 @@ public class TrailRepository {
     }
 
     public void insert(List<Trail> trails){
+        Log.d("DebugApp","Entrou aqui a inserir 4");
         Executors.newSingleThreadExecutor().execute(() -> trailDAO.insert(trails));
     }
 
     private void makeRequest() {
+        Log.d("DebugApp","Entrou aqui a inserir 3");
         Call<List<Trail>> call = trailAPI.getTrails();
         call.enqueue(new UtilRepository<>((response) -> this.insert(response.body()),null));
     }
@@ -60,25 +62,25 @@ public class TrailRepository {
     private void getTailAPI(int id, MutableLiveData<Trail> res) {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
+            Log.d("DebugApp","A pedir trilho " + id + " à API");
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<Trail> call = trailAPI.getTrail(id,csrftoken,sessionid);
             call.enqueue(new UtilRepository<>((response) -> res.setValue(response.body()), null));
         }
     }
-    public LiveData<Trail> getTrail(int id) {
-        MutableLiveData<Trail> res = new MutableLiveData<>();
-        if(allTrails.getValue() != null) {
-            int index = allTrails.getValue().stream()
-                    .map(Trail::getId)
-                    .collect(Collectors.toList())
-                    .indexOf(id);
-            if (index != -1) {
-                res.setValue(allTrails.getValue().get(index));
-                return res;
-            }
+    private void getTrail(Trail trail, int id, MediatorLiveData<Trail> res) {
+        if (trail != null) {
+            Log.d("DebugApp","Tem trilho " + id + " na base de dados");
+            res.setValue(trail);
         }
-        getTailAPI(id,res);
+        else
+            getTailAPI(id,res);
+
+    }
+    public LiveData<Trail> getTrail(int id) {
+        MediatorLiveData<Trail> res = new MediatorLiveData<>();
+        res.addSource(trailDAO.getTrail(id),t -> getTrail(t,id,res));
         return res;
     }
 

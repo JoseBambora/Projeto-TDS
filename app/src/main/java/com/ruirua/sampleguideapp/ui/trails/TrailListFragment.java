@@ -80,7 +80,7 @@ public class TrailListFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new TrailsRecyclerViewAdapter(trails,fragmentManager));
+        recyclerView.setAdapter(new TrailsRecyclerViewAdapter(trails,fragmentManager, getActivity()));
     }
 
     @Override

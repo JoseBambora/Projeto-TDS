@@ -104,7 +104,7 @@ public class MediaRepository {
             mediaPlayer.setDataSource(audioFile.getAbsolutePath());
             mediaPlayer.prepare();
             posPrepared.accept(mediaPlayer);
-            Log.d("DebugApp","Deu save audio");
+            Log.d("DebugApp","Deu save audio " + filename);
         } catch (Exception e) {
             Log.d("DebugApp", "Erro " + e.getMessage());
         }
@@ -114,7 +114,7 @@ public class MediaRepository {
             InputStream inputStream = responseBody.byteStream();
             File videoFile = getVideoFile(context,filename);
             readContent(inputStream,videoFile);
-            Log.d("DebugApp","Deu save video");
+            Log.d("DebugApp","Deu save video " + filename);
             videoView.setVideoURI(Uri.fromFile(videoFile));
             posPrepared.accept(videoView);
         } catch (Exception e) {
@@ -125,7 +125,7 @@ public class MediaRepository {
     public static void getImage(String link, ImageView imageView, Context context) {
         String filename = getFileName(link);
         if(hasImage(context,filename)) {
-            Log.d("DebugApp", "Tem imagem guardado");
+            Log.d("DebugApp", "Tem imagem " + filename + " guardada");
             File imageFile = getImageFile(context,filename);
             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
             imageView.setImageBitmap(bitmap);
@@ -141,7 +141,7 @@ public class MediaRepository {
         String filename = getFileName(link);
         if(hasAudio(context,filename)) {
             try {
-                Log.d("DebugApp", "Tem audio guardado");
+                Log.d("DebugApp", "Tem audio " + filename +" guardado");
                 File imageFile = getAudioFile(context,filename);
                 mediaPlayer.setDataSource(imageFile.getAbsolutePath());
                 mediaPlayer.prepare();
@@ -157,7 +157,7 @@ public class MediaRepository {
     public static void getVideo(String link, Context context, VideoView videoView, Consumer<VideoView> posPrepared) {
         String filename = getFileName(link);
         if(hasVideo(context,filename)) {
-            Log.d("DebugApp", "Tem video guardado");
+            Log.d("DebugApp", "Tem video " + filename + " guardado");
             File videoFile = getVideoFile(context,filename);
             videoView.setVideoURI(Uri.fromFile(videoFile));
             posPrepared.accept(videoView);

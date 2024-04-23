@@ -20,11 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.trails.Trail;
-import com.ruirua.sampleguideapp.model.user.LoginData;
-import com.ruirua.sampleguideapp.viewModel.PinsViewModel;
+import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,7 +54,6 @@ public class TrailFragment extends Fragment {
         tvm.getTrail(trailId).observe(getViewLifecycleOwner(), trail -> {
             if (trail != null) {
                 populateTrailInfo(trail, view);
-                routeInfo(trail.getPinsInOrder(),view);
             }
         });
     }
@@ -65,7 +61,7 @@ public class TrailFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void populateTrailInfo(Trail trail, View view) {
         TextView id = view.findViewById(R.id.idTrilho);
-        id.setText("" + trail.getId());
+        id.setText("ID: " + trail.getId());
 
         ImageView trailImg = view.findViewById(R.id.trailImg);
         Log.d("IMAGE", trail.getTrailImg());
@@ -78,21 +74,20 @@ public class TrailFragment extends Fragment {
         trailDesc.setText(trail.getTrailDesc());
 
         TextView trailDuration = view.findViewById(R.id.trailDuration);
-        trailDuration.setText("" + trail.getTrailDuration());
+        trailDuration.setText("Duração: " + trail.getTrailDuration());
 
         TextView trailDifficulty = view.findViewById(R.id.trailDifficulty);
-        trailDifficulty.setText(trail.getTrailDifficulty());
+        trailDifficulty.setText("Dificuldade: " + trail.getTrailDifficulty());
 
         setupTrailPinsRecyclerView(trail.getPins(), view);
     }
 
     private void loadTrailImage(String imageUrl, ImageView trailImg) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
-            // Replace "http://" with "https://"
-            imageUrl = imageUrl.replace("http:", "https:").replace("/trail","");
+            imageUrl = imageUrl.replace("/trail","");
 
             Log.d("IMAGE", imageUrl);
-            Picasso.get().load(imageUrl).into(trailImg);
+            UIFuns.showImage(imageUrl,trailImg,getActivity());
         } else {
             // Image URL is null or empty
             if (trailImg != null) {
@@ -104,16 +99,9 @@ public class TrailFragment extends Fragment {
     private void setupTrailPinsRecyclerView(List<Pin> pinList, View view) {
         RecyclerView recyclerViewPins = view.findViewById(R.id.recycler_view_pins);
         recyclerViewPins.setLayoutManager(new LinearLayoutManager(requireContext()));
-        TrailPinRecyclerView adapter = new TrailPinRecyclerView(pinList, fragmentManager);
+        TrailPinRecyclerView adapter = new TrailPinRecyclerView(pinList, fragmentManager, getActivity());
         recyclerViewPins.setAdapter(adapter);
     }
-
-    @SuppressLint("SetTextI18n")
-    private void routeInfo(List<Pin> pinList, View view)   {
-        TextView route = view.findViewById(R.id.route);
-        route.setText(pinList.toString());
-    }
-
 
 }
 

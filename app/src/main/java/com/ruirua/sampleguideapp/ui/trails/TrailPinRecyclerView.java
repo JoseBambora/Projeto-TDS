@@ -46,7 +46,8 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
     @Override
     public void onBindViewHolder(@NonNull TrailPinViewHolder holder, int position) {
         Pin pin = pinList.get(position);
-        holder.bind(pin);
+        boolean isLastItem = position == getItemCount() - 1;
+        holder.bind(pin, isLastItem);
     }
 
     @Override
@@ -57,11 +58,10 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
     public class TrailPinViewHolder extends RecyclerView.ViewHolder {
         private TextView pinNameTextView;
         private ImageView pinImageView;
-
         private ImageView pinHasImage;
         private ImageView pinHasAudio;
         private ImageView pinHasVideo;
-
+        private ImageView dividerImageView;
         public TrailPinViewHolder(@NonNull View itemView) {
             super(itemView);
             pinImageView = itemView.findViewById(R.id.pincardimage);
@@ -69,6 +69,7 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
             pinHasImage= itemView.findViewById(R.id.hasImage);
             pinHasAudio= itemView.findViewById(R.id.hasAudio);
             pinHasVideo= itemView.findViewById(R.id.hasVideo);
+            dividerImageView = itemView.findViewById(R.id.divider_image);
         }
 
         private void handleImage(List<Media>mediaList){
@@ -113,7 +114,7 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
             handleVideo(mediaList);
         }
 
-        public void bind(Pin pin) {
+        public void bind(Pin pin, boolean isLastItem) {
             pinNameTextView.setText(pin.getPin_name());
             List<Media> mediaList = pin.getMediaList();
             if (!mediaList.isEmpty()) {
@@ -127,9 +128,9 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
                 pinImageView.setImageResource(R.drawable.baseline_broken_image_24);
             }
             checkMultimedia(mediaList);
-            Map<String,String> params = new HashMap<>();
-            params.put("pinid", String.valueOf(pin.getId()));
+            
             itemView.setOnClickListener(view -> UIFuns.changeFragment(fragmentManager,new PinFragment(pin.getId())));
+            dividerImageView.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
         }
     }
 }

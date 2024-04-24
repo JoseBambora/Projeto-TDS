@@ -128,12 +128,15 @@ public class Trail {
 
     public List<Pin> getPinsInOrder() {
         List<Pin> pinsInOrder = new ArrayList<>();
+        int i = 0;
         for (Edge edge : edges) {
-            if (!pinsInOrder.contains(edge.getEdgeStart())) {
+            if(i==0 || !edge.getEdgeStart().equals(pinsInOrder.get(i-1))) {
                 pinsInOrder.add(edge.getEdgeStart());
+                i++;
             }
-            if (!pinsInOrder.contains(edge.getEdgeEnd())) {
+            if(!edge.getEdgeEnd().equals(pinsInOrder.get(i-1))) {
                 pinsInOrder.add(edge.getEdgeEnd());
+                i++;
             }
         }
         return pinsInOrder;

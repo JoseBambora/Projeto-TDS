@@ -95,4 +95,13 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/divider_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_downward_24"
+        card_view:tint="?attr/Texto1"
+        android:contentDescription="@string/arrow_for_route" />
+
 </LinearLayout>

@@ -120,8 +120,8 @@ public class UserRepository {
         {
             UserLogged ul = new UserLogged();
             ul.setUsername("p");
-            ul.setCsrftoken("csrftoken=tknr4RPpue47Oftn8mgjEuB1vW9Y7UpvMEhD0wIaO6AYTOHuSWQnGjN7JfUoIGKC; expires=Wed, 09 Apr 2025 18:48:11 GMT; Max-Age=31449600; Path=/; SameSite=Lax");
-            ul.setSessionid("sessionid=5sisk4qt4lajnr9zihurxbcktzbigz8i; expires=Wed, 24 Apr 2024 18:48:11 GMT; Max-Age=1209600; Path=/; SameSite=Lax");
+            ul.setCsrftoken("csrftoken=Ts5KCq3Eoocyg7vCcTObGj82UUPPOo4oc7UbjuBOiNokZMyvJfufIbGnM7Csw2Hi; expires=Wed, 23 Apr 2025 16:20:46 GMT; Max-Age=31449600; Path=/; SameSite=Lax");
+            ul.setSessionid("sessionid=11mfdadellc6z45ietru9r5kraf1huq3; expires=Wed, 08 May 2024 16:20:46 GMT; Max-Age=1209600; Path=/; SameSite=Lax");
             setCurrentUser(ul);
             assignUserType();
             consumer.accept(true);
@@ -168,7 +168,7 @@ public class UserRepository {
     public static synchronized UserRepository getInstance() {
         return instance;
     }
-    public static synchronized UserRepository createUserRepository(Application application) {
+    public static synchronized UserRepository createInstance(Application application) {
         if(instance == null)
             instance = new UserRepository(application);
         return instance;

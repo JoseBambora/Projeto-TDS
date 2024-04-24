@@ -1,28 +1,16 @@
-package com.ruirua.sampleguideapp.ui.utils;
+package com.ruirua.sampleguideapp.repositories;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.android.gms.location.LocationRequest;
-import com.google.gson.Gson;
 import com.ruirua.sampleguideapp.notifications.NotificationSystem;
 import com.ruirua.sampleguideapp.sensors.OurLocationListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Settings {
+public class SettingsRepository {
     private boolean darkMode = false;
     private boolean onLocationListener = true;
     private boolean notification = true;
@@ -30,31 +18,14 @@ public class Settings {
     private int delayLocationSensor = 10;
 
     private int priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
-
-    private static Settings instance = null;
     private Context context = null;
     private static String file = "settings.json";
-
-    public static Settings getInstance() {
-        return instance;
-    }
 
     private void setContext(Context context) {
         this.context = context;
     }
 
-    public static void createInstance(Context context) {
-        if(instance == null) {
-            instance = new Settings();
-            SharedPreferences prefs = context.getSharedPreferences(file, Context.MODE_PRIVATE);
-            instance.darkMode = prefs.getBoolean("darkMode", false);
-            instance.onLocationListener = prefs.getBoolean("onLocationListener", true);
-            instance.notification = prefs.getBoolean("notification", true);
-            instance.delayLocationSensor = prefs.getInt("delayLocationSensor", 10);
-            instance.priority = prefs.getInt("priority", LocationRequest.PRIORITY_HIGH_ACCURACY);
-            instance.setContext(context);
-        }
-    }
+
 
     public boolean isDarkMode() {
         return darkMode;
@@ -170,4 +141,22 @@ public class Settings {
         saveFile();
     }
 
+
+    private static SettingsRepository instance = null;
+
+    public static void createInstance(Context context) {
+        if(instance == null) {
+            instance = new SettingsRepository();
+            SharedPreferences prefs = context.getSharedPreferences(file, Context.MODE_PRIVATE);
+            instance.darkMode = prefs.getBoolean("darkMode", false);
+            instance.onLocationListener = prefs.getBoolean("onLocationListener", true);
+            instance.notification = prefs.getBoolean("notification", true);
+            instance.delayLocationSensor = prefs.getInt("delayLocationSensor", 10);
+            instance.priority = prefs.getInt("priority", LocationRequest.PRIORITY_HIGH_ACCURACY);
+            instance.setContext(context);
+        }
+    }
+    public static SettingsRepository getInstance() {
+        return instance;
+    }
 }

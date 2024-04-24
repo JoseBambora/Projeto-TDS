@@ -22,6 +22,7 @@ import com.ruirua.sampleguideapp.Permissions;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.repositories.MediaRepository;
+import com.ruirua.sampleguideapp.repositories.SettingsRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ import java.util.Stack;
 public class UIFuns {
     private static final Stack<Class<?>> stack = new Stack<>();
     public static void configureTheme(Activity activity) {
-        if(Settings.getInstance().isLightMode())
+        if(SettingsRepository.getInstance().isLightMode())
             activity.setTheme(R.style.AppThemeLight);
         else
             activity.setTheme(R.style.AppThemeDark);
@@ -179,7 +180,7 @@ public class UIFuns {
     public static void playVideo(String video_url, VideoView videoView, Button buttonVideo, ImageView imageView, Activity activity) {
         String url = video_url.replace("http:", "https:");
         buttonVideo.setOnClickListener(view -> Toast.makeText(activity,"A carregar Vídeo", Toast.LENGTH_SHORT).show());
-        MediaRepository.getVideo(url,activity,videoView, l -> UIFuns.loadVideo(videoView,buttonVideo,imageView,activity));
+        MediaRepository.getInstance().getVideo(url,videoView, l -> UIFuns.loadVideo(videoView,buttonVideo,imageView,activity));
         MediaController mediaController = new MediaController(activity);
         mediaController.setAnchorView(videoView);
         mediaController.setMediaPlayer(videoView);
@@ -206,17 +207,17 @@ public class UIFuns {
                 .build());
         mediaPlayer.reset();
         buttonAudio.setOnClickListener(view -> Toast.makeText(activity,"A carregar Áudio.", Toast.LENGTH_SHORT).show());
-        MediaRepository.getAudio(url,activity,mediaPlayer, l -> loadAudio(buttonAudio,activity,mediaPlayer));
+        MediaRepository.getInstance().getAudio(url,mediaPlayer, l -> loadAudio(buttonAudio,activity,mediaPlayer));
     }
 
-    public static void showImage(String image_url, ImageView iv, Activity activity) {
+    public static void showImage(String image_url, ImageView iv) {
         String url = image_url.replace("http:", "https:");
         iv.setVisibility(View.VISIBLE);
-        MediaRepository.getImage(url,iv,activity);
+        MediaRepository.getInstance().getImage(url,iv);
     }
 
-    public static void showImage(String image_url, ImageView iv, Activity activity, Button buttonImage, VideoView videoView) {
-        showImage(image_url,iv,activity);
+    public static void showImage(String image_url, ImageView iv, Button buttonImage, VideoView videoView) {
+        showImage(image_url,iv);
         buttonImage.setOnClickListener(view-> {
             if(videoView != null) {
                 videoView.setVisibility(View.GONE);

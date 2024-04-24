@@ -5,21 +5,15 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import com.ruirua.sampleguideapp.Permissions;
-import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.sensors.OurLocationListener;
-import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
-import com.ruirua.sampleguideapp.ui.utils.Settings;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 
 import java.util.ArrayList;

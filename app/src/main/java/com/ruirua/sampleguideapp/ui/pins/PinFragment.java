@@ -48,7 +48,7 @@ public class PinFragment extends Fragment {
 
     private void setImage(Media m, View v) {
         videoView.setVisibility(View.GONE);
-        UIFuns.showImage(m.getMedia_file(),v.findViewById(R.id.imagePin),activity,v.findViewById(R.id.playImagem),videoView);
+        UIFuns.showImage(m.getMedia_file(),v.findViewById(R.id.imagePin),v.findViewById(R.id.playImagem),videoView);
     }
     private void setAudio(Media m, View v) {
         UIFuns.playAudio(m.getMedia_file(),v.findViewById(R.id.playAudio),getActivity(), mediaPlayer);

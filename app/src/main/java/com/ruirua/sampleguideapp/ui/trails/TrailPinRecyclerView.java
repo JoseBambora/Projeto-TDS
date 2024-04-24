@@ -120,7 +120,7 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
             if (!mediaList.isEmpty()) {
                 for(Media media : mediaList)
                     if(media.isImage())
-                        UIFuns.showImage(media.getMedia_file(),pinImageView,activity);
+                        UIFuns.showImage(media.getMedia_file(),pinImageView);
                 Picasso.get()
                         .load(mediaList.get(0).getMedia_file().replace("http:", "https:"))
                         .into(pinImageView);

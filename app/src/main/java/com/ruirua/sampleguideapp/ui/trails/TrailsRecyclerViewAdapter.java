@@ -47,7 +47,7 @@ public class TrailsRecyclerViewAdapter extends RecyclerView.Adapter<TrailsRecycl
         holder.mIdView.setText("ID: " + trail.getId());
         holder.mNameView.setText(trail.getTrailName());
         holder.mDifficultyView.setText("Dificuldade: "+trail.getTrailDifficulty());
-        UIFuns.showImage(trail.getTrailImg(),holder.imageView,activity);
+        UIFuns.showImage(trail.getTrailImg(),holder.imageView);
         holder.mView.setOnClickListener(view -> UIFuns.changeFragment(this.fragmentManager,new TrailFragment(trail.getId(),fragmentManager)));
     }
 

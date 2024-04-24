@@ -88,7 +88,7 @@ public class TrailFragment extends Fragment {
             imageUrl = imageUrl.replace("/trail","");
 
             Log.d("IMAGE", imageUrl);
-            UIFuns.showImage(imageUrl,trailImg,getActivity());
+            UIFuns.showImage(imageUrl,trailImg);
         } else {
             // Image URL is null or empty
             if (trailImg != null) {

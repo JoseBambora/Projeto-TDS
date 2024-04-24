@@ -3,11 +3,9 @@ package com.ruirua.sampleguideapp.ui.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,14 +14,16 @@ import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.ruirua.sampleguideapp.Permissions;
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.repositories.MediaRepository;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -92,6 +92,46 @@ public class UIFuns {
         }
         else
             return new Intent();
+    }
+
+    private static Intent intentGoogleMaps(List<Pin> sortedPins) {
+        if(Permissions.permission_google_maps) {
+            Uri.Builder builder = new Uri.Builder()
+                    .scheme("https")
+                    .authority("www.google.com")
+                    .appendPath("maps")
+                    .appendPath("dir")
+                    .appendPath("")
+                    .appendQueryParameter("origin", sortedPins.get(0).getPin_lat() + "," + sortedPins.get(0).getPin_lng())
+                    .appendQueryParameter("destination", sortedPins.get(sortedPins.size()-1).getPin_lat() + "," + sortedPins.get(sortedPins.size()-1).getPin_lng());
+            return connectPins(sortedPins, builder);
+        }
+        else
+            return new Intent();
+    }
+
+    public static void initiateGoogleMapsTrail(List<Pin> sortedPins, Activity activity) {
+        Intent mapIntent = UIFuns.intentGoogleMaps(sortedPins);
+        if (mapIntent.resolveActivity(activity.getPackageManager()) != null) {
+            activity.startActivity(mapIntent);
+        } else {
+            Toast.makeText(activity, "Google Maps não está instalado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @NonNull
+    private static Intent connectPins(List<Pin> sortedPins, Uri.Builder builder) {
+        if(sortedPins.size() > 2) {
+            for(int i = 1; i < sortedPins.size()-1; i++) {
+                builder.appendQueryParameter("waypoint", sortedPins.get(i).getPin_lat() + "," + sortedPins.get(i).getPin_lng());
+            }
+        }
+        Uri finalUri = builder
+                .appendQueryParameter("api", "1")
+                .build();
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, finalUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent;
     }
 
     public static Intent permissionsGoogleMap() {

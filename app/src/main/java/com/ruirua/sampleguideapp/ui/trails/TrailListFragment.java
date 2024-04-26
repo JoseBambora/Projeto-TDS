@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class TrailListFragment extends Fragment {
         trailsViewModel = new ViewModelProvider(this).get(TrailsViewModel.class);
         trailsViewModel.getAllTrails().observe(getViewLifecycleOwner(), x -> {
             loadRecyclerView(view, x);
-            //Log.d("trails",x.toString());
+            Log.d("trails",x.toString());
         });
         return view;
     }

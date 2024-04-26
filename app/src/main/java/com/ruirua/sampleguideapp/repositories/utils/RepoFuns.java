@@ -1,12 +1,17 @@
 package com.ruirua.sampleguideapp.repositories.utils;
 
+import android.util.Log;
+
 import com.ruirua.sampleguideapp.BuildConfig;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -29,22 +34,20 @@ public class RepoFuns {
         return res;
     }
 
-    private static Date extractExpiration(String tokenString) {
-        try {
-            String[] parts = tokenString.split("; ");
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
-            for (String part : parts) {
-                if (part.startsWith("expires=")) {
-                    return sdf.parse(part.substring(8));
-                }
+    private static LocalDateTime extractExpiration(String tokenString) {
+        String[] parts = tokenString.split("; ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+        for (String part : parts) {
+            if (part.startsWith("expires=")) {
+                return LocalDateTime.parse(part.substring(8), formatter);
             }
-        } catch (ParseException ignored) {}
+        }
         return null;
     }
     public static boolean validateTokens(String csrfToken, String sessionID) {
-        Date currentDate = new Date();
-        Date csrfDate = extractExpiration(csrfToken);
-        Date sessionDate = extractExpiration(sessionID);
-        return currentDate.before(csrfDate) && currentDate.before(sessionDate);
+        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDateTime csrfDate = extractExpiration(csrfToken);
+        LocalDateTime sessionDate = extractExpiration(sessionID);
+        return currentDate.isBefore(csrfDate) && currentDate.isBefore(sessionDate);
     }
 }

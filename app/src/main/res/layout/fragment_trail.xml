@@ -200,6 +200,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp" />
 
+        <android.widget.Button
+            android:id="@+id/startTrail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn3"
+            android:textColor="@color/white"
+            android:text="@string/come_ar_trilho" />
 
     </LinearLayout>
 

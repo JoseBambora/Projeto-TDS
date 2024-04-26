@@ -32,6 +32,7 @@ import java.util.Map;
 public class MenuInicialFragment extends Fragment {
     private Activity activity;
     private AppRepository appRepository;
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,13 +41,9 @@ public class MenuInicialFragment extends Fragment {
         appRepository = new AppRepository();
         setOnClicks(view);
         appRepository.getAppInfo().observe(getViewLifecycleOwner(), app -> this.fillInfo(view,app));
+        this.view = view;
+        hideButtons(view);
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        hideButtons(getView());
     }
 
     private void hideButtons(View view) {

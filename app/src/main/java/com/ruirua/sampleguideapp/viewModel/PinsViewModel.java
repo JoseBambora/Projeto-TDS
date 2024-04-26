@@ -12,20 +12,16 @@ import com.ruirua.sampleguideapp.repositories.PinRepository;
 import java.util.List;
 
 public class PinsViewModel extends AndroidViewModel {
-
     private PinRepository repository;
-
-    public LiveData<List<Pin>> pins;
     public PinsViewModel(@NonNull Application application) {
         super(application);
         repository= new PinRepository(application);
-        pins = repository.getAllPins();
-    }
-    public LiveData<List<Pin>> getAllPins() {
-        return pins;
     }
     public LiveData<Pin> getPin(int id) {
         return repository.getPin(id);
     }
 
+    public List<LiveData<Pin>> getPins(List<Integer> pinsIds) {
+        return repository.getPinsIds(pinsIds);
+    }
 }

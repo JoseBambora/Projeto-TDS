@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.trails.Trail;
+import com.ruirua.sampleguideapp.repositories.HistoryRepository;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TrailFragment extends Fragment {
 
@@ -79,7 +82,14 @@ public class TrailFragment extends Fragment {
         TextView trailDifficulty = view.findViewById(R.id.trailDifficulty);
         trailDifficulty.setText(trail.getTrailDifficulty());
 
-        setupTrailPinsRecyclerView(trail.getPinsInOrder(), view);
+        List<Pin> sortedPins = trail.getPinsInOrder();
+        setupTrailPinsRecyclerView(sortedPins, view);
+
+
+        Button startTrail = view.findViewById(R.id.startTrail);
+        startTrail.setOnClickListener(l -> {
+            HistoryRepository.getInstance().addHistory(trailId,sortedPins.stream().map(Pin::getId).collect(Collectors.toList()));
+        });
 
     }
 

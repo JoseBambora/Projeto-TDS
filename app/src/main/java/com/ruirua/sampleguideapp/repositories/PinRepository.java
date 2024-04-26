@@ -90,4 +90,8 @@ public class PinRepository {
         res.addSource(pinDAO.getPin(id),p -> getPin(p,id,res));
         return res;
     }
+
+    public List<LiveData<Pin>> getPinsIds(List<Integer> pinsIds) {
+        return pinsIds.stream().map(this::getPin).collect(Collectors.toList());
+    }
 }

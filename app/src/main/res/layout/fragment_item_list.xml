@@ -12,11 +12,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Text "Trilhos" -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Trilhos"
+            android:text="@string/trilhos"
             android:textSize="30sp"
             android:gravity="center"
             android:paddingTop="16dp"
@@ -24,7 +23,6 @@
             android:textColor="?attr/Secundario"
             android:textStyle="bold|italic"/>
 
-        <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"

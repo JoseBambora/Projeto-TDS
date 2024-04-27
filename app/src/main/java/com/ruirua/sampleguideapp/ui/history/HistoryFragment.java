@@ -43,9 +43,11 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.historyRecyclerView);
+        RecyclerView recyclerViewP = view.findViewById(R.id.historyPinRecyclerView);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewP.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<Integer> historyPinIds = historyRepository.getHistoryPins();
         List<Integer> historyTrailIds = historyRepository.getHistoryTrails();
@@ -57,6 +59,7 @@ public class HistoryFragment extends Fragment {
         List<LiveData <Trail>> trails = tvm.getTrails(historyTrailIds);
 
         recyclerView.setAdapter(new HistoryTrailAdapter(trails,getViewLifecycleOwner(), getFragmentManager(), getActivity()));
+        recyclerViewP.setAdapter(new HistoryPinAdapter(pins,getViewLifecycleOwner(), getFragmentManager(), getActivity()));
 
 
     }

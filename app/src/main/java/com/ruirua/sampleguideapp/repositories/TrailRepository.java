@@ -84,4 +84,8 @@ public class TrailRepository {
         return res;
     }
 
+    public List<LiveData<Trail>> getTrailsIds(List<Integer> trailsIds) {
+        return trailsIds.stream().map(this::getTrail).collect(Collectors.toList());
+    }
+
 }

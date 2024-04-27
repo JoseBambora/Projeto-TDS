@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
 import com.ruirua.sampleguideapp.repositories.TrailRepository;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import java.util.List;
@@ -24,4 +25,8 @@ public class TrailsViewModel extends AndroidViewModel {
     }
 
     public LiveData<Trail> getTrail(int id) { return repository.getTrail(id);}
+
+    public List<LiveData<Trail>> getTrails(List<Integer> trailsIds) {
+        return repository.getTrailsIds(trailsIds);
+    }
 }

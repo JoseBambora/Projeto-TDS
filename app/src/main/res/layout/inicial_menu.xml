@@ -84,13 +84,6 @@
             android:textColor="@color/white"
             android:text="@string/localiza_o_e_navega_o" />
 
-        <android.widget.Button
-            android:id="@+id/buttonLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn3"
-            android:textColor="@color/white"
-            android:text="@string/conteudo_multim_dia"/>
 
         <android.widget.Button
             android:id="@+id/testePin"
@@ -107,6 +100,14 @@
             android:background="@drawable/btn3"
             android:textColor="@color/white"
             android:text="@string/google_maps"/>
+
+        <android.widget.Button
+            android:id="@+id/historyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn6"
+            android:textColor="@color/white"
+            android:text="@string/history"/>
 
         <android.widget.Button
             android:id="@+id/userInfo"

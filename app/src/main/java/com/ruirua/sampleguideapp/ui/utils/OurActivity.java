@@ -1,7 +1,6 @@
 package com.ruirua.sampleguideapp.ui.utils;
 
 import android.app.PendingIntent;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +8,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -23,6 +21,7 @@ import com.ruirua.sampleguideapp.repositories.PinRepository;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.sensors.OurLocationListener;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
+import com.ruirua.sampleguideapp.ui.history.HistoryFragment;
 import com.ruirua.sampleguideapp.ui.shared.SettingsFragment;
 import com.ruirua.sampleguideapp.ui.user.LoginFragment;
 

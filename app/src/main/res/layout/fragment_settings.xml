@@ -15,6 +15,18 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <TextView
+            android:id="@+id/settingsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@string/action_settings"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="30dp"
+            android:textColor="?attr/Secundario"
+            android:textStyle="bold|italic"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

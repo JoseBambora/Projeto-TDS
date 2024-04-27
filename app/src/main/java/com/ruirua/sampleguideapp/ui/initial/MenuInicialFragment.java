@@ -20,6 +20,7 @@ import com.ruirua.sampleguideapp.model.general.App;
 import com.ruirua.sampleguideapp.repositories.AppRepository;
 import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
+import com.ruirua.sampleguideapp.ui.history.HistoryActivity;
 import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 import com.ruirua.sampleguideapp.ui.pins.PinFragment;
 import com.ruirua.sampleguideapp.ui.trails.TrailActivity;
@@ -53,6 +54,7 @@ public class MenuInicialFragment extends Fragment {
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
         Button buttonId = view.findViewById(R.id.testePin);
+        Button buttonHist = view.findViewById(R.id.historyButton);
         buttonId.setOnClickListener(v -> UIFuns.changeFragment(getFragmentManager(),new PinFragment(1)));
 
         UserRepository ur = UserRepository.getInstance();
@@ -62,6 +64,7 @@ public class MenuInicialFragment extends Fragment {
             buttonRegister.setVisibility(View.VISIBLE);
             buttonLogin.setVisibility(View.VISIBLE);
             buttonLogout.setVisibility(View.GONE);
+            buttonHist.setVisibility(View.GONE);
         }
         else {
             buttonTourRoutes.setVisibility(View.VISIBLE);
@@ -69,6 +72,7 @@ public class MenuInicialFragment extends Fragment {
             buttonRegister.setVisibility(View.GONE);
             buttonLogin.setVisibility(View.GONE);
             buttonLogout.setVisibility(View.VISIBLE);
+            buttonHist.setVisibility(View.VISIBLE);
         }
     }
 
@@ -96,11 +100,13 @@ public class MenuInicialFragment extends Fragment {
         Button buttonList = view.findViewById(R.id.buttonTourRoutes);
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
         Button buttonGM = view.findViewById(R.id.googleMaps);
+        Button buttonHist = view.findViewById(R.id.historyButton);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
         buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("register")));
         buttonLogin.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("login")));
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
+        buttonHist.setOnClickListener(v -> UIFuns.changeActivity(activity, HistoryActivity.class,null));
         buttonGM.setOnClickListener(v ->googleMaps());
         buttonLogout.setOnClickListener(v-> {
             UserRepository.getInstance().logout();

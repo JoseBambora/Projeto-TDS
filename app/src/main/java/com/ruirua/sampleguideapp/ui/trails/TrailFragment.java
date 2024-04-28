@@ -26,6 +26,7 @@ import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TrailFragment extends Fragment {
@@ -85,10 +86,10 @@ public class TrailFragment extends Fragment {
         List<Pin> sortedPins = trail.getPinsInOrder();
         setupTrailPinsRecyclerView(sortedPins, view);
 
-
         Button startTrail = view.findViewById(R.id.startTrail);
         startTrail.setOnClickListener(l -> {
             HistoryRepository.getInstance().addHistory(trailId,sortedPins.stream().map(Pin::getId).collect(Collectors.toList()));
+            UIFuns.initiateGoogleMapsTrail(trail.getPinsInOrder(), this.requireActivity());
         });
 
     }

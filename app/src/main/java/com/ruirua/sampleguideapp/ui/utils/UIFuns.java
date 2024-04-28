@@ -102,11 +102,11 @@ public class UIFuns {
                     .scheme("https")
                     .authority("www.google.com")
                     .appendPath("maps")
-                    .appendPath("dir")
-                    .appendPath("")
-                    .appendQueryParameter("origin", sortedPins.get(0).getPin_lat() + "," + sortedPins.get(0).getPin_lng())
-                    .appendQueryParameter("destination", sortedPins.get(sortedPins.size()-1).getPin_lat() + "," + sortedPins.get(sortedPins.size()-1).getPin_lng());
-            return connectPins(sortedPins, builder);
+                    .appendPath("dir");
+            sortedPins.forEach(pin -> builder.appendPath(pin.getPin_lat() + "," + pin.getPin_lng()));
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, builder.build());
+            mapIntent.setPackage("com.google.android.apps.maps");
+            return mapIntent;
         }
         else
             return new Intent();
@@ -119,21 +119,6 @@ public class UIFuns {
         } else {
             Toast.makeText(activity, "Google Maps não está instalado", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @NonNull
-    private static Intent connectPins(List<Pin> sortedPins, Uri.Builder builder) {
-        if(sortedPins.size() > 2) {
-            for(int i = 1; i < sortedPins.size()-1; i++) {
-                builder.appendQueryParameter("waypoint", sortedPins.get(i).getPin_lat() + "," + sortedPins.get(i).getPin_lng());
-            }
-        }
-        Uri finalUri = builder
-                .appendQueryParameter("api", "1")
-                .build();
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, finalUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        return mapIntent;
     }
 
     public static Intent permissionsGoogleMap() {

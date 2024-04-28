@@ -96,9 +96,9 @@ public class TrailFragment extends Fragment {
                 HistoryRepository.getInstance().addHistory(trailId,sortedPins.stream().map(Pin::getId).collect(Collectors.toList()));
                 UIFuns.initiateGoogleMapsTrail(trail.getPinsInOrder(), this.requireActivity());
             });
-        } else {
-        startTrail.setVisibility(View.GONE);
-    }
+        }
+        else
+            startTrail.setVisibility(View.GONE);
 
 
     }

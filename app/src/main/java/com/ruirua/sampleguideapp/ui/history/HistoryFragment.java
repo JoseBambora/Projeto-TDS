@@ -55,11 +55,11 @@ public class HistoryFragment extends Fragment {
         PinsViewModel pvm = new ViewModelProvider(this).get(PinsViewModel.class);
         TrailsViewModel tvm = new ViewModelProvider(this).get(TrailsViewModel.class);
 
-        List<LiveData <Pin>> pins = pvm.getPins(historyPinIds);
-        List<LiveData <Trail>> trails = tvm.getTrails(historyTrailIds);
+        List<LiveData<Pin>> pins = pvm.getPins(historyPinIds);
+        List<LiveData<Trail>> trails = tvm.getTrails(historyTrailIds);
 
-        recyclerView.setAdapter(new HistoryTrailAdapter(trails,getViewLifecycleOwner(), getFragmentManager(), getActivity()));
-        recyclerViewP.setAdapter(new HistoryPinAdapter(pins,getViewLifecycleOwner(), getFragmentManager(), getActivity()));
+        recyclerView.setAdapter(new HistoryTrailAdapter(trails, getViewLifecycleOwner(), getFragmentManager(), getActivity()));
+        recyclerViewP.setAdapter(new HistoryPinAdapter(pins, getViewLifecycleOwner(), getFragmentManager(), getActivity()));
 
 
     }

@@ -22,6 +22,7 @@ import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.repositories.HistoryRepository;
+import com.ruirua.sampleguideapp.repositories.UserRepository;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
 import com.ruirua.sampleguideapp.viewModel.TrailsViewModel;
 
@@ -86,11 +87,19 @@ public class TrailFragment extends Fragment {
         List<Pin> sortedPins = trail.getPinsInOrder();
         setupTrailPinsRecyclerView(sortedPins, view);
 
+        UserRepository ur = UserRepository.getInstance();
+
         Button startTrail = view.findViewById(R.id.startTrail);
-        startTrail.setOnClickListener(l -> {
-            HistoryRepository.getInstance().addHistory(trailId,sortedPins.stream().map(Pin::getId).collect(Collectors.toList()));
-            UIFuns.initiateGoogleMapsTrail(trail.getPinsInOrder(), this.requireActivity());
-        });
+
+        if(ur.isPremium()){
+            startTrail.setOnClickListener(l -> {
+                HistoryRepository.getInstance().addHistory(trailId,sortedPins.stream().map(Pin::getId).collect(Collectors.toList()));
+                UIFuns.initiateGoogleMapsTrail(trail.getPinsInOrder(), this.requireActivity());
+            });
+        } else {
+        startTrail.setVisibility(View.GONE);
+    }
+
 
     }
 

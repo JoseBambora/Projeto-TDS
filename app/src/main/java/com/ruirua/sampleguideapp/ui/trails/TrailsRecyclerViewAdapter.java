@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.ruirua.sampleguideapp.R;
 import com.ruirua.sampleguideapp.model.trails.Trail;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

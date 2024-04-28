@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.ruirua.sampleguideapp.Permissions;
 import com.ruirua.sampleguideapp.R;
+import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.repositories.MediaRepository;
 import com.ruirua.sampleguideapp.repositories.SettingsRepository;
@@ -226,5 +227,63 @@ public class UIFuns {
             }
             iv.setVisibility(View.VISIBLE);
         });
+    }
+
+
+    private static void handleImage(List<Media>mediaList, ImageView pinHasImage){
+        boolean hasImage = false;
+        for (Media media : mediaList) {
+            if (media.isImage()) {
+                hasImage = true;
+                break;
+            }
+        }
+        if (hasImage) pinHasImage.setImageResource(R.drawable.baseline_check_24);
+        else pinHasImage.setImageResource(R.drawable.baseline_close_24);
+    }
+
+    private static void handleAudio(List<Media>mediaList, ImageView pinHasAudio){
+        boolean hasAudio = false;
+        for (Media media : mediaList) {
+            if (media.isAudio()) {
+                hasAudio = true;
+                break;
+            }
+        }
+        if (hasAudio) pinHasAudio.setImageResource(R.drawable.baseline_check_24);
+        else pinHasAudio.setImageResource(R.drawable.baseline_close_24);
+    }
+
+    private static void handleVideo(List<Media>mediaList, ImageView pinHasVideo){
+        boolean hasVideo = false;
+        for (Media media : mediaList) {
+            if (media.isVideo()) {
+                hasVideo = true;
+                break;
+            }
+        }
+        if (hasVideo) pinHasVideo.setImageResource(R.drawable.baseline_check_24);
+        else pinHasVideo.setImageResource(R.drawable.baseline_close_24);
+    }
+
+    public static void checkMultimedia(List<Media> mediaList, ImageView pinHasImageView, ImageView pinHasAudio, ImageView pinHasVideo){
+        handleImage(mediaList,pinHasImageView);
+        handleAudio(mediaList,pinHasAudio);
+        handleVideo(mediaList,pinHasVideo);
+    }
+    public static void setPinImage(Pin pin, ImageView pinImageView) {
+        List<Media> mediaList = pin.getMediaList();
+        if (!mediaList.isEmpty()) {
+            boolean hasImage = false;
+            for (Media media : mediaList) {
+                hasImage = hasImage || media.isImage();
+                if (media.isImage())
+                    UIFuns.showImage(media.getMedia_file(), pinImageView);
+            }
+            if(!hasImage)
+                pinImageView.setImageResource(R.drawable.baseline_broken_image_24);
+        } else {
+            pinImageView.setImageResource(R.drawable.baseline_broken_image_24);
+        }
     }
 }

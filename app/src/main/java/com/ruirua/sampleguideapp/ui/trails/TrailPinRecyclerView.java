@@ -8,21 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruirua.sampleguideapp.R;
-import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
-import com.ruirua.sampleguideapp.ui.pins.PinActivity;
 import com.ruirua.sampleguideapp.ui.pins.PinFragment;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
-import com.squareup.picasso.Picasso;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerView.TrailPinViewHolder> {
     private List<Pin> pinList;
@@ -72,63 +65,10 @@ public class TrailPinRecyclerView extends RecyclerView.Adapter<TrailPinRecyclerV
             dividerImageView = itemView.findViewById(R.id.divider_image);
         }
 
-        private void handleImage(List<Media>mediaList){
-            boolean hasImage = false;
-            for (Media media : mediaList) {
-                if (media.isImage()) {
-                    hasImage = true;
-                    break;
-                }
-            }
-            if (hasImage) pinHasImage.setImageResource(R.drawable.baseline_check_24);
-            else pinHasImage.setImageResource(R.drawable.baseline_close_24);
-        }
-
-        private void handleAudio(List<Media>mediaList){
-            boolean hasAudio = false;
-            for (Media media : mediaList) {
-                if (media.isAudio()) {
-                    hasAudio = true;
-                    break;
-                }
-            }
-            if (hasAudio) pinHasAudio.setImageResource(R.drawable.baseline_check_24);
-            else pinHasAudio.setImageResource(R.drawable.baseline_close_24);
-        }
-
-        private void handleVideo(List<Media>mediaList){
-            boolean hasVideo = false;
-            for (Media media : mediaList) {
-                if (media.isVideo()) {
-                    hasVideo = true;
-                    break;
-                }
-            }
-            if (hasVideo) pinHasVideo.setImageResource(R.drawable.baseline_check_24);
-            else pinHasVideo.setImageResource(R.drawable.baseline_close_24);
-        }
-
-        private void checkMultimedia(List<Media> mediaList){
-            handleImage(mediaList);
-            handleAudio(mediaList);
-            handleVideo(mediaList);
-        }
-
         public void bind(Pin pin, boolean isLastItem) {
             pinNameTextView.setText(pin.getPin_name());
-            List<Media> mediaList = pin.getMediaList();
-            if (!mediaList.isEmpty()) {
-                for(Media media : mediaList)
-                    if(media.isImage())
-                        UIFuns.showImage(media.getMedia_file(),pinImageView);
-                Picasso.get()
-                        .load(mediaList.get(0).getMedia_file().replace("http:", "https:"))
-                        .into(pinImageView);
-            } else {
-                pinImageView.setImageResource(R.drawable.baseline_broken_image_24);
-            }
-            checkMultimedia(mediaList);
-            
+            UIFuns.setPinImage(pin,pinImageView);
+            UIFuns.checkMultimedia(pin.getMediaList(),pinHasImage,pinHasAudio,pinHasVideo);
             itemView.setOnClickListener(view -> UIFuns.changeFragment(fragmentManager,new PinFragment(pin.getId())));
             dividerImageView.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
         }

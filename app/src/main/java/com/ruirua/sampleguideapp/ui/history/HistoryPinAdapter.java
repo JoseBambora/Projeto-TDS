@@ -14,12 +14,9 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruirua.sampleguideapp.R;
-import com.ruirua.sampleguideapp.model.pins.Media;
 import com.ruirua.sampleguideapp.model.pins.Pin;
 import com.ruirua.sampleguideapp.ui.pins.PinFragment;
-import com.ruirua.sampleguideapp.ui.trails.TrailPinRecyclerView;
 import com.ruirua.sampleguideapp.ui.utils.UIFuns;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,7 +35,7 @@ public class HistoryPinAdapter extends RecyclerView.Adapter<HistoryPinAdapter.Tr
     @NonNull
     @Override
     public TrailPinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pin_history, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pin, parent, false);
         return new TrailPinViewHolder(view);
     }
 
@@ -46,8 +43,7 @@ public class HistoryPinAdapter extends RecyclerView.Adapter<HistoryPinAdapter.Tr
     @Override
     public void onBindViewHolder(@NonNull TrailPinViewHolder holder, int position) {
         LiveData<Pin> pin = pins.get(position);
-        boolean isLastItem = position == getItemCount() - 1;
-        holder.bind(pin, isLastItem);
+        holder.bind(pin);
     }
 
     @Override
@@ -61,33 +57,26 @@ public class HistoryPinAdapter extends RecyclerView.Adapter<HistoryPinAdapter.Tr
     public class TrailPinViewHolder extends RecyclerView.ViewHolder {
         private TextView pinNameTextView;
         private ImageView pinImageView;
+        private ImageView pinHasImage;
+        private ImageView pinHasAudio;
+        private ImageView pinHasVideo;
 
         public TrailPinViewHolder(@NonNull View itemView) {
             super(itemView);
             pinImageView = itemView.findViewById(R.id.pincardimage);
             pinNameTextView = itemView.findViewById(R.id.trail_name);
+            pinHasImage= itemView.findViewById(R.id.hasImage);
+            pinHasAudio= itemView.findViewById(R.id.hasAudio);
+            pinHasVideo= itemView.findViewById(R.id.hasVideo);
+            itemView.findViewById(R.id.divider_image).setVisibility(View.GONE);
         }
 
-        public void bind(LiveData<Pin> pinLiveData, boolean isLastItem) {
+        public void bind(LiveData<Pin> pinLiveData) {
             pinLiveData.observe((LifecycleOwner) activity, pin -> {
-
                 if (pin != null) {
                     pinNameTextView.setText(pin.getPin_name());
-                    List<Media> mediaList = pin.getMediaList();
-                    if (!mediaList.isEmpty()) {
-                        for (Media media : mediaList) {
-                            if (media.isImage()) {
-                                UIFuns.showImage(media.getMedia_file(), pinImageView);
-                                break;
-                            }
-                        }
-                        Picasso.get()
-                                .load(mediaList.get(0).getMedia_file().replace("http:", "https:"))
-                                .into(pinImageView);
-                    } else {
-                        pinImageView.setImageResource(R.drawable.baseline_broken_image_24);
-                    }
-
+                    UIFuns.setPinImage(pin,pinImageView);
+                    UIFuns.checkMultimedia(pin.getMediaList(),pinHasImage,pinHasAudio,pinHasVideo);
                     itemView.setOnClickListener(view -> UIFuns.changeFragment(fragmentManager, new PinFragment(pin.getId())));
                 }
             });

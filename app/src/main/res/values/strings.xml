@@ -64,7 +64,7 @@
     <string name="ltimo_nome">Último Nome</string>
     <string name="nome_de_utilizador">Nome de Utilizador</string>
     <string name="multim_dia">Multimédia</string>
-    <string name="pins">Trilho</string>
+    <string name="trilho">Trilho</string>
     <string name="dificuldade">Dificuldade</string>
     <string name="dura_o">Duração</string>
     <string name="descricao">Descrição</string>
@@ -80,4 +80,5 @@
     <string name="come_ar_trilho">Começar Trilho</string>
     <string name="history">History</string>
     <string name="trilhos">Trilhos</string>
+    <string name="pins">Pins</string>
 </resources>

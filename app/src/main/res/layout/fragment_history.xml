@@ -9,42 +9,64 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/historyTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/history"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="?attr/Secundario"
-            android:textStyle="bold|italic"/>
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/historyRecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layoutManager="LinearLayoutManager"
-            tools:context=".ui.trails.TrailListFragment"
-            tools:listitem="@layout/fragment_item" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/historyPinRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layoutManager="LinearLayoutManager" />
+            <TextView
+                android:id="@+id/historyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/history"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textColor="?attr/Secundario"
+                android:textStyle="bold|italic"/>
+
+            <TextView
+                android:id="@+id/trails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trilhos"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textColor="?attr/Secundario"
+                android:textStyle="bold|italic"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/historyRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".ui.trails.TrailListFragment"
+                tools:listitem="@layout/fragment_item" />
+
+            <TextView
+                android:id="@+id/pins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pins"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textColor="?attr/Secundario"
+                android:textStyle="bold|italic"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/historyPinRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layoutManager="LinearLayoutManager" />
 
 
 

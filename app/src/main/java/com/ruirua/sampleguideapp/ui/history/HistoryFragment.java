@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,10 +58,23 @@ public class HistoryFragment extends Fragment {
 
         List<LiveData<Pin>> pins = pvm.getPins(historyPinIds);
         List<LiveData<Trail>> trails = tvm.getTrails(historyTrailIds);
+        TextView emptyTextView = view.findViewById(R.id.emptyTextView);
+        TextView trailsText = view.findViewById(R.id.trails);
+        TextView pinsText= view.findViewById(R.id.pins);
 
-        recyclerView.setAdapter(new HistoryTrailAdapter(trails, getViewLifecycleOwner(), getFragmentManager(), getActivity()));
-        recyclerViewP.setAdapter(new HistoryPinAdapter(pins, getViewLifecycleOwner(), getFragmentManager(), getActivity()));
+        if (pins.isEmpty() && trails.isEmpty()) {
 
+            emptyTextView.setVisibility(View.VISIBLE);
+            trailsText.setVisibility(View.GONE);
+            pinsText.setVisibility(View.GONE);
+        } else {
 
+            emptyTextView.setVisibility(View.GONE);
+            trailsText.setVisibility(View.VISIBLE);
+            pinsText.setVisibility(View.VISIBLE);
+            recyclerView.setAdapter(new HistoryTrailAdapter(trails, getViewLifecycleOwner(), getFragmentManager(), getActivity()));
+            recyclerViewP.setAdapter(new HistoryPinAdapter(pins, getViewLifecycleOwner(), getFragmentManager(), getActivity()));
+
+        }
     }
 }

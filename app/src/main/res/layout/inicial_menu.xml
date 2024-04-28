@@ -86,22 +86,6 @@
 
 
         <android.widget.Button
-            android:id="@+id/testePin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn3"
-            android:textColor="@color/white"
-            android:text="@string/pin_id"/>
-
-        <android.widget.Button
-            android:id="@+id/googleMaps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn3"
-            android:textColor="@color/white"
-            android:text="@string/google_maps"/>
-
-        <android.widget.Button
             android:id="@+id/historyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

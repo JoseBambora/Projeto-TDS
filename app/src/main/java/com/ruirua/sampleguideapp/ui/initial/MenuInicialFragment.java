@@ -53,9 +53,7 @@ public class MenuInicialFragment extends Fragment {
         Button buttonRegister = view.findViewById(R.id.buttonRegister);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
-        Button buttonId = view.findViewById(R.id.testePin);
         Button buttonHist = view.findViewById(R.id.historyButton);
-        buttonId.setOnClickListener(v -> UIFuns.changeFragment(getFragmentManager(),new PinFragment(1)));
 
         UserRepository ur = UserRepository.getInstance();
         if (!ur.isLogged()) {
@@ -99,7 +97,6 @@ public class MenuInicialFragment extends Fragment {
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
         Button buttonList = view.findViewById(R.id.buttonTourRoutes);
         Button buttonUserInfo = view.findViewById(R.id.userInfo);
-        Button buttonGM = view.findViewById(R.id.googleMaps);
         Button buttonHist = view.findViewById(R.id.historyButton);
         Button buttonLogout = view.findViewById(R.id.buttonLogout);
         buttonRegister.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("register")));
@@ -107,7 +104,6 @@ public class MenuInicialFragment extends Fragment {
         buttonList.setOnClickListener(v -> UIFuns.changeActivity(activity,TrailActivity.class,null));
         buttonUserInfo.setOnClickListener(v -> UIFuns.changeActivity(activity,UserActivity.class,setAction("userinfo")));
         buttonHist.setOnClickListener(v -> UIFuns.changeActivity(activity, HistoryActivity.class,null));
-        buttonGM.setOnClickListener(v ->googleMaps());
         buttonLogout.setOnClickListener(v-> {
             UserRepository.getInstance().logout();
             UIFuns.refreshPage(getFragmentManager(),this);

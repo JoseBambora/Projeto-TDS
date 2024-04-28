@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="gray">#A9A9A9</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#F75F50</color>
     <color name="PrimarioLight">#FFFFFFFF</color>
     <color name="SecundarioLight">#F75F50</color>
     <color name="AlternativoLight">#C9EFF8</color>
@@ -16,5 +17,6 @@
     <color name="SecundarioDark">#F75F50</color>
     <color name="AlternativoDark">#C9EFF8</color>
     <color name="Transparent">#00FFFFFF</color>
+    <color name="semi_transparent_gray">#80808080</color>
 
 </resources>

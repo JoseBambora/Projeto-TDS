@@ -1,5 +1,7 @@
 package com.ruirua.sampleguideapp.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -8,33 +10,35 @@ import com.ruirua.sampleguideapp.model.general.AppAPI;
 import com.ruirua.sampleguideapp.repositories.utils.RepoFuns;
 import com.ruirua.sampleguideapp.repositories.utils.UtilRepository;
 
-import java.util.List;
-
-import retrofit2.Call;
 import retrofit2.Retrofit;
 
 public class AppRepository {
     private final AppAPI appAPI;
 
-    private App cache = null;
+    private MutableLiveData<App> cache = new MutableLiveData<>();
 
-    public AppRepository() {
+    private AppRepository() {
         Retrofit retrofit = RepoFuns.buildRetrofit();
         appAPI = retrofit.create(AppAPI.class);
     }
 
     public LiveData<App> getAppInfo() {
-        MutableLiveData<App> res = new MutableLiveData<>();
-        if(cache == null) {
+        if(cache.getValue() == null) {
+            Log.d("DebugApp","Cache == null");
             appAPI.getAppInfo().enqueue(new UtilRepository<>(r -> {
                 App a = r.body().get(0);
-                cache = a;
-                res.setValue(a);
+                cache.setValue(a);
             },null));
         }
-        else
-            res.setValue(cache);
-        return res;
+        return cache;
+    }
+
+    public static AppRepository instance = null;
+
+    public static AppRepository getInstance() {
+        if (instance == null)
+            instance = new AppRepository();
+        return instance;
     }
 
 

@@ -13,9 +13,17 @@ import retrofit2.Response;
 public class UtilRepository<T> implements Callback<T> {
     Consumer<Response<T>> sucess;
     Consumer<Response<T>> error;
+    Consumer<Throwable> fail;
     public UtilRepository(Consumer<Response<T>> sucess, Consumer<Response<T>> error) {
         this.sucess = sucess;
         this.error = error;
+        this.fail = null;
+    }
+
+    public UtilRepository(Consumer<Response<T>> sucess, Consumer<Response<T>> error, Consumer<Throwable> fail) {
+        this.sucess = sucess;
+        this.error = error;
+        this.fail = fail;
     }
 
     @Override
@@ -31,8 +39,13 @@ public class UtilRepository<T> implements Callback<T> {
 
     @Override
     public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
-        Log.d("DebugApp","erro2 " + t.getMessage());
-        Log.e("DebugApp", "onFailure: " + t.getMessage());
+        if(fail != null) {
+            fail.accept(t);
+        }
+        else {
+            Log.d("DebugApp","erro2 " + t.getMessage());
+            Log.e("DebugApp", "onFailure: " + t.getMessage());
+        }
     }
 }
 

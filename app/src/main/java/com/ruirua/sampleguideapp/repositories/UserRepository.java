@@ -115,7 +115,7 @@ public class UserRepository {
         assignUserType();
         consumer.accept(true);
     }
-    public void login(String username, String password, Consumer<Boolean> consumer) {
+    public void login(String username, String password, Consumer<Boolean> consumer, Consumer<Throwable> fail) {
         if(username.equals("p"))
         {
             UserLogged ul = new UserLogged();
@@ -131,7 +131,7 @@ public class UserRepository {
         }
         else {
             Call<ResponseBody> call = userAPI.postLogin(new LoginData(username, password));
-            call.enqueue(new UtilRepository<>((res) -> authUser(res,username,consumer), (res) -> consumer.accept(false)));
+            call.enqueue(new UtilRepository<>((res) -> authUser(res,username,consumer), (res) -> consumer.accept(false),fail ));
         }
     }
 

@@ -32,17 +32,13 @@ import java.util.Map;
 
 public class MenuInicialFragment extends Fragment {
     private Activity activity;
-    private AppRepository appRepository;
-    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inicial_menu, container, false);
         activity = getActivity();
-        appRepository = new AppRepository();
         setOnClicks(view);
-        appRepository.getAppInfo().observe(getViewLifecycleOwner(), app -> this.fillInfo(view,app));
-        this.view = view;
+        AppRepository.getInstance().getAppInfo().observe(getViewLifecycleOwner(), app -> this.fillInfo(view,app));
         hideButtons(view);
         return view;
     }

@@ -34,12 +34,10 @@ public class HistoryRepository {
     private void loadInfo() {
         loadInfo("pins",historyPins);
         loadInfo("trails",historyTrails);
-        Log.d("DebugApp","Pins " + historyPins + " | Trails " + historyTrails);
     }
     private void saveInfo() {
         saveInfo("pins",historyPins);
         saveInfo("trails",historyTrails);
-        Log.d("DebugApp","Pins " + historyPins + " | Trails " + historyTrails);
     }
 
     public List<Integer> getHistoryPins() {

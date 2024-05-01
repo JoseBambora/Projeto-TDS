@@ -24,7 +24,6 @@ public class AppRepository {
 
     public LiveData<App> getAppInfo() {
         if(cache.getValue() == null) {
-            Log.d("DebugApp","Cache == null");
             appAPI.getAppInfo().enqueue(new UtilRepository<>(r -> {
                 App a = r.body().get(0);
                 cache.setValue(a);

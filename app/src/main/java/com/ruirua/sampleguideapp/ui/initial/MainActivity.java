@@ -2,6 +2,7 @@
 package com.ruirua.sampleguideapp.ui.initial;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import com.ruirua.sampleguideapp.Permissions;
+import com.ruirua.sampleguideapp.sensors.LocationService;
 import com.ruirua.sampleguideapp.sensors.OurLocationListener;
 import com.ruirua.sampleguideapp.ui.utils.GoBackInterface;
 import com.ruirua.sampleguideapp.ui.utils.OurActivity;
@@ -49,7 +51,7 @@ public class MainActivity extends OurActivity implements GoBackInterface {
             permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
         }
         else
-            OurLocationListener.getInstance().onStart();
+            startService(new Intent(this, LocationService.class));
         if(!permissions.isEmpty())
             requestPermissions(permissions.toArray(new String[0]), 100);
     }
@@ -61,7 +63,7 @@ public class MainActivity extends OurActivity implements GoBackInterface {
             Permissions.permission_call = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
             Permissions.permission_notitications = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
             Permissions.permission_location = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED;
-            OurLocationListener.getInstance().onStart();
+            startService(new Intent(this, LocationService.class));
         }
     }
 

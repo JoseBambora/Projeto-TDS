@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
     <queries>
         <package android:name="com.google.android.apps.maps" />
     </queries>
@@ -31,11 +34,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SampleGuideApp">
+
+        <service
+            android:name=".sensors.LocationService"
+            android:foregroundServiceType="location"
+            android:exported="false">
+        </service>
         <activity
             android:name=".ui.pins.PinActivity"
             android:exported="false"
             android:label="@string/title_activity_pin"
             android:theme="@style/Theme.SampleGuideApp" />
+
         <activity
             android:name=".ui.initial.MainActivity"
             android:exported="true"

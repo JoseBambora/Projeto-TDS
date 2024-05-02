@@ -35,7 +35,6 @@
         android:contentDescription="@string/voltar"
         app:fabSize="normal"
         app:backgroundTint="?attr/Alternativo"
-        app:borderWidth="3dp"
         app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -47,7 +46,6 @@
         android:backgroundTint="?attr/NavBar"
         android:contentDescription="@string/chamada_de_emerg_ncia"
         app:backgroundTint="?attr/Alternativo"
-        app:borderWidth="3dp"
         app:fabSize="normal"
         app:srcCompat="@drawable/phone_icon"
         app:tint="@color/white" />

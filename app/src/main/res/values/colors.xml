@@ -18,5 +18,6 @@
     <color name="AlternativoDark">#C9EFF8</color>
     <color name="Transparent">#00FFFFFF</color>
     <color name="semi_transparent_gray">#80808080</color>
+    <color name="darkmode">#020c0f</color>
 
 </resources>

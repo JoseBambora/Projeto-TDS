@@ -2,7 +2,7 @@
 <resources>
     <style name="AppThemeDark" parent="Theme.MaterialComponents.NoActionBar">
         <item name="NavBar">@color/PrimarioDark</item>
-        <item name="Primario">@color/PrimarioDark</item>
+        <item name="Primario">@color/darkmode</item>
         <item name="Secundario">@color/SecundarioDark</item>
         <item name="Alternativo">@color/AlternativoDark</item>
         <item name="Texto1">@color/white</item>

@@ -92,10 +92,7 @@ public class OurActivity extends AppCompatActivity implements GoBackInterface {
             UIFuns.changeFragment(getSupportFragmentManager(),new SettingsFragment());
             return true;
         }
-        if (id == R.id.action_login) {
-            UIFuns.changeFragment(getSupportFragmentManager(), new LoginFragment(this, getSupportFragmentManager()));
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
+
 }

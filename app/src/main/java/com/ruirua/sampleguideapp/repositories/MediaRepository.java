@@ -152,7 +152,7 @@ public class MediaRepository {
     public void getImage(String link, ImageView imageView) {
         String filename = getFileName(link);
         if(hasImage(filename)) {
-            Log.d("DebugApp", "Tem imagem " + filename + " guardada");
+            // Log.d("DebugApp", "Tem imagem " + filename + " guardada");
             File imageFile = getImageFile(filename);
             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
             imageView.setImageBitmap(bitmap);
@@ -168,7 +168,7 @@ public class MediaRepository {
         String filename = getFileName(link);
         if(hasAudio(filename)) {
             try {
-                Log.d("DebugApp", "Tem audio " + filename +" guardado");
+                // Log.d("DebugApp", "Tem audio " + filename +" guardado");
                 File imageFile = getAudioFile(filename);
                 mediaPlayer.setDataSource(imageFile.getAbsolutePath());
                 mediaPlayer.prepare();
@@ -184,7 +184,7 @@ public class MediaRepository {
     public void getVideo(String link, VideoView videoView, Consumer<VideoView> posPrepared) {
         String filename = getFileName(link);
         if(hasVideo(filename)) {
-            Log.d("DebugApp", "Tem video " + filename + " guardado");
+            // Log.d("DebugApp", "Tem video " + filename + " guardado");
             File videoFile = getVideoFile(filename);
             videoView.setVideoURI(Uri.fromFile(videoFile));
             posPrepared.accept(videoView);

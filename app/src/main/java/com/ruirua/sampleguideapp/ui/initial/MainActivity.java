@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends OurActivity implements GoBackInterface {
+    private static boolean serviceOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,10 @@ public class MainActivity extends OurActivity implements GoBackInterface {
             permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
             permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
         }
-        else
+        else if(!serviceOn) {
             startService(new Intent(this, LocationService.class));
+            serviceOn = true;
+        }
         if(!permissions.isEmpty())
             requestPermissions(permissions.toArray(new String[0]), 100);
     }
@@ -63,7 +66,10 @@ public class MainActivity extends OurActivity implements GoBackInterface {
             Permissions.permission_call = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
             Permissions.permission_notitications = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
             Permissions.permission_location = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED;
-            startService(new Intent(this, LocationService.class));
+            if(!serviceOn) {
+                startService(new Intent(this, LocationService.class));
+                serviceOn = true;
+            }
         }
     }
 

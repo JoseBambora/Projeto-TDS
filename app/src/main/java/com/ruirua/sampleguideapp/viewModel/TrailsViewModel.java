@@ -24,7 +24,7 @@ public class TrailsViewModel extends AndroidViewModel {
         return repository.getAllTrails();
     }
 
-    public LiveData<Trail> getTrail(int id) { return repository.getTrail(id);}
+    public LiveData<Trail> getTrail(int id) { return repository.setTrail(id);}
 
     public List<LiveData<Trail>> getTrails(List<Integer> trailsIds) {
         return repository.getTrailsIds(trailsIds);

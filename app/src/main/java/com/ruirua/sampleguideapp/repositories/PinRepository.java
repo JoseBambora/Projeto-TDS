@@ -26,19 +26,14 @@ import retrofit2.Retrofit;
 
 public class PinRepository {
     private final PinDAO pinDAO;
-    private final MediatorLiveData<List<Pin>> allPins;
 
     private final PinAPI pinAPI;
 
-    public LiveData<List<Pin>> getAllPins(){
-        return allPins;
-    }
-
-    private void setValues(List<Pin> localPins) {
+    private void setValues(List<Pin> localPins, MediatorLiveData<List<Pin>> res) {
         if (localPins != null && !localPins.isEmpty()) {
-            allPins.setValue(localPins);
+            res.setValue(localPins);
         } else {
-            getPinsAPI();
+            getPinsAPI(res);
         }
     }
 
@@ -47,21 +42,20 @@ public class PinRepository {
         Retrofit retrofit= RepoFuns.buildRetrofit();
         pinAPI = retrofit.create(PinAPI.class);
         pinDAO = database.pinDAO();
-        allPins = new MediatorLiveData<>();
-        allPins.addSource(pinDAO.getPins(), this::setValues);
     }
 
-    public void insert(List<Pin> pins){
+    public void insert(List<Pin> pins,MutableLiveData<List<Pin>> res){
+        res.setValue(pins);
         Executors.newSingleThreadExecutor().execute(() -> pinDAO.insert(pins));
     }
 
-    private void getPinsAPI() {
+    private void getPinsAPI(MutableLiveData<List<Pin>> res) {
         UserRepository ur = UserRepository.getInstance();
         if(ur.isLogged()) {
             String csrftoken = ur.getCsrfToken();
             String sessionid = ur.getSessionId();
             Call<List<Pin>> call = pinAPI.getPins(csrftoken, sessionid);
-            call.enqueue(new UtilRepository<>((response) -> this.insert(response.body()), null));
+            call.enqueue(new UtilRepository<>((response) -> this.insert(response.body(),res), null));
         }
     }
 
@@ -84,6 +78,11 @@ public class PinRepository {
         else
             getPinAPI(id,res);
 
+    }
+    public LiveData<List<Pin>> getAllPins(){
+        MediatorLiveData<List<Pin>> res = new MediatorLiveData<>();
+        res.addSource(pinDAO.getPins(),t->setValues(t,res));
+        return res;
     }
     public LiveData<Pin> getPin(int id) {
         MediatorLiveData<Pin> res = new MediatorLiveData<>();

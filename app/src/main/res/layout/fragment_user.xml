@@ -206,6 +206,11 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="75dp"/>
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

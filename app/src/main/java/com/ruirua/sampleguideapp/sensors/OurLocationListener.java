@@ -31,6 +31,7 @@ public class OurLocationListener extends LocationCallback {
     }
 
     public static OurLocationListener createInstance(OurActivity activity) {
+        Log.d("ENTROU", "createInstance: ");
         if(instance == null)
             instance = new OurLocationListener(activity);
         return instance;

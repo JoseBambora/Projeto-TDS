@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Settings from './src/views/Settings';
+import NavBarStyle from './src/styles/NavBar';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
@@ -41,8 +42,9 @@ const App = () => {
           tabBarIcon:({ focused, color, size }) => {
             return <Ionicons name={getIcon(route)} size={size} color={color} />;
           },
-          tabBarActiveTintColor: 'red',
-          tabBarInactiveTintColor: 'gray'
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
+          tabBarStyle:NavBarStyle.navbar
         } )}
         >
         <Tab.Screen name="Autenticação" component={LoginStack} options={{ headerShown: false }}/>

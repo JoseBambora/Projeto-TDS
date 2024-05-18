@@ -14,12 +14,12 @@ const CardStyle = StyleSheet.create({
     },
     cardImage: {
       width: '100%',
-      height: 200, // Adjust height as needed
-      resizeMode: 'cover', // Adapt image to container
-      borderRadius: 8, // Match card corner radius
+      height: 200,
+      resizeMode: 'cover',
+      borderRadius: 8
     },
     cardContent: {
-      marginTop: 10, // Add space between image and content
+      marginTop: 10,
     },
   });
   

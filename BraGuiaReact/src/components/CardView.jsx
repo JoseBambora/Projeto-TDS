@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import CardStyle from '../styles/CardView';
 import OurText from './Text';
 
-const CardView = ({ title, description, imageSource, social_media }) => {
+const CardView = ({ title, description, imageSource }) => {
   return (
     <View style={CardStyle.card}>
       {imageSource && <Image source={imageSource} style={CardStyle.cardImage} />}

@@ -6,7 +6,7 @@ import OurText from '../components/Text';
 import OurTextInput from '../components/TextInput';
 import OurClickable from '../components/Clickable';
 import LoginRequest from '../helper/LoginRequest';
-import { IsAuthenticated, Logout } from '../helper/SessionState';
+import { IsAuthenticated, Logout } from '../redux/SessionState';
 
 
 function Login({navigation}) {

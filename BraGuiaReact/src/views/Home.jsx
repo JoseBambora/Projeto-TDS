@@ -7,6 +7,9 @@ import SocialMedia from '../components/SocialMedia';
 import Contacts from '../components/Contacts';
 import FooterStyle from '../styles/Footer';
 import Partners from '../components/Partners';
+import { GetTrails } from '../repositories/Trails';
+import { resetRealm } from '../redux/DB';
+import { GetPin } from '../repositories/Pins';
 
 
 

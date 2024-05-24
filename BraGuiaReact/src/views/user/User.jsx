@@ -5,6 +5,8 @@ import OurCardView from "../../components/CardView"
 import { GetUser } from "../../repositories/User"
 import OurText from "../../components/Text"
 import { Logout } from "../../repositories/User"
+import { OurHeaderCurve } from "../../components/HeaderCurve"
+import PageStyle from "../../styles/Pages"
 
 function userInfo(setData,setLoading,navigation) {
   useEffect(() => {
@@ -24,20 +26,21 @@ function User({ navigation }) {
       .catch(error => alert(error.message))
   }
   userInfo(setData,setLoading,navigation)
+  const content = {
+    'Primeiro Nome': data.first_name,
+    'Último Nome': data.last_name,
+    'Tipo de Utilizador': data.user_type,
+    'Email': data.email
+  }
   return isLoading ? (
     <View>
       <OurText content={'Loading user info'}/>
     </View>
   ) : (
     <ScrollView>
-      <View style={{ padding: 10, paddingBottom: 30 }}>
-        <OurCardView title={'Nome de Utilizador'} description={data.username} />
-        <OurCardView title={'Primeiro Nome'} description={data.first_name} />
-        <OurCardView title={'Último Nome'} description={data.last_name} />
-        <OurCardView title={'Email'} description={data.email} />
-        <OurCardView title={'Tipo de Utilizador'} description={data.user_type} />
-      </View>
-      <View style={{ padding: 5, paddingBottom: 10, paddingRight: 20, alignItems: 'flex-end' }}>
+      <OurHeaderCurve icon={'person'} content={data.username} />
+      <OurCardView data={content} />
+      <View style={PageStyle.bottomleft}>
         <OurButton title={'Logout'} icon={'log-out-outline'} onPress={logout} />
       </View>
     </ScrollView>

@@ -6,6 +6,7 @@ import OurText from '../../components/Text';
 import OurTextInput from '../../components/TextInput';
 import OurClickable from '../../components/Clickable';
 import LoginRequest from '../../helper/LoginRequest';
+import PageStyle from '../../styles/Pages'
 
 
 function Login({ navigation }) {
@@ -21,7 +22,7 @@ function Login({ navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={PageStyle.center}>
       <OurText content={'Página de Login'} color={'red'} fontSize={30} />
       <OurTextInput placeholder={'Nome de Utilizador'} password={false} icon={'user'} onChangeText={text => setUsername(text)} />
       <OurTextInput placeholder={'Palavra passe'} password={true} icon={'lock'} onChangeText={text => setPassword(text)} />

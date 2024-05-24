@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Settings from './src/views/Settings';
 import NavBarStyle from './src/styles/NavBar';
+import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
 
 const Tab = createBottomTabNavigator()
 
@@ -31,8 +32,8 @@ const App = () => {
             size = focused ? size + 5 : size
             return  <Ionicons name={getIcon(route)} size={size} color={color} />;
           },
-          tabBarActiveTintColor: 'palegoldenrod',
-          tabBarInactiveTintColor: 'white',
+          tabBarActiveTintColor: navBarColorSelected(),
+          tabBarInactiveTintColor: navBarColorNotSelected(),
           tabBarStyle:NavBarStyle.navbar,
         } )}
         >

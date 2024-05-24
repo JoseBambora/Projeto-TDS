@@ -5,7 +5,7 @@ import OurText from '../components/Text';
 function Settings({navigation}) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <OurText content={'Welcome to Settings Page'}/>
+      <OurText content={'Welcome to Settings Page'}/>
     </View>
   );
 };

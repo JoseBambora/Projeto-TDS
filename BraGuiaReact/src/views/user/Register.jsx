@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { View } from 'react-native';
-import OurButton from '../components/Button';
-import OurText from '../components/Text';
-import OurTextInput from '../components/TextInput';
-import OurClickable from '../components/Clickable';
+import OurButton from '../../components/Button';
+import OurText from '../../components/Text';
+import OurTextInput from '../../components/TextInput';
+import OurClickable from '../../components/Clickable';
 
 
 function Register({ navigation }) {

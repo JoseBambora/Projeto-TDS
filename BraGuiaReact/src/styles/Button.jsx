@@ -15,7 +15,7 @@ const ButtonStyle = StyleSheet.create({
     buttonText: {
       color: 'white',
       fontSize: 16,
-      marginLeft: 5, // Adjust this value to add space between icon and text
+      marginLeft: 5,
     },
 });
 

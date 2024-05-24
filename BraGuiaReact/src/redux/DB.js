@@ -81,7 +81,23 @@ const RelatedPinSchema = {
     pin: 'int',
   },
 };
+const UserSchema = {
+  name: 'User',
+  primaryKey: 'username',
+  properties: {
+    username: 'string',
+    user_type: 'string',
+    last_login: 'string',
+    is_superuser: 'bool',
+    first_name: 'string',
+    last_name: 'string',
+    email: 'string',
+    is_staff: 'bool',
+    is_active: 'bool',
+    date_joined: "string",
+  }
+}
 
-const realm = new Realm({ schema: [MediaSchema, PinSchema, RelatedPinSchema, TrailSchema, RelatedTrailSchema, EdgeSchema] });
+const realm = new Realm({ schema: [MediaSchema, PinSchema, RelatedPinSchema, TrailSchema, RelatedTrailSchema, EdgeSchema, UserSchema] });
 
 export default realm;

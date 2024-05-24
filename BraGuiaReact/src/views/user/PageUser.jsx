@@ -11,12 +11,12 @@ import Register from './Register';
 const Stack = createNativeStackNavigator();
 
 function StackNavigator(logged) {
-  initialRouteName = logged == 1 ? "User" : "Login"
+  initialRouteName = logged == 1 ? "UserPage" : "Login"
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="User" component={User} />
+      <Stack.Screen name="UserPage" component={User} />
     </Stack.Navigator>
   )
 }
@@ -29,11 +29,9 @@ function isLogged(setLogged) {
   }, [])
 }
 
-function PageUser({navigation}) {
+function PageUser() {
   const [logged, setLogged] = useState(0)
-
   useFocusEffect(isLogged(setLogged));
-  
   return logged == 0 ? (<OurText content={'A verificar se está autenticado'}/>) : StackNavigator(logged)
 };
 

@@ -16,7 +16,7 @@ const getIcon = (route) => {
   } else if (route.name.includes('Settings')) {
     return 'settings';
   }
-  else if (route.name.includes('PageUser')) {
+  else if (route.name.includes('User')) {
     return 'person'
   }
 }
@@ -28,14 +28,15 @@ const App = () => {
         initialRouteName='Home'
         screenOptions={({ route }) => ({
           tabBarIcon:({ focused, color, size }) => {
-            return <Ionicons name={getIcon(route)} size={size} color={color} />;
+            size = focused ? size + 5 : size
+            return  <Ionicons name={getIcon(route)} size={size} color={color} />;
           },
-          tabBarActiveTintColor: 'white',
+          tabBarActiveTintColor: 'palegoldenrod',
           tabBarInactiveTintColor: 'white',
-          tabBarStyle:NavBarStyle.navbar
+          tabBarStyle:NavBarStyle.navbar,
         } )}
         >
-        <Tab.Screen name="PageUser" component={PageUser} options={{ headerShown: false }}/>
+        <Tab.Screen name="User" component={PageUser} options={{ headerShown: false }}/>
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>

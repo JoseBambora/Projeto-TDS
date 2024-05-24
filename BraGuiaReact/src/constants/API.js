@@ -3,3 +3,4 @@ export const approute = () => `${server}/app`
 export const loginroute = () => `${server}/login`
 export const trailsroute = () => `${server}/trails`
 export const trailroute = (id) => `${server}/trail/${id}`
+export const userroute = () => `${server}/user`

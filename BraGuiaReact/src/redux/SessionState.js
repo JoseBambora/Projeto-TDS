@@ -7,7 +7,7 @@ export const IsAuthenticated = () => {
     .catch(error => { throw error })
 }
 
-export const Logout = () => {
+export const DeleteCookies = () => {
     return CookieManager.clearAll()
     .then(_ => 0)
     .catch(error => { throw error })

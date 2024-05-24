@@ -16,7 +16,7 @@ function Login({ navigation }) {
   };
   const postLogin = () => {
     LoginRequest(username, password)
-      .then(_ => navigation.replace('User'))
+      .then(_ => navigation.replace('UserPage'))
       .catch(error => alert(error.message))
   }
 

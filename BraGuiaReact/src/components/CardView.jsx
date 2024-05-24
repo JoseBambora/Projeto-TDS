@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import CardStyle from '../styles/CardView';
 import OurText from './Text';
 
-const CardView = ({ title, description, imageSource }) => {
+const OurCardView = ({ title, description, imageSource }) => {
   return (
     <View style={CardStyle.card}>
       {imageSource && <Image source={imageSource} style={CardStyle.cardImage} />}
       <View style={CardStyle.cardContent}>
-        <OurText content={title} fontSize={24} color={'red'}/>
+        <OurText content={title} fontSize={20} color={'red'}/>
         <OurText content={description} />
       </View>
     </View>
@@ -16,4 +16,4 @@ const CardView = ({ title, description, imageSource }) => {
 };
 
 
-export default CardView;
+export default OurCardView;

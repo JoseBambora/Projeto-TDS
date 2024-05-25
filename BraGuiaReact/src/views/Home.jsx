@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Image } from 'react-native';
 import OurText from '../components/Text';
 import OurCardView from '../components/CardView';
 import SocialMedia from '../components/SocialMedia';
@@ -8,11 +8,6 @@ import FooterStyle from '../styles/Footer';
 import Partners from '../components/Partners';
 import { textColorHeader } from '../styles/Colors';
 import { GetApp } from '../repositories/App';
-import { GetTrail } from '../repositories/Trails';
-import { GetPin } from '../repositories/Pins';
-import { IsAuthenticated } from '../repositories/User';
-
-
 
 function makeRequest(setData,setLoading) {
   useEffect(() => {

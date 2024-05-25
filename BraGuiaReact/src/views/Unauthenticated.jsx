@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { OurHeaderCurve } from '../components/HeaderCurve';
-import UnauthenticatedScreenStyles from '../styles/UnauthenticatedScreen'; // Import styles from separate file
+import UnauthenticatedStyles from '../styles/Unauthenticated';
 
-const UnauthenticatedScreen = () => {
+const Unauthenticated = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
@@ -12,10 +12,10 @@ const UnauthenticatedScreen = () => {
   };
 
   return (
-    <View style={UnauthenticatedScreenStyles.container}>
+    <View style={UnauthenticatedStyles.container}>
       <OurHeaderCurve icon="sad-sharp" />
-      <View style={UnauthenticatedScreenStyles.content}>
-        <Text style={UnauthenticatedScreenStyles.text}>
+      <View style={UnauthenticatedStyles.content}>
+        <Text style={UnauthenticatedStyles.text}>
           Para acessar aos trilhos, é necessário estar autenticado!
         </Text>
         <Button title="Autentique-se" onPress={handleLogin} color="red" />
@@ -24,4 +24,4 @@ const UnauthenticatedScreen = () => {
   );
 };
 
-export default UnauthenticatedScreen;
+export default Unauthenticated;

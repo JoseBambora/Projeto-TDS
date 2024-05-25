@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const UnauthenticatedScreenStyles = StyleSheet.create({
+const UnauthenticatedStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -19,4 +19,4 @@ const UnauthenticatedScreenStyles = StyleSheet.create({
   },
 });
 
-export default UnauthenticatedScreenStyles;
+export default UnauthenticatedStyles;

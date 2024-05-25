@@ -1,9 +1,9 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import OurCardView from './CardView';
-import TrailsStyles from '../styles/Trails'
+import TrailsStyles from '../styles/TrailsComponent';
 
-const Trails = ({ trailData }) => {
+const TrailsComponent = ({ trailData }) => {
   return (
     <ScrollView contentContainerStyle={TrailsStyles.container}>
       {trailData.map((trail) => (
@@ -20,4 +20,4 @@ const Trails = ({ trailData }) => {
   );
 };
 
-export default Trails;
+export default TrailsComponent;

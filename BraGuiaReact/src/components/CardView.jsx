@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import CardStyle from '../styles/CardView';
 import OurText from './Text';
-import { StyleSheet } from 'react-native';
 import { textColorHeader } from '../styles/Colors';
 
 const OurCardView = ({ data, imageSource }) => {

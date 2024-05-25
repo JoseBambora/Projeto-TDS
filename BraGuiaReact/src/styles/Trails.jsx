@@ -1,13 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-const TrailsStyles = StyleSheet.create({
+const TrailsScreen = StyleSheet.create({
   container: {
-    paddingVertical: 10,
-  },
-  cardWrapper: {
-    marginBottom: 10,
-    paddingHorizontal: 15,
-  },
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  }
 });
 
-export default TrailsStyles;
+export default TrailsScreen;

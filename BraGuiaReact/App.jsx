@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Settings from './src/views/Settings';
 import NavBarStyle from './src/styles/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
-import TrailsScreen from './src/views/trails/TrailsScreen';
+import Trails from './src/views/trails/Trails';
 
 const Tab = createBottomTabNavigator()
 
@@ -43,7 +43,7 @@ const App = () => {
         >
         <Tab.Screen name="User" component={PageUser} options={{ headerShown: false }}/>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Trails" component={TrailsScreen} />
+        <Tab.Screen name="Trails" component={Trails} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>

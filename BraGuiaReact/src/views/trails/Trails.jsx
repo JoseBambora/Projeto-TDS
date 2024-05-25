@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { SafeAreaView, StatusBar, ActivityIndicator } from 'react-native';
-import Trails from '../../components/Trails';
+import React, { useState, useCallback } from 'react';
+import { SafeAreaView, StatusBar } from 'react-native';
+import TrailsComponent from '../../components/TrailsComponent';
 import { GetTrails } from '../../repositories/Trails';
-import trailsScreenStyles from '../../styles/TrailsScreen';
+import TrailsScreen from '../../styles/Trails';
 import { IsAuthenticated } from '../../repositories/User';
-import UnauthenticatedScreen from '../UnauthenticatedScreen';
+import Unauthenticated from '../Unauthenticated';
+import LoadingIndicator from '../../components/Indicator';
 import { useFocusEffect } from '@react-navigation/native';
 
-const TrailsScreen = () => {
+const Trails = () => {
   const [trailData, setTrailData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
@@ -42,23 +43,21 @@ const TrailsScreen = () => {
   );
 
   if (!authenticated) {
-    return <UnauthenticatedScreen />;
+    return <Unauthenticated />;
   }
 
   if (loading) {
     return (
-      <SafeAreaView style={trailsScreenStyles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </SafeAreaView>
+      <LoadingIndicator/>
     );
   }
 
   return (
-    <SafeAreaView style={trailsScreenStyles.container}>
+    <SafeAreaView style={TrailsScreen.container}>
       <StatusBar barStyle="dark-content" />
-      <Trails trailData={trailData} />
+      <TrailsComponent trailData={trailData} />
     </SafeAreaView>
   );
 };
 
-export default TrailsScreen;
+export default Trails;

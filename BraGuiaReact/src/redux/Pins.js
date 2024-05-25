@@ -10,30 +10,18 @@ const CreatePin = (pin) => {
 }
 
 const UpdatePin = (pin) => {
-  const pinOriginal = realm.objectForPrimaryKey('Pin', id)
   realm.write(() => {
-    pinOriginal = pin
+    realm.create('Pin', pin, 'modified')
     console.log(`Deu Update ao pin ${pin.id}`)
   })
 }
 
 export const AddPinDB = (pin) => {
-  GetPinDB(pin.id)
-  .then(_ => UpdatePin(pin))
-  .catch(_ => CreatePin(pin))
+  const pindb = GetPinDB(pin.id)
+  if(pindb)
+    UpdatePin(pin)
+  else
+    CreatePin(pin)
 }
 
-export const GetPinDB = (id) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const pin = realm.objectForPrimaryKey('Pin', id);
-      if (pin) {
-        resolve(pin);
-      } else {
-        reject(new Error(`Pin with id ${id} not found`));
-      }
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
+export const GetPinDB = (id) => realm.objectForPrimaryKey('Pin', id);

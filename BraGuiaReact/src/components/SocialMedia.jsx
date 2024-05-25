@@ -15,13 +15,12 @@ const SocialIcon = ({ name }) => {
 };
 
 const SocialMedia = ({ social_links }) => {
-  const socialIcons = social_links.map((e) => { e.social_name = e.social_name.toLowerCase(); return e })
   return (
     <View>
       <OurText content={'Redes Sociais'} fontSize={20} color={'white'} />
       <View style={FooterStyle.container}>
         {
-          socialIcons.map((icon, index) => (
+          social_links.map((icon, index) => (
             <SocialIcon key={index} name={icon.social_name} />
           ))}
       </View>

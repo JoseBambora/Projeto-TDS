@@ -1,7 +1,7 @@
 import CookieManager from '@react-native-cookies/cookies';
 import { loginroute } from '../constants/API';
 
-export const IsAuthenticated = () => {
+export const HasCookies = () => {
     return CookieManager.get(loginroute())
     .then(data => data !== null && Object.keys(data).length > 0)
     .catch(error => { throw error })

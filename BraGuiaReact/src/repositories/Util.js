@@ -1,0 +1,1 @@
+export const CreatePromise = (data) => new Promise((resolve, _) => { resolve(data) })

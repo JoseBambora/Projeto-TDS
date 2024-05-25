@@ -1,19 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import { View, ScrollView } from 'react-native';
 import OurText from '../components/Text';
-import AppRequest from '../helper/AppRequest';
 import OurCardView from '../components/CardView';
 import SocialMedia from '../components/SocialMedia';
 import Contacts from '../components/Contacts';
 import FooterStyle from '../styles/Footer';
 import Partners from '../components/Partners';
 import { textColorHeader } from '../styles/Colors';
+import { GetApp } from '../repositories/App';
+import { GetTrail } from '../repositories/Trails';
+import { GetPin } from '../repositories/Pins';
+import { IsAuthenticated } from '../repositories/User';
 
 
 
 function makeRequest(setData,setLoading) {
   useEffect(() => {
-    AppRequest()
+    GetApp()
     .then(json => setData(json))
     .catch(err => alert(err.message))
     .finally(() => setLoading(false))

@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import OurText from '../../components/Text';
-import { IsAuthenticated } from '../../redux/SessionState';
+import { IsAuthenticated } from '../../repositories/User';
 import User from './User';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './Login';

@@ -32,6 +32,4 @@ export const AddUserDB = (user) => {
 }
 
 
-export const GetUsersDB = () => {
-  return Array.from(realm.objects('User'));
-};
+export const GetUsersDB = () => Array.from(realm.objects('User'));

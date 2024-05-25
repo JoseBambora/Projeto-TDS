@@ -1,12 +1,21 @@
-import { TrailsRequest } from "../helper/TrailsRequest";
-import { AddTrails, GetTrailsDB } from "../redux/Trails";
+import { TrailRequest, TrailsRequest } from "../helper/TrailsRequest";
+import { AddTrailDB, AddTrailsDB, GetTrailDB, GetTrailsDB } from "../redux/Trails";
+import { CreatePromise } from "./Util";
 
 
 function LoadAndSaveTrails() {
-    console.log('No Trails')
     return TrailsRequest()
     .then(data => {
-        AddTrails(data)
+        AddTrailsDB(data)
+        return data
+    })
+    .catch(err => { throw err})
+}
+
+function LoadAndSaveTrail(id) {
+    return TrailRequest(id)
+    .then(data => {
+        AddTrailDB(data)
         return data
     })
     .catch(err => { throw err})
@@ -14,7 +23,10 @@ function LoadAndSaveTrails() {
 
 export const GetTrails = () => {
     const trails = GetTrailsDB()
-    if(trails.length > 0)
-        console.log('Tem trails')
-    return trails.length == 0 ? LoadAndSaveTrails():  new Promise((resolve, _) => {resolve(trails)})
+    return trails.length > 0 ? CreatePromise(trails) : LoadAndSaveTrails()
+}
+
+export const GetTrail = (id) => {
+    const trail = GetTrailDB(id)
+    return trail ? CreatePromise(trail) : LoadAndSaveTrail(id)
 }

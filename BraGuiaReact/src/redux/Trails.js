@@ -16,36 +16,32 @@ const edgesConverter = (edges) => {
   });
 }
 
-export const AddTrail = (trail) => {
+const Insert = (trail) => {
+  realm.write(() => {
+    realm.create('Trail', trail)
+    console.log('Adicionou o trail ' + trail.id)
+  })
+}
+
+const Update = (trail) => {
+  realm.write(() => {
+    realm.create('Trail', trail,'Update')
+    console.log('Deu update ao trail ' + trail.id)
+  })
+}
+
+export const AddTrailDB = (trail) => {
   trail.edges.forEach(edge => {
     AddPinDB(edge.edge_start)
     AddPinDB(edge.edge_end)
   })
   trail.edges = edgesConverter(trail.edges)
-  realm.write(() => {
-    realm.create('Trail', trail)
-  })
+  if (GetTrailDB(trail.id))
+    Update(trail)
+  else 
+    Insert(trail)
 }
 
-export const AddTrails = (trails) => {
-  trails.forEach(t => AddTrail(t))
-}
-
-export const GetTrailsDB = () => {
-  return Array.from(realm.objects('Trail'));
-}
-
-export const GetTrailDB = (id) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const trail = realm.objectForPrimaryKey('Trail', id);
-      if (trail) {
-        resolve(trail);
-      } else {
-        reject(new Error(`Trail with id ${id} not found`));
-      }
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
+export const AddTrailsDB = (trails) => trails.forEach(t => AddTrail(t))
+export const GetTrailsDB = () => Array.from(realm.objects('Trail'));
+export const GetTrailDB = (id) => realm.objectForPrimaryKey('Trail', id);

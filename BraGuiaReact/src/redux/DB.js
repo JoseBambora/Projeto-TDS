@@ -98,6 +98,62 @@ const UserSchema = {
   }
 }
 
-const realm = new Realm({ schema: [MediaSchema, PinSchema, RelatedPinSchema, TrailSchema, RelatedTrailSchema, EdgeSchema, UserSchema] });
+const SocialSchema = {
+  name: 'Social',
+  properties: {
+    social_name: 'string',
+    social_url: 'string',
+    social_share_link: 'string'
+  }
+};
+
+const ContactSchema = {
+  name: 'Contact',
+  properties: {
+    contact_name: 'string',
+    contact_phone: 'string',
+    contact_url: 'string',
+    contact_mail: 'string',
+    contact_desc: 'string',
+  }
+};
+
+const PartnerSchema = {
+  name: 'Partner',
+  properties: {
+    partner_name: 'string',
+    partner_phone: 'string',
+    partner_url: 'string',
+    partner_mail: 'string',
+    partner_desc: 'string',
+  }
+};
+
+const AppSchema = {
+  name: 'App',
+  properties: {
+    app_name: 'string',
+    app_desc: 'string',
+    app_landing_page_text: 'string',
+    socials: { type: 'list', objectType: 'Social' },
+    contacts: { type: 'list', objectType: 'Contact' },
+    partners: { type: 'list', objectType: 'Partner' }
+  },
+};
+
+const realm = new Realm({
+  schema: [
+    MediaSchema,
+    PinSchema,
+    RelatedPinSchema,
+    TrailSchema,
+    RelatedTrailSchema,
+    EdgeSchema,
+    UserSchema,
+    SocialSchema,
+    ContactSchema,
+    PartnerSchema,
+    AppSchema]
+});
 
 export default realm;

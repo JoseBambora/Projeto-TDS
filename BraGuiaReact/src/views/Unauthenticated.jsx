@@ -3,6 +3,7 @@ import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { OurHeaderCurve } from '../components/HeaderCurve';
 import UnauthenticatedStyles from '../styles/Unauthenticated';
+import { activityColorPrimary } from '../styles/Colors';
 
 const Unauthenticated = () => {
   const navigation = useNavigation();
@@ -18,7 +19,7 @@ const Unauthenticated = () => {
         <Text style={UnauthenticatedStyles.text}>
           Para acessar aos trilhos, é necessário estar autenticado!
         </Text>
-        <Button title="Autentique-se" onPress={handleLogin} color="red" />
+        <Button title="Autentique-se" onPress={handleLogin} color={activityColorPrimary()} />
       </View>
     </View>
   );

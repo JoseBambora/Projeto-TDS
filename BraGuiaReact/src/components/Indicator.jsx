@@ -3,15 +3,10 @@ import { SafeAreaView, ActivityIndicator } from 'react-native';
 import Indicator from '../styles/Indicator';
 import { activityColorPrimary } from '../styles/Colors';
 
-const LoadingIndicator = ({size, color}) => (
+const LoadingIndicator = ({ size = 'large', color = activityColorPrimary() }) => (
   <SafeAreaView style={Indicator.defaultStyle}>
     <ActivityIndicator size={size} color={color} />
   </SafeAreaView>
 );
-
-LoadingIndicator.defaultProps = {
-  size: 'large',
-  color: activityColorPrimary()
-};
 
 export default LoadingIndicator;

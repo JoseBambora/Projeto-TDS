@@ -30,11 +30,9 @@ export const GetPinDB = (id) => {
       if (pin) {
         resolve(pin);
       } else {
-        console.log('NotFound here')
         reject(new Error(`Pin with id ${id} not found`));
       }
     } catch (error) {
-      console.log('Erro: ' + error.message)
       reject(error);
     }
   });

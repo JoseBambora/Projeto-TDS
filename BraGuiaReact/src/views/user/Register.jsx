@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { View } from 'react-native';
-import OurButton from '../components/Button';
-import OurText from '../components/Text';
-import OurTextInput from '../components/TextInput';
-import OurClickable from '../components/Clickable';
+import OurButton from '../../components/Button';
+import OurText from '../../components/Text';
+import OurTextInput from '../../components/TextInput';
+import OurClickable from '../../components/Clickable';
+import PageStyle from '../../styles/Pages';
 
 
 function Register({ navigation }) {
@@ -17,7 +18,7 @@ function Register({ navigation }) {
 
   }
   return (
-    <View style={{flex:1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={PageStyle.center}>
       <OurText content={'Página de Registo'} color={'red'} fontSize={30}/>
       <OurTextInput 
         placeholder={'Nome de Utilizador'} 

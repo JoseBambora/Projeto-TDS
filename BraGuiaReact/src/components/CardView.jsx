@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import CardStyle from '../styles/CardView';
 import OurText from './Text';
 import { StyleSheet } from 'react-native';
@@ -11,7 +11,7 @@ const OurCardView = ({ data, imageSource }) => {
   return (
     <View style={CardStyle.container}>
       <View style={CardStyle.card}>
-        {imageSource && <Image source={imageSource} style={CardStyle.cardImage} />}
+        {imageSource && <Image source={{uri:imageSource}} style={CardStyle.cardImage} />}
         <View style={CardStyle.cardContent}>
           {titles.map((title, index) => (
             <View key={index}>

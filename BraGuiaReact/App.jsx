@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Settings from './src/views/Settings';
 import NavBarStyle from './src/styles/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
+import TrailsScreen from './src/views/trails/TrailsScreen';
 
 const Tab = createBottomTabNavigator()
 
@@ -16,6 +17,9 @@ const getIcon = (route) => {
     return 'home';
   } else if (route.name.includes('Settings')) {
     return 'settings';
+  }
+  else if (route.name.includes('Trails')) {
+    return 'walk'
   }
   else if (route.name.includes('User')) {
     return 'person'
@@ -39,6 +43,7 @@ const App = () => {
         >
         <Tab.Screen name="User" component={PageUser} options={{ headerShown: false }}/>
         <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Trails" component={TrailsScreen} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>

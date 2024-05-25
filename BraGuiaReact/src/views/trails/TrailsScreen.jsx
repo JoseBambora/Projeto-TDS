@@ -35,10 +35,6 @@ const TrailsScreen = () => {
       });
   }, []);
 
-  useEffect(() => {
-    checkAuthentication();
-  }, [checkAuthentication]);
-
   useFocusEffect(
     useCallback(() => {
       checkAuthentication();

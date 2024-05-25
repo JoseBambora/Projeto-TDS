@@ -42,6 +42,6 @@ export const AddTrailDB = (trail) => {
     Insert(trail)
 }
 
-export const AddTrailsDB = (trails) => trails.forEach(t => AddTrail(t))
+export const AddTrailsDB = (trails) => trails.forEach(t => AddTrailDB(t))
 export const GetTrailsDB = () => Array.from(realm.objects('Trail'));
 export const GetTrailDB = (id) => realm.objectForPrimaryKey('Trail', id);

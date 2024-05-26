@@ -5,6 +5,7 @@ import PageUser from './src/views/user/PageUser'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Settings from './src/views/Settings';
+import History from './src/views/history/History';
 import NavBarStyle from './src/styles/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
 import Trails from './src/views/trails/Trails';
@@ -24,6 +25,9 @@ const getIcon = (route) => {
   else if (route.name.includes('User')) {
     return 'person'
   }
+  else if (route.name.includes('History')) {
+    return 'history'
+  }
 }
 
 const App = () => {
@@ -42,6 +46,7 @@ const App = () => {
         } )}
         >
         <Tab.Screen name="User" component={PageUser} options={{ headerShown: false }}/>
+        <Tab.Screen name="History" component={History} />
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Trails" component={Trails} />
         <Tab.Screen name="Settings" component={Settings} />

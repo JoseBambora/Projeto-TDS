@@ -7,11 +7,6 @@ const MediaStyle = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 8
   },
-  videoPlayer: {
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 8
-  },
   videoBox: {
     padding: 10,
   },

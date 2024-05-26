@@ -3,14 +3,14 @@ import { View, Image } from 'react-native';
 import CardStyle from '../styles/CardView';
 import OurText from './Text';
 import { textColorHeader } from '../styles/Colors';
+import OurImage from './media/Image';
 
 const OurCardView = ({ data, imageSource }) => {
   const titles = Object.keys(data);
-
   return (
     <View style={CardStyle.container}>
       <View style={CardStyle.card}>
-        {imageSource && <Image source={{uri:imageSource}} style={CardStyle.cardImage} />}
+        {imageSource && <OurImage url={imageSource} />}
         <View style={CardStyle.cardContent}>
           {titles.map((title, index) => (
             <View key={index}>

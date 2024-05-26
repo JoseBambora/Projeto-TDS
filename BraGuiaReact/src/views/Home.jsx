@@ -8,6 +8,8 @@ import FooterStyle from '../styles/Footer';
 import Partners from '../components/Partners';
 import { textColorHeader } from '../styles/Colors';
 import { GetApp } from '../repositories/App';
+import OurAudio from '../components/media/Audio';
+import OurVideo from '../components/media/Video';
 
 function makeRequest(setData,setLoading) {
   useEffect(() => {

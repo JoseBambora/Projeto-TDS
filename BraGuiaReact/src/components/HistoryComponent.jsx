@@ -2,33 +2,41 @@ import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import OurCardView from './CardView';
 import HistoryStyles from '../styles/HistoryComponent';
+import OurText from './Text';
 
 const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
+  const trailsContent = trailsData.reduce((acc, trail, index) => {
+    acc[`${index + 1}º Trilho`] = trail.trailName;
+    return acc;
+  }, {});
+
+
+  const pointsOfInterestContent = pointsOfInterestData.reduce((acc, point, index) => {
+    acc[`${index + 1}º Pin`] = point.pointOfInterestName;
+    return acc;
+  }, {});
+
   return (
     <ScrollView contentContainerStyle={HistoryStyles.container}>
       <View style={HistoryStyles.section}>
-        <Text style={HistoryStyles.sectionTitle}>Trilhos Visitados</Text>
-        {trailsData.map((trail) => (
-          <View key={trail.id} style={HistoryStyles.cardWrapper}>
-            <OurCardView
-              data={{
-                "Nome do trilho": trail.trailName
-              }}
-            />
-          </View>
-        ))}
+      <OurText 
+          content="Trilhos Visitados" 
+          fontSize={22} 
+          color="grey" 
+          textAlign="center" 
+          fontWeight="bold"
+        />
+        <OurCardView data={trailsContent} />
       </View>
       <View style={HistoryStyles.section}>
-        <Text style={HistoryStyles.sectionTitle}>Pontos de Interesse Visitados</Text>
-        {pointsOfInterestData.map((point) => (
-          <View key={point.id} style={HistoryStyles.cardWrapper}>
-            <OurCardView
-              data={{
-                "Ponto de Interesse": point.pointOfInterestName
-              }}
-            />
-          </View>
-        ))}
+      <OurText 
+          content="Pins Visitados" 
+          fontSize={22} 
+          color="grey" 
+          textAlign="center"
+          fontWeight="bold" 
+        />
+        <OurCardView data={pointsOfInterestContent} />
       </View>
     </ScrollView>
   );

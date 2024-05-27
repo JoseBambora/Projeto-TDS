@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import SwitchButtonStyle from '../styles/SwitchButton';
 import SwitchButton from '../components/SwitchButton';
+import { OurHeaderCurve } from '../components/HeaderCurve';
 
 function Settings() {
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
@@ -20,25 +21,28 @@ function Settings() {
   };
 
   return (
-    <View style={SwitchButtonStyle.container}>
-      <SwitchButton
-        label="Notificações"
-        value={areNotificationsEnabled}
-        onValueChange={toggleNotifications}
-        iconName="notifications"
-      />
-      <SwitchButton
-        label="Localização"
-        value={isLocationEnabled}
-        onValueChange={toggleLocation}
-        iconName="location-sharp"
-      />
-      <SwitchButton
-        label="Dark Mode"
-        value={isDarkModeEnabled}
-        onValueChange={toggleDarkMode}
-        iconName="moon"
-      />
+    <View style={{ flex: 1 }}>
+      <OurHeaderCurve icon="settings" />
+      <View style={SwitchButtonStyle.container}>
+        <SwitchButton
+          label="Notificações"
+          value={areNotificationsEnabled}
+          onValueChange={toggleNotifications}
+          iconName="notifications"
+        />
+        <SwitchButton
+          label="Localização"
+          value={isLocationEnabled}
+          onValueChange={toggleLocation}
+          iconName="location-sharp"
+        />
+        <SwitchButton
+          label="Dark Mode"
+          value={isDarkModeEnabled}
+          onValueChange={toggleDarkMode}
+          iconName="moon"
+        />
+      </View>
     </View>
   );
 }

@@ -4,16 +4,8 @@ import TextStyle from '../styles/Text';
 import { textColorPrimary } from '../styles/Colors';
 
 
-function OurText({ content, fontSize, color, textAlign, width}) {
-  if (fontSize == undefined)
-    fontSize = 16
-  if (color == undefined)
-    color = textColorPrimary()
-  if (textAlign == undefined)
-    textAlign = 'left'
-  return (
-    <Text style={TextStyle(fontSize,color,textAlign,width).textStyle}>{content}</Text>
-  );
-}
+const OurText = ({ content, fontSize=16, color=textColorPrimary(), textAlign='left', width}) => (
+  <Text style={TextStyle(fontSize,color,textAlign,width).textStyle}>{content}</Text>
+)
 
 export default OurText;

@@ -9,7 +9,7 @@ function OurButton({ onPress, title, icon, color=buttonColorPrimary(), iconColor
     <TouchableOpacity style={{... ButtonStyle.button, backgroundColor:color}} onPress={onPress}>
       <View style={ButtonStyle.buttonContent}>
         {icon && <Ionicons name={icon} size={20} color={iconColor} />}
-        {title && <Text style={ButtonStyle.buttonText}>{title}</Text>}
+        <Text style={ButtonStyle.buttonText}>{title}</Text>
       </View>
     </TouchableOpacity>
   );

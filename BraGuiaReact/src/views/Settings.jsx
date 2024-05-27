@@ -6,6 +6,7 @@ import SwitchButton from '../components/SwitchButton';
 function Settings() {
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
   const [areNotificationsEnabled, setAreNotificationsEnabled] = useState(false);
+  const [isDarkModeEnabled, setisDarkModeEnabled] = useState(false);
 
   const toggleLocation = () => {
     setIsLocationEnabled(previousState => !previousState);
@@ -13,6 +14,9 @@ function Settings() {
 
   const toggleNotifications = () => {
     setAreNotificationsEnabled(previousState => !previousState);
+  };
+  const toggleDarkMode = () => {
+    setisDarkModeEnabled(previousState => !previousState);
   };
 
   return (
@@ -28,6 +32,12 @@ function Settings() {
         value={isLocationEnabled}
         onValueChange={toggleLocation}
         iconName="location-sharp"
+      />
+      <SwitchButton
+        label="Dark Mode"
+        value={isDarkModeEnabled}
+        onValueChange={toggleDarkMode}
+        iconName="moon"
       />
     </View>
   );

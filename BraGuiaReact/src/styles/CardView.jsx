@@ -17,13 +17,6 @@ const CardStyle = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
   },
-  cardImage: {
-    height: 300,
-    flex: 1,
-    width: null,
-    resizeMode: 'cover',
-    borderRadius: 8
-  },
   cardContent: {
     marginTop: 2,
   },

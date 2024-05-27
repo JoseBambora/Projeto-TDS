@@ -26,3 +26,15 @@ export const Logout = () => {
 export const IsAuthenticated = () => {
     return HasCookies()
 }
+
+export const IsPremium = () => {
+    return IsAuthenticated()
+    .then(b => {
+        if(b) {
+           return GetUser()
+           .then(u => u.user_type === 'Premium')
+           .catch(_ => false)
+        }
+    })
+    .catch(_ => false)
+}

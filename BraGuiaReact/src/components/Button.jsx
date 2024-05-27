@@ -8,8 +8,8 @@ function OurButton({ onPress, title, icon}) {
   return (
     <TouchableOpacity style={ButtonStyle.button} onPress={onPress}>
       <View style={ButtonStyle.buttonContent}>
-      {icon && <Ionicons name={icon} size={20} color={iconsColorPrimary()} />}
-      <Text style={ButtonStyle.buttonText}>{title}</Text>
+        {icon && <Ionicons name={icon} size={20} color={iconsColorPrimary()} />}
+        <Text style={ButtonStyle.buttonText}>{title}</Text>
       </View>
     </TouchableOpacity>
   );

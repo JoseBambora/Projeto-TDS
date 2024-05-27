@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 
 const ButtonStyle = StyleSheet.create({
   button: {
-    backgroundColor: 'red',
     borderRadius: 20,
     padding: 10,
+    marginHorizontal: 5,
     alignItems: 'center',
   },
   buttonContent: {

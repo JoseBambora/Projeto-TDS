@@ -9,9 +9,9 @@ import History from './src/views/history/History';
 import NavBarStyle from './src/styles/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
 import Trails from './src/views/trails/Trails';
+import { EmergencyCall } from './src/components/Emergency';
 
 const Tab = createBottomTabNavigator()
-
 
 const getIcon = (route) => {
   if (route.name.includes('Home')) {
@@ -45,11 +45,11 @@ const App = () => {
           tabBarStyle:NavBarStyle.navbar,
         } )}
         >
-        <Tab.Screen name="User" component={PageUser} options={{ headerShown: false }}/>
-        <Tab.Screen name="History" component={History} />
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Trails" component={Trails} />
-        <Tab.Screen name="Settings" component={Settings} />
+        <Tab.Screen name="User" component={PageUser} options={{...EmergencyCall(), headerShown: false }}/>
+        <Tab.Screen name="History" component={History} options={EmergencyCall()}/>
+        <Tab.Screen name="Home" component={Home} options={EmergencyCall()}/>
+        <Tab.Screen name="Trails" component={Trails} options={EmergencyCall()}/>
+        <Tab.Screen name="Settings" component={Settings} options={EmergencyCall()}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

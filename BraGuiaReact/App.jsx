@@ -26,7 +26,7 @@ const getIcon = (route) => {
     return 'person'
   }
   else if (route.name.includes('History')) {
-    return 'timer'
+    return 'history'
   }
 }
 

@@ -6,19 +6,19 @@ import { Image } from "react-native"
 import MediaStyle from "../../styles/Media"
 import { AudioPlayer } from "./Audio"
 import { VideoPlayer } from "./Video"
+import OurText from "../Text"
+import { useFocusEffect } from "@react-navigation/native"
 
-const Local = (url, setContent) => {
-  console.log('local ' + url)
+const Premium = (url, setContent) => {
   LoadContent(url)
     .then(f => {
-      setContent({ loading: false, mediaUrl: `file://${f}` })
+      setContent({ loading: false, isPremium:true, mediaUrl: `file://${f}` })
     })
     .catch(e => console.log(e))
 }
 
-const Request = (url, setContent) => {
-  console.log('request ' + url)
-  setContent({ loading: false, mediaUrl: url })
+const Standard = (url, setContent) => {
+  setContent({ loading: false, isPremium:false, mediaUrl: url })
 }
 
 const Media = (mediaUrl, type) => {
@@ -28,18 +28,18 @@ const Media = (mediaUrl, type) => {
 }
 
 const OurMedia = ({ url, type }) => {
-  const [content, setContent] = useState({ loading: true, mediaUrl: '' })
+  const [content, setContent] = useState({ loading: true, mediaUrl: '', isPremium : false})
 
   const fetchData = useCallback(() => {
     IsPremium()
-      .then(b => b ? Local(url, setContent) : Request(url, setContent))
+      .then(b => b ? Premium(url, setContent) : Standard(url, setContent))
       .catch(e => console.log(e))
   }, [url]);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-  return content.loading ? <LoadingIndicator /> : content.mediaUrl != '' && Media(content.mediaUrl, type)
+  useFocusEffect(fetchData);
+  return content.loading ? <LoadingIndicator /> : 
+  content.isPremium ? content.mediaUrl != '' && Media(content.mediaUrl, type) :
+  <OurText content={'Conteúdo multimédia apenas disponível para utilizadores premium'} textAlign="center"/>
 }
 
 

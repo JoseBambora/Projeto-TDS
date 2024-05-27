@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'; // Assuming you're us
 import ButtonStyle from '../styles/Button';
 import { iconsColorPrimary } from '../styles/Colors';
 
-function OurButton({ onPress, title, icon}) {
+function OurButton({ onPress, title, icon }) {
   return (
     <TouchableOpacity style={ButtonStyle.button} onPress={onPress}>
       <View style={ButtonStyle.buttonContent}>

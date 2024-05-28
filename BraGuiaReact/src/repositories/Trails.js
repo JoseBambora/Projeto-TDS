@@ -5,19 +5,15 @@ import { CreatePromise } from "./Util";
 
 function LoadAndSaveTrails() {
     return TrailsRequest()
-    .then(data => {
-        AddTrailsDB(data)
-        return data
-    })
+    .then(data => AddTrailsDB(data))
+    .then(_ => GetTrailsDB())
     .catch(err => { throw err})
 }
 
 function LoadAndSaveTrail(id) {
     return TrailRequest(id)
-    .then(data => {
-        AddTrailDB(data)
-        return data
-    })
+    .then(data => AddTrailDB(data))
+    .then(_ => GetTrailDB(id))
     .catch(err => { throw err})
 }
 

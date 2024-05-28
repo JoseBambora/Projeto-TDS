@@ -15,7 +15,7 @@ function makeRequest(setData, setLoading,setContacts) {
     GetApp()
       .then(json => {
         setData(json)
-        setContacts({'Contacts': json.contacts.map((e) => `${e.contact_name} (${e.contact_phone})`)})
+        setContacts({'Contactos': json.contacts.map((e) => `${e.contact_name} (${e.contact_phone})`)})
       })
       .catch(err => alert(err.message))
       .finally(() => setLoading(false))

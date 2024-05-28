@@ -11,15 +11,8 @@ const FooterStyle = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     padding: 15,
-  },
-
-  container: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 10,
+    justifyContent: 'space-between'
   },
   element: {
     flexDirection: 'row',

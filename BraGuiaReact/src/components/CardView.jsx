@@ -15,7 +15,13 @@ const OurCardView = ({ data, imageSource }) => {
           {titles.map((title, index) => (
             <View key={index}>
               <OurText content={title} fontSize={20} color={textColorHeader()} />
-              <OurText content={data[title]} />
+              {Array.isArray(data[title]) ?
+                data[title].map((d, i) => (
+                  <View key={i}>
+                    <OurText content={`${i+1}. ${d}`} />
+                    {i < data[title].length - 1 && <View style={CardStyle.separator} />}
+                  </View>))
+                : (<OurText content={data[title]} />)}
               {index < titles.length - 1 && <View style={CardStyle.separator} />}
             </View>
           ))}

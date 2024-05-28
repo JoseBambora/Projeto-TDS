@@ -1,4 +1,5 @@
 import realm from "./DB";
+import { deepCopy } from "./Utils";
 
 const CreatePin = (pin) => {
   try {
@@ -24,4 +25,4 @@ export const AddPinDB = (pin) => {
     CreatePin(pin)
 }
 
-export const GetPinDB = (id) => realm.objectForPrimaryKey('Pin', id);
+export const GetPinDB = (id) => deepCopy(realm.objectForPrimaryKey('Pin', id));

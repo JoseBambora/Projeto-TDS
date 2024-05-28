@@ -4,11 +4,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import React, {useState} from 'react';
 
 
-const OurTextInput = ({placeholder,password, onChangeText, value, icon}) => {
+const OurTextInput = ({placeholder,password, onChangeText, value, icon, borderColor='gray'}) => {
     const [focus, setFocus] = useState(false);
-    
+    const textInputStyle = TextInputStyle(borderColor)
     return (
-    <View style={[TextInputStyle.inputWrapper, focus && TextInputStyle.focusedInputWrapper]}>
+    <View style={[textInputStyle.inputWrapper, focus && textInputStyle.focusedInputWrapper]}>
         <Icon name={icon} size={20} color="gray" style={TextInputStyle.icon} />
         <TextInput
             placeholder={placeholder} 

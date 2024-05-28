@@ -4,8 +4,9 @@ import TextStyle from '../styles/Text';
 import { textColorPrimary } from '../styles/Colors';
 
 
-const OurText = ({ content, fontSize=16, color=textColorPrimary(), textAlign='left', width}) => (
-  <Text style={TextStyle(fontSize,color,textAlign,width).textStyle}>{content}</Text>
+
+const OurText = ({ content, fontSize=16, color=textColorPrimary(), textAlign='left', width, fontWeight='normal'}) => (
+  <Text style={TextStyle(fontSize,color,textAlign,width,fontWeight).textStyle}>{content}</Text>
 )
 
 export default OurText;

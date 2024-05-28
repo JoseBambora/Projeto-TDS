@@ -7,6 +7,7 @@ import OurText from "../../components/Text"
 import { Logout } from "../../repositories/User"
 import { OurHeaderCurve } from "../../components/HeaderCurve"
 import PageStyle from "../../styles/Pages"
+import LoadingIndicator from "../../components/Indicator"
 
 function userInfo(setData,setLoading,navigation) {
   useEffect(() => {
@@ -32,11 +33,7 @@ function User({ navigation }) {
     'Tipo de Utilizador': data.user_type,
     'Email': data.email
   }
-  return isLoading ? (
-    <View>
-      <OurText content={'Loading user info'}/>
-    </View>
-  ) : (
+  return isLoading ? (<LoadingIndicator />) : (
     <ScrollView>
       <OurHeaderCurve icon={'person'} content={data.username} />
       <OurCardView data={content} />

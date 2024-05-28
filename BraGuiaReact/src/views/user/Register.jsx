@@ -5,19 +5,24 @@ import OurText from '../../components/Text';
 import OurTextInput from '../../components/TextInput';
 import OurClickable from '../../components/Clickable';
 import PageStyle from '../../styles/Pages';
+import LoadingIndicator from '../../components/Indicator';
+import { Alert } from 'react-native';
 
 
 function Register({ navigation }) {
   const [username, setUsername] = useState('');
   const [fstPassword, setPassword1] = useState('');
   const [sndPassword, setPassword2] = useState('');
+  const [register, setRegister] = useState(false);
   const redirectToLogin = () => {
     navigation.navigate('Login');
   };
-  const posRegister = () => {
-
+  const postRegister = () => {
+    setRegister(true)
+    Alert.alert(`Funcionalidade não implementada`);
+    setRegister(false)
   }
-  return (
+  return register ? (<LoadingIndicator />):(
     <View style={PageStyle.center}>
       <OurText content={'Página de Registo'} color={'red'} fontSize={30}/>
       <OurTextInput 
@@ -33,7 +38,7 @@ function Register({ navigation }) {
         placeholder={'Confirmar Palavra Passe'} 
         password={true} icon={'lock'} 
         onChangeText={text => setPassword2(text)}/>
-      <OurButton title='Registar' onPress={posRegister} icon={'person-add'}/>
+      <OurButton title='Registar' onPress={postRegister} icon={'person-add'}/>
       <OurClickable text={'Já criou conta?'} title='Faça login' onPress={redirectToLogin}/>
     </View>
   );

@@ -141,6 +141,25 @@ const AppSchema = {
   },
 };
 
+const TrailHistorySchema = {
+  name: 'TrailHistory',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    trailName: 'string'
+  },
+}
+
+
+const PinHistorySchema = {
+  name: 'PinHistory',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    pointOfInterestName: 'string'
+  },
+};
+
 const realm = new Realm({
   schema: [
     MediaSchema,
@@ -153,7 +172,9 @@ const realm = new Realm({
     SocialSchema,
     ContactSchema,
     PartnerSchema,
-    AppSchema]
+    AppSchema,
+    TrailHistorySchema,
+    PinHistorySchema]
 });
 
 export default realm;

@@ -1,50 +1,70 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/Text'; 
-import { textColorHeader } from '../../styles/Colors';
+import { textColorHeader, activityColorPrimary } from '../../styles/Colors';
 import OurCardView from '../../components/CardView';
 import OurButton from '../../components/Button';
-import { activityColorPrimary } from '../../styles/Colors';
+import EdgeCard from '../../components/EdgeCard';
+import PinCard from '../../components/PinCard';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const getAllPins = (trail) => {
+  const pinSet = new Set();
+  const aux = [];
+  if (trail.edges && trail.edges.length > 0) {
+    trail.edges.forEach((edge) => {
+      if(!aux.includes(edge.edge_start.pin_name)){
+        aux.push(edge.edge_start.pin_name)
+        pinSet.add(edge.edge_start);
+      }
+      if(!aux.includes(edge.edge_end.pin_name)){
+        aux.push(edge.edge_end.pin_name)
+        pinSet.add(edge.edge_end);
+      }
+    });
+  }
+  return Array.from(pinSet);
+};
 
 const TrailDetail = ({ route }) => {
   const { trail } = route.params;
-
-  const formatRelTrails = (relTrails) => {
-    const formattedTrails = relTrails.map(trail => ({
-      "Attribute": trail.attrib,
-      "Id": trail.id,
-      "Value": trail.value
-    }));
-    return formattedTrails.map(trail => `${trail.Attribute}: ${trail.Value}`);;
-  }
-
-  const trailDetails = {
-    "Id": trail.id,
-    "Nome do Trilho": trail.trail_name,
-    "Descrição": trail.trail_desc,
-    "Duração": trail.trail_duration + " minutos",
-    "Dificuldade": trail.trail_difficulty,
-  }
-
-  if (trail.rel_trail && trail.rel_trail.length > 0) {
-    trailDetails["Informações Extra"] = formatRelTrails(trail.rel_trail);
-  }
+  const pins = getAllPins(trail);
 
   return (
     <ScrollView>
       <OurImage url={trail.trail_img}/> 
       <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
-      <OurCardView data={trailDetails} />
-      <OurText content={"Trajeto"} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
-      {/*ADICIONAR AQUI COMPONENTE PARA A LISTA DE PINS E FUNÇÃO PARA INICIAR O TRILHO*/}
+      <OurCardView data={{ "Id": trail.id, "Nome do Trilho": trail.trail_name, "Descrição": trail.trail_desc, "Duração": trail.trail_duration + " minutos", "Dificuldade": trail.trail_difficulty }} />
+      <OurText content={"Pontos de interesse"} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
+
+      {pins.map((pin, index) => (
+        <View key={index}>
+          <PinCard pin={pin} />
+          {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={styles.arrow} />}
+        </View>
+      ))}
+      
+      <OurText content={"Detalhes do trajeto"} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
+      {trail.edges && trail.edges.length > 0 &&
+        trail.edges.map((edge, index) => (
+          <EdgeCard key={index} edge={edge} />
+        ))
+      }
       <OurButton
-          icon={"play-sharp"}
-          title={"Iniciar Trilho"}
-          color={activityColorPrimary()}>
-          </OurButton>
+        icon={"play-sharp"}
+        title={"Iniciar Trilho"}
+        color={activityColorPrimary()}
+      />
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  arrow: {
+    alignSelf: 'center',
+    marginTop: -35,
+  },
+});
 
 export default TrailDetail;

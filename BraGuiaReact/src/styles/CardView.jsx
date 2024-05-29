@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const CardStyle = StyleSheet.create({
   container: {
     padding: 10, 
-    paddingBottom: 30 
+    paddingBottom: 30,
   },
   card: {
     backgroundColor: 'white',
@@ -17,7 +17,22 @@ const CardStyle = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
   },
+  cardIcon: {
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent:'center',
+    marginRight: 10,
+  },
   cardContent: {
+    width:"100%",
+    marginTop: 2,
+  },
+  cardContent2 : {
+    width:"80%",
     marginTop: 2,
   },
   separator: {

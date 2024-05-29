@@ -6,7 +6,7 @@ import { IsAuthenticated } from '../../repositories/User';
 import Unauthenticated from '../Unauthenticated';
 import LoadingIndicator from '../../components/Indicator';
 import { useFocusEffect } from '@react-navigation/native';
-
+import { GetTrailsHistory, GetPinsHistory } from '../../repositories/History';
 const History = () => {
   const [trailsData, setTrailsData] = useState([]);
   const [pointsOfInterestData, setPointsOfInterestData] = useState([]);
@@ -18,7 +18,7 @@ const History = () => {
       .then(isAuthenticated => {
         setAuthenticated(isAuthenticated);
         if (isAuthenticated) {
-          return fetchHistoryData(); // Placeholder so para teste de interface
+          return fetchHistoryData();
         } else {
           setLoading(false);
           return Promise.resolve({ trails: [], pointsOfInterest: [] });
@@ -45,12 +45,10 @@ const History = () => {
     return <LoadingIndicator />;
   }
 
-
   if (!authenticated) {
     return <Unauthenticated />;
   }
 
-  
   return (
     <View style={HistoryScreen.container}>
       <HistoryComponent trailsData={trailsData} pointsOfInterestData={pointsOfInterestData} />
@@ -61,14 +59,10 @@ const History = () => {
 export default History;
 
 const fetchHistoryData = () => {
-  return Promise.resolve({
-    trails: [
-      { id: 1, trailName: 'Holy Trail' },
-      { id: 2, trailName: 'Student Trail' },
-    ],
-    pointsOfInterest: [
-      { id: 1, pointOfInterestName: 'Bom Jesus' },
-      { id: 2, pointOfInterestName: 'Casa da Ribas' },
-    ],
+  return Promise.all([GetTrailsHistory(), GetPinsHistory()]).then(([trails, pointsOfInterest]) => {
+    return {
+      trails,
+      pointsOfInterest,
+    };
   });
 };

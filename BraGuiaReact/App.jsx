@@ -8,8 +8,8 @@ import Settings from './src/views/Settings';
 import History from './src/views/history/History';
 import NavBarStyle from './src/styles/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
-import Trails from './src/views/trails/Trails';
 import { EmergencyCall } from './src/components/Emergency';
+import TrailsStack from './src/views/trails/TrailsStack';
 
 const Tab = createBottomTabNavigator()
 
@@ -48,7 +48,7 @@ const App = () => {
         <Tab.Screen name="User" component={PageUser} options={{...EmergencyCall(), headerShown: false }}/>
         <Tab.Screen name="History" component={History} options={EmergencyCall()}/>
         <Tab.Screen name="Home" component={Home} options={EmergencyCall()}/>
-        <Tab.Screen name="Trails" component={Trails} options={EmergencyCall()}/>
+        <Tab.Screen name="Trails" component={TrailsStack} options={{...EmergencyCall(), headerShown: false }}/>
         <Tab.Screen name="Settings" component={Settings} options={EmergencyCall()}/>
       </Tab.Navigator>
     </NavigationContainer>

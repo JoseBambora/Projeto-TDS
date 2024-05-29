@@ -42,14 +42,14 @@ const Trails = () => {
     }, [checkAuthentication])
   );
 
-  if (!authenticated) {
-    return <Unauthenticated />;
-  }
-
   if (loading) {
     return (
       <LoadingIndicator/>
     );
+  }
+
+  if (!authenticated) {
+    return <Unauthenticated />;
   }
 
   return (

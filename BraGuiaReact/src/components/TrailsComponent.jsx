@@ -1,20 +1,31 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import OurCardView from './CardView';
 import TrailsStyles from '../styles/TrailsComponent';
 
 const TrailsComponent = ({ trailData }) => {
+  const navigation = useNavigation();
+
+  const handleTrailPress = (trail) => {
+    navigation.navigate('TrailDetail', { trail });
+  };
+
   return (
     <ScrollView contentContainerStyle={TrailsStyles.container}>
       {trailData.map((trail) => (
-        <View key={trail.id} style={TrailsStyles.cardWrapper}>
+        <TouchableOpacity 
+          key={trail.id} 
+          style={TrailsStyles.cardWrapper} 
+          onPress={() => handleTrailPress(trail)}
+        >
           <OurCardView
             data={{
               "Nome do trilho": trail.trail_name
             }}
             imageSource={trail.trail_img}
           />
-        </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );

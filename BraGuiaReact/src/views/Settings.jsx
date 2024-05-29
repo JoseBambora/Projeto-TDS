@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import SwitchButtonStyle from '../styles/SwitchButton';
 import SwitchButton from '../components/SwitchButton';
 import { OurHeaderCurve } from '../components/HeaderCurve';
+import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn } from '../repositories/Settings';
 
 function Settings() {
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
   const [areNotificationsEnabled, setAreNotificationsEnabled] = useState(false);
-  const [isDarkModeEnabled, setisDarkModeEnabled] = useState(false);
+  const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
+
+  useEffect(() => {
+    const settings = GetSettings();
+    setIsLocationEnabled(settings.location_on);
+    setAreNotificationsEnabled(settings.notification_on);
+    setIsDarkModeEnabled(settings.dark_mode);
+  }, []);
 
   const toggleLocation = () => {
-    setIsLocationEnabled(previousState => !previousState);
+    const newValue = !isLocationEnabled;
+    setIsLocationEnabled(newValue);
+    SaveLocationOn(newValue);
   };
 
   const toggleNotifications = () => {
-    setAreNotificationsEnabled(previousState => !previousState);
+    const newValue = !areNotificationsEnabled;
+    setAreNotificationsEnabled(newValue);
+    SaveNotificationOn(newValue);
   };
+
   const toggleDarkMode = () => {
-    setisDarkModeEnabled(previousState => !previousState);
+    const newValue = !isDarkModeEnabled;
+    setIsDarkModeEnabled(newValue);
+    SaveDarkMode(newValue);
   };
 
   return (

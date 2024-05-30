@@ -3,11 +3,13 @@ import { requestLocationPermission, getLocation } from './Geolocation';
 import { IsPremium } from '../repositories/User';
 import { IsLocationOn, TimeoutLocation } from '../repositories/Settings';
 
+let isRunning = false
 
 const startService = async () => {
   console.log('A arrancar serviço')
   const hasLocationPermission = await requestLocationPermission();
   if (hasLocationPermission && IsLocationOn()) {
+    isRunning = true
     BackgroundTimer.runBackgroundTimer(() => {
       getLocation();
     }, TimeoutLocation());
@@ -15,17 +17,23 @@ const startService = async () => {
 }
 
 export const startBackgroundTask = () => {
-  IsPremium()
+  if(!isRunning) {
+    IsPremium()
     .then(b => { if(b) startService() })
     .catch(e => {throw e})
+  }
 };
 
 export const stopBackgroundTask = () => {
-  console.log('A parar serviço')
-  BackgroundTimer.stopBackgroundTimer();
+  if(isRunning) {
+    console.log('A parar serviço')
+    BackgroundTimer.stopBackgroundTimer();
+  }
 };
 
 export const restartBackGroudTask = () => {
-  stopBackgroundTask()
-  startBackgroundTask()
+  if(!isRunning) {
+    stopBackgroundTask()
+    startBackgroundTask()
+  }
 }

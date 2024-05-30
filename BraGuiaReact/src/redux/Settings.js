@@ -21,4 +21,4 @@ export const isDarkModeDB = () => storage.contains('dark_mode') ? storage.getBoo
 export const locationOnDB = () => storage.contains('location_on') ? storage.getBoolean('location_on') : true
 export const notificationOnDB = () => storage.contains('notification_on') ? storage.getBoolean('notification_on') : false
 export const isHighAccuracyDB = () => storage.contains('accuracy') ? storage.getBoolean('accuracy') : true
-export const timeoutDB = () => storage.contains('timeout') ? storage.getNumber('timeout') : 1000
+export const timeoutDB = () => storage.contains('timeout') ? storage.getNumber('timeout') : 120000

@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import OurCardView from './CardView';
+import PinCardStyles from '../styles/PinCard';
 
 const PinCard = ({ pin }) => {
   return (
-    <View style={styles.container}>
+    <View style={PinCardStyles.container}>
       <OurCardView
          data={{
           "Nome do Pin": pin.pin_name
@@ -14,15 +15,5 @@ const PinCard = ({ pin }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
-  arrow: {
-    alignSelf: 'center',
-    marginTop: 10, // Adjust as needed for spacing
-  },
-});
 
 export default PinCard;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/Text'; 
 import { textColorHeader, activityColorPrimary } from '../../styles/Colors';
@@ -8,6 +8,7 @@ import OurButton from '../../components/Button';
 import EdgeCard from '../../components/EdgeCard';
 import PinCard from '../../components/PinCard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import TrailDetailStyles from '../../styles/TrailDetail';
 
 const getAllPins = (trail) => {
   const pinSet = new Set();
@@ -27,9 +28,13 @@ const getAllPins = (trail) => {
   return Array.from(pinSet);
 };
 
-const TrailDetail = ({ route }) => {
+const TrailDetail = ({ route, navigation }) => {
   const { trail } = route.params;
   const pins = getAllPins(trail);
+
+  const handlePinPress = (pin) => {
+    navigation.navigate('PinDetail', { pin });
+  };
 
   return (
     <ScrollView>
@@ -40,8 +45,10 @@ const TrailDetail = ({ route }) => {
 
       {pins.map((pin, index) => (
         <View key={index}>
-          <PinCard pin={pin} />
-          {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={styles.arrow} />}
+          <TouchableOpacity onPress={() => handlePinPress(pin)}>
+            <PinCard pin={pin} />
+          </TouchableOpacity>
+          {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={TrailDetailStyles.arrow} />}
         </View>
       ))}
       
@@ -59,12 +66,5 @@ const TrailDetail = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  arrow: {
-    alignSelf: 'center',
-    marginTop: -35,
-  },
-});
 
 export default TrailDetail;

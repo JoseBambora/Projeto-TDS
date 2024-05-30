@@ -1,16 +1,9 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text } from 'react-native';
+import LabelStyles from '../styles/Label';
 
 const Label = ({ text }) => {
-  return <Text style={styles.label}>{text}</Text>;
+  return <Text style={LabelStyles.label}>{text}</Text>;
 };
-
-const styles = StyleSheet.create({
-  label: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginRight: 10,
-  },
-});
 
 export default Label;

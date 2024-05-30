@@ -2,6 +2,7 @@
 import { PermissionsAndroid, Platform } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import { GetPins } from '../repositories/Pins';
+import { IsHighAccuracyLocation } from '../repositories/Settings';
 
 export const requestLocationPermission = async () => {
     if (Platform.OS === 'android') {
@@ -39,7 +40,7 @@ export const getLocation = () => {
             console.error('Geolocation Error:', error);
         },
         {
-            enableHighAccuracy: true,
+            enableHighAccuracy: IsHighAccuracyLocation(),
             timeout: 15000,
             maximumAge: 10000
         }

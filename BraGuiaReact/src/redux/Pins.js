@@ -26,3 +26,4 @@ export const AddPinDB = (pin) => {
 }
 
 export const GetPinDB = (id) => deepCopy(realm.objectForPrimaryKey('Pin', id));
+export const GetPinsDB = () => deepCopy(realm.objects('Pin'))

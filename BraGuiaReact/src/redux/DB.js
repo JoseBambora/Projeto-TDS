@@ -1,7 +1,5 @@
 import Realm from "realm";
 
-
-// Define the schema for the edges
 const EdgeSchema = {
   name: 'Edge',
   primaryKey: 'id',
@@ -27,7 +25,6 @@ const RelatedTrailSchema = {
   },
 };
 
-// Define the schema for the trail
 const TrailSchema = {
   name: 'Trail',
   primaryKey: 'id',
@@ -43,7 +40,6 @@ const TrailSchema = {
   },
 };
 
-// Define the schema for the media files
 const MediaSchema = {
   name: 'Media',
   primaryKey: 'id',
@@ -55,7 +51,6 @@ const MediaSchema = {
   },
 };
 
-// Define the schema for the pins
 const PinSchema = {
   name: 'Pin',
   primaryKey: 'id',
@@ -101,6 +96,7 @@ const UserSchema = {
 const SocialSchema = {
   name: 'Social',
   properties: {
+    social_app: 'string',
     social_name: 'string',
     social_url: 'string',
     social_share_link: 'string'
@@ -110,6 +106,7 @@ const SocialSchema = {
 const ContactSchema = {
   name: 'Contact',
   properties: {
+    contact_app: 'string',
     contact_name: 'string',
     contact_phone: 'string',
     contact_url: 'string',
@@ -121,6 +118,7 @@ const ContactSchema = {
 const PartnerSchema = {
   name: 'Partner',
   properties: {
+    partner_app: 'string',
     partner_name: 'string',
     partner_phone: 'string',
     partner_url: 'string',

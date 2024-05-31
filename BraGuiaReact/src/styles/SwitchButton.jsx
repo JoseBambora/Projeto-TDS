@@ -11,7 +11,7 @@ const SwitchButtonStyle = StyleSheet.create({
   switchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 15,
   },
   text: {
     color: textColorPrimary(),

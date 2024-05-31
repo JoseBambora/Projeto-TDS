@@ -14,16 +14,9 @@ const PinDetail = ({ route }) => {
   const [isPremium, setIsPremium] = useState(null);
 
   useEffect(() => {
-    const checkPremiumStatus = async () => {
-      try {
-        const premiumStatus = await IsPremium();
-        setIsPremium(premiumStatus);
-      } catch (error) {
-        console.error('Error checking premium status', error);
-      }
-    };
-
-    checkPremiumStatus();
+    IsPremium()
+      .then(premiumStatus => setIsPremium(premiumStatus))
+      .catch(error => console.error('Error checking premium status', error));
   }, []);
 
   const pinData = {

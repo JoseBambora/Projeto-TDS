@@ -10,22 +10,23 @@ import PinCard from '../../components/PinCard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TrailDetailStyles from '../../styles/TrailDetail';
 
+const add = (edge, aux, pins) => {
+  if (!aux.has(edge.pin_name)) {
+    aux.add(edge.pin_name);
+    pins.push(edge);
+  }
+};
+
 const getAllPins = (trail) => {
-  const pinSet = new Set();
-  const aux = [];
+  const pins = [];
+  const aux = new Set();
   if (trail.edges && trail.edges.length > 0) {
     trail.edges.forEach((edge) => {
-      if(!aux.includes(edge.edge_start.pin_name)){
-        aux.push(edge.edge_start.pin_name)
-        pinSet.add(edge.edge_start);
-      }
-      if(!aux.includes(edge.edge_end.pin_name)){
-        aux.push(edge.edge_end.pin_name)
-        pinSet.add(edge.edge_end);
-      }
+      add(edge.edge_start, aux, pins);
+      add(edge.edge_end, aux, pins);
     });
   }
-  return Array.from(pinSet);
+  return pins;
 };
 
 const TrailDetail = ({ route, navigation }) => {

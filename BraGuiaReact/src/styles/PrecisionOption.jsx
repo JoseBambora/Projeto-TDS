@@ -9,11 +9,11 @@ const PrecisionOptionStyle = StyleSheet.create({
   },
   optionButton: {
     backgroundColor: 'white',
-    padding: 5,
+    padding: 15,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: 'gray',
-    width: '40%',
+    width: '50%',
   },
   selectedOption: {
     backgroundColor: 'lightblue',

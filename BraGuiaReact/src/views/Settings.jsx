@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import SwitchButtonStyle from '../styles/SwitchButton';
 import SwitchButton from '../components/SwitchButton';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { OurHeaderCurve } from '../components/HeaderCurve';
 import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn } from '../repositories/Settings';
 import PrecisionOption from '../components/PrecisionOption';
@@ -76,11 +77,13 @@ function Settings() {
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '50%' }}>
           <PrecisionOption
             label="Baixa"
+            choosenicon='trending-down'
             isSelected={accuracy === 'Baixa'}
             onPress={() => handleAccuracyChange('Baixa')}
           />
           <PrecisionOption
             label="Alta"
+            choosenicon='trending-up'
             isSelected={accuracy === 'Alta'}
             onPress={() => handleAccuracyChange('Alta')}
           />

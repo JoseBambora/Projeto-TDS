@@ -15,9 +15,9 @@ const OurSlider = ({ value, onValueChange, min, max, step, title, valueLabel }) 
         step={step}
         value={value}
         onValueChange={onValueChange}
-        minimumTrackTintColor="#1EB1FC"
+        minimumTrackTintColor="#FF0000"
         maximumTrackTintColor="#d3d3d3"
-        thumbTintColor="#1EB1FC"
+        thumbTintColor="#FF0000"
       />
       <OurText content={valueLabel(value)} fontSize={16} textAlign="center" />
     </View>

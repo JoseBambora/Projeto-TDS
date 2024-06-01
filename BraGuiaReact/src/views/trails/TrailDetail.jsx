@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/Text'; 
@@ -10,7 +9,7 @@ import PinCard from '../../components/PinCard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TrailDetailStyles from '../../styles/TrailDetail';
 import { IsPremium } from '../../repositories/User';
-import LoadingIndicator from '../../components/Indicator';
+import { AddTrailHistory, AddPinHistory } from '../../repositories/History';
 import { OpenURL } from '../../constants/Links';
 
 const add = (edge, aux, pins) => {
@@ -37,7 +36,6 @@ const buildUrl = (pins) => {
   return `https://www.google.com/maps/dir/${encodedPins.join('/')}/`;
 };
 
-
 const openGoogleMaps = (pins) => OpenURL(buildUrl(pins));
 
 const TrailDetail = ({ route, navigation }) => {
@@ -46,6 +44,7 @@ const TrailDetail = ({ route, navigation }) => {
 
   const handlePinPress = (pin) => {
     navigation.navigate('PinDetail', { pin });
+    AddPinHistory(pin);
   };
 
   const handleStartTrailPress = () => {
@@ -53,6 +52,7 @@ const TrailDetail = ({ route, navigation }) => {
       .then(premiumStatus => {
         if (premiumStatus) {
           openGoogleMaps(pins);
+          AddTrailHistory(trail);
         } else {
           alert('Funcionalidade apenas para utilizadores premium.');
         }
@@ -62,9 +62,18 @@ const TrailDetail = ({ route, navigation }) => {
 
   return (
     <ScrollView>
+      
       <OurImage url={trail.trail_img}/> 
       <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
-      <OurCardView data={{ "Id": trail.id, "Nome do Trilho": trail.trail_name, "Descrição": trail.trail_desc, "Duração": trail.trail_duration + " minutos", "Dificuldade": trail.trail_difficulty }} />
+      
+      <OurButton
+        icon={"play-sharp"}
+        title={"Iniciar Trilho"}
+        color={activityColorPrimary()}
+        onPress={handleStartTrailPress}
+      />
+
+      <OurCardView data={{ "Descrição": trail.trail_desc, "Duração": trail.trail_duration + " minutos", "Dificuldade": trail.trail_difficulty }} />
       <OurText content={"Pontos de interesse"} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
 
       {pins.map((pin, index) => (
@@ -82,12 +91,6 @@ const TrailDetail = ({ route, navigation }) => {
           <EdgeCard key={index} edge={edge} />
         ))
       }
-      <OurButton
-        icon={"play-sharp"}
-        title={"Iniciar Trilho"}
-        color={activityColorPrimary()}
-        onPress={handleStartTrailPress}
-      />
     </ScrollView>
   );
 };

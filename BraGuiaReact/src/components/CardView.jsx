@@ -28,7 +28,6 @@ const OurCardView = ({ data, imageSource, icon }) => {
                 data[title].map((d, i) => (
                   <View key={i}>
                     <OurText content={d} />
-                    {i < data[title].length - 1 && <View style={CardStyle.separator} />}
                   </View>))
                 : (<OurText content={data[title]} />)}
               {index < titles.length - 1 && <View style={CardStyle.separator} />}

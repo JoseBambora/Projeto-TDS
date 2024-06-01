@@ -6,14 +6,17 @@ import { textColorSecondary } from '../styles/Colors';
 import { OpenURL } from '../constants/Links';
 
 const SocialIcon = ({ name, link }) => {
+  const handlePress = () => {
+    OpenURL(link);
+  };
+
   return (
-    <TouchableOpacity style={FooterStyle.element} onPress={OpenURL(link)}>
-      <Icon name={name}
-        size={30}
-        color={'white'} />
+    <TouchableOpacity style={FooterStyle.element} onPress={handlePress}>
+      <Icon name={name} size={30} color={'white'} />
     </TouchableOpacity>
   );
 };
+
 
 const SocialMedia = ({ social_links }) => {
   return (

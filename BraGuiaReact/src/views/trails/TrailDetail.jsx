@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/Text'; 
@@ -9,6 +9,9 @@ import EdgeCard from '../../components/EdgeCard';
 import PinCard from '../../components/PinCard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TrailDetailStyles from '../../styles/TrailDetail';
+import { IsPremium } from '../../repositories/User';
+import LoadingIndicator from '../../components/Indicator';
+import { OpenURL } from '../../constants/Links';
 
 const add = (edge, aux, pins) => {
   if (!aux.has(edge.pin_name)) {
@@ -29,13 +32,40 @@ const getAllPins = (trail) => {
   return pins;
 };
 
+const buildUrl = (pins) => {
+  const encodedPins = pins.map(p => encodeURIComponent(`${p.pin_lat},${p.pin_lng}`));
+  return `https://www.google.com/maps/dir/${encodedPins.join('/')}/`;
+};
+
+
+const openGoogleMaps = (pins) => OpenURL(buildUrl(pins));
+
 const TrailDetail = ({ route, navigation }) => {
   const { trail } = route.params;
+  const [isPremium, setIsPremium] = useState(null);
   const pins = getAllPins(trail);
+
+  useEffect(() => {
+    IsPremium()
+      .then(premiumStatus => setIsPremium(premiumStatus))
+      .catch(error => console.error('Error checking premium status', error));
+  }, []);
 
   const handlePinPress = (pin) => {
     navigation.navigate('PinDetail', { pin });
   };
+
+  const handleStartTrailPress = () => {
+    if (isPremium) {
+      openGoogleMaps(pins);
+    } else {
+      alert('Funcionalidade apenas para utilizadores premium.');
+    }
+  };
+
+  if (isPremium === null) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <ScrollView>
@@ -63,6 +93,7 @@ const TrailDetail = ({ route, navigation }) => {
         icon={"play-sharp"}
         title={"Iniciar Trilho"}
         color={activityColorPrimary()}
+        onPress={handleStartTrailPress}
       />
     </ScrollView>
   );

@@ -6,9 +6,9 @@ import { IsLocationOn, TimeoutLocation } from '../repositories/Settings';
 let isRunning = false
 
 const startService = async () => {
-  console.log('A arrancar serviço')
   const hasLocationPermission = await requestLocationPermission();
   if (hasLocationPermission && IsLocationOn()) {
+    console.log('A arrancar serviço')
     isRunning = true
     BackgroundTimer.runBackgroundTimer(() => {
       getLocation();
@@ -27,6 +27,7 @@ export const startBackgroundTask = () => {
 export const stopBackgroundTask = () => {
   if(isRunning) {
     console.log('A parar serviço')
+    isRunning = false
     BackgroundTimer.stopBackgroundTimer();
   }
 };

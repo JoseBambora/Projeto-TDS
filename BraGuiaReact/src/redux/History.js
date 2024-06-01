@@ -44,8 +44,8 @@ export const AddTrailHistoryDB = (trail) => {
   }
 }
 
-export const GetTrailsHistoryDB = () => Array.from(realm.objects('TrailHistory'))
-export const GetPinsHistoryDB = () => Array.from(realm.objects('PinHistory'))
+export const GetTrailsHistoryDB = () => Array.from(realm.objects('TrailHistory')).sort((a, b) => b.date - a.date)
+export const GetPinsHistoryDB = () => Array.from(realm.objects('PinHistory')).sort((a, b) => b.date - a.date)
 export const CleanHistoryDB = () => {
   realm.delete(realm.objects('TrailHistory'))
   realm.delete(realm.objects('PinHistory'))

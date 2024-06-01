@@ -6,14 +6,19 @@ import { textColorSecondary, iconsColorPrimary } from '../styles/Colors';
 import { OpenURL } from '../constants/Links';
 
 
-const Partner = ({ name,link }) => {
+const Partner = ({ name, link }) => {
+  const handlePress = () => {
+    OpenURL(link);
+  };
+
   return (
-    <TouchableOpacity style={FooterStyle.element} onPress={OpenURL(link)}>
+    <TouchableOpacity style={FooterStyle.element} onPress={handlePress}>
       <Icon name={'university'} size={30} color={iconsColorPrimary()} />
       <OurText content={name} color={textColorSecondary()} />
     </TouchableOpacity>
   );
 };
+
 
 const Partners = ({ partners }) => {
   return (

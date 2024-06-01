@@ -144,17 +144,18 @@ const TrailHistorySchema = {
   primaryKey: 'id',
   properties: {
     id: 'int',
-    trailName: 'string'
+    trailName: 'string',
+    date: 'date'
   },
 }
-
 
 const PinHistorySchema = {
   name: 'PinHistory',
   primaryKey: 'id',
   properties: {
     id: 'int',
-    pointOfInterestName: 'string'
+    pointOfInterestName: 'string',
+    date: 'date'
   },
 };
 

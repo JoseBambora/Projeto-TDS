@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import SwitchButtonStyle from '../styles/SwitchButton';
 import SwitchButton from '../components/SwitchButton';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import SettingsStyles from '../styles/Settings';
 import { OurHeaderCurve } from '../components/HeaderCurve';
-import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn } from '../repositories/Settings';
+import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn, SaveAccuracyLocation, SaveTimeoutLocation } from '../repositories/Settings';
 import PrecisionOption from '../components/PrecisionOption';
 import OurText from '../components/Text';
 import OurSlider from '../components/SliderComponent';
@@ -14,13 +14,15 @@ function Settings() {
   const [areNotificationsEnabled, setAreNotificationsEnabled] = useState(false);
   const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
   const [delay, setDelay] = useState(1);
-  const [accuracy, setAccuracy] = useState('Baixa'); 
+  const [accuracy, setAccuracy] = useState(false);
 
   useEffect(() => {
     const settings = GetSettings();
     setIsLocationEnabled(settings.location_on);
     setAreNotificationsEnabled(settings.notification_on);
     setIsDarkModeEnabled(settings.dark_mode);
+    setAccuracy(settings.accuracy);
+    setDelay(settings.timeout / 1000);
   }, []);
 
   const toggleLocation = () => {
@@ -41,12 +43,14 @@ function Settings() {
     SaveDarkMode(newValue);
   };
 
-  const handleAccuracyChange = (newAccuracy) => {
-    setAccuracy(newAccuracy);
+  const handleAccuracyChange = (isHighAccuracy) => {
+    setAccuracy(isHighAccuracy);
+    SaveAccuracyLocation(isHighAccuracy);
   };
 
   const handleDelayChange = (newDelay) => {
     setDelay(newDelay);
+    SaveTimeoutLocation(newDelay * 1000); 
   };
 
   return (
@@ -72,24 +76,22 @@ function Settings() {
           iconName="moon"
         />
       </View>
-      <View style={{ alignItems: 'center', marginTop: 20, width: '100%' }}>
+      <View style={SettingsStyles.container}>
         <OurText content="Precisão da localização" fontSize={18} fontWeight="bold" />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '50%' }}>
+        <View style={SettingsStyles.optionContainer}>
           <PrecisionOption
             label="Baixa"
-            choosenicon='trending-down'
-            isSelected={accuracy === 'Baixa'}
-            onPress={() => handleAccuracyChange('Baixa')}
+            isSelected={!accuracy}
+            onPress={() => handleAccuracyChange(false)}
           />
           <PrecisionOption
             label="Alta"
-            choosenicon='trending-up'
-            isSelected={accuracy === 'Alta'}
-            onPress={() => handleAccuracyChange('Alta')}
+            isSelected={accuracy}
+            onPress={() => handleAccuracyChange(true)}
           />
         </View>
       </View>
-      <View style={{ alignItems: 'center', marginTop: 20, width: '100%' }}>
+      <View style={SettingsStyles.sliderContainer}>
         <OurSlider
           value={delay}
           onValueChange={handleDelayChange}

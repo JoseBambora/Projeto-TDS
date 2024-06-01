@@ -1,42 +1,63 @@
 import React from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import OurCardView from './CardView';
 import HistoryStyles from '../styles/HistoryComponent';
 import OurText from './Text';
 
 const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
-  const trailsContent = trailsData.reduce((acc, trail, index) => {
-    acc[`${index + 1}º Trilho`] = trail.trailName;
-    return acc;
-  }, {});
+  
+  const groupTrailsByDate = (data) => {
+    const groupedData = {};
+    data.forEach((item) => {
+      const date = new Date(item.date).toLocaleDateString();
+      if (!groupedData[date]) {
+        groupedData[date] = [];
+      }
+      groupedData[date].push(item.trailName);
+    });
+    return groupedData;
+  };
 
+  const groupPointsOfInterestByDate = (data) => {
+    const groupedData = {};
+    data.forEach((item) => {
+      const date = new Date(item.date).toLocaleDateString();
+      if (!groupedData[date]) {
+        groupedData[date] = [];
+      }
+      groupedData[date].push(item.pointOfInterestName);
+    });
+    return groupedData;
+  };
 
-  const pointsOfInterestContent = pointsOfInterestData.reduce((acc, point, index) => {
-    acc[`${index + 1}º Pin`] = point.pointOfInterestName;
-    return acc;
-  }, {});
+  const groupedTrailsData = groupTrailsByDate(trailsData);
+  const groupedPointsOfInterestData = groupPointsOfInterestByDate(pointsOfInterestData);
 
   return (
     <ScrollView contentContainerStyle={HistoryStyles.container}>
       <View style={HistoryStyles.section}>
-      <OurText 
-          content="Trilhos Visitados" 
+        <OurText 
+          content={'Trilhos Visitados'} 
           fontSize={22} 
           color="grey" 
           textAlign="center" 
           fontWeight="bold"
         />
-        <OurCardView data={trailsContent} />
+        <OurCardView 
+          data={groupedTrailsData} 
+        />
       </View>
       <View style={HistoryStyles.section}>
-      <OurText 
-          content="Pins Visitados" 
+        <OurText 
+          content={'Pins Visitados'} 
           fontSize={22} 
           color="grey" 
-          textAlign="center"
-          fontWeight="bold" 
+          textAlign="center" 
+          fontWeight="bold"
         />
-        <OurCardView data={pointsOfInterestContent} />
+        <OurCardView 
+          data={groupedPointsOfInterestData} 
+        />
       </View>
     </ScrollView>
   );

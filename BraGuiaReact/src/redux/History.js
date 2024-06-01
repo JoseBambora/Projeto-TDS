@@ -3,27 +3,50 @@ import realm from "../redux/DB"
 
 export const AddPinHistoryDB = (pin) => {
   const pin_save = {
-    id:pin.id,
-    pointOfInterestName: pin.pin_name
+    id: pin.id,
+    pointOfInterestName: pin.pin_name,
+    date: new Date()
   }
-  try {
+  if (realm.objectForPrimaryKey('PinHistory', pin_save.id)) {
+    realm.write(() => {
+      realm.create('PinHistory', pin_save, 'modified')
+      console.log(`Deu Update ao pinhistory ao pin ${pin_save.id}`)
+    })
+    return 1;
+  }
+  else {
     realm.write(() => {
       realm.create('PinHistory', pin_save)
+      console.log(`Adicionou a pinhistory o pin ${pin_save.id}`)
     })
-  } catch (error) { }
+    return 0;
+  }
 }
 
 export const AddTrailHistoryDB = (trail) => {
   const trail_save = {
-    id:trail.id,
-    trailName: trail.trail_name
+    id: trail.id,
+    trailName: trail.trail_name,
+    date: new Date()
   }
-  try {
+  if (realm.objectForPrimaryKey('TrailHistory', trail_save.id)) {
+    realm.write(() => {
+      realm.create('TrailHistory', trail_save, 'modified')
+      console.log(`Deu Update ao TrailHistory ao pin ${trail_save.id}`)
+    })
+    return 1;
+  }
+  else {
     realm.write(() => {
       realm.create('TrailHistory', trail_save)
     })
-  } catch (error) { }
+    return 0;
+  }
 }
 
 export const GetTrailsHistoryDB = () => Array.from(realm.objects('TrailHistory'))
 export const GetPinsHistoryDB = () => Array.from(realm.objects('PinHistory'))
+export const CleanHistoryDB = () => {
+  realm.delete(realm.objects('TrailHistory'))
+  realm.delete(realm.objects('PinHistory'))
+}

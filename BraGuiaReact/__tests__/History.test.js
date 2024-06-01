@@ -29,6 +29,20 @@ test('Get Trails', () => {
 });
 
 
+function sameTrails(trails) {
+  const trailsHistory = GetTrailsHistory().map(t => ({id:t.id, trailName:t.trailName}))
+  expect(trailsHistory.length).toEqual(3)
+  const trails2 = trails.map(t=> ({id:t.id, trailName:t.trail_name}))
+  expect(trailsHistory).toEqual(trails2)
+}
+
+function samePins(pins) {
+  const pinsHistory = GetPinsHistory().map(p => ({id:p.id, pointOfInterestName:p.pointOfInterestName}))
+  expect(pinsHistory.length).toEqual(3)
+  const pins2 = pins.map(p => ({id:p.id, pointOfInterestName:p.pin_name}))
+  expect(pinsHistory).toEqual(pins2)
+}
+
 test('Add Pins', () => {
   const pins = [
     {
@@ -37,20 +51,16 @@ test('Add Pins', () => {
     },
     {
       id:2,
-      pin_name:'Portugal',
+      pin_name:'Portugal'
     },
     {
       id:3,
-      pin_name:'Dume',
+      pin_name:'Dume'
     }
   ]
-  pins.forEach(p => AddPinHistory(p))
-  const pinsHistory = GetPinsHistory()
-  expect(pinsHistory.length).toEqual(3)
-  const pins2 = pins.map(p => ({id:p.id, pointOfInterestName:p.pin_name}))
-  expect(pinsHistory).toEqual(pins2)
+  pins.map(p => AddPinHistory(p)).forEach(n => expect(n).toEqual(0))
+  samePins(pins)
 })
-
 
 test('Add Trails', () => {
   const trails = [
@@ -60,18 +70,52 @@ test('Add Trails', () => {
     },
     {
       id:2,
-      trail_name:'Portugal',
+      trail_name:'Portugal'
     },
     {
       id:3,
-      trail_name:'Dume',
+      trail_name:'Dume'
     }
   ]
-  trails.forEach(t => AddTrailHistory(t))
-  const trailsHistory = GetTrailsHistory()
-  expect(trailsHistory.length).toEqual(3)
-  const trails2 = trails.map(t=> ({id:t.id, trailName:t.trail_name}))
-  expect(trailsHistory).toEqual(trails2)
+  trails.map(t => AddTrailHistory(t)).forEach(n => expect(n).toEqual(0))
+  sameTrails(trails)
+})
 
+test('Update Pin', () => {
+  const pins = [
+    {
+      id:1,
+      pin_name:'Braga'
+    },
+    {
+      id:2,
+      pin_name:'Portugal'
+    },
+    {
+      id:3,
+      pin_name:'Dume'
+    }
+  ]
+  pins.map(p => AddPinHistory(p)).forEach(n => expect(n).toEqual(1))
+  samePins(pins)
+})
+
+test('Update Trail', () => {
+  const trails = [
+    {
+      id:1,
+      trail_name:'Braga'
+    },
+    {
+      id:2,
+      trail_name:'Portugal'
+    },
+    {
+      id:3,
+      trail_name:'Dume'
+    }
+  ]
+  trails.map(t => AddTrailHistory(t)).forEach(n => expect(n).toEqual(1))
+  sameTrails(trails)
 })
 

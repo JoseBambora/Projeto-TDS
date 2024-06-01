@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
-import OurText from '../../components/Text'; 
+import OurText from '../../components/Text';
 import { textColorHeader, activityColorPrimary } from '../../styles/Colors';
 import OurCardView from '../../components/CardView';
 import OurButton from '../../components/Button';
@@ -66,12 +66,16 @@ const TrailDetail = ({ route, navigation }) => {
       .catch(error => console.error('Error checking premium status', error));
   };
 
+  const handlePinPress = (pin) => {
+    navigation.navigate('PinDetail', { pin });
+  }
+
   return (
     <ScrollView>
-      
-      <OurImage url={trail.trail_img}/> 
-      <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
-      
+
+      <OurImage url={trail.trail_img} />
+      <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'} />
+
       <OurButton
         icon={isTraversing ? "stop-sharp" : "play-sharp"}
         title={isTraversing ? "Interromper Trilho" : "Iniciar Trilho"}
@@ -80,18 +84,18 @@ const TrailDetail = ({ route, navigation }) => {
       />
 
       <OurCardView data={{ "Descrição": trail.trail_desc, "Duração": trail.trail_duration + " minutos", "Dificuldade": trail.trail_difficulty }} />
-      <OurText content={"Pontos de interesse"} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
+      <OurText content={"Pontos de interesse"} fontSize={30} color={textColorHeader()} textAlign={'center'} />
 
       {pins.map((pin, index) => (
         <View key={index}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handlePinPress(pin)}>
             <PinCard pin={pin} />
           </TouchableOpacity>
           {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={TrailDetailStyles.arrow} />}
         </View>
       ))}
-      
-      <OurText content={"Detalhes do trajeto"} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
+
+      <OurText content={"Detalhes do trajeto"} fontSize={30} color={textColorHeader()} textAlign={'center'} />
       {trail.edges && trail.edges.length > 0 &&
         trail.edges.map((edge, index) => (
           <EdgeCard key={index} edge={edge} />

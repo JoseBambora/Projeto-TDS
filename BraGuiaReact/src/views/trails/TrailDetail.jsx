@@ -45,17 +45,6 @@ const TrailDetail = ({ route, navigation }) => {
   const pins = getAllPins(trail);
   const [isTraversing, setIsTraversing] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      stopBackgroundTask(); 
-    };
-  }, []);
-
-  const handlePinPress = (pin) => {
-    navigation.navigate('PinDetail', { pin });
-    AddPinHistory(pin);
-  };
-
   const handleStartTrailPress = () => {
     IsPremium()
       .then(premiumStatus => {
@@ -95,7 +84,7 @@ const TrailDetail = ({ route, navigation }) => {
 
       {pins.map((pin, index) => (
         <View key={index}>
-          <TouchableOpacity onPress={() => handlePinPress(pin)}>
+          <TouchableOpacity>
             <PinCard pin={pin} />
           </TouchableOpacity>
           {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={TrailDetailStyles.arrow} />}

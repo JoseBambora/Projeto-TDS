@@ -1,4 +1,4 @@
-import { AddPinHistory, AddTrailHistory, GetPinsHistory, GetTrailsHistory } from "../src/repositories/History";
+import { AddPinHistory, AddTrailHistory, CleanHistory, GetPinsHistory, GetTrailsHistory } from "../src/repositories/History";
 import { test, expect, afterAll, beforeAll } from '@jest/globals';
 import Realm from "realm";
 import realm from "../src/redux/DB";
@@ -142,7 +142,13 @@ test('Sort', () => {
   expect(trailsDB[3]).toEqual(3)
   expect(trailsDB[4]).toEqual(2)
   expect(trailsDB[5]).toEqual(1)
-  
+})
 
+
+test('Clean History', () => {
+  CleanHistory()
+  console.log(GetTrailsHistory())
+  expect(GetTrailsHistory().length).toEqual(0)
+  expect(GetPinsHistory().length).toEqual(0)
 })
 

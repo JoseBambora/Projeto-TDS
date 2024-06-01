@@ -1,5 +1,5 @@
 
-import { AddPinHistoryDB, AddTrailHistoryDB, GetPinsHistoryDB, GetTrailsHistoryDB } from "../redux/History"
+import { AddPinHistoryDB, AddTrailHistoryDB, GetPinsHistoryDB, GetTrailsHistoryDB, CleanHistoryDB } from "../redux/History"
 
 export const AddPinHistory = (pin) => AddPinHistoryDB(pin)
 export const AddTrailHistory = (trail) => AddTrailHistoryDB(trail)

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/Text'; 
@@ -11,6 +12,7 @@ import TrailDetailStyles from '../../styles/TrailDetail';
 import { IsPremium } from '../../repositories/User';
 import { AddTrailHistory, AddPinHistory } from '../../repositories/History';
 import { OpenURL } from '../../constants/Links';
+import { startBackgroundTask, stopBackgroundTask } from '../../background/Service';
 
 const add = (edge, aux, pins) => {
   if (!aux.has(edge.pin_name)) {
@@ -41,6 +43,13 @@ const openGoogleMaps = (pins) => OpenURL(buildUrl(pins));
 const TrailDetail = ({ route, navigation }) => {
   const { trail } = route.params;
   const pins = getAllPins(trail);
+  const [isTraversing, setIsTraversing] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      stopBackgroundTask(); 
+    };
+  }, []);
 
   const handlePinPress = (pin) => {
     navigation.navigate('PinDetail', { pin });
@@ -51,8 +60,16 @@ const TrailDetail = ({ route, navigation }) => {
     IsPremium()
       .then(premiumStatus => {
         if (premiumStatus) {
-          openGoogleMaps(pins);
-          AddTrailHistory(trail);
+          if (!isTraversing) {
+            openGoogleMaps(pins);
+            AddTrailHistory(trail);
+            pins.forEach(pin => AddPinHistory(pin))
+            startBackgroundTask();
+            setIsTraversing(true);
+          } else {
+            stopBackgroundTask();
+            setIsTraversing(false);
+          }
         } else {
           alert('Funcionalidade apenas para utilizadores premium.');
         }
@@ -67,8 +84,8 @@ const TrailDetail = ({ route, navigation }) => {
       <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'}  />
       
       <OurButton
-        icon={"play-sharp"}
-        title={"Iniciar Trilho"}
+        icon={isTraversing ? "stop-sharp" : "play-sharp"}
+        title={isTraversing ? "Interromper Trilho" : "Iniciar Trilho"}
         color={activityColorPrimary()}
         onPress={handleStartTrailPress}
       />

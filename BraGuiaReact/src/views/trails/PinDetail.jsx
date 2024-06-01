@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { ScrollView } from 'react-native';
 import OurCardView from '../../components/CardView';
 import OurImage from '../../components/media/Image';
 import OurAudio from '../../components/media/Audio';
@@ -13,11 +14,11 @@ const PinDetail = ({ route }) => {
   const { pin } = route.params;
   const [isPremium, setIsPremium] = useState(null);
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     IsPremium()
       .then(premiumStatus => setIsPremium(premiumStatus))
       .catch(error => console.error('Error checking premium status', error));
-  }, []);
+  }, []));
 
   const pinData = {
     "Nome do Ponto": pin.pin_name,

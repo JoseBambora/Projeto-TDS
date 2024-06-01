@@ -42,30 +42,23 @@ const openGoogleMaps = (pins) => OpenURL(buildUrl(pins));
 
 const TrailDetail = ({ route, navigation }) => {
   const { trail } = route.params;
-  const [isPremium, setIsPremium] = useState(null);
   const pins = getAllPins(trail);
-
-  useEffect(() => {
-    IsPremium()
-      .then(premiumStatus => setIsPremium(premiumStatus))
-      .catch(error => console.error('Error checking premium status', error));
-  }, []);
 
   const handlePinPress = (pin) => {
     navigation.navigate('PinDetail', { pin });
   };
 
   const handleStartTrailPress = () => {
-    if (isPremium) {
-      openGoogleMaps(pins);
-    } else {
-      alert('Funcionalidade apenas para utilizadores premium.');
-    }
+    IsPremium()
+      .then(premiumStatus => {
+        if (premiumStatus) {
+          openGoogleMaps(pins);
+        } else {
+          alert('Funcionalidade apenas para utilizadores premium.');
+        }
+      })
+      .catch(error => console.error('Error checking premium status', error));
   };
-
-  if (isPremium === null) {
-    return <LoadingIndicator />;
-  }
 
   return (
     <ScrollView>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { OurHeaderCurve } from '../components/HeaderCurve';
-import UnauthenticatedStyles from '../styles/Unauthenticated';
-import { activityColorPrimary } from '../styles/Colors';
-import OurText from '../components/Text';
-import OurButton from '../components/Button';
+import { OurHeaderCurve } from '../../components/ui/HeaderCurve';
+import UnauthenticatedStyles from '../../styles/sub-components/Unauthenticated';
+import { activityColorPrimary } from '../../styles/Colors';
+import OurText from '../../components/ui/Text';
+import OurButton from '../../components/ui/Button';
 
 const Unauthenticated = () => {
   const navigation = useNavigation();
@@ -19,7 +19,7 @@ const Unauthenticated = () => {
       <OurHeaderCurve icon="sad-sharp" />
       <View style={UnauthenticatedStyles.content}>
       <OurText
-          content="Para acessar aos trilhos, é necessário estar autenticado!"
+          content={`Para acessar a esta página, é necessário estar autenticado!`}
           fontSize={18}
           color={activityColorPrimary()}
           textAlign="center"

@@ -7,7 +7,9 @@ const CreatePin = (pin) => {
       realm.create('Pin', pin)
       console.log(`Adicionou pin ${pin.id}`)
     })
-  } catch (error) {}
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 const UpdatePin = (pin) => {

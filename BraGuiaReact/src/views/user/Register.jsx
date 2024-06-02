@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { View } from 'react-native';
-import OurButton from '../../components/Button';
-import OurText from '../../components/Text';
-import OurTextInput from '../../components/TextInput';
-import OurClickable from '../../components/Clickable';
-import PageStyle from '../../styles/Pages';
-import LoadingIndicator from '../../components/Indicator';
+import OurButton from '../../components/ui/Button';
+import OurText from '../../components/ui/Text';
+import OurTextInput from '../../components/ui/TextInput';
+import OurClickable from '../../components/ui/Clickable';
+import PageStyle from '../../styles/ui/Pages';
+import LoadingIndicator from '../../components/ui/Indicator';
 import { Alert } from 'react-native';
 
 

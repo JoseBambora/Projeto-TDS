@@ -1,12 +1,12 @@
 import React, {useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import OurText from '../../components/Text';
+import OurText from '../../components/ui/Text';
 import { IsAuthenticated } from '../../repositories/User';
 import User from './User';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './Login';
 import Register from './Register';
-import { EmergencyCall } from '../../components/Emergency';
+import { EmergencyCall } from '../../components/sub-components/Emergency';
 
 
 const Stack = createNativeStackNavigator();

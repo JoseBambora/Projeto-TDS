@@ -1,1 +1,1 @@
-export const CreatePromise = (data) => new Promise((resolve, _) => { resolve(data) })
+export const CreatePromise = (data) => new Promise((resolve) => { resolve(data) })

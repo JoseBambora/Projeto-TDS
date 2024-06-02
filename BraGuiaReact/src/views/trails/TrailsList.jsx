@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
-import TrailsComponent from '../../components/TrailsComponent';
+import TrailsComponent from '../../components/sub-components/TrailsComponent';
 import { GetTrails } from '../../repositories/Trails';
-import TrailsScreen from '../../styles/Trails';
+import TrailsScreen from '../../styles/sub-components/Trails';
 
 const Trails = () => {
   const [trailData, setTrailData] = useState([]);

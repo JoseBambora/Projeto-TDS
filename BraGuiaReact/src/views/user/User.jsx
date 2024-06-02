@@ -1,13 +1,12 @@
 import React, {useEffect, useState}  from "react"
 import { ScrollView, View } from "react-native"
-import OurButton from "../../components/Button"
-import OurCardView from "../../components/CardView"
+import OurButton from "../../components/ui/Button"
+import OurCardView from "../../components/ui/CardView"
 import { GetUser } from "../../repositories/User"
-import OurText from "../../components/Text"
 import { Logout } from "../../repositories/User"
-import { OurHeaderCurve } from "../../components/HeaderCurve"
-import PageStyle from "../../styles/Pages"
-import LoadingIndicator from "../../components/Indicator"
+import { OurHeaderCurve } from "../../components/ui/HeaderCurve"
+import PageStyle from "../../styles/ui/Pages"
+import LoadingIndicator from "../../components/ui/Indicator"
 import { stopBackgroundTask } from "../../background/Service"
 
 function userInfo(setData,setLoading,navigation) {

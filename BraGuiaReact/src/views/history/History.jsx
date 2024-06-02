@@ -1,14 +1,14 @@
 import React, { useState, useCallback } from 'react';
 import { View } from 'react-native';
-import HistoryComponent from '../../components/HistoryComponent';
-import HistoryScreen from '../../styles/History';
+import HistoryComponent from '../../components/sub-components/HistoryComponent';
+import HistoryScreen from '../../styles/sub-components/History';
 import { IsAuthenticated } from '../../repositories/User';
-import Unauthenticated from '../Unauthenticated';
-import LoadingIndicator from '../../components/Indicator';
+import Unauthenticated from '../user/Unauthenticated';
+import LoadingIndicator from '../../components/ui/Indicator';
 import { useFocusEffect } from '@react-navigation/native';
 import { GetTrailsHistory, GetPinsHistory, CleanHistory } from '../../repositories/History';
-import OurButton from '../../components/Button';
-import PageStyle from '../../styles/Pages';
+import OurButton from '../../components/ui/Button';
+import PageStyle from '../../styles/ui/Pages';
 
 const History = () => {
   const [trailsData, setTrailsData] = useState([]);

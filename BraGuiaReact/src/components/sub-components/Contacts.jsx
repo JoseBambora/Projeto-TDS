@@ -1,7 +1,7 @@
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import OurText from "./Text";
+import { View, TouchableOpacity } from 'react-native';
+import OurText from "../ui/Text";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import FooterStyle from "../styles/Footer";
+import FooterStyle from "../../styles/sub-components/Footer";
 
 const Contact = ({ number }) => {
   return (

@@ -17,15 +17,15 @@ const startService = async () => {
 }
 
 export const startBackgroundTask = () => {
-  if(!isRunning) {
+  if (!isRunning) {
     IsPremium()
-    .then(b => { if(b) startService() })
-    .catch(e => {throw e})
+      .then(b => { if (b) startService() })
+      .catch(e => { throw e })
   }
 };
 
 export const stopBackgroundTask = () => {
-  if(isRunning) {
+  if (isRunning) {
     console.log('A parar serviço')
     isRunning = false
     BackgroundTimer.stopBackgroundTimer();
@@ -33,7 +33,7 @@ export const stopBackgroundTask = () => {
 };
 
 export const restartBackGroudTask = () => {
-  if(!isRunning) {
+  if (!isRunning) {
     stopBackgroundTask()
     startBackgroundTask()
   }

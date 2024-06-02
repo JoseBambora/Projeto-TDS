@@ -7,7 +7,9 @@ const CreateUser = (user) => {
     realm.write(() => {
       realm.create('User', user)
     })
-  } catch (error) { }
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 export const DeleteUserDB = () => {
@@ -24,12 +26,10 @@ export const DeleteUserDB = () => {
   });
 };
 
-
 export const AddUserDB = (user) => {
   return DeleteUserDB()
-  .then(_ => CreateUser(user))
+  .then(() => CreateUser(user))
   .catch(e => console.log(e.message))
 }
-
 
 export const GetUsersDB = () => Array.from(realm.objects('User'));

@@ -1,18 +1,14 @@
 import OurMedia from "./Media";
 import Sound from "react-native-sound";
 import { useState, useEffect } from "react"
-import { View, Platform, ProgressViewIOS, ProgressBarAndroidComponent } from "react-native";
-import OurButton from "../Button";
-import MediaStyle from "../../styles/Media";
-import CardStyle from "../../styles/CardView";
-import OurText from "../Text";
+import { View, Platform, ProgressViewIOS } from "react-native";
+import CardStyle from "../../styles/ui/CardView";
+import OurText from "../ui/Text";
 import { progressBarColor, textColorHeader } from "../../styles/Colors";
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 import Controller from "./Controllers";
 
-
 const OurAudio = ({ url }) => <OurMedia url={url} type={1} />
-
 
 export const AudioPlayer = ({ mediaUrl }) => {
   const [sound, setSound] = useState(null);

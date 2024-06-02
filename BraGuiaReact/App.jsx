@@ -4,11 +4,11 @@ import Home from './src/views/Home';
 import PageUser from './src/views/user/PageUser'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Settings from './src/views/Settings';
+import Settings from './src/views/settings/Settings';
 import History from './src/views/history/History';
-import NavBarStyle from './src/styles/NavBar';
+import NavBarStyle from './src/styles/sub-components/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
-import { EmergencyCall } from './src/components/Emergency';
+import { EmergencyCall } from './src/components/sub-components/Emergency';
 import TrailsStack from './src/views/trails/TrailsStack';
 
 const Tab = createBottomTabNavigator()

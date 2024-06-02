@@ -32,8 +32,8 @@ export const IsPremium = () => {
       if (b) {
         return GetUser()
           .then(u => u.user_type === 'Premium')
-          .catch(_ => false)
+          .catch(() => false)
       }
     })
-    .catch(_ => false)
+    .catch(() => false)
 }

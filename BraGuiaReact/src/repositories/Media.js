@@ -11,7 +11,7 @@ export const LoadContent = (url) => {
     .then(b => {
       if (!b) {
         return downloadContent(url, localFilePath)
-          .then(_ => localFilePath)
+          .then(() => localFilePath)
           .catch(e => { throw e })
       }
       else

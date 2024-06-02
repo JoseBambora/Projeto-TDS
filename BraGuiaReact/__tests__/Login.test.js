@@ -4,7 +4,7 @@ import realm from '../src/redux/DB';
 import Realm from 'realm';
 import LoginRequest from '../src/helper/LoginRequest';
 import { True, False } from './Utils';
-import { GetUser, IsAuthenticated, Logout } from '../src/repositories/User';
+import { IsAuthenticated, Logout } from '../src/repositories/User';
 
 beforeAll(() => {
   realm.write(() => {

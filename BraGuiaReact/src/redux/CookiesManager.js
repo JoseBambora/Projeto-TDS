@@ -9,7 +9,7 @@ export const HasCookies = () => {
 
 export const DeleteCookies = () => {
   return CookieManager.clearAll()
-    .then(_ => 0)
+    .then(() => 0)
     .catch(error => { throw error })
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   preset: 'react-native',
   transformIgnorePatterns: [],
@@ -11,3 +12,4 @@ module.exports = {
     "__test__"
   ]
 };
+/* eslint-enable no-undef */

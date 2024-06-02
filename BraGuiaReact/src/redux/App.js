@@ -5,7 +5,9 @@ export const AddAppDB = (app) => {
     realm.write(() => {
       realm.create('App', app)
     })
-  } catch (error) { }
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 export const GetAppDB = () => Array.from(realm.objects('App'))[0]

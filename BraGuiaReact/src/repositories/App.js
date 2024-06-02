@@ -4,12 +4,12 @@ import { CreatePromise } from "./Util";
 
 function LoadAndSaveApp() {
   return AppRequest()
-  .then(data => {
-    data.socials = data.socials.map((e) => { e.social_name = e.social_name.toLowerCase(); return e })
-    AddAppDB(data)
-    return data
-  })
-  .catch(err => { throw err})
+    .then(data => {
+      data.socials = data.socials.map((e) => { e.social_name = e.social_name.toLowerCase(); return e })
+      AddAppDB(data)
+      return data
+    })
+    .catch(err => { throw err })
 }
 
 export const GetApp = () => {

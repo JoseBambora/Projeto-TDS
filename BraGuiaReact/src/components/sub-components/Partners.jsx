@@ -5,7 +5,6 @@ import FooterStyle from "../../styles/sub-components/Footer";
 import { textColorSecondary, iconsColorPrimary } from '../../styles/Colors';
 import { OpenURL } from '../../constants/Links';
 
-
 const Partner = ({ name, link }) => {
   const handlePress = () => {
     OpenURL(link);
@@ -18,7 +17,6 @@ const Partner = ({ name, link }) => {
     </TouchableOpacity>
   );
 };
-
 
 const Partners = ({ partners }) => {
   return (

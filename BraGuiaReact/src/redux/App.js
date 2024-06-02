@@ -1,6 +1,5 @@
 import realm from "./DB";
 
-
 export const AddAppDB = (app) => {
   try {
     realm.write(() => {
@@ -8,6 +7,5 @@ export const AddAppDB = (app) => {
     })
   } catch (error) { }
 }
-
 
 export const GetAppDB = () => Array.from(realm.objects('App'))[0]

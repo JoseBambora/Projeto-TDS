@@ -96,7 +96,7 @@ function Settings() {
           value={delay}
           onValueChange={handleDelayChange}
           min={1}
-          max={50}
+          max={240}
           step={1}
           title="Intervalo entre medição da localização do utilizador"
           valueLabel={(value) => `${value} segundos`}

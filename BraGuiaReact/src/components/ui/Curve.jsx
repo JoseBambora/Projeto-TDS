@@ -2,8 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-
-export default function OurCurve({color}) {
+export default function OurCurve({ color }) {
   return (
     <View style={{ backgroundColor: color, height: 160 }}>
       <Svg

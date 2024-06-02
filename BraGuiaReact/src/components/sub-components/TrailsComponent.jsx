@@ -14,9 +14,9 @@ const TrailsComponent = ({ trailData }) => {
   return (
     <ScrollView contentContainerStyle={TrailsStyles.container}>
       {trailData.map((trail) => (
-        <TouchableOpacity 
-          key={trail.id} 
-          style={TrailsStyles.cardWrapper} 
+        <TouchableOpacity
+          key={trail.id}
+          style={TrailsStyles.cardWrapper}
           onPress={() => handleTrailPress(trail)}
         >
           <OurCardView

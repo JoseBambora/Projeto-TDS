@@ -7,7 +7,7 @@ const PinCard = ({ pin }) => {
   return (
     <View style={PinCardStyles.container}>
       <OurCardView
-         data={{
+        data={{
           "Nome do Pin": pin.pin_name
         }}
         icon={'location-outline'}

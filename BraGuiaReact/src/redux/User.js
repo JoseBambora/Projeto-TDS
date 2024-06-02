@@ -24,12 +24,10 @@ export const DeleteUserDB = () => {
   });
 };
 
-
 export const AddUserDB = (user) => {
   return DeleteUserDB()
   .then(_ => CreateUser(user))
   .catch(e => console.log(e.message))
 }
-
 
 export const GetUsersDB = () => Array.from(realm.objects('User'));

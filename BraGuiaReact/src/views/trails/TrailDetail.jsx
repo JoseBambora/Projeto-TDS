@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/ui/Text';

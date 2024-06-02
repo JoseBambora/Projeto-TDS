@@ -6,7 +6,7 @@ import Controller from "./Controllers";
 import MediaStyle from "../../styles/media/Media";
 import CardStyle from "../../styles/ui/CardView";
 import OurText from "../ui/Text";
-import { textColorHeader, textColorPrimary } from "../../styles/Colors";
+import { textColorHeader } from "../../styles/Colors";
 
 const OurVideo = ({ url }) => <OurMedia url={url} type={2} />
 

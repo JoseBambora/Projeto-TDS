@@ -2,7 +2,6 @@ import realm from "./DB";
 import { AddPinDB, GetPinDB } from "./Pins";
 import { deepCopy } from "./Utils";
 
-
 const edgesConverter = (edges) => {
   return edges.map(edge => {
     return {

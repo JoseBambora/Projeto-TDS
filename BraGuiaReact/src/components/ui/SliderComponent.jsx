@@ -4,10 +4,10 @@ import Slider from '@react-native-community/slider';
 import SliderStyle from '../../styles/ui/Slider';
 import OurText from './Text';
 
-const OurSlider = ({ value, onValueChange, min, max, step, title, valueLabel }) => {
+const OurSlider = ({ value, onValueChange, min, max, step, title, valueLabel, isDarkMode }) => {
   return (
     <View style={SliderStyle.container}>
-      <OurText content={title} fontSize={18} fontWeight="bold" textAlign="center" />
+      <OurText content={title} fontSize={18} fontWeight="bold" textAlign="center" color={isDarkMode ? 'white' : 'black'} />
       <Slider
         style={SliderStyle.slider}
         minimumValue={min}
@@ -19,7 +19,7 @@ const OurSlider = ({ value, onValueChange, min, max, step, title, valueLabel }) 
         maximumTrackTintColor="#d3d3d3"
         thumbTintColor="#FF0000"
       />
-      <OurText content={valueLabel(value)} fontSize={16} textAlign="center" />
+      <OurText content={valueLabel(value)} fontSize={16} textAlign="center" color={isDarkMode ? 'white' : 'black'} />
     </View>
   );
 };

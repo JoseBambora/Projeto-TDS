@@ -1,18 +1,20 @@
 import { View, TouchableOpacity } from 'react-native';
+import { useContext } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OurText from "../ui/Text";
 import FooterStyle from "../../styles/sub-components/Footer";
-import { textColorSecondary } from '../../styles/Colors';
+import { textColorSecondary, iconsColorPrimary } from '../../styles/Colors';
 import { OpenURL } from '../../constants/Links';
+import { ThemeContext } from '../../controler/ThemeControler';
 
 const SocialIcon = ({ name, link }) => {
   const handlePress = () => {
     OpenURL(link);
   };
-
+  const { isDarkMode } = useContext(ThemeContext); 
   return (
     <TouchableOpacity style={FooterStyle.element} onPress={handlePress}>
-      <Icon name={name} size={30} color={'white'} />
+      <Icon name={name} size={30} color={iconsColorPrimary(isDarkMode)} />
     </TouchableOpacity>
   );
 };

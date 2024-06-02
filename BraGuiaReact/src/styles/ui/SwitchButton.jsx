@@ -6,6 +6,7 @@ const SwitchButtonStyle = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 10,
     flex: 1,
   },
   switchContainer: {

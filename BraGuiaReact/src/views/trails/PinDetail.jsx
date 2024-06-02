@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
 import OurCardView from '../../components/ui/CardView';
@@ -9,10 +9,13 @@ import { IsPremium } from '../../repositories/User';
 import LoadingIndicator from '../../components/ui/Indicator';
 import OurText from '../../components/ui/Text';
 import PinDetailStyles from '../../styles/sub-components/PinDetail';
+import { ThemeContext } from '../../controler/ThemeControler';
+import { backgroundColor } from '../../styles/Colors';
 
 const PinDetail = ({ route }) => {
   const { pin } = route.params;
   const [isPremium, setIsPremium] = useState(null);
+  const { isDarkMode } = useContext(ThemeContext);
 
   useFocusEffect(useCallback(() => {
     IsPremium()
@@ -40,7 +43,7 @@ const PinDetail = ({ route }) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={PinDetailStyles.container}>
+    <ScrollView contentContainerStyle={[PinDetailStyles.container, { backgroundColor: backgroundColor(isDarkMode)}]}>
       {isPremium ? (
         mediaData.map((media, index) => {
           switch (media.type) {
@@ -55,7 +58,7 @@ const PinDetail = ({ route }) => {
           }
         })
       ) : (
-        <OurText content={'Conteúdo multimédia apenas disponível para utilizadores premium'} textAlign="center" />
+        <OurText content={'Conteúdo multimédia apenas disponível para utilizadores premium'} textAlign="center" color={isDarkMode ? 'white' : 'black'} />
       )}
       <OurCardView data={pinData} imageSource={pin.pin_img} />
     </ScrollView>

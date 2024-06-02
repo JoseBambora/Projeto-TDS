@@ -1,14 +1,13 @@
 import { StyleSheet } from 'react-native';
 
+
 const CardStyle = StyleSheet.create({
   container: {
     padding: 10, 
     paddingBottom: 30,
   },
   card: {
-    backgroundColor: 'white',
     borderRadius: 16,
-    shadowColor: '#ccc',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,

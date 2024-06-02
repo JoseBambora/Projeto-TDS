@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { View } from 'react-native';
 import HistoryComponent from '../../components/sub-components/HistoryComponent';
 import HistoryScreen from '../../styles/sub-components/History';
@@ -9,8 +9,11 @@ import { useFocusEffect } from '@react-navigation/native';
 import { GetTrailsHistory, GetPinsHistory, CleanHistory } from '../../repositories/History';
 import OurButton from '../../components/ui/Button';
 import PageStyle from '../../styles/ui/Pages';
+import { ThemeContext } from '../../controler/ThemeControler';
+import { backgroundColor } from '../../styles/Colors';
 
 const History = () => {
+  const { isDarkMode } = useContext(ThemeContext); 
   const [trailsData, setTrailsData] = useState([]);
   const [pointsOfInterestData, setPointsOfInterestData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,7 +62,7 @@ const History = () => {
   }
 
   return (
-    <View style={HistoryScreen.container}>
+    <View style={[HistoryScreen.container, { backgroundColor: backgroundColor(isDarkMode) }]}>
       <HistoryComponent trailsData={trailsData} pointsOfInterestData={pointsOfInterestData} />
       {(trailsData.length > 0 || pointsOfInterestData.length > 0) && (
         <View style={PageStyle.bottomleft}> 

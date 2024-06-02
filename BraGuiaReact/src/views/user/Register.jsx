@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { View } from 'react-native';
 import OurButton from '../../components/ui/Button';
 import OurText from '../../components/ui/Text';
@@ -7,9 +7,12 @@ import OurClickable from '../../components/ui/Clickable';
 import PageStyle from '../../styles/ui/Pages';
 import LoadingIndicator from '../../components/ui/Indicator';
 import { Alert } from 'react-native';
+import { ThemeContext } from '../../controler/ThemeControler';
+import { backgroundColor } from '../../styles/Colors';
 
 
 function Register({ navigation }) {
+  const { isDarkMode } = useContext(ThemeContext);
   const [username, setUsername] = useState('');
   const [fstPassword, setPassword1] = useState('');
   const [sndPassword, setPassword2] = useState('');
@@ -23,7 +26,7 @@ function Register({ navigation }) {
     setRegister(false)
   }
   return register ? (<LoadingIndicator />):(
-    <View style={PageStyle.center}>
+    <View style={[PageStyle.center, { backgroundColor: backgroundColor(isDarkMode) }]}>
       <OurText content={'Página de Registo'} color={'red'} fontSize={30}/>
       <OurTextInput 
         placeholder={'Nome de Utilizador'} 

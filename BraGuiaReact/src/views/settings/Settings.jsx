@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, ScrollView } from 'react-native';
 import SwitchButtonStyle from '../../styles/ui/SwitchButton';
+import { ThemeContext } from '../../controler/ThemeControler';
 import SwitchButton from '../../components/ui/SwitchButton';
 import SettingsStyles from '../../styles/sub-components/Settings';
 import { OurHeaderCurve } from '../../components/ui/HeaderCurve';
-import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn, SaveAccuracyLocation, SaveTimeoutLocation } from '../../repositories/Settings';
+import { GetSettings, SaveLocationOn, SaveNotificationOn, SaveAccuracyLocation, SaveTimeoutLocation } from '../../repositories/Settings';
 import PrecisionOption from '../../components/sub-components/PrecisionOption';
 import OurText from '../../components/ui/Text';
 import OurSlider from '../../components/ui/SliderComponent';
+import { backgroundColor} from '../../styles/Colors';
 
 function Settings() {
+  const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
   const [areNotificationsEnabled, setAreNotificationsEnabled] = useState(false);
-  const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
   const [delay, setDelay] = useState(1);
   const [accuracy, setAccuracy] = useState(false);
 
@@ -20,7 +22,6 @@ function Settings() {
     const settings = GetSettings();
     setIsLocationEnabled(settings.location_on);
     setAreNotificationsEnabled(settings.notification_on);
-    setIsDarkModeEnabled(settings.dark_mode);
     setAccuracy(settings.accuracy);
     setDelay(settings.timeout / 1000);
   }, []);
@@ -37,12 +38,6 @@ function Settings() {
     SaveNotificationOn(newValue);
   };
 
-  const toggleDarkMode = () => {
-    const newValue = !isDarkModeEnabled;
-    setIsDarkModeEnabled(newValue);
-    SaveDarkMode(newValue);
-  };
-
   const handleAccuracyChange = (isHighAccuracy) => {
     setAccuracy(isHighAccuracy);
     SaveAccuracyLocation(isHighAccuracy);
@@ -50,11 +45,11 @@ function Settings() {
 
   const handleDelayChange = (newDelay) => {
     setDelay(newDelay);
-    SaveTimeoutLocation(newDelay * 1000); 
+    SaveTimeoutLocation(newDelay * 1000);
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 2, backgroundColor: backgroundColor(isDarkMode) }}>
       <OurHeaderCurve icon="settings" />
       <View style={SwitchButtonStyle.container}>
         <SwitchButton
@@ -71,13 +66,13 @@ function Settings() {
         />
         <SwitchButton
           label="Dark Mode"
-          value={isDarkModeEnabled}
+          value={isDarkMode}
           onValueChange={toggleDarkMode}
           iconName="moon"
         />
       </View>
       <View style={SettingsStyles.container}>
-        <OurText content="Precisão da localização" fontSize={18} fontWeight="bold" />
+        <OurText content="Precisão da localização" fontSize={18} fontWeight="bold" isDarkMode={isDarkMode} />
         <View style={SettingsStyles.optionContainer}>
           <PrecisionOption
             label="Baixa"
@@ -100,9 +95,10 @@ function Settings() {
           step={1}
           title="Intervalo entre medição da localização do utilizador"
           valueLabel={(value) => `${value} segundos`}
+          isDarkMode={isDarkMode}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

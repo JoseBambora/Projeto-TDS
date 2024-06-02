@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/ui/Text';
-import { textColorHeader, activityColorPrimary } from '../../styles/Colors';
+import { textColorHeader, activityColorPrimary, backgroundColor } from '../../styles/Colors'; // Importar as cores e o contexto do tema
 import OurCardView from '../../components/ui/CardView';
 import OurButton from '../../components/ui/Button';
 import EdgeCard from '../../components/sub-components/EdgeCard';
@@ -13,6 +13,7 @@ import { IsPremium } from '../../repositories/User';
 import { AddTrailHistory, AddPinHistory } from '../../repositories/History';
 import { OpenURL } from '../../constants/Links';
 import { startBackgroundTask, stopBackgroundTask } from '../../background/Service';
+import { ThemeContext } from '../../controler/ThemeControler';
 
 const add = (edge, aux, pins) => {
   if (!aux.has(edge.pin_name)) {
@@ -44,6 +45,7 @@ const TrailDetail = ({ route, navigation }) => {
   const { trail } = route.params;
   const pins = getAllPins(trail);
   const [isTraversing, setIsTraversing] = useState(false);
+  const { isDarkMode } = useContext(ThemeContext); 
 
   const handleStartTrailPress = () => {
     IsPremium()
@@ -71,21 +73,17 @@ const TrailDetail = ({ route, navigation }) => {
   }
 
   return (
-    <ScrollView>
-
+    <ScrollView style={{ backgroundColor: backgroundColor(isDarkMode) }}>
       <OurImage url={trail.trail_img} />
-      <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'} />
-
+      <OurText content={trail.trail_name} fontSize={30} color={textColorHeader(isDarkMode)} textAlign={'center'} />
       <OurButton
         icon={isTraversing ? "stop-sharp" : "play-sharp"}
         title={isTraversing ? "Interromper Trilho" : "Iniciar Trilho"}
-        color={activityColorPrimary()}
+        color={activityColorPrimary(isDarkMode)}
         onPress={handleStartTrailPress}
       />
-
       <OurCardView data={{ "Descrição": trail.trail_desc, "Duração": trail.trail_duration + " minutos", "Dificuldade": trail.trail_difficulty }} />
-      <OurText content={"Pontos de interesse"} fontSize={30} color={textColorHeader()} textAlign={'center'} />
-
+      <OurText content={"Pontos de interesse"} fontSize={30} color={textColorHeader(isDarkMode)} textAlign={'center'} />
       {pins.map((pin, index) => (
         <View key={index}>
           <TouchableOpacity onPress={() => handlePinPress(pin)}>
@@ -94,8 +92,7 @@ const TrailDetail = ({ route, navigation }) => {
           {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={TrailDetailStyles.arrow} />}
         </View>
       ))}
-
-      <OurText content={"Detalhes do trajeto"} fontSize={30} color={textColorHeader()} textAlign={'center'} />
+      <OurText content={"Detalhes do trajeto"} fontSize={30} color={textColorHeader(isDarkMode)} textAlign={'center'} />
       {trail.edges && trail.edges.length > 0 &&
         trail.edges.map((edge, index) => (
           <EdgeCard key={index} edge={edge} />

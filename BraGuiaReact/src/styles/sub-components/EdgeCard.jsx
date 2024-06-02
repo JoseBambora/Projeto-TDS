@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const EdgeCardStyles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
     marginHorizontal: 10,

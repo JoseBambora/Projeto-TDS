@@ -1,4 +1,4 @@
-import React, {useEffect, useState}  from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { ScrollView, View } from "react-native"
 import OurButton from "../../components/ui/Button"
 import OurCardView from "../../components/ui/CardView"
@@ -8,17 +8,20 @@ import { OurHeaderCurve } from "../../components/ui/HeaderCurve"
 import PageStyle from "../../styles/ui/Pages"
 import LoadingIndicator from "../../components/ui/Indicator"
 import { stopBackgroundTask } from "../../background/Service"
+import { ThemeContext } from "../../controler/ThemeControler"
+import { backgroundColor } from '../../styles/Colors';
 
-function userInfo(setData,setLoading,navigation) {
+function userInfo(setData, setLoading, navigation) {
   useEffect(() => {
     GetUser()
-    .then(json => {setData(json); navigation.setOptions({title: 'User ' + json.username})})
-    .catch(err => alert(err.message))
-    .finally(() => setLoading(false))
-  },[])
+      .then(json => { setData(json); navigation.setOptions({ title: 'User ' + json.username }) })
+      .catch(err => alert(err.message))
+      .finally(() => setLoading(false))
+  }, [])
 }
 
 function User({ navigation }) {
+  const { isDarkMode } = useContext(ThemeContext); 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const logout = () => {
@@ -27,7 +30,7 @@ function User({ navigation }) {
       .catch(error => alert(error.message))
     stopBackgroundTask()
   }
-  userInfo(setData,setLoading,navigation)
+  userInfo(setData, setLoading, navigation)
   const content = {
     'Primeiro Nome': data.first_name,
     'Último Nome': data.last_name,
@@ -35,7 +38,7 @@ function User({ navigation }) {
     'Email': data.email
   }
   return isLoading ? (<LoadingIndicator />) : (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: backgroundColor(isDarkMode) }}>
       <OurHeaderCurve icon={'person'} content={data.username} />
       <OurCardView data={content} />
       <View style={PageStyle.bottomleft}>

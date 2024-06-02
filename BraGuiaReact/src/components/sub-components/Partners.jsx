@@ -1,19 +1,23 @@
+import React, { useContext } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OurText from "../ui/Text";
 import FooterStyle from "../../styles/sub-components/Footer";
 import { textColorSecondary, iconsColorPrimary } from '../../styles/Colors';
 import { OpenURL } from '../../constants/Links';
+import { ThemeContext } from '../../controler/ThemeControler';
 
 const Partner = ({ name, link }) => {
   const handlePress = () => {
     OpenURL(link);
   };
 
+  const { isDarkMode } = useContext(ThemeContext); 
+
   return (
-    <TouchableOpacity style={FooterStyle.element} onPress={handlePress}>
-      <Icon name={'university'} size={30} color={iconsColorPrimary()} />
-      <OurText content={name} color={textColorSecondary()} />
+    <TouchableOpacity style={[FooterStyle.element]} onPress={handlePress}>
+      <Icon name={'university'} size={30} color={iconsColorPrimary(isDarkMode)} />
+      <OurText content={name} color={textColorSecondary(isDarkMode)} />
     </TouchableOpacity>
   );
 };
@@ -30,4 +34,4 @@ const Partners = ({ partners }) => {
   );
 };
 
-export default Partners
+export default Partners;

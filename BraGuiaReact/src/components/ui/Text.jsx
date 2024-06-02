@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
-import TextStyle from '../styles/Text';
-import { textColorPrimary } from '../styles/Colors';
+import TextStyle from '../../styles/ui/Text';
+import { textColorPrimary } from '../../styles/Colors';
 
 
 

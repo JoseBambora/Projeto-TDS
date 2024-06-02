@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Switch } from 'react-native';
 import OurText from './Text';
-import SwitchButtonStyle from '../styles/SwitchButton';
-import { navBarColorSelected, navBarColorNotSelected, iconsColorPrimary, activityColorPrimary, iconsColorSecondary } from '../styles/Colors';
+import SwitchButtonStyle from '../../styles/ui/SwitchButton';
+import { navBarColorSelected, navBarColorNotSelected, iconsColorPrimary, activityColorPrimary, iconsColorSecondary } from '../../styles/Colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const SwitchButton = ({ label, value, onValueChange, iconName }) => {

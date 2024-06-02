@@ -1,5 +1,5 @@
 import {View, TextInput } from "react-native";
-import TextInputStyle from "../styles/TextInput";
+import TextInputStyle from "../../styles/ui/TextInput";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, {useState} from 'react';
 

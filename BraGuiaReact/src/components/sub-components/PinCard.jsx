@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import OurCardView from './CardView';
-import PinCardStyles from '../styles/PinCard';
+import OurCardView from '../ui/CardView';
+import PinCardStyles from '../../styles/sub-components/PinCard';
 
 const PinCard = ({ pin }) => {
   return (

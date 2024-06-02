@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import SwitchButtonStyle from '../styles/SwitchButton';
-import SwitchButton from '../components/SwitchButton';
-import SettingsStyles from '../styles/Settings';
-import { OurHeaderCurve } from '../components/HeaderCurve';
-import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn, SaveAccuracyLocation, SaveTimeoutLocation } from '../repositories/Settings';
-import PrecisionOption from '../components/PrecisionOption';
-import OurText from '../components/Text';
-import OurSlider from '../components/SliderComponent';
+import SwitchButtonStyle from '../../styles/ui/SwitchButton';
+import SwitchButton from '../../components/ui/SwitchButton';
+import SettingsStyles from '../../styles/sub-components/Settings';
+import { OurHeaderCurve } from '../../components/ui/HeaderCurve';
+import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn, SaveAccuracyLocation, SaveTimeoutLocation } from '../../repositories/Settings';
+import PrecisionOption from '../../components/sub-components/PrecisionOption';
+import OurText from '../../components/ui/Text';
+import OurSlider from '../../components/ui/SliderComponent';
 
 function Settings() {
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);

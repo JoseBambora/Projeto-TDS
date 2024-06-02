@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import Label from './Label';
-import Value from './Value';
-import EdgeCardStyles from '../styles/EdgeCard';
+import Label from '../ui/Label';
+import Value from '../ui/Value';
+import EdgeCardStyles from '../../styles/sub-components/EdgeCard';
 
 const EdgeCard = ({ edge }) => {
   const transportType = edge.edge_transport === 'D' ? 'Condução' : 'Caminhada';

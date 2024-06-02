@@ -1,6 +1,6 @@
 import { View } from "react-native"
-import OurButton from "../Button"
-import MediaStyle from "../../styles/Media"
+import OurButton from "../ui/Button"
+import MediaStyle from "../../styles/media/Media"
 
 
 const Controller = ({onSeekPress, play, restart,pause, stop,hasEnded,isPlaying, currentTime}) => {

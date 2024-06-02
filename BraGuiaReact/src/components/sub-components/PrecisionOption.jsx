@@ -1,6 +1,6 @@
 import React from 'react';
-import OurButton from './Button';
-import { buttonColorPrimary, iconsColorPrimary, iconsColorSecondary } from '../styles/Colors';
+import OurButton from '../ui/Button';
+import { buttonColorPrimary, iconsColorPrimary, iconsColorSecondary } from '../../styles/Colors';
 
 const PrecisionOption = ({ label, isSelected, onPress, choosenicon }) => {
     const selectedColor = isSelected ? buttonColorPrimary() : 'grey';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Assuming you're using FontAwesome icons
-import ButtonStyle from '../styles/Button';
-import { buttonColorPrimary, iconsColorPrimary } from '../styles/Colors';
+import ButtonStyle from '../../styles/ui/Button';
+import { buttonColorPrimary, iconsColorPrimary } from '../../styles/Colors';
 
 function OurButton({ onPress, title, icon, color=buttonColorPrimary(), iconColor=iconsColorPrimary()}) {
   return (

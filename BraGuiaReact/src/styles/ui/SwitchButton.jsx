@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { textColorPrimary } from './Colors';
+import { textColorPrimary } from '../Colors';
 
 const SwitchButtonStyle = StyleSheet.create({
   container: {

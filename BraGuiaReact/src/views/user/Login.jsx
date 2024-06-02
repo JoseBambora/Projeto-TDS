@@ -1,13 +1,12 @@
-import React, { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import OurButton from '../../components/Button';
-import OurText from '../../components/Text';
-import OurTextInput from '../../components/TextInput';
-import OurClickable from '../../components/Clickable';
+import OurButton from '../../components/ui/Button';
+import OurText from '../../components/ui/Text';
+import OurTextInput from '../../components/ui/TextInput';
+import OurClickable from '../../components/ui/Clickable';
 import LoginRequest from '../../helper/LoginRequest';
-import PageStyle from '../../styles/Pages'
-import LoadingIndicator from '../../components/Indicator';
+import PageStyle from '../../styles/ui/Pages'
+import LoadingIndicator from '../../components/ui/Indicator';
 
 
 function Login({ navigation }) {

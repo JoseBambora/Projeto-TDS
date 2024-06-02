@@ -1,9 +1,9 @@
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import OurText from "./Text";
-import FooterStyle from "../styles/Footer";
-import { textColorSecondary } from '../styles/Colors';
-import { OpenURL } from '../constants/Links';
+import OurText from "../ui/Text";
+import FooterStyle from "../../styles/sub-components/Footer";
+import { textColorSecondary } from '../../styles/Colors';
+import { OpenURL } from '../../constants/Links';
 
 const SocialIcon = ({ name, link }) => {
   const handlePress = () => {

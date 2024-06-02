@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import OurCardView from './CardView';
-import TrailsStyles from '../styles/TrailsComponent';
+import OurCardView from '../ui/CardView';
+import TrailsStyles from '../../styles/sub-components/TrailsComponent';
 
 const TrailsComponent = ({ trailData }) => {
   const navigation = useNavigation();

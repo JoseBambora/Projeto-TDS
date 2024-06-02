@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from "react"
 import { LoadContent } from "../../repositories/Media"
 import { IsPremium } from "../../repositories/User"
-import LoadingIndicator from "../Indicator"
+import LoadingIndicator from "../ui/Indicator"
 import { Image } from "react-native"
-import MediaStyle from "../../styles/Media"
+import MediaStyle from "../../styles/media/Media"
 import { AudioPlayer } from "./Audio"
 import { VideoPlayer } from "./Video"
-import OurText from "../Text"
+import OurText from "../ui/Text"
 import { useFocusEffect } from "@react-navigation/native"
 
 const Premium = (url, setContent) => {

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
-import OurCardView from '../../components/CardView';
+import OurCardView from '../../components/ui/CardView';
 import OurImage from '../../components/media/Image';
 import OurAudio from '../../components/media/Audio';
 import OurVideo from '../../components/media/Video';
 import { IsPremium } from '../../repositories/User';
-import LoadingIndicator from '../../components/Indicator';
-import OurText from '../../components/Text';
-import PinDetailStyles from '../../styles/PinDetail';
+import LoadingIndicator from '../../components/ui/Indicator';
+import OurText from '../../components/ui/Text';
+import PinDetailStyles from '../../styles/sub-components/PinDetail';
 
 const PinDetail = ({ route }) => {
   const { pin } = route.params;

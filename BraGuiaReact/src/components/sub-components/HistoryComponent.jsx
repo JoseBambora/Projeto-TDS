@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import OurCardView from './CardView';
-import HistoryStyles from '../styles/HistoryComponent';
-import OurText from './Text';
+import OurCardView from '../ui/CardView';
+import HistoryStyles from '../../styles/sub-components/HistoryComponent';
+import OurText from '../ui/Text';
 
 const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
   

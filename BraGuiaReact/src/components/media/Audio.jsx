@@ -2,10 +2,10 @@ import OurMedia from "./Media";
 import Sound from "react-native-sound";
 import { useState, useEffect } from "react"
 import { View, Platform, ProgressViewIOS, ProgressBarAndroidComponent } from "react-native";
-import OurButton from "../Button";
-import MediaStyle from "../../styles/Media";
-import CardStyle from "../../styles/CardView";
-import OurText from "../Text";
+import OurButton from "../ui/Button";
+import MediaStyle from "../../styles/media/Media";
+import CardStyle from "../../styles/ui/CardView";
+import OurText from "../ui/Text";
 import { progressBarColor, textColorHeader } from "../../styles/Colors";
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 import Controller from "./Controllers";

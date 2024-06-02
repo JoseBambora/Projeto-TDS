@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Image } from 'react-native';
-import CardStyle from '../styles/CardView';
+import { View } from 'react-native';
+import CardStyle from '../../styles/ui/CardView';
 import OurText from './Text';
-import { iconsColorSecondary, textColorHeader } from '../styles/Colors';
-import OurImage from './media/Image';
+import { iconsColorSecondary, textColorHeader } from '../../styles/Colors';
+import OurImage from '../media/Image';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 

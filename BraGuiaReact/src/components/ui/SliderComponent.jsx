@@ -1,7 +1,7 @@
 import React from 'react';
 import { View} from 'react-native';
 import Slider from '@react-native-community/slider';
-import SliderStyle from '../styles/Slider';
+import SliderStyle from '../../styles/ui/Slider';
 import OurText from './Text';
 
 const OurSlider = ({ value, onValueChange, min, max, step, title, valueLabel }) => {

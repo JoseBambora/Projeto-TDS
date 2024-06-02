@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Image } from 'react-native';
-import OurText from '../components/Text';
-import OurCardView from '../components/CardView';
-import SocialMedia from '../components/SocialMedia';
-import Contacts from '../components/Contacts';
-import FooterStyle from '../styles/Footer';
-import Partners from '../components/Partners';
+import { View, ScrollView } from 'react-native';
+import OurText from '../components/ui/Text';
+import OurCardView from '../components/ui/CardView';
+import SocialMedia from '../components/sub-components/SocialMedia';
+import FooterStyle from '../styles/sub-components/Footer';
+import Partners from '../components/sub-components/Partners';
 import { textColorHeader } from '../styles/Colors';
 import { GetApp } from '../repositories/App';
-import LoadingIndicator from '../components/Indicator';
+import LoadingIndicator from '../components/ui/Indicator';
 
 function makeRequest(setData, setLoading,setContacts) {
   useEffect(() => {

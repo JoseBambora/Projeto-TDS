@@ -6,7 +6,7 @@ import User from './User';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './Login';
 import Register from './Register';
-import { EmergencyCall } from '../../components/sub-components/Emergency';
+import { HeaderProps } from '../../components/sub-components/Emergency';
 
 
 const Stack = createNativeStackNavigator();
@@ -15,9 +15,9 @@ function StackNavigator(logged) {
   initialRouteName = logged == 1 ? "UserPage" : "Login"
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>
-      <Stack.Screen name="Login" component={Login} options={EmergencyCall()}/>
-      <Stack.Screen name="Register" component={Register} options={EmergencyCall()}/>
-      <Stack.Screen name="UserPage" component={User} options={EmergencyCall()}/>
+      <Stack.Screen name="Login" component={Login} options={HeaderProps()}/>
+      <Stack.Screen name="Register" component={Register} options={HeaderProps()}/>
+      <Stack.Screen name="UserPage" component={User} options={HeaderProps()}/>
     </Stack.Navigator>
   )
 }

@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Trails from './TrailsList';
 import TrailDetail from './TrailDetail';
 import { IsAuthenticated } from '../../repositories/User';
-import { EmergencyCall } from '../../components/sub-components/Emergency';
+import { HeaderProps } from '../../components/sub-components/Emergency';
 import LoadingIndicator from '../../components/ui/Indicator';
 import Unauthenticated from '../user/Unauthenticated';
 import PinDetail from './PinDetail';
@@ -16,11 +16,11 @@ function StackNavigator(logged) {
   const initialRouteName = logged === 1 ? "TrailsList" : "Unauthenticated";
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>
-      {logged === 2 ? (<Stack.Screen name="Unauthenticated" component={Unauthenticated} options={{ ...EmergencyCall(), headerShown: true }} />) :
+      {logged === 2 ? (<Stack.Screen name="Unauthenticated" component={Unauthenticated} options={HeaderProps()} />) :
         (<>
-          <Stack.Screen name="TrailsList" component={Trails} options={{ ...EmergencyCall(), headerShown: true }} />
-          <Stack.Screen name="TrailDetail" component={TrailDetail} options={{ ...EmergencyCall(), headerShown: true }} />
-          <Stack.Screen name="PinDetail" component={PinDetail} options={{ ...EmergencyCall(), headerShown: true }} />
+          <Stack.Screen name="TrailsList" component={Trails} options={HeaderProps()} />
+          <Stack.Screen name="TrailDetail" component={TrailDetail} options={HeaderProps()} />
+          <Stack.Screen name="PinDetail" component={PinDetail} options={HeaderProps()} />
         </>)}
     </Stack.Navigator>
   );

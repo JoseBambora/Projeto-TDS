@@ -8,7 +8,7 @@ import Settings from './src/views/settings/Settings';
 import History from './src/views/history/History';
 import NavBarStyle from './src/styles/sub-components/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
-import { EmergencyCall } from './src/components/sub-components/Emergency';
+import { HeaderProps } from './src/components/sub-components/Emergency';
 import TrailsStack from './src/views/trails/TrailsStack';
 
 const Tab = createBottomTabNavigator()
@@ -36,6 +36,7 @@ const App = () => {
       <Tab.Navigator 
         initialRouteName='Home'
         screenOptions={({ route }) => ({
+          ...HeaderProps(),
           tabBarIcon:({ focused, color, size }) => {
             size = focused ? size + 5 : size
             return  <Ionicons name={getIcon(route)} size={size} color={color} />;
@@ -45,11 +46,11 @@ const App = () => {
           tabBarStyle:NavBarStyle.navbar,
         } )}
         >
-        <Tab.Screen name="User" component={PageUser} options={{...EmergencyCall(), headerShown: false }}/>
-        <Tab.Screen name="History" component={History} options={EmergencyCall()}/>
-        <Tab.Screen name="Home" component={Home} options={EmergencyCall()}/>
-        <Tab.Screen name="Trails" component={TrailsStack} options={{...EmergencyCall(), headerShown: false }}/>
-        <Tab.Screen name="Settings" component={Settings} options={EmergencyCall()}/>
+        <Tab.Screen name="User" component={PageUser} options={{ headerShown: false }}/>
+        <Tab.Screen name="History" component={History} />
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Trails" component={TrailsStack} options={{ headerShown: false }}/>
+        <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>
   );

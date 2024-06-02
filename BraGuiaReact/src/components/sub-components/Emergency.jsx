@@ -1,10 +1,14 @@
+import { headerColor, headerTextColor } from "../../styles/Colors"
+import HeaderStyle from "../../styles/sub-components/Header"
 import OurButton from "../ui/Button"
 import { Linking } from "react-native"
 
-const Emergency = () => <OurButton icon={'call-outline'} color='white' iconColor='black' onPress={() => Linking.openURL('tel:112')} />
+const Emergency = () => <OurButton icon={'call-outline'} color={headerColor()} iconColor='white' onPress={() => Linking.openURL('tel:112')} />
 
-export const EmergencyCall = () => {
+export const HeaderProps = () => {
   return {
-    headerRight: () => Emergency()
+    headerRight: () => Emergency(),
+    headerStyle: HeaderStyle.header,
+    headerTintColor: headerTextColor()
   }
 }

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { pageColor } from '../Colors';
 
-const PageStyle = StyleSheet.create({
+const PageStyle = (color) => StyleSheet.create({
   center: {
     flex: 1,
     justifyContent: 'center',
@@ -11,7 +12,10 @@ const PageStyle = StyleSheet.create({
     paddingBottom: 10, 
     paddingRight: 20, 
     alignItems: 'flex-end'
-  }
+  },
+  page: {
+    backgroundColor:color
+  }  
 })
 
 export default PageStyle

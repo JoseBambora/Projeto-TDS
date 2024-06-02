@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
+import { cardViewColor, cardViewSeparatorColor, cardViewShadowColor } from '../Colors';
 
-const CardStyle = StyleSheet.create({
+const CardStyle = (color, shadowColor, separatorColor) => StyleSheet.create({
   container: {
     padding: 10, 
     paddingBottom: 30,
   },
   card: {
-    backgroundColor: 'white',
+    backgroundColor: color,
     borderRadius: 16,
-    shadowColor: '#ccc',
-    shadowOffset: { width: 0, height: 2 },
+    shadowColor: shadowColor,
+    shadowOffset: { width: 10, height: 10 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 3,
@@ -37,7 +38,7 @@ const CardStyle = StyleSheet.create({
   },
   separator: {
     borderBottomWidth: 0.5,
-    borderBottomColor: 'gray',
+    borderBottomColor: separatorColor,
     marginVertical: 10,
   }
 });

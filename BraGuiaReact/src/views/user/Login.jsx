@@ -7,6 +7,8 @@ import OurClickable from '../../components/ui/Clickable';
 import LoginRequest from '../../helper/LoginRequest';
 import PageStyle from '../../styles/ui/Pages'
 import LoadingIndicator from '../../components/ui/Indicator';
+import { pageColor } from '../../styles/Colors';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
 
 
 function Login({ navigation }) {
@@ -38,9 +40,10 @@ function Login({ navigation }) {
         })
     }
   }
+  refreshIfDarkModeChanges()
   color = errorMsg.length > 0 ? 'red' : 'gray'
   return login ? (<LoadingIndicator />) : (
-    <View style={PageStyle.center}>
+    <View style={PageStyle(pageColor()).pagecenter}>
       <OurText content={'Página de Login'} color={'red'} fontSize={30} />
       {errorMsg && <OurText content={errorMsg} color={'red'} fontSize={15} />}
       <OurTextInput borderColor={color} placeholder={'Nome de Utilizador'} password={false} icon={'user'} onChangeText={text => setUsername(text)} />

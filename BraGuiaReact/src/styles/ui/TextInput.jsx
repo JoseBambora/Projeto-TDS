@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const TextInputStyle = (borderColor) => StyleSheet.create({
+const TextInputStyle = (borderColor,color) => StyleSheet.create({
     inputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -12,7 +12,7 @@ const TextInputStyle = (borderColor) => StyleSheet.create({
       borderColor: 'orange',
     },
     inputWrapper: {
-      backgroundColor: 'lightgray',
+      backgroundColor: color,
       flexDirection: 'row',
       alignItems: 'center',
       width: '80%',

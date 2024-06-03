@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { pageColor } from '../Colors';
 
 const PageStyle = (color) => StyleSheet.create({
   center: {
@@ -15,7 +14,13 @@ const PageStyle = (color) => StyleSheet.create({
   },
   page: {
     backgroundColor:color
-  }  
+  },
+  pagecenter: {
+    backgroundColor:color,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
 
 export default PageStyle

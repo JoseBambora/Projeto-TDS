@@ -7,10 +7,10 @@ import { iconsColorPrimary, textColorSecondary } from "../../styles/Colors"
 
 export const OurHeaderCurve = ({ icon, content }) => {
   return (
-    <View style={{ marginBottom: 40 }}>
+    <View style={{ marginBottom: 50 }}>
       <OurCurve color={'red'} />
-      <View style={{ alignItems: 'center', marginTop: -130 }}>
-        <Ionicons name={icon} size={100} color={iconsColorPrimary()} />
+      <View style={{ alignItems: 'center', marginTop: -80 }}>
+        <Ionicons name={icon} size={50} color={iconsColorPrimary()} />
         <OurText content={content} fontSize={20} color={textColorSecondary()} />
       </View>
     </View>

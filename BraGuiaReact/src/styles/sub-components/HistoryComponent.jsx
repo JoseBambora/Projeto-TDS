@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-const HistoryStyles = StyleSheet.create({
+const HistoryStyles = (color)=> StyleSheet.create({
   container: {
+    backgroundColor : color,
     paddingVertical: 10,
   },
   section: {
-    marginBottom: 20,
-    paddingHorizontal: 15,
+    backgroundColor : color,
+    paddingHorizontal: 10,
   },
   sectionTitle: {
     fontSize: 22,
@@ -15,7 +16,8 @@ const HistoryStyles = StyleSheet.create({
     textAlign: 'center',
   },
   cardWrapper: {
-    marginBottom: 10,
+    backgroundColor : color,
+    marginBottom: 20,
   },
 });
 

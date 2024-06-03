@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 import OurCardView from '../ui/CardView';
 import HistoryStyles from '../../styles/sub-components/HistoryComponent';
 import OurText from '../ui/Text';
+import { pageColor } from '../../styles/Colors';
 
 const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
 
@@ -32,10 +33,10 @@ const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
 
   const groupedTrailsData = groupTrailsByDate(trailsData);
   const groupedPointsOfInterestData = groupPointsOfInterestByDate(pointsOfInterestData);
-
+  const HistoryStyleVar = HistoryStyles(pageColor)
   return (
-    <ScrollView contentContainerStyle={HistoryStyles.container}>
-      <View style={HistoryStyles.section}>
+    <ScrollView style={HistoryStyleVar.container}>
+      <View style={HistoryStyleVar.section}>
         <OurText
           content={'Trilhos Visitados'}
           fontSize={22}
@@ -47,7 +48,7 @@ const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
           data={groupedTrailsData}
         />
       </View>
-      <View style={HistoryStyles.section}>
+      <View style={HistoryStyleVar.section}>
         <OurText
           content={'Pins Visitados'}
           fontSize={22}

@@ -7,6 +7,8 @@ const PageStyle = (color) => StyleSheet.create({
     alignItems: 'center'
   },
   bottomleft: {
+    backgroundColor: color,
+    borderColor: color,
     padding: 5, 
     paddingBottom: 10, 
     paddingRight: 20, 

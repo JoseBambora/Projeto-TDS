@@ -33,24 +33,18 @@ function Home() {
     'Descrição': data.app_desc,
     'Extra': data.app_landing_page_text
   }
-  return (
-    <View style={PageStyle(pageColor()).page}>
-      {
-        isLoading ? (<LoadingIndicator />)
-          : (
-            <ScrollView>
-              <OurText content={data.app_name} fontSize={30} color={textColorHeader()} textAlign={'center'} />
-              <OurCardView data={content} />
-              <OurCardView data={contacts} />
-              <View style={FooterStyle.footer}>
-                <SocialMedia social_links={data.socials} />
-                <Partners partners={data.partners} />
-              </View>
-            </ScrollView>
-          )
-      }
-    </View>
-  )
+  return isLoading ? (<LoadingIndicator />)
+    : (
+      <ScrollView style={PageStyle(pageColor()).page}>
+        <OurText content={data.app_name} fontSize={30} color={textColorHeader()} textAlign={'center'} />
+        <OurCardView data={content} />
+        <OurCardView data={contacts} />
+        <View style={FooterStyle.footer}>
+          <SocialMedia social_links={data.socials} />
+          <Partners partners={data.partners} />
+        </View>
+      </ScrollView>
+    )
 };
 
 export default Home;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import SwitchButtonStyle from '../../styles/ui/SwitchButton';
 import SwitchButton from '../../components/ui/SwitchButton';
 import SettingsStyles from '../../styles/sub-components/Settings';
@@ -8,6 +8,9 @@ import { GetSettings, SaveDarkMode, SaveLocationOn, SaveNotificationOn, SaveAccu
 import PrecisionOption from '../../components/sub-components/PrecisionOption';
 import OurText from '../../components/ui/Text';
 import OurSlider from '../../components/ui/SliderComponent';
+import PageStyle from '../../styles/ui/Pages';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
+import { pageColor } from '../../styles/Colors';
 
 function Settings() {
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
@@ -52,9 +55,10 @@ function Settings() {
     setDelay(newDelay);
     SaveTimeoutLocation(newDelay * 1000); 
   };
+  refreshIfDarkModeChanges()
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={PageStyle(pageColor()).page}>
       <OurHeaderCurve icon="settings" />
       <View style={SwitchButtonStyle.container}>
         <SwitchButton
@@ -102,7 +106,7 @@ function Settings() {
           valueLabel={(value) => `${value} segundos`}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

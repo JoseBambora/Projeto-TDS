@@ -6,11 +6,12 @@ import { iconsColorThird, textInputCursorColor, textInputTextColor, textInputBox
 
 const OurTextInput = ({ placeholder, password, onChangeText, value, icon, borderColor = 'gray' }) => {
   const [focus, setFocus] = useState(false);
-  const textInputStyle = TextInputStyle(borderColor,textInputBoxColor())
+  const textInputStyle = TextInputStyle(borderColor,textInputBoxColor(),textInputTextColor())
   return (
     <View style={[textInputStyle.inputWrapper, focus && textInputStyle.focusedInputWrapper]}>
       <Icon name={icon} size={20} color={iconsColorThird()} style={TextInputStyle.icon} />
       <TextInput
+        style={textInputStyle.textColor}
         placeholder={placeholder}
         secureTextEntry={password}
         onChangeText={onChangeText}

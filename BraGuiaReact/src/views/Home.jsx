@@ -34,18 +34,16 @@ function Home() {
     'Descrição': data.app_desc,
     'Extra': data.app_landing_page_text
   };
-  const PageStyleVar = PageStyle(pageColor())
+
   return isLoading ? (
     <LoadingIndicator />
   ) : (
-    <ScrollView style={PageStyleVar.page}>
+    <ScrollView style={PageStyle(pageColor()).page}>
       <OurText content={data.app_name} fontSize={30} color={textColorHeader()} textAlign={'center'} />
-      <View style={PageStyleVar.center}>
-        <Image
-          source={require('../../android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png')}
-          style={HomeStyle.logo}
-        />
-      </View>
+      <Image
+        source={require('../../android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png')}
+        style={HomeStyle.logo}
+      />
       <OurCardView data={content} />
       <OurCardView data={contacts} />
       <View style={FooterStyle.footer}>

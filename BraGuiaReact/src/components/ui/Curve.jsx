@@ -8,7 +8,7 @@ export default function OurCurve({ color }) {
       <Svg
         height="100%"
         width="100%"
-        viewBox="0 0 1440 320"
+        viewBox="0 0 1440 310"
         style={{ position: 'absolute', top: 55 }}
       >
         <Path

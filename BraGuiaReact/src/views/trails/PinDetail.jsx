@@ -9,8 +9,12 @@ import { IsPremium } from '../../repositories/User';
 import LoadingIndicator from '../../components/ui/Indicator';
 import OurText from '../../components/ui/Text';
 import PinDetailStyles from '../../styles/sub-components/PinDetail';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
+import { pageColor } from '../../styles/Colors';
 
 const PinDetail = ({ route }) => {
+  refreshIfDarkModeChanges();
+  const PinDetailStyleVar = PinDetailStyles(pageColor())
   const { pin } = route.params;
   const [isPremium, setIsPremium] = useState(null);
 
@@ -40,7 +44,7 @@ const PinDetail = ({ route }) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={PinDetailStyles.container}>
+    <ScrollView contentContainerStyle={PinDetailStyleVar.container}>
       {isPremium ? (
         mediaData.map((media, index) => {
           switch (media.type) {

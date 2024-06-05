@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/ui/Text';
-import { textColorHeader, activityColorPrimary } from '../../styles/Colors';
+import { textColorHeader, activityColorPrimary, pageColor } from '../../styles/Colors';
 import OurCardView from '../../components/ui/CardView';
 import OurButton from '../../components/ui/Button';
 import EdgeCard from '../../components/sub-components/EdgeCard';
@@ -13,6 +13,8 @@ import { IsPremium } from '../../repositories/User';
 import { AddTrailHistory, AddPinHistory } from '../../repositories/History';
 import { OpenURL } from '../../constants/Links';
 import { startBackgroundTask, stopBackgroundTask } from '../../background/Service';
+import PageStyle from '../../styles/ui/Pages';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
 
 const add = (edge, aux, pins) => {
   if (!aux.has(edge.pin_name)) {
@@ -41,6 +43,7 @@ const buildUrl = (pins) => {
 const openGoogleMaps = (pins) => OpenURL(buildUrl(pins));
 
 const TrailDetail = ({ route, navigation }) => {
+  refreshIfDarkModeChanges();
   const { trail } = route.params;
   const pins = getAllPins(trail);
   const [isTraversing, setIsTraversing] = useState(false);
@@ -71,7 +74,7 @@ const TrailDetail = ({ route, navigation }) => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={PageStyle(pageColor()).page}>
 
       <OurImage url={trail.trail_img} />
       <OurText content={trail.trail_name} fontSize={30} color={textColorHeader()} textAlign={'center'} />

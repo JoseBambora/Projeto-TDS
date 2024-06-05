@@ -6,7 +6,7 @@ import User from './User';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './Login';
 import Register from './Register';
-import { HeaderProps } from '../../components/sub-components/Emergency';
+import { HeaderProps } from '../../components/sub-components/Header';
 
 
 const Stack = createNativeStackNavigator();

@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Trails from './TrailsList';
 import TrailDetail from './TrailDetail';
 import { IsAuthenticated } from '../../repositories/User';
-import { HeaderProps } from '../../components/sub-components/Emergency';
+import { HeaderProps } from '../../components/sub-components/Header';
 import LoadingIndicator from '../../components/ui/Indicator';
 import Unauthenticated from '../user/Unauthenticated';
 import PinDetail from './PinDetail';

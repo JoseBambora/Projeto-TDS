@@ -8,7 +8,7 @@ import Settings from './src/views/settings/Settings';
 import History from './src/views/history/History';
 import NavBarStyle from './src/styles/sub-components/NavBar';
 import { navBarColorNotSelected, navBarColorSelected } from './src/styles/Colors';
-import { HeaderProps } from './src/components/sub-components/Emergency';
+import { HeaderProps } from './src/components/sub-components/Header';
 import TrailsStack from './src/views/trails/TrailsStack';
 
 const Tab = createBottomTabNavigator()

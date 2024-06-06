@@ -66,11 +66,8 @@ const History = () => {
       {(trailsData.length > 0 || pointsOfInterestData.length > 0) && (
         <View style={PageStyle(pageColor()).bottomleft}> 
           <OurButton 
-            title="" 
             onPress={handleCleanHistory} 
-            icon="trash" 
-            color="#ff4d4d" 
-            iconColor="#fff" 
+            icon="trash"
           />
         </View>
       )}

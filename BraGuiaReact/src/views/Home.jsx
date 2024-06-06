@@ -11,13 +11,14 @@ import LoadingIndicator from '../components/ui/Indicator';
 import PageStyle from '../styles/ui/Pages';
 import { refreshIfDarkModeChanges } from './utils/RefreshDarkMode';
 import HomeStyle from '../styles/ui/Home';
+import { Linking } from 'react-native';
 
 function makeRequest(setData, setLoading, setContacts) {
   useEffect(() => {
     GetApp()
       .then(json => {
         setData(json);
-        setContacts({ 'Contactos': json.contacts.map((e) => `${e.contact_name} (${e.contact_phone})`) });
+        setContacts({ 'Contactos': json.contacts.map((e) => [`${e.contact_name} (${e.contact_phone})`, () => Linking.openURL(`tel:${e.contact_phone}`)]) });
       })
       .catch(err => alert(err.message))
       .finally(() => setLoading(false));

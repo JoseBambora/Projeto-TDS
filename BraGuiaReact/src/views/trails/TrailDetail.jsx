@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
 import OurImage from '../../components/media/Image';
 import OurText from '../../components/ui/Text';
@@ -15,6 +15,8 @@ import { OpenURL } from '../../constants/Links';
 import { startBackgroundTask, stopBackgroundTask } from '../../background/Service';
 import PageStyle from '../../styles/ui/Pages';
 import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
+import { GetTrail } from '../../repositories/Trails';
+import LoadingIndicator from '../../components/ui/Indicator';
 
 const add = (edge, aux, pins) => {
   if (!aux.has(edge.pin_name)) {
@@ -44,10 +46,18 @@ const openGoogleMaps = (pins) => OpenURL(buildUrl(pins));
 
 const TrailDetail = ({ route, navigation }) => {
   refreshIfDarkModeChanges();
-  const { trail } = route.params;
-  const pins = getAllPins(trail);
+  const [trail, setTrail] = useState(null);
+  const [pins, setPins] = useState(null);
+  const { id } = route.params;
+  useEffect(() => {
+    GetTrail(id)
+    .then(t => {
+      setPins(getAllPins(t))
+      setTrail(t)
+    })
+    .catch(e => console.log(e.message))
+  }, [])
   const [isTraversing, setIsTraversing] = useState(false);
-
   const handleStartTrailPress = () => {
     IsPremium()
       .then(premiumStatus => {
@@ -70,10 +80,11 @@ const TrailDetail = ({ route, navigation }) => {
   };
 
   const handlePinPress = (pin) => {
-    navigation.navigate('PinDetail', { pin });
+    const id = pin.id
+    navigation.navigate('PinDetail', { id });
   }
 
-  return (
+  return trail ? (
     <ScrollView style={PageStyle(pageColor()).page}>
 
       <OurImage url={trail.trail_img} />
@@ -105,7 +116,7 @@ const TrailDetail = ({ route, navigation }) => {
         ))
       }
     </ScrollView>
-  );
+  ) : <LoadingIndicator />;
 };
 
 export default TrailDetail;

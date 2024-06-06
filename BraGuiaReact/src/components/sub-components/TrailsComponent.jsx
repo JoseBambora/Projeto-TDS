@@ -8,7 +8,8 @@ const TrailsComponent = ({ trailData }) => {
   const navigation = useNavigation();
 
   const handleTrailPress = (trail) => {
-    navigation.navigate('TrailDetail', { trail });
+    const id = trail.id
+    navigation.navigate('TrailDetail', { id });
   };
 
   return (

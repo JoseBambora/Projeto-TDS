@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-const Indicator = StyleSheet.create({
+const Indicator = (color) => StyleSheet.create({
   defaultStyle: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: color
   },
 });
 

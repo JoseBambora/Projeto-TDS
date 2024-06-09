@@ -1,12 +1,12 @@
 import React, {useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import OurText from '../../components/ui/Text';
 import { IsAuthenticated } from '../../repositories/User';
 import User from './User';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './Login';
 import Register from './Register';
 import { HeaderProps } from '../../components/sub-components/Header';
+import LoadingIndicator from '../../components/ui/Indicator';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,7 +33,7 @@ function isLogged(setLogged) {
 function PageUser() {
   const [logged, setLogged] = useState(0)
   useFocusEffect(isLogged(setLogged));
-  return logged == 0 ? (<OurText content={'A verificar se está autenticado'}/>) : StackNavigator(logged)
+  return logged == 0 ? (<LoadingIndicator />) : StackNavigator(logged)
 };
 
 export default PageUser;

@@ -17,6 +17,7 @@ import PageStyle from '../../styles/ui/Pages';
 import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
 import { GetTrail } from '../../repositories/Trails';
 import LoadingIndicator from '../../components/ui/Indicator';
+import { iconsColorSecondary } from '../../styles/Colors';
 
 const add = (edge, aux, pins) => {
   if (!aux.has(edge.pin_name)) {
@@ -105,7 +106,7 @@ const TrailDetail = ({ route, navigation }) => {
           <TouchableOpacity onPress={() => handlePinPress(pin)}>
             <PinCard pin={pin} />
           </TouchableOpacity>
-          {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color="black" style={TrailDetailStyles.arrow} />}
+          {index < pins.length - 1 && <Ionicons name="arrow-down" size={24} color={iconsColorSecondary()} style={TrailDetailStyles.arrow} />}
         </View>
       ))}
 

@@ -8,6 +8,8 @@ import { OurHeaderCurve } from "../../components/ui/HeaderCurve"
 import PageStyle from "../../styles/ui/Pages"
 import LoadingIndicator from "../../components/ui/Indicator"
 import { stopBackgroundTask } from "../../background/Service"
+import { pageColor } from "../../styles/Colors"
+import { refreshIfDarkModeChanges } from "../utils/RefreshDarkMode"
 
 function userInfo(setData,setLoading,navigation) {
   useEffect(() => {
@@ -28,17 +30,19 @@ function User({ navigation }) {
     stopBackgroundTask()
   }
   userInfo(setData,setLoading,navigation)
+  refreshIfDarkModeChanges()
   const content = {
     'Primeiro Nome': data.first_name,
     'Último Nome': data.last_name,
     'Tipo de Utilizador': data.user_type,
     'Email': data.email
   }
+  const PageStyleVar = PageStyle(pageColor())
   return isLoading ? (<LoadingIndicator />) : (
-    <ScrollView>
+    <ScrollView style={PageStyleVar.page}>
       <OurHeaderCurve icon={'person'} content={data.username} />
       <OurCardView data={content} />
-      <View style={PageStyle.bottomleft}>
+      <View style={PageStyleVar.bottomleft}>
         <OurButton title={'Logout'} icon={'log-out-outline'} onPress={logout} />
       </View>
     </ScrollView>

@@ -1,10 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const UnauthenticatedStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
+const UnauthenticatedStyles = () => StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: 'center',

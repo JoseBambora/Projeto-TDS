@@ -6,7 +6,7 @@ import Controller from "./Controllers";
 import MediaStyle from "../../styles/media/Media";
 import CardStyle from "../../styles/ui/CardView";
 import OurText from "../ui/Text";
-import { textColorHeader } from "../../styles/Colors";
+import { textColorHeader, mediaBackgroundColor } from "../../styles/Colors";
 
 const OurVideo = ({ url }) => <OurMedia url={url} type={2} />
 
@@ -58,9 +58,12 @@ export const VideoPlayer = ({ mediaUrl }) => {
     setEnd(false)
   }
 
+  const CardStylesVar = CardStyle(mediaBackgroundColor())
+
+
   return (
-    <View style={CardStyle.container}>
-      <View style={CardStyle.card}>
+    <View style={CardStylesVar.container}>
+      <View style={CardStylesVar.card}>
         <OurText content={'Vídeo'} textAlign="center" color={textColorHeader()} fontSize={24} />
         <View style={MediaStyle.videoBox}>
           <Video

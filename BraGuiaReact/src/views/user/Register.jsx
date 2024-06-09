@@ -7,6 +7,8 @@ import OurClickable from '../../components/ui/Clickable';
 import PageStyle from '../../styles/ui/Pages';
 import LoadingIndicator from '../../components/ui/Indicator';
 import { Alert } from 'react-native';
+import { pageColor } from '../../styles/Colors';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
 
 
 function Register({ navigation }) {
@@ -22,8 +24,9 @@ function Register({ navigation }) {
     Alert.alert(`Funcionalidade não implementada`);
     setRegister(false)
   }
+  refreshIfDarkModeChanges()
   return register ? (<LoadingIndicator />):(
-    <View style={PageStyle.center}>
+    <View style={PageStyle(pageColor()).pagecenter}>
       <OurText content={'Página de Registo'} color={'red'} fontSize={30}/>
       <OurTextInput 
         placeholder={'Nome de Utilizador'} 

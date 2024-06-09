@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { View, Platform, ProgressViewIOS } from "react-native";
 import CardStyle from "../../styles/ui/CardView";
 import OurText from "../ui/Text";
-import { progressBarColor, textColorHeader } from "../../styles/Colors";
+import { progressBarColor, textColorHeader, mediaBackgroundColor } from "../../styles/Colors";
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 import Controller from "./Controllers";
 
@@ -100,9 +100,11 @@ export const AudioPlayer = ({ mediaUrl }) => {
     }
   };
 
+  const CardStylesVar = CardStyle(mediaBackgroundColor())
+
   return (
-    <View style={CardStyle.container}>
-      <View style={CardStyle.card}>
+    <View style={CardStylesVar.container}>
+      <View style={CardStylesVar.card}>
         <OurText content={'Áudio'} textAlign="center" color={textColorHeader()} fontSize={24} />
         {renderProgressBar()}
         <Controller onSeekPress={onSeekPress} stop={stopSound} restart={restartSound} play={playSound} pause={pauseSound} hasEnded={ended} isPlaying={isPlaying} currentTime={currentTime} />

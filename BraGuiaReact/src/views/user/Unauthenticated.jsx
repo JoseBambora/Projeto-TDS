@@ -1,13 +1,18 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { OurHeaderCurve } from '../../components/ui/HeaderCurve';
 import UnauthenticatedStyles from '../../styles/sub-components/Unauthenticated';
 import { activityColorPrimary } from '../../styles/Colors';
 import OurText from '../../components/ui/Text';
 import OurButton from '../../components/ui/Button';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
+import { pageColor } from '../../styles/Colors';
+import PageStyle from '../../styles/ui/Pages';
 
 const Unauthenticated = () => {
+  refreshIfDarkModeChanges();
+  const UnauthenticatedStyleVar = UnauthenticatedStyles()
   const navigation = useNavigation();
 
   const handleLogin = () => {
@@ -15,10 +20,10 @@ const Unauthenticated = () => {
   };
 
   return (
-    <View style={UnauthenticatedStyles.container}>
+    <ScrollView style={PageStyle(pageColor()).page}>
       <OurHeaderCurve icon="sad-sharp" />
-      <View style={UnauthenticatedStyles.content}>
-      <OurText
+      <View style={UnauthenticatedStyleVar.content}>
+        <OurText
           content={`Para acessar a esta página, é necessário estar autenticado!`}
           fontSize={18}
           color={activityColorPrimary()}
@@ -30,7 +35,7 @@ const Unauthenticated = () => {
           color={activityColorPrimary()}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

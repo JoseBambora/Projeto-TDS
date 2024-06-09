@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-const LabelStyles = StyleSheet.create({
+const LabelStyles = (color) => StyleSheet.create({
   label: {
     fontWeight: 'bold',
     fontSize: 16,
     marginRight: 10,
+    color: color
   },
 });
 

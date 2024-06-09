@@ -3,39 +3,39 @@ import { ScrollView, View } from 'react-native';
 import OurCardView from '../ui/CardView';
 import HistoryStyles from '../../styles/sub-components/HistoryComponent';
 import OurText from '../ui/Text';
+import { pageColor } from '../../styles/Colors';
+import { useNavigation } from '@react-navigation/native';
 
 const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
-
-  const groupTrailsByDate = (data) => {
+  const groupByDate = (data, itemType, page, navigation) => {
     const groupedData = {};
+    const options = { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' };
+
     data.forEach((item) => {
-      const date = new Date(item.date).toLocaleDateString();
+      const parts = new Intl.DateTimeFormat('pt-PT', options).formatToParts(new Date(item.date));
+      const dateParts = {};
+      parts.forEach(part => dateParts[part.type] = part.value);
+      const capitalizedWeekday = dateParts.weekday.charAt(0).toUpperCase() + dateParts.weekday.slice(1);
+      const date = `${capitalizedWeekday}, ${dateParts.day}/${dateParts.month}/${dateParts.year}`;
+
       if (!groupedData[date]) {
         groupedData[date] = [];
       }
-      groupedData[date].push(item.trailName);
+      const id = item.id;
+      groupedData[date].push([item[itemType], () => navigation.navigate(page, { id })]);
     });
+
     return groupedData;
   };
 
-  const groupPointsOfInterestByDate = (data) => {
-    const groupedData = {};
-    data.forEach((item) => {
-      const date = new Date(item.date).toLocaleDateString();
-      if (!groupedData[date]) {
-        groupedData[date] = [];
-      }
-      groupedData[date].push(item.pointOfInterestName);
-    });
-    return groupedData;
-  };
-
-  const groupedTrailsData = groupTrailsByDate(trailsData);
-  const groupedPointsOfInterestData = groupPointsOfInterestByDate(pointsOfInterestData);
-
+  const navigation = useNavigation();
+  const groupedTrailsData = groupByDate(trailsData, 'trailName', 'TrailDetail', navigation);
+  const groupedPointsOfInterestData = groupByDate(pointsOfInterestData, 'pointOfInterestName', 'PinDetail', navigation);
+  const HistoryStyleVar = HistoryStyles(pageColor)
+  
   return (
-    <ScrollView contentContainerStyle={HistoryStyles.container}>
-      <View style={HistoryStyles.section}>
+    <ScrollView style={HistoryStyleVar.container}>
+      <View style={HistoryStyleVar.section}>
         <OurText
           content={'Trilhos Visitados'}
           fontSize={22}
@@ -47,7 +47,7 @@ const HistoryComponent = ({ trailsData, pointsOfInterestData }) => {
           data={groupedTrailsData}
         />
       </View>
-      <View style={HistoryStyles.section}>
+      <View style={HistoryStyleVar.section}>
         <OurText
           content={'Pins Visitados'}
           fontSize={22}

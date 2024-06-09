@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import HistoryComponent from '../../components/sub-components/HistoryComponent';
-import HistoryScreen from '../../styles/sub-components/History';
 import { IsAuthenticated } from '../../repositories/User';
 import Unauthenticated from '../user/Unauthenticated';
 import LoadingIndicator from '../../components/ui/Indicator';
@@ -9,12 +8,15 @@ import { useFocusEffect } from '@react-navigation/native';
 import { GetTrailsHistory, GetPinsHistory, CleanHistory } from '../../repositories/History';
 import OurButton from '../../components/ui/Button';
 import PageStyle from '../../styles/ui/Pages';
+import { refreshIfDarkModeChanges } from '../utils/RefreshDarkMode';
+import { pageColor } from '../../styles/Colors';
 
 const History = () => {
   const [trailsData, setTrailsData] = useState([]);
   const [pointsOfInterestData, setPointsOfInterestData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
+  
 
   const checkAuthentication = useCallback(() => {
     IsAuthenticated()
@@ -37,7 +39,7 @@ const History = () => {
         setLoading(false);
       });
   }, []);
-
+  
   useFocusEffect(
     useCallback(() => {
       checkAuthentication();
@@ -49,7 +51,7 @@ const History = () => {
     setTrailsData([]);
     setPointsOfInterestData([]);
   };
-
+  refreshIfDarkModeChanges()
   if (loading) {
     return <LoadingIndicator />;
   }
@@ -59,20 +61,17 @@ const History = () => {
   }
 
   return (
-    <View style={HistoryScreen.container}>
+    <ScrollView  style={PageStyle(pageColor()).page}>
       <HistoryComponent trailsData={trailsData} pointsOfInterestData={pointsOfInterestData} />
       {(trailsData.length > 0 || pointsOfInterestData.length > 0) && (
-        <View style={PageStyle.bottomleft}> 
+        <View style={PageStyle(pageColor()).bottomleft}> 
           <OurButton 
-            title="" 
             onPress={handleCleanHistory} 
-            icon="trash" 
-            color="#ff4d4d" 
-            iconColor="#fff" 
+            icon="trash"
           />
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 

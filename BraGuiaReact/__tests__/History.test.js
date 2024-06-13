@@ -147,7 +147,6 @@ test('Sort', () => {
 
 test('Clean History', () => {
   CleanHistory()
-  console.log(GetTrailsHistory())
   expect(GetTrailsHistory().length).toEqual(0)
   expect(GetPinsHistory().length).toEqual(0)
 })

@@ -65,13 +65,13 @@ const Pin2 = () => ( {
     "media": [
         {
             "id": 1,
-            "media_file": "http://39b6-193-137-92-72.ngrok-free.app/media/se_de_braga_m0C5XV9.jpg",
+            "media_file": "http://192.168.85.186/media/se_de_braga_m0C5XV9.jpg",
             "media_type": "I",
             "media_pin": 2
         },
         {
             "id": 2,
-            "media_file": "http://39b6-193-137-92-72.ngrok-free.app/media/A_Alma_Gente_Se_de_Braga_short.mp3",
+            "media_file": "http://192.168.85.186/media/A_Alma_Gente_Se_de_Braga_short.mp3",
             "media_type": "R",
             "media_pin": 2
         }

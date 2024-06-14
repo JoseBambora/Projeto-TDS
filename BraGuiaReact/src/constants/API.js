@@ -1,4 +1,4 @@
-const server = 'https://39b6-193-137-92-72.ngrok-free.app'
+const server = 'http://192.168.85.186'
 export const approute = () => `${server}/app`
 export const loginroute = () => `${server}/login`
 export const trailsroute = () => `${server}/trails`
